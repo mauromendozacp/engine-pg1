@@ -5,15 +5,33 @@
     <ClCompile Include="..\src\Window\window.cpp">
       <Filter>Window</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\Renderer\renderer.cpp">
+      <Filter>Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\BaseGame\baseGame.cpp">
+      <Filter>BaseGame</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Window">
       <UniqueIdentifier>{1cd8a2f0-84cb-4eaf-a120-3380ab4d1af4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Renderer">
+      <UniqueIdentifier>{97d18cdb-69d8-4854-8c5b-d3bb8493d810}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="BaseGame">
+      <UniqueIdentifier>{b55f8235-b2d9-4553-8b24-97b26749939a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\Window\window.h">
       <Filter>Window</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Renderer\renderer.h">
+      <Filter>Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\BaseGame\baseGame.h">
+      <Filter>BaseGame</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

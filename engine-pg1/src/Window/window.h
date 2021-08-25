@@ -1,19 +1,24 @@
-#ifndef ELEMENT_WINDOW
-#define ELEMENT_WIDNOW
+#ifndef WINDOW_H
+#define WINDOW_H
 
 #include <GLFW/glfw3.h>
+#include <iostream>
 
 namespace GL
 {
 	class Window
 	{
 	public:
+		Window(int height, int width, const char* title);
+		~Window();
+		GLFWwindow* GetWindow();
+		bool OpenWindow();
+		void CloseWindow();
+	private:
+		GLFWwindow* glfWindow;
 		int height;
 		int width;
-		int title;
-		void OpenWindow(GLFWmonitor* monitor, GLFWwindow* share);
-		void CloseWindow();
-		GLFWwindow* getGLFWWindow();
+		std::string title;
 	};
 }
 
