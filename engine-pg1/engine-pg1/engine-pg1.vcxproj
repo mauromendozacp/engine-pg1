@@ -152,7 +152,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\BaseGame\baseGame.h" />
-    <ClInclude Include="..\src\Renderer\exports.h" />
+    <ClInclude Include="..\src\exports.h" />
     <ClInclude Include="..\src\Renderer\renderer.h" />
     <ClInclude Include="..\src\Window\window.h" />
   </ItemGroup>

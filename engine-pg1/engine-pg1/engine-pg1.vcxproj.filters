@@ -33,6 +33,6 @@
     <ClInclude Include="..\src\BaseGame\baseGame.h">
       <Filter>BaseGame</Filter>
     </ClInclude>
-    <ClInclude Include="..\src\Renderer\exports.h" />
+    <ClInclude Include="..\src\exports.h" />
   </ItemGroup>
 </Project>
