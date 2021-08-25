@@ -1,12 +1,13 @@
 #ifndef WINDOW_H
 #define WINDOW_H
 
+#include "exports.h"
 #include <GLFW/glfw3.h>
 #include <iostream>
 
 namespace GL
 {
-	class Window
+	class GRAPHICSENGINE_API Window
 	{
 	public:
 		Window(int height, int width, const char* title);

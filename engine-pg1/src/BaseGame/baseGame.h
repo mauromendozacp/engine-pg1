@@ -1,25 +1,26 @@
-#ifndef GAME_H
-#define GAME_H
+#ifndef BASEGAME_H
+#define BASEGAME_H
 
-#include "../Window/window.h"
+#include "exports.h"
+#include "Window/window.h"
+#include "Renderer/renderer.h"
 
 namespace GL
 {
-	class BaseGame
+	class GRAPHICSENGINE_API BaseGame
 	{
 	public:
 		BaseGame();
 		~BaseGame();
-		void Init();
-		void Update();
-		void Draw();
-		void DeInit();
+		void Play();
 	private:
 		Window* window;
+		
 
-		void InitLibrary();
-		bool OpenWindow();
+		void Init();
+		void Update();
+		void DeInit();
 	};
 }
 
-#endif // !GAME_h
+#endif // !BASEGAME_H

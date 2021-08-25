@@ -4,7 +4,7 @@ namespace GL
 {
 	Window::Window(int height, int width, const char* title)
 	{
-		this->glfWindow = NULL;
+		this->glfWindow = nullptr;
 		this->height = height;
 		this->width = width;
 		this->title = title;

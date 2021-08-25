@@ -12,29 +12,38 @@ namespace GL
 		delete window;
 	}
 
+	void BaseGame::Play()
+	{
+		Init();
+
+		while (!glfwWindowShouldClose(window->GetWindow()))
+		{
+			Update();
+		}
+
+		DeInit();
+	}
+
 	void BaseGame::Init()
 	{
-		if (!window->OpenWindow())
-		{
+		if (!glfwInit())
 			return;
-		}
+
+		if (!window->OpenWindow())
+			return;
 
 		glfwMakeContextCurrent(window->GetWindow());
 	}
 
 	void BaseGame::Update()
 	{
-
-	}
-
-	void BaseGame::Draw()
-	{
-
+		glClear(GL_COLOR_BUFFER_BIT);
+		glfwSwapBuffers(window->GetWindow());
+		glfwPollEvents();
 	}
 
 	void BaseGame::DeInit()
 	{
+		glfwTerminate();
 	}
-
-
 }
