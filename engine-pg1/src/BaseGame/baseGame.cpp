@@ -5,27 +5,28 @@ namespace GL
 	BaseGame::BaseGame()
 	{
 		window = new Window(640, 480, "Hello World");
-		//window = nullptr;
+		render = new Render(window);
 	}
 
 	BaseGame::~BaseGame()
 	{
 		if (window != nullptr) 
 		{
-			window = nullptr;
 			delete window;
+			window = nullptr;
+		}
+
+		if (render != nullptr)
+		{
+			delete render;
+			render = nullptr;
 		}
 	}
 
 	void BaseGame::Play()
 	{
 		Init();
-
-		while (!glfwWindowShouldClose(window->GetWindow()))
-		{
-			Update();
-		}
-
+		Update();
 		DeInit();
 	}
 
@@ -42,9 +43,16 @@ namespace GL
 
 	void BaseGame::Update()
 	{
-		glClear(GL_COLOR_BUFFER_BIT);
-		glfwSwapBuffers(window->GetWindow());
-		glfwPollEvents();
+		while (!glfwWindowShouldClose(window->GetWindow()))
+		{
+			render->ClearScreen();
+
+			//****Render here****
+			render->RenderTriangule();
+			//--------------------
+
+			render->PostRender();
+		}
 	}
 
 	void BaseGame::DeInit()

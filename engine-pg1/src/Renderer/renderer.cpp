@@ -1,24 +1,23 @@
 #include "Renderer/renderer.h"
 
-
 namespace GL
 {
-	Render::Render()
+	Render::Render(Window* window)
 	{
-		
+		this->window = window;
+		this->vertexArrayID = NULL;
+		this->title = "";
 	}
+
 	Render::~Render()
 	{
+		if (window != nullptr)
+		{
+			delete window;
+			window = nullptr;
+		}
+	}
 
-	}
-	bool Render::Start(Window* win)
-	{
-		return false;
-	}
-	bool Render::Stop()
-	{
-		return false;
-	}
 	unsigned int Render::GenerateBuffer(float* buffer, int size)
 	{
 		return 0;
@@ -39,6 +38,14 @@ namespace GL
 	{
 
 	}
+	void Render::RenderTriangule()
+	{
+		glBegin(GL_TRIANGLES);
+		glVertex2f(-0.5f, -0.5f);
+		glVertex2f(0.5f, 0.5f);
+		glVertex2f(0.5f, -0.5f);
+		glEnd();
+	}
 	void Render::BeginDrawing(unsigned int attribID)
 	{
 		glBegin(GLenum());
@@ -55,6 +62,7 @@ namespace GL
 	{
 
 	}
+	
 	void Render::SetClearColor(float r, float g, float b, float a)
 	{
 		glClearColor(r, g, b, a);
@@ -63,8 +71,9 @@ namespace GL
 	{
 		glClear(GL_COLOR_BUFFER_BIT);
 	}
-	void Render::SwapBuffers()
+	void Render::PostRender()
 	{
 		glfwSwapBuffers(window->GetWindow());
+		glfwPollEvents();
 	}
 }

@@ -21,8 +21,8 @@ namespace GL
 		//void UpdateMVP();
 
 	public:
-		bool Start(Window* win);
-		bool Stop();
+		Render(Window* window);
+		~Render();
 
 		unsigned int GenerateBuffer(float* buffer, int size);
 		void DestroyBuffer(unsigned int buffer);
@@ -32,6 +32,8 @@ namespace GL
 		void MultiplyModelMat(/*mat4 mat*/);
 
 		//mat4& GetMVP()
+
+		void RenderTriangule();
 		
 		void BeginDrawing(unsigned int attribID);
 		void BindBuffer(unsigned int vertexBuffer, unsigned int attribID);
@@ -40,12 +42,7 @@ namespace GL
 
 		void SetClearColor(float r, float g, float b, float a);
 		void ClearScreen();
-		void SwapBuffers();
-
-		Render();
-		~Render();
-
-
+		void PostRender();
 	};
 }
 

@@ -12,7 +12,11 @@ namespace GL
 
 	Window::~Window()
 	{
-		delete glfWindow;
+		if (glfWindow != nullptr)
+		{
+			delete glfWindow;
+			glfWindow = nullptr;
+		}
 	}
 
 	GLFWwindow* Window::GetWindow()

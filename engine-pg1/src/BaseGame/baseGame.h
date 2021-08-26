@@ -15,6 +15,7 @@ namespace GL
 		void Play();
 	private:
 		Window* window;
+		Render* render;
 		void Init();
 		void Update();
 		void DeInit();
