@@ -2,7 +2,7 @@
 #define WINDOW_H
 
 #include "exports.h"
-#include <GLFW/glfw3.h>
+#include "../lib/GLFW/include/GLFW/glfw3.h"
 #include <iostream>
 
 namespace GL

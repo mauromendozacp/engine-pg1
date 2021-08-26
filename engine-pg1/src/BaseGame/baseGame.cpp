@@ -5,11 +5,16 @@ namespace GL
 	BaseGame::BaseGame()
 	{
 		window = new Window(640, 480, "Hello World");
+		//window = nullptr;
 	}
 
 	BaseGame::~BaseGame()
 	{
-		delete window;
+		if (window != nullptr) 
+		{
+			window = nullptr;
+			delete window;
+		}
 	}
 
 	void BaseGame::Play()

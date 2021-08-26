@@ -23,7 +23,7 @@ namespace GL
 	bool Window::OpenWindow()
 	{
 		glfWindow = glfwCreateWindow(width, height, title.c_str(), NULL, NULL);
-		if (glfWindow)
+		if (!glfWindow)
 		{
 			glfwTerminate();
 			return false;

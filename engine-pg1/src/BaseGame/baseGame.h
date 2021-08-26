@@ -2,8 +2,8 @@
 #define BASEGAME_H
 
 #include "exports.h"
-#include "Window/window.h"
 #include "Renderer/renderer.h"
+#include "Window/window.h"
 
 namespace GL
 {
@@ -15,8 +15,6 @@ namespace GL
 		void Play();
 	private:
 		Window* window;
-		
-
 		void Init();
 		void Update();
 		void DeInit();
