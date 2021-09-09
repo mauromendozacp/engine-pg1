@@ -18,9 +18,9 @@ namespace GL
 		}
 	}
 
-	unsigned int Render::GenerateBuffer(float* buffer, int size)
+	void Render::GenerateBuffer(float* buffer, int size)
 	{
-		return 0;
+		
 	}
 	void Render::DestroyBuffer(unsigned int buffer)
 	{
@@ -40,24 +40,39 @@ namespace GL
 	}
 	void Render::RenderTriangule()
 	{
-		glBegin(GL_TRIANGLES);
+		/*glBegin(GL_TRIANGLES);
 		glVertex2f(-0.5f, -0.5f);
 		glVertex2f(0.5f, 0.5f);
 		glVertex2f(0.5f, -0.5f);
-		glEnd();
+		glEnd();*/
+
+		float positions[] = {
+			-0.5f, -0.5f,
+			 0.0f,  -0.5f,
+			 0.5f, -0.5f
+		};
+
+		/*unsigned int buffer;
+		glGenBuffers(1, &buffer);
+		glBindBuffer(GL_ARRAY_BUFFER, buffer);
+		glBufferData(GL_ARRAY_BUFFER, 6 * sizeof(float), positions, GL_STATIC_DRAW);
+		glBindBuffer(GL_ARRAY_BUFFER, 0);*/
 	}
 	void Render::BeginDrawing(unsigned int attribID)
 	{
 		glBegin(GLenum());
 	}
+
 	void Render::BindBuffer(unsigned int vertexBuffer, unsigned int attribID)
 	{
 		
 	}
+
 	void Render::DrawBuffer(int size)
 	{
 		glDrawArrays(GL_TRIANGLE_STRIP, 0, size);
 	}
+
 	void Render::EndDrawing(unsigned int attribID)
 	{
 
@@ -67,10 +82,12 @@ namespace GL
 	{
 		glClearColor(r, g, b, a);
 	}
+
 	void Render::ClearScreen()
 	{
 		glClear(GL_COLOR_BUFFER_BIT);
 	}
+
 	void Render::PostRender()
 	{
 		glfwSwapBuffers(window->GetWindow());

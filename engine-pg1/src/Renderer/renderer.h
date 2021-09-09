@@ -1,8 +1,10 @@
 #ifndef RENDER_H
 #define RENDER_H
 
-#include "Window/window.h"
+#include "exports.h"
+#include "../lib/GLEW/include/glew.h"
 #include "../lib/GLFW/include/GLFW/glfw3.h"
+#include "Window/window.h"
 
 namespace GL
 {
@@ -24,7 +26,7 @@ namespace GL
 		Render(Window* window);
 		~Render();
 
-		unsigned int GenerateBuffer(float* buffer, int size);
+		void GenerateBuffer(float* buffer, int size);
 		void DestroyBuffer(unsigned int buffer);
 
 		void LoadIdentityMat();
