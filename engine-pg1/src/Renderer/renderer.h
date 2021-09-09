@@ -1,9 +1,6 @@
 #ifndef RENDER_H
 #define RENDER_H
 
-#include "exports.h"
-#include "../lib/GLEW/include/glew.h"
-#include "../lib/GLFW/include/GLFW/glfw3.h"
 #include "Window/window.h"
 
 namespace GL
@@ -35,7 +32,8 @@ namespace GL
 
 		//mat4& GetMVP()
 
-		void RenderTriangule();
+		void RenderBufferTriangule();
+		void Draw();
 		
 		void BeginDrawing(unsigned int attribID);
 		void BindBuffer(unsigned int vertexBuffer, unsigned int attribID);

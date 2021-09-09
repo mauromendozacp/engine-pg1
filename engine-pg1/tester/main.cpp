@@ -1,10 +1,10 @@
 #include "BaseGame/baseGame.h"
 
-//using namespace GL;
+using namespace GL;
 
 int main()
 {
-    GL::BaseGame* game = new GL::BaseGame();
+    BaseGame* game = new BaseGame();
     game->Play();
     if (game != nullptr)
     {

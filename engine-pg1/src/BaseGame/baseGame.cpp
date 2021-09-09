@@ -39,6 +39,11 @@ namespace GL
 			return;
 
 		glfwMakeContextCurrent(window->GetWindow());
+
+		if (glewInit() != GLEW_OK)
+			std::cout << "ERROR" << std::endl;
+
+		render->RenderBufferTriangule();
 	}
 
 	void BaseGame::Update()
@@ -48,7 +53,7 @@ namespace GL
 			render->ClearScreen();
 
 			//****Render here****
-			render->RenderTriangule();
+			render->Draw();
 			//--------------------
 
 			render->PostRender();

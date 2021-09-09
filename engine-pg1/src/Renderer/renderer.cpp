@@ -38,7 +38,7 @@ namespace GL
 	{
 
 	}
-	void Render::RenderTriangule()
+	void Render::RenderBufferTriangule()
 	{
 		/*glBegin(GL_TRIANGLES);
 		glVertex2f(-0.5f, -0.5f);
@@ -46,18 +46,28 @@ namespace GL
 		glVertex2f(0.5f, -0.5f);
 		glEnd();*/
 
-		float positions[] = {
+		float positions[6] = {
 			-0.5f, -0.5f,
 			 0.0f,  -0.5f,
 			 0.5f, -0.5f
 		};
 
-		/*unsigned int buffer;
-		glGenBuffers(1, &buffer);
-		glBindBuffer(GL_ARRAY_BUFFER, buffer);
-		glBufferData(GL_ARRAY_BUFFER, 6 * sizeof(float), positions, GL_STATIC_DRAW);
-		glBindBuffer(GL_ARRAY_BUFFER, 0);*/
+		unsigned int VBO;
+		glGenBuffers(1, &VBO);
+		glBindBuffer(GL_ARRAY_BUFFER, VBO);
+		glBufferData(GL_ARRAY_BUFFER, sizeof(positions), positions, GL_STATIC_DRAW);
+
+		glEnableVertexAttribArray(0);
+		glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, sizeof(float) * 2, 0);
+
+		glBindBuffer(GL_ARRAY_BUFFER, 0);
 	}
+
+	void Render::Draw()
+	{
+		glDrawArrays(GL_TRIANGLES, 0, 3);
+	}
+
 	void Render::BeginDrawing(unsigned int attribID)
 	{
 		glBegin(GLenum());
