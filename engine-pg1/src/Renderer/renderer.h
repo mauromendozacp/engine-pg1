@@ -16,6 +16,10 @@ namespace GL
 		unsigned int vertexShader;
 		unsigned int fragmentShader;
 
+		unsigned int VBO;
+		unsigned int VAO;
+		unsigned int EBO;
+
 	public:
 		Render(Window* window);
 		~Render();
