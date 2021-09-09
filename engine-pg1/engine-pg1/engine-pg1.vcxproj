@@ -97,7 +97,8 @@
       <AdditionalDependencies>glfw3.lib;opengl32.lib;User32.lib;Gdi32.lib;Shell32.lib;glew32s.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>XCOPY "$(ProjectDir)Bin\$(Platform)\$(Configuration)\engine-pg1.dll" "$(SolutionDir)Tester\Bin\$(Platform)\$(Configuration)\" /e /h /y /s</Command>
+      <Command>
+      </Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">

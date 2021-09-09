@@ -43,6 +43,9 @@ namespace GL
 		if (glewInit() != GLEW_OK)
 			std::cout << "ERROR" << std::endl;
 
+		std::cout << glGetString(GL_VERSION) << std::endl;
+
+		render->CreateShader();
 		render->RenderBufferTriangule();
 	}
 
@@ -62,6 +65,7 @@ namespace GL
 
 	void BaseGame::DeInit()
 	{
+		render->DeleteShader();
 		glfwTerminate();
 	}
 }
