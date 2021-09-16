@@ -11,10 +11,20 @@ namespace GL
 	{
 	private:
 		Render* render;
-		
+		glm::vec3 v3Pos;
+		glm::vec3 v3Rot;
+		glm::vec3 v3Scale;
+
+		glm::mat4 translate;
+		glm::mat4 rotationX;
+		glm::mat4 rotationY;
+		glm::mat4 rotationZ;
+		glm::mat4 scale;
+
+		glm::mat4 trs;
 
 	public:
-		Entity();
+		Entity(Render* render);
 		~Entity();
 	};
 
