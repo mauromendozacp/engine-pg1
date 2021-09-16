@@ -150,11 +150,13 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\src\BaseGame\baseGame.cpp" />
+    <ClCompile Include="..\src\Entity\entity.cpp" />
     <ClCompile Include="..\src\Renderer\renderer.cpp" />
     <ClCompile Include="..\src\Window\window.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\BaseGame\baseGame.h" />
+    <ClInclude Include="..\src\Entity\entity.h" />
     <ClInclude Include="..\src\exports.h" />
     <ClInclude Include="..\src\Renderer\renderer.h" />
     <ClInclude Include="..\src\Window\window.h" />
