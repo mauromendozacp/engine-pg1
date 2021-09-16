@@ -3,6 +3,7 @@
 
 #include "exports.h"
 #include "Renderer/renderer.h"
+#include "glm.hpp"
 
 namespace GL
 {
