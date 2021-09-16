@@ -33,7 +33,7 @@ namespace GL
 		void FragmentShader();
 		void LinkShader();
 		void DeleteShader();
-		const char* ReadShaderFile(std::string path);
+		std::string ReadShaderFile(std::string path);
 
 		void RenderBufferTriangule();
 		void Draw();

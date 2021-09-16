@@ -35,30 +35,59 @@ namespace GL
 
 	void Render::VertexShader()
 	{
-		const char* vertexShaderSource = ReadShaderFile(vertexPath);
+		int success;
+		char infoLog[512];
+		std::string vertexShaderString = ReadShaderFile(vertexPath);
+		const char* vertexShaderSource = vertexShaderString.c_str();
 
 		vertexShader = glCreateShader(GL_VERTEX_SHADER);
-
 		glShaderSource(vertexShader, 1, &vertexShaderSource, NULL);
 		glCompileShader(vertexShader);
-	}
 
+		glGetShaderiv(vertexShader, GL_COMPILE_STATUS, &success);
+		if (!success)
+		{
+			glGetShaderInfoLog(vertexShader, 512, NULL, infoLog);
+			std::cout << "ERROR::SHADER::VERTEX::COMPILATION_FAILED\n" << infoLog << std::endl;
+		};
+	}
+ 
 	void Render::FragmentShader()
 	{
-		const char* fragmentShaderSource = ReadShaderFile(fragmentPath);
+		int success;
+		char infoLog[512];
+		std::string fragmentShaderString = ReadShaderFile(fragmentPath);
+		const char* fragmentShaderSource = fragmentShaderString.c_str();
 
 		fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
 		glShaderSource(fragmentShader, 1, &fragmentShaderSource, NULL);
 		glCompileShader(fragmentShader);
+
+		glGetShaderiv(fragmentShader, GL_COMPILE_STATUS, &success);
+		if (!success)
+		{
+			glGetShaderInfoLog(fragmentShader, 512, NULL, infoLog);
+			std::cout << "ERROR::SHADER::FRAGMENT::COMPILATION_FAILED\n" << infoLog << std::endl;
+		};
 	}
 
 	void Render::LinkShader()
 	{
+		int success;
+		char infoLog[512];
+
 		shaderProgram = glCreateProgram();
 
 		glAttachShader(shaderProgram, vertexShader);
 		glAttachShader(shaderProgram, fragmentShader);
 		glLinkProgram(shaderProgram);
+
+		glGetProgramiv(shaderProgram, GL_LINK_STATUS, &success);
+		if (!success)
+		{
+			glGetProgramInfoLog(shaderProgram, 512, NULL, infoLog);
+			std::cout << "ERROR::SHADER::PROGRAM::LINKING_FAILED\n" << infoLog << std::endl;
+		}
 
 		glUseProgram(shaderProgram);
 	}
@@ -69,14 +98,14 @@ namespace GL
 		glDeleteShader(fragmentShader);
 	}
 
-	const char* Render::ReadShaderFile(std::string path)
+	std::string Render::ReadShaderFile(std::string path)
 	{
 		std::string shaderCode;
 		std::ifstream vShaderFile;
 
 		vShaderFile.exceptions(std::ifstream::failbit | std::ifstream::badbit);
 		try {
-			vShaderFile.open(vertexPath);
+			vShaderFile.open(path);
 			std::stringstream vShaderStream, fShaderStream;
 
 			vShaderStream << vShaderFile.rdbuf();
@@ -86,20 +115,19 @@ namespace GL
 		catch (std::ifstream::failure & e) {
 			std::cout << "ERROR::SHADER::FILE_NOT_SUCCESFULLY_READ" << std::endl;
 		}
-		return shaderCode.c_str();
+		return shaderCode;
 	}
 
 	void Render::RenderBufferTriangule()
 	{
 		float vertices[] = {
-			 0.5f,  0.5f, 0.0f,
-			 0.5f, -0.5f, 0.0f,
-			-0.5f, -0.5f, 0.0f,
-			-0.5f,  0.5f, 0.0f
+			// positions         // colors
+			 0.5f, -0.5f, 0.0f,  1.0f, 0.0f, 0.0f,   // bottom right
+			-0.5f, -0.5f, 0.0f,  0.0f, 1.0f, 0.0f,   // bottom left
+			 0.0f,  0.5f, 0.0f,  0.0f, 0.0f, 1.0f    // top 
 		};
 		unsigned int indices[] = {
-			0, 1, 3,
-			1, 2, 3
+			0, 1, 3
 		};
 
 		glGenVertexArrays(1, &VAO);
@@ -113,8 +141,13 @@ namespace GL
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
 		glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
 
-		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
+		//positions
+		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)0);
 		glEnableVertexAttribArray(0);
+
+		//colors
+		glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)(3 * sizeof(float)));
+		glEnableVertexAttribArray(1);
 
 		glBindBuffer(GL_ARRAY_BUFFER, 0);
 		glBindVertexArray(0);
