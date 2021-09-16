@@ -52,6 +52,23 @@ namespace GL
 		glCompileShader(fragmentShader);
 	}
 
+	void Render::LinkShader()
+	{
+		shaderProgram = glCreateProgram();
+
+		glAttachShader(shaderProgram, vertexShader);
+		glAttachShader(shaderProgram, fragmentShader);
+		glLinkProgram(shaderProgram);
+
+		glUseProgram(shaderProgram);
+	}
+
+	void Render::DeleteShader()
+	{
+		glDeleteShader(vertexShader);
+		glDeleteShader(fragmentShader);
+	}
+
 	const char* Render::ReadShaderFile(std::string path)
 	{
 		std::string shaderCode;
@@ -70,23 +87,6 @@ namespace GL
 			std::cout << "ERROR::SHADER::FILE_NOT_SUCCESFULLY_READ" << std::endl;
 		}
 		return shaderCode.c_str();
-	}
-
-	void Render::LinkShader()
-	{
-		shaderProgram = glCreateProgram();
-
-		glAttachShader(shaderProgram, vertexShader);
-		glAttachShader(shaderProgram, fragmentShader);
-		glLinkProgram(shaderProgram);
-
-		glUseProgram(shaderProgram);
-	}
-
-	void Render::DeleteShader()
-	{
-		glDeleteShader(vertexShader);
-		glDeleteShader(fragmentShader);
 	}
 
 	void Render::RenderBufferTriangule()

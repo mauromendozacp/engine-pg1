@@ -32,8 +32,8 @@ namespace GL
 		void VertexShader();
 		void FragmentShader();
 		void LinkShader();
-		const char* ReadShaderFile(std::string path);
 		void DeleteShader();
+		const char* ReadShaderFile(std::string path);
 
 		void RenderBufferTriangule();
 		void Draw();
