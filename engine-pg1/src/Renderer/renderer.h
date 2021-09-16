@@ -2,9 +2,13 @@
 #define RENDER_H
 
 #include "Window/window.h"
-
+#include <fstream>
+#include <sstream>
 namespace GL
 {
+	const std::string vertexPath =  "../src/Shaders/vertexshader.txt";
+	const std::string fragmentPath = "../src/Shaders/fragmentshader.txt";
+
 	class GRAPHICSENGINE_API Render
 	{
 	private:
@@ -28,6 +32,7 @@ namespace GL
 		void VertexShader();
 		void FragmentShader();
 		void LinkShader();
+		const char* ReadShaderFile(std::string path);
 		void DeleteShader();
 
 		void RenderBufferTriangule();

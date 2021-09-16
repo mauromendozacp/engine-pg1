@@ -35,12 +35,7 @@ namespace GL
 
 	void Render::VertexShader()
 	{
-		const char* vertexShaderSource = "#version 330 core\n"
-			"layout (location = 0) in vec3 aPos;\n"
-			"void main()\n"
-			"{\n"
-			"   gl_Position = vec4(aPos.x, aPos.y, aPos.z, 1.0);\n"
-			"}\0";
+		const char* vertexShaderSource = ReadShaderFile(vertexPath);
 
 		vertexShader = glCreateShader(GL_VERTEX_SHADER);
 
@@ -50,16 +45,31 @@ namespace GL
 
 	void Render::FragmentShader()
 	{
-		const char* fragmentShaderSource = "#version 330 core\n"
-			"out vec4 FragColor;\n"
-			"void main()\n"
-			"{\n"
-			"	FragColor = vec4(1.0f, 0.5f, 0.2f, 1.0f);\n"
-			"}\0";
+		const char* fragmentShaderSource = ReadShaderFile(fragmentPath);
 
 		fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
 		glShaderSource(fragmentShader, 1, &fragmentShaderSource, NULL);
 		glCompileShader(fragmentShader);
+	}
+
+	const char* Render::ReadShaderFile(std::string path)
+	{
+		std::string shaderCode;
+		std::ifstream vShaderFile;
+
+		vShaderFile.exceptions(std::ifstream::failbit | std::ifstream::badbit);
+		try {
+			vShaderFile.open(vertexPath);
+			std::stringstream vShaderStream, fShaderStream;
+
+			vShaderStream << vShaderFile.rdbuf();
+			vShaderFile.close();
+			shaderCode = vShaderStream.str();
+		}
+		catch (std::ifstream::failure & e) {
+			std::cout << "ERROR::SHADER::FILE_NOT_SUCCESFULLY_READ" << std::endl;
+		}
+		return shaderCode.c_str();
 	}
 
 	void Render::LinkShader()
@@ -116,6 +126,8 @@ namespace GL
 		glBindVertexArray(VAO);
 		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 		glBindVertexArray(0);
+
+		glUseProgram(shaderProgram);
 	}
 
 	void Render::SetClearColor(float r, float g, float b, float a)
@@ -125,6 +137,7 @@ namespace GL
 
 	void Render::ClearScreen()
 	{
+		glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT);
 	}
 
