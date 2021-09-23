@@ -2,6 +2,9 @@
 
 namespace GL
 {
+	Entity::Entity()
+	{
+	}
 	Entity::Entity(Render* render)
 	{
 		this->render = render;
@@ -17,6 +20,7 @@ namespace GL
 		scale = glm::mat4();
 
 		trs = glm::mat4();
+		color = glm::vec4();
 	}
 
 	Entity::~Entity()

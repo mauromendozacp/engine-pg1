@@ -5,7 +5,7 @@
 
 namespace GL
 {
-	class GRAPHICSENGINE_API Entity2D : Entity
+	class GRAPHICSENGINE_API Entity2D : public Entity
 	{
 	public:
 		Entity2D(Render* render);

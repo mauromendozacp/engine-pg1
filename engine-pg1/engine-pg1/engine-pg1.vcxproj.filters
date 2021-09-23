@@ -19,6 +19,9 @@
     <ClCompile Include="..\src\Entity2D\entity2D.cpp">
       <Filter>Entity2D</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\Shape\shape.cpp">
+      <Filter>Shape</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Window">
@@ -38,6 +41,9 @@
     </Filter>
     <Filter Include="Entity2D">
       <UniqueIdentifier>{f8467625-1a4a-4fed-a3ee-84128d16f364}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Shape">
+      <UniqueIdentifier>{108e0dc6-8401-4679-9e41-9edad1f71a0d}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -59,6 +65,9 @@
     </ClInclude>
     <ClInclude Include="..\src\Entity2D\entity2D.h">
       <Filter>Entity2D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Shape\shape.h">
+      <Filter>Shape</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

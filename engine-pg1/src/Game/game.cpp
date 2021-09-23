@@ -1,4 +1,5 @@
 #include "game.h"
+#include "Shape/shape.h"
 
 namespace GL
 {
@@ -36,8 +37,19 @@ namespace GL
 
 	void Game::Init()
 	{
+		float vertices[] = {
+			// positions         // colors
+			 0.5f, -0.5f, 0.0f,  1.0f, 0.0f, 0.0f,   // bottom right
+			-0.5f, -0.5f, 0.0f,  0.0f, 1.0f, 0.0f,   // bottom left
+			 0.0f,  0.5f, 0.0f,  0.0f, 0.0f, 1.0f    // top 
+		};
+		unsigned int indices[] = {
+			0, 1, 3
+		};
+
 		render->CreateShader();
-		render->RenderBufferTriangule();
+		
+		entity = new Shape(render, SHAPE_TYPE::TRIANGLE);
 	}
 
 	void Game::Update()
@@ -47,7 +59,7 @@ namespace GL
 			render->ClearScreen();
 
 			//****Render here****
-			render->Draw();
+			
 			//--------------------
 
 			render->PostRender();

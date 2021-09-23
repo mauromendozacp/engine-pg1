@@ -2,6 +2,7 @@
 #define GAME_H
 
 #include "BaseGame/baseGame.h"
+#include "Entity/entity.h"
 
 namespace GL
 {
@@ -16,6 +17,9 @@ namespace GL
 		void Init() override;
 		void Update() override;
 		void DeInit() override;
+
+	private:
+		Entity* entity;
 	};
 }
 

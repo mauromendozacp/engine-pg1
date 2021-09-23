@@ -154,6 +154,7 @@
     <ClCompile Include="..\src\Entity\entity.cpp" />
     <ClCompile Include="..\src\Game\game.cpp" />
     <ClCompile Include="..\src\Renderer\renderer.cpp" />
+    <ClCompile Include="..\src\Shape\shape.cpp" />
     <ClCompile Include="..\src\Window\window.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -163,6 +164,7 @@
     <ClInclude Include="..\src\exports.h" />
     <ClInclude Include="..\src\Game\game.h" />
     <ClInclude Include="..\src\Renderer\renderer.h" />
+    <ClInclude Include="..\src\Shape\shape.h" />
     <ClInclude Include="..\src\Window\window.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

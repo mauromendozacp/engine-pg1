@@ -20,10 +20,6 @@ namespace GL
 		unsigned int vertexShader;
 		unsigned int fragmentShader;
 
-		unsigned int VBO;
-		unsigned int VAO;
-		unsigned int EBO;
-
 	public:
 		Render(Window* window);
 		~Render();
@@ -35,8 +31,9 @@ namespace GL
 		void DeleteShader();
 		std::string ReadShaderFile(std::string path);
 
-		void RenderBufferTriangule();
-		void Draw();
+		void BindBuffer(unsigned int VAO, unsigned int VBO, unsigned int EBO, float* vertices);
+		void RenderBuffer();
+		void UseShader();
 
 		void SetClearColor(float r, float g, float b, float a);
 		void ClearScreen();

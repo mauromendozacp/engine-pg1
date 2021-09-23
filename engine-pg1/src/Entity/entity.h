@@ -12,10 +12,11 @@ namespace GL
 	{
 
 	public:
+		Entity();
 		Entity(Render* render);
 		~Entity();
 
-	private:
+	protected:
 		Render* render;
 
 		glm::vec3 v3Pos;

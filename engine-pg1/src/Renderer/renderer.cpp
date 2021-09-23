@@ -11,10 +11,6 @@ namespace GL
 		this->shaderProgram = NULL;
 		this->vertexShader = NULL;
 		this->fragmentShader = NULL;
-
-		this->VBO = NULL;
-		this->VAO = NULL;
-		this->EBO = NULL;
 	}
 
 	Render::~Render()
@@ -118,18 +114,10 @@ namespace GL
 		return shaderCode;
 	}
 
-	void Render::RenderBufferTriangule()
-	{
-		float vertices[] = {
-			// positions         // colors
-			 0.5f, -0.5f, 0.0f,  1.0f, 0.0f, 0.0f,   // bottom right
-			-0.5f, -0.5f, 0.0f,  0.0f, 1.0f, 0.0f,   // bottom left
-			 0.0f,  0.5f, 0.0f,  0.0f, 0.0f, 1.0f    // top 
-		};
-		unsigned int indices[] = {
-			0, 1, 3
-		};
 
+
+	void Render::BindBuffer(unsigned int VAO, unsigned int VBO, unsigned int EBO, float* vertices)
+	{
 		glGenVertexArrays(1, &VAO);
 		glGenBuffers(1, &VBO);
 		glGenBuffers(1, &EBO);
@@ -138,9 +126,12 @@ namespace GL
 		glBindBuffer(GL_ARRAY_BUFFER, VBO);
 		glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
 
-		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
-		glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
+		/*glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
+		glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);*/
+	}
 
+	void Render::RenderBuffer()
+	{
 		//positions
 		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)0);
 		glEnableVertexAttribArray(0);
@@ -153,13 +144,8 @@ namespace GL
 		glBindVertexArray(0);
 	}
 
-	void Render::Draw()
+	void Render::UseShader()
 	{
-		glUseProgram(shaderProgram);
-		glBindVertexArray(VAO);
-		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
-		glBindVertexArray(0);
-
 		glUseProgram(shaderProgram);
 	}
 
