@@ -4,13 +4,20 @@
 #include "exports.h"
 #include "Renderer/renderer.h"
 #include "glm.hpp"
+#include "../glm/ext/matrix_transform.hpp"
 
 namespace GL
 {
 	class GRAPHICSENGINE_API Entity
 	{
+
+	public:
+		Entity(Render* render);
+		~Entity();
+
 	private:
 		Render* render;
+
 		glm::vec3 v3Pos;
 		glm::vec3 v3Rot;
 		glm::vec3 v3Scale;
@@ -21,11 +28,17 @@ namespace GL
 		glm::mat4 rotationZ;
 		glm::mat4 scale;
 
+		glm::vec4 color;
 		glm::mat4 trs;
 
-	public:
-		Entity(Render* render);
-		~Entity();
+		void SetTranslate(float x, float y, float z);
+		void SetRotX(float x);
+		void SetRotY(float y);
+		void SetRotZ(float z);
+		glm::mat4 Rotation();
+		void SetScale(float x, float y, float z);
+		void UpdateTRS();
+		void SetColor(glm::vec4 color);
 	};
 
 	
