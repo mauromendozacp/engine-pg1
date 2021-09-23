@@ -13,6 +13,9 @@
     <ClCompile Include="..\src\Entity\entity.cpp">
       <Filter>Entity</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\Game\game.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Window">
@@ -26,6 +29,9 @@
     </Filter>
     <Filter Include="Entity">
       <UniqueIdentifier>{248283fe-5f18-472a-a68f-bbd7c228960c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game">
+      <UniqueIdentifier>{72035bf6-b4ab-40b1-9133-853e08ad3c8d}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -41,6 +47,9 @@
     <ClInclude Include="..\src\exports.h" />
     <ClInclude Include="..\src\Entity\entity.h">
       <Filter>Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Game\game.h">
+      <Filter>Game</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

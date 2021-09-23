@@ -1,0 +1,1 @@
+SetRot(x) va a cambiar la mat de rotacion y despues va a multiplicar nuevamente M*V*P, dando como resultado la forma girada.

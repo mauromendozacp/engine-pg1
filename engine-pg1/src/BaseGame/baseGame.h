@@ -15,10 +15,10 @@ namespace GL
 	private:
 		Window* window;
 		Render* render;
-		void Init();
-		void Update();
-		void DeInit();
-	};
+		virtual void Init();
+		virtual void Update();
+		virtual void DeInit();
+	};	
 }
 
 #endif // !BASEGAME_H
