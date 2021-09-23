@@ -11,13 +11,12 @@ namespace GL
 	public:
 		BaseGame();
 		~BaseGame();
-		void Play();
-	private:
+	protected:
 		Window* window;
 		Render* render;
-		virtual void Init();
-		virtual void Update();
-		virtual void DeInit();
+		virtual void Init() = 0;
+		virtual void Update() = 0;
+		virtual void DeInit() = 0;
 	};	
 }
 

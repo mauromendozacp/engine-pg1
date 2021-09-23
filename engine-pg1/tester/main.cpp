@@ -1,15 +1,17 @@
-#include "BaseGame/baseGame.h"
+#include "Game/game.h"
 
 using namespace GL;
 
 int main()
 {
-    BaseGame* game = new BaseGame();
+    Game* game = new Game();
     game->Play();
-    if (game != nullptr)
+
+    if (game != NULL)
     {
-        game = nullptr;
+        game = NULL;
         delete game;
     }
+
     return 0;
 }
