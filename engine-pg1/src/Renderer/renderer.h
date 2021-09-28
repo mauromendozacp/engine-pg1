@@ -4,6 +4,7 @@
 #include "Window/window.h"
 #include <fstream>
 #include <sstream>
+
 namespace GL
 {
 	const std::string vertexPath =  "../src/Shaders/vertexshader.txt";

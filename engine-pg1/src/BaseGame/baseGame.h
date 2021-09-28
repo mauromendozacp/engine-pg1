@@ -2,10 +2,13 @@
 #define BASEGAME_H
 
 #include "exports.h"
-#include "Renderer/renderer.h"
+#include "Entity/entity.h"
 
 namespace GL
 {
+	class Render;
+	class Window;
+
 	class GRAPHICSENGINE_API BaseGame
 	{
 	public:

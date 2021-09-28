@@ -1,5 +1,6 @@
 #include "game.h"
 #include "Shape/shape.h"
+#include "Renderer/renderer.h"
 
 namespace GL
 {

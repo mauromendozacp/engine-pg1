@@ -2,7 +2,6 @@
 #define GAME_H
 
 #include "BaseGame/baseGame.h"
-#include "Entity/entity.h"
 
 namespace GL
 {

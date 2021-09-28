@@ -1,5 +1,7 @@
 #include "baseGame.h"
 
+#include "Renderer/renderer.h"
+
 namespace GL
 {
 	BaseGame::BaseGame()
