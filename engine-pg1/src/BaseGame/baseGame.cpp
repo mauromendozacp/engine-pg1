@@ -7,9 +7,9 @@ namespace GL
 {
 	BaseGame::BaseGame()
 	{
-		window = new Window(640, 480, "Hello World");
-		render = new Render(window);
-		input = new Input(window);
+		window = NULL;
+		render = NULL;
+		input = NULL;
 	}
 
 	BaseGame::~BaseGame()
@@ -38,6 +38,10 @@ namespace GL
 		if (!glfwInit())
 			return;
 
+		window = new Window(640.0f, 480.0f, "Mauwus y Guiduwu");
+		render = new Render(window);
+		input = new Input(window);
+
 		if (!window->OpenWindow())
 			return;
 
@@ -48,7 +52,6 @@ namespace GL
 
 		std::cout << glGetString(GL_VERSION) << std::endl;
 
-		input->Init();
 		render->CreateShader();
 	}
 
@@ -70,6 +73,7 @@ namespace GL
 	void BaseGame::End()
 	{
 		render->DeleteShader();
+		window->DestroyWindow();
 		glfwTerminate();
 	}
 }

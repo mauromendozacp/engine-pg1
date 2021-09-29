@@ -2,9 +2,9 @@
 
 namespace GL
 {
-	Window::Window(int height, int width, const char* title)
+	Window::Window(float width, float height, std::string title)
 	{
-		this->glfWindow = nullptr;
+		this->glfWindow = NULL;
 		this->height = height;
 		this->width = width;
 		this->title = title;
@@ -12,11 +12,6 @@ namespace GL
 
 	Window::~Window()
 	{
-		if (glfWindow != nullptr)
-		{
-			delete glfWindow;
-			glfWindow = nullptr;
-		}
 	}
 
 	GLFWwindow* Window::GetWindow()
@@ -37,6 +32,11 @@ namespace GL
 
 	void Window::CloseWindow()
 	{
+		glfwTerminate();
+	}
 
+	void Window::DestroyWindow()
+	{
+		//glfwDestroyWindow(glfWindow);
 	}
 }

@@ -9,15 +9,16 @@ namespace GL
 	class GRAPHICSENGINE_API Window
 	{
 	public:
-		Window(int height, int width, const char* title);
+		Window(float width, float height, std::string title);
 		~Window();
 		GLFWwindow* GetWindow();
 		bool OpenWindow();
 		void CloseWindow();
+		void DestroyWindow();
 	private:
 		GLFWwindow* glfWindow;
-		int height;
-		int width;
+		float height;
+		float width;
 		std::string title;
 	};
 }

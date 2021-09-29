@@ -5,7 +5,7 @@
 
 namespace GL
 {
-	enum SHAPE_TYPE
+	enum class SHAPE_TYPE
 	{
 		TRIANGLE
 	};

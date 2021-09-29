@@ -49,11 +49,6 @@ namespace GL
 
 	Entity::~Entity()
 	{
-		if (render != NULL)
-		{
-			delete render;
-			render = NULL;
-		}
 	}
 
 	void Entity::SetPos(float x, float y, float z)

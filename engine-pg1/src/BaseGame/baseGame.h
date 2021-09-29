@@ -8,10 +8,6 @@
 
 namespace GL
 {
-	class Render;
-	class Window;
-	class Input;
-
 	class GRAPHICSENGINE_API BaseGame
 	{
 	public:
@@ -21,6 +17,7 @@ namespace GL
 		Window* window;
 		Render* render;
 		Input* input;
+		std::string title;
 
 		void Start();
 		bool GetWindowClose();

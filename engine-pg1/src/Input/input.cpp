@@ -12,11 +12,6 @@ namespace GL
 
 	Input::~Input()
 	{
-		if (window != NULL)
-		{
-			delete window;
-			window = NULL;
-		}
 	}
 
 	void Input::Init()

@@ -6,11 +6,10 @@ using namespace GL;
 int main()
 {
     Game* game = new Game();
-    game->Play();
-
+    
     if (game != NULL)
     {
-        game = NULL;
+        game->Play();
         delete game;
     }
 
