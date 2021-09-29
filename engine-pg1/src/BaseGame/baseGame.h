@@ -2,7 +2,9 @@
 #define BASEGAME_H
 
 #include "exports.h"
-#include "Entity/entity.h"
+#include "Shape/shape.h"
+#include "Renderer/renderer.h"
+#include "Input/input.h"
 
 namespace GL
 {
@@ -19,6 +21,13 @@ namespace GL
 		Window* window;
 		Render* render;
 		Input* input;
+
+		void Start();
+		bool GetWindowClose();
+		void ClearScreen();
+		void PostRender();
+		void End();
+
 		virtual void Init() = 0;
 		virtual void Update() = 0;
 		virtual void DeInit() = 0;

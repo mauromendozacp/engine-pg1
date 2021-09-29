@@ -32,4 +32,44 @@ namespace GL
 			input = NULL;
 		}
 	}
+
+	void BaseGame::Start()
+	{
+		if (!glfwInit())
+			return;
+
+		if (!window->OpenWindow())
+			return;
+
+		glfwMakeContextCurrent(window->GetWindow());
+
+		if (glewInit() != GLEW_OK)
+			std::cout << "ERROR" << std::endl;
+
+		std::cout << glGetString(GL_VERSION) << std::endl;
+
+		input->Init();
+		render->CreateShader();
+	}
+
+	bool BaseGame::GetWindowClose()
+	{
+		return glfwWindowShouldClose(window->GetWindow());
+	}
+
+	void BaseGame::ClearScreen()
+	{
+		render->ClearScreen();
+	}
+
+	void BaseGame::PostRender()
+	{
+		render->PostRender();
+	}
+
+	void BaseGame::End()
+	{
+		render->DeleteShader();
+		glfwTerminate();
+	}
 }

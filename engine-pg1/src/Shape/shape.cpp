@@ -34,6 +34,4 @@ namespace GL
 		glBindVertexArray(0);
 		this->render->UseShader();
 	}
-
-
 }

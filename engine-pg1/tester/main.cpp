@@ -5,7 +5,6 @@ using namespace GL;
 
 int main()
 {
-
     Game* game = new Game();
     game->Play();
 

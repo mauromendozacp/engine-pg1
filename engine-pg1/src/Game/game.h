@@ -11,7 +11,6 @@ namespace GL
 		Game();
 		~Game();
 		void Play();
-		void Start();
 
 		void Init() override;
 		void Update() override;
