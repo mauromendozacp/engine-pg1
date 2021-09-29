@@ -22,6 +22,9 @@
     <ClCompile Include="..\src\Input\input.cpp">
       <Filter>Input</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\Shader\shader.cpp">
+      <Filter>Shader</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Window">
@@ -44,6 +47,9 @@
     </Filter>
     <Filter Include="Input">
       <UniqueIdentifier>{13a2f417-aa4b-465c-b1c7-b7c7a2f57fa5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Shader">
+      <UniqueIdentifier>{19925a9c-3c89-4d39-bcb8-f8d97d0aede5}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -69,6 +75,9 @@
     <ClInclude Include="keycodes.h" />
     <ClInclude Include="..\src\Input\input.h">
       <Filter>Input</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Shader\shader.h">
+      <Filter>Shader</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

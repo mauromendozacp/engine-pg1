@@ -39,7 +39,7 @@ namespace GL
 			return;
 
 		window = new Window(640.0f, 480.0f, "Mauwus y Guiduwu");
-		render = new Render(window);
+		render = new Render();
 		input = new Input(window);
 
 		if (!window->OpenWindow())
@@ -52,7 +52,7 @@ namespace GL
 
 		std::cout << glGetString(GL_VERSION) << std::endl;
 
-		render->CreateShader();
+		render->InitShader();
 	}
 
 	bool BaseGame::GetWindowClose()
@@ -67,12 +67,12 @@ namespace GL
 
 	void BaseGame::PostRender()
 	{
-		render->PostRender();
+		render->PostRender(window);
 	}
 
 	void BaseGame::End()
 	{
-		render->DeleteShader();
+		render->DeInitShader();
 		window->DestroyWindow();
 		glfwTerminate();
 	}
