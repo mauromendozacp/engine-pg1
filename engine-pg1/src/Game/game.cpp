@@ -12,6 +12,11 @@ namespace GL
 
 	Game::~Game()
 	{
+		if (entity != NULL)
+		{
+			delete entity;
+			entity = NULL;
+		}
 	}
 
 	void Game::Play()

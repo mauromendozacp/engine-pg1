@@ -4,10 +4,7 @@ namespace GL
 {
 	Entity::Entity()
 	{
-	}
-	Entity::Entity(Render* render)
-	{
-		this->render = render;
+		this->render = NULL;
 
 		v3Pos = glm::vec3();
 		v3Rot = glm::vec3();
@@ -21,6 +18,33 @@ namespace GL
 
 		trs = glm::mat4();
 		color = glm::vec4();
+
+		VAO = 0;
+		VBO = 0;
+		EBO = 0;
+		vertices = 0;
+	}
+
+	Entity::Entity(Render* render)
+	{
+		this->render = render;
+
+		trs = glm::mat4(1.0f);
+		translate = glm::mat4(1.0f);
+		rotationX = glm::mat4(1.0f);
+		rotationY = glm::mat4(1.0f);
+		rotationZ = glm::mat4(1.0f);
+		scale = glm::mat4(1.0f);
+
+		v3Pos = glm::vec3(0.0f);
+		v3Rot = glm::vec3(0.0f);
+		v3Scale = glm::vec3(1.0f);
+		color = glm::vec4();
+
+		VAO = 0;
+		VBO = 0;
+		EBO = 0;
+		vertices = 0;
 	}
 
 	Entity::~Entity()
@@ -31,15 +55,14 @@ namespace GL
 			render = NULL;
 		}
 	}
-	void Entity::UpdateTRS()
-	{
-		trs = translate * Rotation() * scale;
-	}
-	void Entity::SetTranslate(float x, float y, float z)
+
+	void Entity::SetPos(float x, float y, float z)
 	{
 		v3Pos = glm::vec3(x, y, z);
-		scale = glm::scale(glm::mat4(1.0f), v3Pos);
+		translate = glm::translate(glm::mat4(1.0f), v3Pos);
+		UpdateTRS();
 	}
+
 	void Entity::SetRotX(float x) 
 	{
 		v3Rot[0] = x;
@@ -47,6 +70,7 @@ namespace GL
 		rotationX = glm::rotate(glm::mat4(1.0f), x, axis);
 		UpdateTRS();
 	}
+
 	void Entity::SetRotY(float y) 
 	{
 		v3Rot[1] = y;
@@ -54,6 +78,7 @@ namespace GL
 		rotationY = glm::rotate(glm::mat4(1.0f), y, axis);
 		UpdateTRS();
 	}
+
 	void Entity::SetRotZ(float z) 
 	{
 		v3Rot[2] = z;
@@ -61,17 +86,71 @@ namespace GL
 		rotationZ = glm::rotate(glm::mat4(1.0f), z, axis);
 		UpdateTRS();
 	}
-	glm::mat4 Entity::Rotation()
-	{
-		return (rotationX * rotationY * rotationZ);
-	}
+
 	void Entity::SetScale(float x, float y, float z)
 	{
 		v3Scale = glm::vec3(x, y, z);
 		scale = glm::scale(glm::mat4(1.0f), v3Scale);
+		UpdateTRS();
 	}
+
 	void Entity::SetColor(glm::vec4 color)
 	{
 		this->color = color;
+	}
+
+	glm::mat4 Entity::GetRotation()
+	{
+		return (rotationX * rotationY * rotationZ);
+	}
+
+	void Entity::UpdateTRS()
+	{
+		trs = translate * GetRotation() * scale;
+	}
+
+	float Entity::GetPosX()
+	{
+		return v3Pos[0];
+	}
+
+	float Entity::GetPosY()
+	{
+		return v3Pos[1];
+	}
+
+	float Entity::GetPosZ()
+	{
+		return v3Pos[2];
+	}
+
+	float Entity::GetRotX()
+	{
+		return v3Rot[0];
+	}
+
+	float Entity::GetRotY()
+	{
+		return v3Rot[1];
+	}
+
+	float Entity::GetRotZ()
+	{
+		return v3Rot[2];
+	}
+
+	float Entity::GetScaleX()
+	{
+		return v3Scale[0];
+	}
+
+	float Entity::GetScaleY()
+	{
+		return v3Scale[1];
+	}
+
+	float Entity::GetScaleZ()
+	{
+		return v3Scale[2];
 	}
 }

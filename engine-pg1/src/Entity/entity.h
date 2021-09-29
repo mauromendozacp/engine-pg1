@@ -16,6 +16,30 @@ namespace GL
 		Entity(Render* render);
 		~Entity();
 
+		void SetPos(float x, float y, float z);
+		void SetRotX(float x);
+		void SetRotY(float y);
+		void SetRotZ(float z);
+		void SetScale(float x, float y, float z);
+		void SetColor(glm::vec4 color);
+
+		glm::mat4 GetRotation();
+		void UpdateTRS();
+
+		float GetPosX();
+		float GetPosY();
+		float GetPosZ();
+
+		float GetRotX();
+		float GetRotY();
+		float GetRotZ();
+
+		float GetScaleX();
+		float GetScaleY();
+		float GetScaleZ();
+
+		virtual void Draw() = 0;
+
 	protected:
 		Render* render;
 
@@ -32,14 +56,7 @@ namespace GL
 		glm::vec4 color;
 		glm::mat4 trs;
 
-		void SetTranslate(float x, float y, float z);
-		void SetRotX(float x);
-		void SetRotY(float y);
-		void SetRotZ(float z);
-		glm::mat4 Rotation();
-		void SetScale(float x, float y, float z);
-		void UpdateTRS();
-		void SetColor(glm::vec4 color);
+		unsigned int VAO, VBO, EBO, vertices;
 	};
 
 	
