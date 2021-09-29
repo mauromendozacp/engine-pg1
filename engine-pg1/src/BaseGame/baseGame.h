@@ -8,6 +8,7 @@ namespace GL
 {
 	class Render;
 	class Window;
+	class Input;
 
 	class GRAPHICSENGINE_API BaseGame
 	{
@@ -17,6 +18,7 @@ namespace GL
 	protected:
 		Window* window;
 		Render* render;
+		Input* input;
 		virtual void Init() = 0;
 		virtual void Update() = 0;
 		virtual void DeInit() = 0;

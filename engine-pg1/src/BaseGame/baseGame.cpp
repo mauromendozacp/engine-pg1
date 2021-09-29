@@ -1,6 +1,7 @@
 #include "baseGame.h"
 
 #include "Renderer/renderer.h"
+#include "Input/input.h"
 
 namespace GL
 {
@@ -8,6 +9,7 @@ namespace GL
 	{
 		window = new Window(640, 480, "Hello World");
 		render = new Render(window);
+		input = new Input(window);
 	}
 
 	BaseGame::~BaseGame()
@@ -22,6 +24,12 @@ namespace GL
 		{
 			delete render;
 			render = NULL;
+		}
+
+		if (input != NULL)
+		{
+			delete input;
+			input = NULL;
 		}
 	}
 }

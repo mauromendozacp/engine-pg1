@@ -1,11 +1,13 @@
 #include "game.h"
 #include "Shape/shape.h"
 #include "Renderer/renderer.h"
+#include "Input/input.h"
 
 namespace GL
 {
 	Game::Game()
 	{
+		this->entity = NULL;
 	}
 
 	Game::~Game()
@@ -34,6 +36,8 @@ namespace GL
 			std::cout << "ERROR" << std::endl;
 
 		std::cout << glGetString(GL_VERSION) << std::endl;
+
+		input->Init();
 	}
 
 	void Game::Init()

@@ -114,8 +114,6 @@ namespace GL
 		return shaderCode;
 	}
 
-
-
 	void Render::BindBuffer(unsigned int VAO, unsigned int VBO, unsigned int EBO, float* vertices)
 	{
 		glGenVertexArrays(1, &VAO);

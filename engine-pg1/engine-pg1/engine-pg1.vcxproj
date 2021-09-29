@@ -153,6 +153,7 @@
     <ClCompile Include="..\src\Entity2D\entity2D.cpp" />
     <ClCompile Include="..\src\Entity\entity.cpp" />
     <ClCompile Include="..\src\Game\game.cpp" />
+    <ClCompile Include="..\src\Input\input.cpp" />
     <ClCompile Include="..\src\Renderer\renderer.cpp" />
     <ClCompile Include="..\src\Shape\shape.cpp" />
     <ClCompile Include="..\src\Window\window.cpp" />
@@ -163,9 +164,11 @@
     <ClInclude Include="..\src\Entity\entity.h" />
     <ClInclude Include="..\src\exports.h" />
     <ClInclude Include="..\src\Game\game.h" />
+    <ClInclude Include="..\src\Input\input.h" />
     <ClInclude Include="..\src\Renderer\renderer.h" />
     <ClInclude Include="..\src\Shape\shape.h" />
     <ClInclude Include="..\src\Window\window.h" />
+    <ClInclude Include="keycodes.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
