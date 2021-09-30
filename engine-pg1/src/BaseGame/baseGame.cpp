@@ -38,7 +38,7 @@ namespace GL
 		if (!glfwInit())
 			return;
 
-		window = new Window(640.0f, 480.0f, "Mauwus y Guiduwu");
+		window = new Window(640.0f, 480.0f, "COCO 2, LA VENGANZA ANASHEEEE");
 		render = new Render();
 		input = new Input(window);
 

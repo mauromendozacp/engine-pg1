@@ -3,9 +3,9 @@
 
 #include "BaseGame/baseGame.h"
 
-namespace GL
+namespace GameXD
 {
-	class GRAPHICSENGINE_API Game : BaseGame
+	class GRAPHICSENGINE_API Game : GL::BaseGame
 	{
 	public:
 		Game();
@@ -17,7 +17,7 @@ namespace GL
 		void DeInit() override;
 
 	private:
-		Shape* entity;
+		GL::Shape* entity;
 	};
 }
 

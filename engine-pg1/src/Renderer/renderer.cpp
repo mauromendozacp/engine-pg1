@@ -11,6 +11,7 @@ namespace GL
 		view = glm::mat4(1.0f);
 		view = glm::lookAt(glm::vec3(0, 0, -15), glm::vec3(0, 0, 0), glm::vec3(0, 1, 0));
 		projection = glm::mat4(1.0f);
+		projection = glm::perspective(glm::radians(45.0f), 640.0f / 480.0f, 0.1f, 1000.0f);
 		//projectionMatrix = glm::ortho(0.0f, (float)currentWindow->getWidth(), 0.0f, (float)currentWindow->getHeight(), 0.1f, 100.0f);
 		//projection = glm::perspective(glm::radians(90.0f), (float)currentWindow->getWidth() / (float)currentWindow->getHeight(), 0.1f, 100.0f);
 		glEnable(GL_DEPTH_TEST);
@@ -71,9 +72,10 @@ namespace GL
 		glDeleteBuffers(1, &EBO);
 	}
 
-	void Render::Draw(glm::mat4 model, glm::vec4 color, unsigned int VAO, unsigned int vertices)
+	void Render::Draw(glm::mat4 model, glm::vec4 color, unsigned int VAO, unsigned int vertex)
 	{
-		//ESTO ES DE OWIN XD
+		glUseProgram(shader->GetShader());
+
 		unsigned int modelLoc = glGetUniformLocation(shader->GetShader(), "model");
 		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
 
@@ -89,19 +91,14 @@ namespace GL
 
 		unsigned int alphaLoc = glGetUniformLocation(shader->GetShader(), "a");
 		glUniform1fv(alphaLoc, 1, &(color.a));
-
+		
 		glBindVertexArray(VAO);
-		glDrawElements(GL_TRIANGLES, vertices, GL_UNSIGNED_INT, 0);
-
-		/*glBindVertexArray(VAO);
-		glBindBuffer(GL_ARRAY_BUFFER, VBO);
-		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
-		glBufferData(GL_ARRAY_BUFFER, tam, vertices, GL_STATIC_DRAW);
+		glDrawElements(GL_TRIANGLES, vertex, GL_UNSIGNED_INT, 0);
 
 		glBindVertexArray(0);
 		glBindBuffer(GL_ARRAY_BUFFER, 0);
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
-		glUseProgram(0);*/
+		glUseProgram(0);
 	}
 
 	void Render::SetClearColor(float r, float g, float b, float a)
@@ -112,12 +109,7 @@ namespace GL
 	void Render::ClearScreen()
 	{
 		glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
-		glClear(GL_COLOR_BUFFER_BIT);
-		glUseProgram(shader->GetShader());
-	}
-
-	void Render::Draw(glm::mat4 model, glm::vec4 color, unsigned int VAO, float* indexes)
-	{
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	}
 
 	void Render::PostRender(Window* window)

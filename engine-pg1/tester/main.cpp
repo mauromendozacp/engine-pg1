@@ -1,7 +1,7 @@
 #include "Game/game.h"
 
 
-using namespace GL;
+using namespace GameXD;
 
 int main()
 {

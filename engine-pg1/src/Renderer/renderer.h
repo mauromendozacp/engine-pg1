@@ -27,8 +27,7 @@ namespace GL
 		void BindIndexs(unsigned int& EBO, int tam, unsigned int* indexs);
 		void BindAttrib();
 		void UnBind(unsigned int& VAO, unsigned int& VBO, unsigned int& EBO);
-		void Draw(glm::mat4 model, glm::vec4 color, unsigned int VAO, float* indexes);
-		void Draw(glm::mat4 model, glm::vec4 color, unsigned int VAO, unsigned int vertices);
+		void Draw(glm::mat4 model, glm::vec4 color, unsigned int VAO, unsigned int vertex);
 
 		void SetClearColor(float r, float g, float b, float a);
 		void ClearScreen();

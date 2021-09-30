@@ -26,17 +26,16 @@ namespace GL
 	{
 		this->render = render;
 
-		model = glm::mat4(1.0f);
-		translate = glm::mat4(1.0f);
-		rotationX = glm::mat4(1.0f);
-		rotationY = glm::mat4(1.0f);
-		rotationZ = glm::mat4(1.0f);
-		scale = glm::mat4(1.0f);
+		SetPos(0.0f, 0.0f, 0.0f);
+		SetRotX(0.0f);
+		SetRotY(0.0f);
+		SetRotZ(0.0f);
+		SetScale(1.0f, 1.0f, 1.0f);
 
 		v3Pos = glm::vec3(0.0f);
 		v3Rot = glm::vec3(0.0f);
 		v3Scale = glm::vec3(1.0f);
-		color = glm::vec4();
+		color = glm::vec4(1.0f);
 
 		VAO = 0;
 		VBO = 0;

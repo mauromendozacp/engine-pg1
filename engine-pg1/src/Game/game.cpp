@@ -1,6 +1,6 @@
 #include "game.h"
 
-namespace GL
+namespace GameXD
 {
 	Game::Game()
 	{
@@ -26,7 +26,7 @@ namespace GL
 
 	void Game::Init()
 	{
-		entity = new Shape(render, SHAPE_TYPE::TRIANGLE);
+		entity = new GL::Shape(render, GL::SHAPE_TYPE::TRIANGLE);
 		entity->Init();
 	}
 
