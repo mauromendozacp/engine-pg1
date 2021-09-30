@@ -17,7 +17,7 @@ namespace GL
 		void DeInit() override;
 
 	private:
-		Entity* entity;
+		Shape* entity;
 	};
 }
 

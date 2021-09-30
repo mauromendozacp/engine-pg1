@@ -20,13 +20,6 @@ namespace GL
 		void Draw();
 
 	private:
-		unsigned int VBO;
-		unsigned int VAO;
-		unsigned int EBO;
-
-		float* vertices;
-		unsigned int* indices;
-
 		SHAPE_TYPE shapeType;
 	};
 }

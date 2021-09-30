@@ -56,9 +56,6 @@
     <ClInclude Include="..\src\Window\window.h">
       <Filter>Window</Filter>
     </ClInclude>
-    <ClInclude Include="..\src\Renderer\renderer.h">
-      <Filter>Renderer</Filter>
-    </ClInclude>
     <ClInclude Include="..\src\BaseGame\baseGame.h">
       <Filter>BaseGame</Filter>
     </ClInclude>
@@ -78,6 +75,9 @@
     </ClInclude>
     <ClInclude Include="..\src\Shader\shader.h">
       <Filter>Shader</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Renderer\renderer.h">
+      <Filter>Renderer</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

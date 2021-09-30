@@ -97,6 +97,11 @@ namespace GL
 		}
 	}
 
+	uint Shader::GetShader()
+	{
+		return shaderId;
+	}
+
 	std::string Shader::ReadShaderFile(std::string path)
 	{
 		std::string shaderCode;

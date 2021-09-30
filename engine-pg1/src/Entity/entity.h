@@ -24,7 +24,7 @@ namespace GL
 		void SetColor(glm::vec4 color);
 
 		glm::mat4 GetRotation();
-		void UpdateTRS();
+		void UpdateModel();
 
 		float GetPosX();
 		float GetPosY();
@@ -54,7 +54,7 @@ namespace GL
 		glm::mat4 scale;
 
 		glm::vec4 color;
-		glm::mat4 trs;
+		glm::mat4 model;
 
 		unsigned int VAO, VBO, EBO, vertices;
 	};

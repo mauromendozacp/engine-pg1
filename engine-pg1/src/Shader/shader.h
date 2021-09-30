@@ -20,6 +20,7 @@ namespace GL
 
 		void CreateShader();
 		void DeleteShader();
+		uint GetShader();
 		
 	private:
 		uint shaderId;

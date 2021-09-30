@@ -5,6 +5,7 @@
 #include "Shader/shader.h"
 #include "glm.hpp"
 #include "../glm/ext/matrix_transform.hpp"
+#include "../glm/gtc/type_ptr.hpp"
 
 namespace GL
 {
@@ -22,11 +23,12 @@ namespace GL
 		void InitShader();
 		void DeInitShader();
 
-		void BindBuffer(unsigned int VAO, unsigned int VBO, int tam, float* vertices);
-		void BindIndexs(unsigned int EBO, int tam, float* indexs);
-		void BindAttrib(unsigned int location, int size, int stride, int offset);
+		void BindBuffer(unsigned int& VAO, unsigned int& VBO, int tam, float* vertices);
+		void BindIndexs(unsigned int& EBO, int tam, unsigned int* indexs);
+		void BindAttrib();
 		void UnBind(unsigned int& VAO, unsigned int& VBO, unsigned int& EBO);
-		void Draw(unsigned int VAO, unsigned int VBO, unsigned int EBO, int tam, float* vertices);
+		void Draw(glm::mat4 model, glm::vec4 color, unsigned int VAO, float* indexes);
+		void Draw(glm::mat4 model, glm::vec4 color, unsigned int VAO, unsigned int vertices);
 
 		void SetClearColor(float r, float g, float b, float a);
 		void ClearScreen();

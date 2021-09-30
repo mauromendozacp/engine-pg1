@@ -27,6 +27,7 @@ namespace GL
 	void Game::Init()
 	{
 		entity = new Shape(render, SHAPE_TYPE::TRIANGLE);
+		entity->Init();
 	}
 
 	void Game::Update()
@@ -36,7 +37,7 @@ namespace GL
 			ClearScreen();
 
 			//****Render here****
-			//entity->Draw();
+			entity->Draw();
 			//--------------------
 
 			PostRender();
