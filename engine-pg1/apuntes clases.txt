@@ -11,9 +11,17 @@ Vertex shader. 3 vertices
 DrawArrays(verts[[],[],[]]) Funcionacon un Vertex Buffer
 DrawElements() Funciona con un Index Buffer (que es alimentado por un vertex buffer).
 Se le especifica cuantos indices se les va a pasar
-Formato: Piuntero de atributo
+Formato: 
+Piuntero de atributo
 ID=0 -> Pos
 Tipo de dato -> float
 Cant -> 2*Sizeof(float) a esto*
-Comienzo -> vertice     y a esto* 
+Comienzo -> vertice y a esto*
 *Se lo conoce como OffsetStride.
+
+VAO - Vertex Array Object
+VBO - Vertex Buffer Object
+EBO - Elements Buffer Object
+
+Window -> Renderer -> Shader -> Shape -> entity2D -> entity
+
