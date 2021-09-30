@@ -1,6 +1,5 @@
 #include "Game/game.h"
 
-
 using namespace GameXD;
 
 int main()
@@ -14,5 +13,4 @@ int main()
     }
 
     return 0;
-
 }

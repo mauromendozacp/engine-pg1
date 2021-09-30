@@ -11,9 +11,7 @@ namespace GL
 		view = glm::mat4(1.0f);
 		view = glm::lookAt(glm::vec3(0, 0, -15), glm::vec3(0, 0, 0), glm::vec3(0, 1, 0));
 		projection = glm::mat4(1.0f);
-		projection = glm::perspective(glm::radians(45.0f), 640.0f / 480.0f, 0.1f, 1000.0f);
-		//projectionMatrix = glm::ortho(0.0f, (float)currentWindow->getWidth(), 0.0f, (float)currentWindow->getHeight(), 0.1f, 100.0f);
-		//projection = glm::perspective(glm::radians(90.0f), (float)currentWindow->getWidth() / (float)currentWindow->getHeight(), 0.1f, 100.0f);
+		projection = glm::perspective(glm::radians(90.0f), 640.0f / 480.0f, 0.1f, 1000.0f);
 		glEnable(GL_DEPTH_TEST);
 		glDepthFunc(GL_LESS);
 	}
@@ -55,7 +53,6 @@ namespace GL
 		glBufferData(GL_ELEMENT_ARRAY_BUFFER, tam, indexs, GL_STATIC_DRAW);
 	}
 
-	//void Render::BindAttrib(unsigned int location, int size, int stride, int offset)
 	void Render::BindAttrib()
 	{
 		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)0);

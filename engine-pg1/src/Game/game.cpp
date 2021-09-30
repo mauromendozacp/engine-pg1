@@ -2,9 +2,9 @@
 
 namespace GameXD
 {
-	float posSpeed = 1.0f;
-	float rotSpeed = 1.0f;
-	float scaleSpeed = 1.0f;
+	float posSpeed = 0.25f;
+	float rotSpeed = 0.25f;
+	float scaleSpeed = 0.25f;
 
 	Game::Game()
 	{

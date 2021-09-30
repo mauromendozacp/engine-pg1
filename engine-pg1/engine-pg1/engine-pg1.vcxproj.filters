@@ -51,6 +51,9 @@
     <Filter Include="Shader">
       <UniqueIdentifier>{19925a9c-3c89-4d39-bcb8-f8d97d0aede5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ShaderCode">
+      <UniqueIdentifier>{83991cc7-c5ac-4427-b259-d17a2481e5ae}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\Window\window.h">
@@ -79,5 +82,13 @@
       <Filter>Renderer</Filter>
     </ClInclude>
     <ClInclude Include="..\src\keycodes.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="..\src\Shaders\fragmentshader.txt">
+      <Filter>ShaderCode</Filter>
+    </Text>
+    <Text Include="..\src\Shaders\vertexshader.txt">
+      <Filter>ShaderCode</Filter>
+    </Text>
   </ItemGroup>
 </Project>
