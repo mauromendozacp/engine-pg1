@@ -91,11 +91,6 @@ namespace GL
 		
 		glBindVertexArray(VAO);
 		glDrawElements(GL_TRIANGLES, vertex, GL_UNSIGNED_INT, 0);
-
-		glBindVertexArray(0);
-		glBindBuffer(GL_ARRAY_BUFFER, 0);
-		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
-		glUseProgram(0);
 	}
 
 	void Render::SetClearColor(float r, float g, float b, float a)
