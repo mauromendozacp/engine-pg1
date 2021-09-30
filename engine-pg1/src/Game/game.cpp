@@ -2,17 +2,21 @@
 
 namespace GameXD
 {
+	float posSpeed = 1.0f;
+	float rotSpeed = 1.0f;
+	float scaleSpeed = 1.0f;
+
 	Game::Game()
 	{
-		this->entity = NULL;
+		this->shape = NULL;
 	}
 
 	Game::~Game()
 	{
-		if (entity != NULL)
+		if (shape != NULL)
 		{
-			delete entity;
-			entity = NULL;
+			delete shape;
+			shape = NULL;
 		}
 	}
 
@@ -24,10 +28,38 @@ namespace GameXD
 		DeInit();
 	}
 
+	void Game::Inputs()
+	{
+		if (input->IsKeyPressed(KEY_A))
+		{
+			shape->SetPos(shape->GetPosX() + posSpeed, shape->GetPosY(), shape->GetPosZ());
+		}
+		else if (input->IsKeyPressed(KEY_D))
+		{
+			shape->SetPos(shape->GetPosX() - posSpeed, shape->GetPosY(), shape->GetPosZ());
+		}
+		else if (input->IsKeyPressed(KEY_Q))
+		{
+			shape->SetRotZ(shape->GetRotZ() - rotSpeed);
+		}
+		else if (input->IsKeyPressed(KEY_E))
+		{
+			shape->SetRotZ(shape->GetRotZ() + rotSpeed);
+		}
+		else if (input->IsKeyPressed(KEY_W))
+		{
+			shape->SetScale(shape->GetScaleX() + scaleSpeed, shape->GetScaleY() + scaleSpeed, shape->GetScaleZ() + scaleSpeed);
+		}
+		else if (input->IsKeyPressed(KEY_S))
+		{
+			shape->SetScale(shape->GetScaleX() - scaleSpeed, shape->GetScaleY() - scaleSpeed, shape->GetScaleZ() - scaleSpeed);
+		}
+	}
+
 	void Game::Init()
 	{
-		entity = new GL::Shape(render, GL::SHAPE_TYPE::TRIANGLE);
-		entity->Init();
+		shape = new GL::Shape(render, GL::SHAPE_TYPE::TRIANGLE);
+		shape->Init();
 	}
 
 	void Game::Update()
@@ -36,8 +68,10 @@ namespace GameXD
 		{
 			ClearScreen();
 
+			Inputs();
+
 			//****Render here****
-			entity->Draw();
+			shape->Draw();
 			//--------------------
 
 			PostRender();

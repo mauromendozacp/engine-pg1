@@ -164,11 +164,11 @@
     <ClInclude Include="..\src\Entity\entity.h" />
     <ClInclude Include="..\src\exports.h" />
     <ClInclude Include="..\src\Input\input.h" />
+    <ClInclude Include="..\src\keycodes.h" />
     <ClInclude Include="..\src\Renderer\renderer.h" />
     <ClInclude Include="..\src\Shader\shader.h" />
     <ClInclude Include="..\src\Shape\shape.h" />
     <ClInclude Include="..\src\Window\window.h" />
-    <ClInclude Include="keycodes.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

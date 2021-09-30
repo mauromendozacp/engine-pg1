@@ -20,6 +20,7 @@ namespace GL
 		std::string title;
 
 		void Start();
+		void Inputs();
 		bool GetWindowClose();
 		void ClearScreen();
 		void PostRender();

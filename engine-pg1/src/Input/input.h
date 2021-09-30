@@ -2,6 +2,7 @@
 #define INPUT_H
 
 #include "Window/window.h"
+#include "keycodes.h"
 #include <list>
 
 namespace GL
@@ -12,8 +13,8 @@ namespace GL
 		Input(Window* window);
 		~Input();
 		void Init();
-		bool IsKeyPressed(int keycode, Window* window);
-		bool IsKeyDown(int keycode, Window* window);
+		bool IsKeyPressed(int keycode);
+		bool IsKeyDown(int keycode);
 	private:
 		Window* window;
 	};

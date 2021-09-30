@@ -19,13 +19,13 @@ namespace GL
 		glfwSetKeyCallback(window->GetWindow(), KeyCallback);
 	}
 
-	bool Input::IsKeyPressed(int keycode, Window* window)
+	bool Input::IsKeyPressed(int keycode)
 	{
 		int aux = glfwGetKey(window->GetWindow(), keycode);
 		return aux == GLFW_PRESS;
 	}
 
-	bool Input::IsKeyDown(int keycode, Window* window)
+	bool Input::IsKeyDown(int keycode)
 	{
 		std::list<int>::iterator it = find(currentKeysDown.begin(), currentKeysDown.end(), keycode);
 		if (it != currentKeysDown.end())

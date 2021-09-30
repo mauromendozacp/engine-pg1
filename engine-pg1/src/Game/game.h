@@ -11,13 +11,14 @@ namespace GameXD
 		Game();
 		~Game();
 		void Play();
+		void Inputs();
 
 		void Init() override;
 		void Update() override;
 		void DeInit() override;
 
 	private:
-		GL::Shape* entity;
+		GL::Shape* shape;
 	};
 }
 

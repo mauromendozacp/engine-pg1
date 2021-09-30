@@ -69,7 +69,6 @@
     <ClInclude Include="..\src\Shape\shape.h">
       <Filter>Shape</Filter>
     </ClInclude>
-    <ClInclude Include="keycodes.h" />
     <ClInclude Include="..\src\Input\input.h">
       <Filter>Input</Filter>
     </ClInclude>
@@ -79,5 +78,6 @@
     <ClInclude Include="..\src\Renderer\renderer.h">
       <Filter>Renderer</Filter>
     </ClInclude>
+    <ClInclude Include="..\src\keycodes.h" />
   </ItemGroup>
 </Project>
