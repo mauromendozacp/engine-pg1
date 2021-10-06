@@ -13,19 +13,35 @@ namespace GameXD
 
 	Game::~Game()
 	{
+		
+	}
+
+	void Game::Play()
+	{
+		InitBase();
+		UpdateBase();
+		DeInitBase();
+	}
+
+	void Game::Init()
+	{
+		shape = new GL::Shape(render, GL::SHAPE_TYPE::TRIANGLE);
+		shape->Init();
+	}
+
+	void Game::Update()
+	{
+		Inputs();
+		shape->Draw();
+	}
+
+	void Game::DeInit()
+	{
 		if (shape != NULL)
 		{
 			delete shape;
 			shape = NULL;
 		}
-	}
-
-	void Game::Play()
-	{
-		Start();
-		Init();
-		Update();
-		DeInit();
 	}
 
 	void Game::Inputs()
@@ -54,32 +70,5 @@ namespace GameXD
 		{
 			shape->SetScale(shape->GetScaleX() - scaleSpeed, shape->GetScaleY() - scaleSpeed, shape->GetScaleZ() - scaleSpeed);
 		}
-	}
-
-	void Game::Init()
-	{
-		shape = new GL::Shape(render, GL::SHAPE_TYPE::TRIANGLE);
-		shape->Init();
-	}
-
-	void Game::Update()
-	{
-		while (!GetWindowClose())
-		{
-			ClearScreen();
-
-			Inputs();
-
-			//****Render here****
-			shape->Draw();
-			//--------------------
-
-			PostRender();
-		}
-	}
-
-	void Game::DeInit()
-	{
-		End();
 	}
 }

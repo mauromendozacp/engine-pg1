@@ -37,6 +37,6 @@ namespace GL
 
 	void Window::DestroyWindow()
 	{
-		//glfwDestroyWindow(glfWindow);
+		glfwDestroyWindow(glfWindow);
 	}
 }

@@ -13,18 +13,16 @@ namespace GL
 	public:
 		BaseGame();
 		~BaseGame();
+
 	protected:
 		Window* window;
 		Render* render;
 		Input* input;
 		std::string title;
 
-		void Start();
-		void Inputs();
-		bool GetWindowClose();
-		void ClearScreen();
-		void PostRender();
-		void End();
+		void InitBase();
+		void UpdateBase();
+		void DeInitBase();
 
 		virtual void Init() = 0;
 		virtual void Update() = 0;

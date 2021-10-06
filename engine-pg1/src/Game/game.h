@@ -11,7 +11,6 @@ namespace GameXD
 		Game();
 		~Game();
 		void Play();
-		void Inputs();
 
 		void Init() override;
 		void Update() override;
@@ -19,6 +18,8 @@ namespace GameXD
 
 	private:
 		GL::Shape* shape;
+
+		void Inputs();
 	};
 }
 
