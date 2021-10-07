@@ -21,7 +21,7 @@ namespace GL
 		void SetRotY(float y);
 		void SetRotZ(float z);
 		void SetScale(float x, float y, float z);
-		void SetColor(glm::vec4 color);
+		void SetColor(float r, float g, float b, float a);
 
 		glm::mat4 GetRotation();
 		void UpdateModel();

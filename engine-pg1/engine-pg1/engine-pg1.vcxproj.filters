@@ -84,10 +84,10 @@
     <ClInclude Include="..\src\keycodes.h" />
   </ItemGroup>
   <ItemGroup>
-    <Text Include="..\src\Shaders\fragmentshader.txt">
+    <Text Include="..\src\Shaders\fragmentshader.shader">
       <Filter>ShaderCode</Filter>
     </Text>
-    <Text Include="..\src\Shaders\vertexshader.txt">
+    <Text Include="..\src\Shaders\vertexshader.shader">
       <Filter>ShaderCode</Filter>
     </Text>
   </ItemGroup>

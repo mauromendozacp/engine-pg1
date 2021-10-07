@@ -8,8 +8,8 @@
 
 namespace GL
 {
-	const std::string vertexPath = "../src/Shaders/vertexshader.txt";
-	const std::string fragmentPath = "../src/Shaders/fragmentshader.txt";
+	const std::string vertexPath = "../src/ShadersCode/vertexshader.shader";
+	const std::string fragmentPath = "../src/ShadersCode/fragmentshader.shader";
 	typedef unsigned int uint;
 
 	class GRAPHICSENGINE_API Shader

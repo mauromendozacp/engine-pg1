@@ -17,7 +17,7 @@ namespace GL
 		scale = glm::mat4(1.0f);
 
 		model = glm::mat4(1.0f);
-		SetColor(glm::vec4(1.0f, 1.0f, 1.0f, 1.0f));
+		SetColor(1.0f, 1.0f, 1.0f, 1.0f);
 
 		UpdateModel();
 	}
@@ -84,9 +84,9 @@ namespace GL
 		UpdateModel();
 	}
 
-	void Entity::SetColor(glm::vec4 color)
+	void Entity::SetColor(float r, float g, float b, float a)
 	{
-		this->color = color;
+		this->color = glm::vec4(r, g, b, a);
 	}
 
 	glm::mat4 Entity::GetRotation()
