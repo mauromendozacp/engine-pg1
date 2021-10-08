@@ -8,5 +8,5 @@ uniform float a = 1.0f;
 
 void main()
 {
-   FragColor = vec4(color.x, color.y, color.z, a);
+	FragColor = vec4(ourColor.x * color.x, ourColor.y * color.y, ourColor.z * color.z, a);
 }

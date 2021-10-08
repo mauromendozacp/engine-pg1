@@ -84,11 +84,11 @@
     <ClInclude Include="..\src\keycodes.h" />
   </ItemGroup>
   <ItemGroup>
-    <Text Include="..\src\Shaders\fragmentshader.shader">
+    <None Include="..\src\ShadersCode\fragmentshader.shader">
       <Filter>ShaderCode</Filter>
-    </Text>
-    <Text Include="..\src\Shaders\vertexshader.shader">
+    </None>
+    <None Include="..\src\ShadersCode\vertexshader.shader">
       <Filter>ShaderCode</Filter>
-    </Text>
+    </None>
   </ItemGroup>
 </Project>

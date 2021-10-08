@@ -39,9 +39,7 @@ namespace GL
 			return;
 
 		window = new Window(640.0f, 480.0f, "COCO 2, LA VENGANZA ANASHEEEE");
-		render = new Render();
-		input = new Input(window);
-
+		
 		if (!window->OpenWindow())
 			return;
 
@@ -49,6 +47,9 @@ namespace GL
 
 		if (glewInit() != GLEW_OK)
 			std::cout << "ERROR" << std::endl;
+
+		render = new Render();
+		input = new Input(window);
 
 		std::cout << glGetString(GL_VERSION) << std::endl;
 

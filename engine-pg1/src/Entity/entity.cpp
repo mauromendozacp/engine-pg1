@@ -35,7 +35,7 @@ namespace GL
 		v3Pos = glm::vec3(0.0f);
 		v3Rot = glm::vec3(0.0f);
 		v3Scale = glm::vec3(1.0f);
-		color = glm::vec4(1.0f, 0.0f, 0.0f, 1.0f);
+		color = glm::vec4(0.0f, 0.0f, 0.0f, 1.0f);
 
 		VAO = 0;
 		VBO = 0;
