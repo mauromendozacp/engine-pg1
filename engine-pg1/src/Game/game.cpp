@@ -9,6 +9,7 @@ namespace GameXD
 	Game::Game()
 	{
 		this->shape = NULL;
+		this->sprite = NULL;
 	}
 
 	Game::~Game()
@@ -27,13 +28,19 @@ namespace GameXD
 	{
 		shape = new GL::Shape(render);
 		shape->Init(GL::SHAPE_TYPE::TRIANGLE);
+		shape->SetPos(0.0f, 0.0f, -10.0f);
 		shape->SetColor(1.0f, 1.0f, 0.0f, 0.5f);
+
+		sprite = new GL::Sprite(render);
+		sprite->Init("../res/Textures/izumi.png");
+		sprite->SetScale(10.0f, 10.0f, 10.0f);
 	}
 
 	void Game::Update()
 	{
 		Inputs();
 		shape->Draw();
+		sprite->Draw();
 	}
 
 	void Game::DeInit()
@@ -42,6 +49,11 @@ namespace GameXD
 		{
 			delete shape;
 			shape = NULL;
+		}
+		if (sprite != NULL)
+		{
+			delete sprite;
+			sprite = NULL;
 		}
 	}
 

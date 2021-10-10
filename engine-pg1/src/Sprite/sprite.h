@@ -16,6 +16,7 @@ namespace GL
 
 	private:
 		void LoadTexture(std::string path);
+		void SetShader(unsigned int shaderId) override;
 		void BindAttrib();
 
 		unsigned int textureId;

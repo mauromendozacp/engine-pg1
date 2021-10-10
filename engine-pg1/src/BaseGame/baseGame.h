@@ -3,6 +3,7 @@
 
 #include "exports.h"
 #include "Shape/shape.h"
+#include "Sprite/sprite.h"
 #include "Renderer/renderer.h"
 #include "Input/input.h"
 

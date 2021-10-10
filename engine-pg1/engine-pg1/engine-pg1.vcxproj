@@ -157,6 +157,7 @@
     <ClCompile Include="..\src\Shader\shader.cpp" />
     <ClCompile Include="..\src\Shape\shape.cpp" />
     <ClCompile Include="..\src\Sprite\sprite.cpp" />
+    <ClCompile Include="..\src\StbImage\stb_image.cpp" />
     <ClCompile Include="..\src\Window\window.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -170,6 +171,7 @@
     <ClInclude Include="..\src\Shader\shader.h" />
     <ClInclude Include="..\src\Shape\shape.h" />
     <ClInclude Include="..\src\Sprite\sprite.h" />
+    <ClInclude Include="..\src\StbImage\stb_image.h" />
     <ClInclude Include="..\src\Window\window.h" />
   </ItemGroup>
   <ItemGroup>

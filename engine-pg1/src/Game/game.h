@@ -18,6 +18,7 @@ namespace GameXD
 
 	private:
 		GL::Shape* shape;
+		GL::Sprite* sprite;
 
 		void Inputs();
 	};

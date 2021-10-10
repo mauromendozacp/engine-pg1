@@ -28,6 +28,9 @@
     <ClCompile Include="..\src\Sprite\sprite.cpp">
       <Filter>Sprite</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\StbImage\stb_image.cpp">
+      <Filter>StbImage</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Window">
@@ -60,6 +63,9 @@
     <Filter Include="Sprite">
       <UniqueIdentifier>{06bc9182-16b1-4666-a694-fa563e7a4b4e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="StbImage">
+      <UniqueIdentifier>{27155381-1118-4f6f-9cf2-b6a452984693}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\Window\window.h">
@@ -90,6 +96,9 @@
     <ClInclude Include="..\src\keycodes.h" />
     <ClInclude Include="..\src\Sprite\sprite.h">
       <Filter>Sprite</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\StbImage\stb_image.h">
+      <Filter>StbImage</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

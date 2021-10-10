@@ -18,10 +18,10 @@ namespace GL
 
 		void Init(SHAPE_TYPE shapeType);
 		void Draw();
-		void SetShader(unsigned int shaderId) override;
 
 	private:
 		void BindAttrib();
+		void SetShader(unsigned int shaderId) override;
 	};
 }
 
