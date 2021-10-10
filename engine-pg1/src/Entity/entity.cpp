@@ -9,17 +9,19 @@ namespace GL
 		v3Pos = glm::vec3(0.0f);
 		v3Rot = glm::vec3(0.0f);
 		v3Scale = glm::vec3(1.0f);
+		color = glm::vec4(1.0f, 1.0f, 1.0f, 1.0f);
 
 		translate = glm::mat4(1.0f);
 		rotationX = glm::mat4(1.0f);
 		rotationY = glm::mat4(1.0f);
 		rotationZ = glm::mat4(1.0f);
 		scale = glm::mat4(1.0f);
-
 		model = glm::mat4(1.0f);
-		SetColor(1.0f, 1.0f, 1.0f, 1.0f);
 
-		UpdateModel();
+		VAO = 0;
+		VBO = 0;
+		EBO = 0;
+		vertices = 0;
 	}
 
 	Entity::Entity(Render* render)
@@ -31,19 +33,19 @@ namespace GL
 		SetRotY(0.0f);
 		SetRotZ(0.0f);
 		SetScale(1.0f, 1.0f, 1.0f);
-
-		v3Pos = glm::vec3(0.0f);
-		v3Rot = glm::vec3(0.0f);
-		v3Scale = glm::vec3(1.0f);
-		color = glm::vec4(0.0f, 0.0f, 0.0f, 1.0f);
+		SetColor(1.0f, 1.0f, 1.0f, 1.0f);
 
 		VAO = 0;
 		VBO = 0;
 		EBO = 0;
+		vertices = 0;
+
+		UpdateModel();
 	}
 
 	Entity::~Entity()
 	{
+		render->UnBind(VAO, VBO, EBO);
 	}
 
 	void Entity::SetPos(float x, float y, float z)
@@ -142,5 +144,10 @@ namespace GL
 	float Entity::GetScaleZ()
 	{
 		return v3Scale[2];
+	}
+
+	void Entity::Draw(unsigned int shaderId)
+	{
+		render->Draw(model, VAO, vertices, shaderId);
 	}
 }

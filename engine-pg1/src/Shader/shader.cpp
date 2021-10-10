@@ -9,9 +9,10 @@ namespace GL
 
 	Shader::~Shader()
 	{
+		glDeleteProgram(shaderId);
 	}
 
-	void Shader::CreateShader()
+	void Shader::CreateShader(std::string vertexPath, std::string fragmentPath)
 	{
 		shaderId = glCreateProgram();
 		if (!shaderId) {
@@ -19,12 +20,12 @@ namespace GL
 			return;
 		}
 
-		VertexShader();
-		FragmentShader();
+		VertexShader(vertexPath);
+		FragmentShader(fragmentPath);
 		LinkShader();
 	}
 
-	void Shader::VertexShader()
+	void Shader::VertexShader(std::string vertexPath)
 	{
 		int success;
 		char infoLog[512];
@@ -44,7 +45,7 @@ namespace GL
 		glAttachShader(shaderId, vertexShader);
 	}
 
-	void Shader::FragmentShader()
+	void Shader::FragmentShader(std::string fragmentPath)
 	{
 		int success;
 		char infoLog[512];
@@ -86,15 +87,6 @@ namespace GL
 		}
 
 		glUseProgram(shaderId);
-	}
-
-	void Shader::DeleteShader()
-	{
-		if (shaderId != 0)
-		{
-			glDeleteProgram(shaderId);
-			shaderId = 0;
-		}
 	}
 
 	uint Shader::GetShader()

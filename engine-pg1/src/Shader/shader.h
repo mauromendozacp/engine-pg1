@@ -8,8 +8,6 @@
 
 namespace GL
 {
-	const std::string vertexPath = "../src/ShadersCode/vertexshader.shader";
-	const std::string fragmentPath = "../src/ShadersCode/fragmentshader.shader";
 	typedef unsigned int uint;
 
 	class GRAPHICSENGINE_API Shader
@@ -18,15 +16,14 @@ namespace GL
 		Shader();
 		~Shader();
 
-		void CreateShader();
-		void DeleteShader();
+		void CreateShader(std::string vertexPath, std::string fragmentPath);
 		uint GetShader();
 		
 	private:
 		uint shaderId;
 
-		void VertexShader();
-		void FragmentShader();
+		void VertexShader(std::string vertexPath);
+		void FragmentShader(std::string fragmentPath);
 		void LinkShader();
 		std::string ReadShaderFile(std::string path);
 	};

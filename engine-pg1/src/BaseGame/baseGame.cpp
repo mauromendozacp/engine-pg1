@@ -70,7 +70,6 @@ namespace GL
 
 	void BaseGame::DeInitBase()
 	{
-		render->DeInitShader();
 		window->DestroyWindow();
 		glfwTerminate();
 	}

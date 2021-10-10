@@ -12,7 +12,9 @@ namespace GL
 	class GRAPHICSENGINE_API Render
 	{
 	private:
-		Shader* shader;
+		Shader* solidShader;
+		Shader* textureShader;
+
 		glm::mat4 view;
 		glm::mat4 projection;
 
@@ -21,13 +23,14 @@ namespace GL
 		~Render();
 
 		void InitShader();
-		void DeInitShader();
+		void UseShaderId(unsigned int shaderId);
+		unsigned int GetSolidShaderId();
+		unsigned int GetTextureShaderId();
 
 		void BindBuffer(unsigned int& VAO, unsigned int& VBO, int tam, float* vertices);
 		void BindIndexs(unsigned int& EBO, int tam, unsigned int* indexs);
-		void BindAttrib();
 		void UnBind(unsigned int& VAO, unsigned int& VBO, unsigned int& EBO);
-		void Draw(glm::mat4 model, glm::vec4 color, unsigned int VAO, unsigned int vertex);
+		void Draw(glm::mat4 model, unsigned int VAO, unsigned int vertex, unsigned int shaderId);
 
 		void SetClearColor(float r, float g, float b, float a);
 		void ClearScreen();

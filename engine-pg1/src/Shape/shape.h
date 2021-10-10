@@ -13,14 +13,15 @@ namespace GL
 	class GRAPHICSENGINE_API Shape : public Entity2D
 	{
 	public:
-		Shape(Render* render, SHAPE_TYPE shapeType);
+		Shape(Render* render);
 		~Shape();
 
-		void Init();
+		void Init(SHAPE_TYPE shapeType);
 		void Draw();
+		void SetShader(unsigned int shaderId) override;
 
 	private:
-		SHAPE_TYPE shapeType;
+		void BindAttrib();
 	};
 }
 

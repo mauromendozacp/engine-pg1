@@ -25,8 +25,8 @@ namespace GameXD
 
 	void Game::Init()
 	{
-		shape = new GL::Shape(render, GL::SHAPE_TYPE::TRIANGLE);
-		shape->Init();
+		shape = new GL::Shape(render);
+		shape->Init(GL::SHAPE_TYPE::TRIANGLE);
 		shape->SetColor(1.0f, 1.0f, 0.0f, 0.5f);
 	}
 

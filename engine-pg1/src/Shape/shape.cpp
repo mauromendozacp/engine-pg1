@@ -2,37 +2,27 @@
 
 namespace GL
 {
-	Shape::Shape(Render* render, SHAPE_TYPE shapeType) : Entity2D(render)
+	Shape::Shape(Render* render) : Entity2D(render)
 	{
-		this->render = render;
-		this->shapeType = shapeType;
-
-		this->VBO = 0;
-		this->VAO = 0;
-		this->EBO = 0;
 	}
 
 	Shape::~Shape()
 	{
-		render->UnBind(VAO, VBO, EBO);
 	}
 
-	void Shape::Init()
+	void Shape::Init(SHAPE_TYPE shapeType)
 	{
-		float* vertex;
-		unsigned int* indexes;
-
 		switch (shapeType)
 		{
 		case SHAPE_TYPE::TRIANGLE:
-			vertex = new float[18]
+			float vertex[]
 			{
 				// positions         // colors
 				 0.5f, -0.5f, 0.0f,  1.0f, 1.0f, 1.0f,   // bottom right
 				-0.5f, -0.5f, 0.0f,  1.0f, 1.0f, 1.0f,   // bottom left
 				 0.0f,  0.5f, 0.0f,  1.0f, 1.0f, 1.0f    // top 
 			};
-			indexes = new unsigned int[3]
+			unsigned int indexes[]
 			{
 				0, 1, 2
 			};
@@ -40,19 +30,36 @@ namespace GL
 
 			render->BindBuffer(VAO, VBO, sizeof(vertex) * 18, vertex);
 			render->BindIndexs(EBO, sizeof(indexes) * 3, indexes);
-			render->BindAttrib();
+			BindAttrib();
 
-			delete[] vertex;
-			delete[] indexes;
-
-			break;
-		default:
 			break;
 		}
 	}
 
 	void Shape::Draw()
 	{
-		render->Draw(model, color, VAO, vertices);
+		unsigned int shaderId = render->GetSolidShaderId();
+		render->UseShaderId(shaderId);
+		SetShader(shaderId);
+		Entity::Draw(shaderId);
+	}
+
+	void Shape::SetShader(unsigned int shaderId)
+	{
+		glm::vec3 newColor = glm::vec3(color.r, color.g, color.b);
+		unsigned int colorLoc = glGetUniformLocation(shaderId, "color");
+		glUniform3fv(colorLoc, 1, glm::value_ptr(newColor));
+
+		unsigned int alphaLoc = glGetUniformLocation(shaderId, "a");
+		glUniform1fv(alphaLoc, 1, &(color.a));
+	}
+
+	void Shape::BindAttrib()
+	{
+		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)0);
+		glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)(3 * sizeof(float)));
+
+		glEnableVertexAttribArray(0);
+		glEnableVertexAttribArray(1);
 	}
 }

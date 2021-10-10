@@ -25,6 +25,9 @@
     <ClCompile Include="..\src\Shader\shader.cpp">
       <Filter>Shader</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\Sprite\sprite.cpp">
+      <Filter>Sprite</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Window">
@@ -54,6 +57,9 @@
     <Filter Include="ShaderCode">
       <UniqueIdentifier>{83991cc7-c5ac-4427-b259-d17a2481e5ae}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Sprite">
+      <UniqueIdentifier>{06bc9182-16b1-4666-a694-fa563e7a4b4e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\Window\window.h">
@@ -82,12 +88,21 @@
       <Filter>Renderer</Filter>
     </ClInclude>
     <ClInclude Include="..\src\keycodes.h" />
+    <ClInclude Include="..\src\Sprite\sprite.h">
+      <Filter>Sprite</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\src\ShadersCode\fragmentshader.shader">
+    <None Include="..\src\ShadersCode\SolidFragment.shader">
       <Filter>ShaderCode</Filter>
     </None>
-    <None Include="..\src\ShadersCode\vertexshader.shader">
+    <None Include="..\src\ShadersCode\SolidVertex.shader">
+      <Filter>ShaderCode</Filter>
+    </None>
+    <None Include="..\src\ShadersCode\TextureFragment.shader">
+      <Filter>ShaderCode</Filter>
+    </None>
+    <None Include="..\src\ShadersCode\TextureVertex.shader">
       <Filter>ShaderCode</Filter>
     </None>
   </ItemGroup>
