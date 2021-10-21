@@ -36,6 +36,20 @@ namespace GL
 		LoadTexture(path);
 	}
 
+	void Sprite::Update(float timer)
+	{
+		if (!anim)
+			return;
+
+		anim->Update(timer);
+
+		float currFrame = anim->GetCurrentFrame();
+		if (currFrame != 0)
+		{
+
+		}
+	}
+
 	void Sprite::Draw()
 	{
 		unsigned int shaderId = render->GetTextureShaderId();

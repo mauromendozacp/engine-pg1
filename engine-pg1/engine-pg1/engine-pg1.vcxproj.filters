@@ -31,6 +31,12 @@
     <ClCompile Include="..\src\StbImage\stb_image.cpp">
       <Filter>StbImage</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\Animation\animation.cpp">
+      <Filter>Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Frame\frame.cpp">
+      <Filter>Frame</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Window">
@@ -66,6 +72,12 @@
     <Filter Include="StbImage">
       <UniqueIdentifier>{27155381-1118-4f6f-9cf2-b6a452984693}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Animation">
+      <UniqueIdentifier>{6ea739f6-011a-4a16-bf1c-d9a6a428c6d3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Frame">
+      <UniqueIdentifier>{ef26ce1c-90b9-43b4-b078-0ca3b6d8bc74}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\Window\window.h">
@@ -99,6 +111,12 @@
     </ClInclude>
     <ClInclude Include="..\src\StbImage\stb_image.h">
       <Filter>StbImage</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Animation\animation.h">
+      <Filter>Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Frame\frame.h">
+      <Filter>Frame</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -149,9 +149,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\src\Animation\animation.cpp" />
     <ClCompile Include="..\src\BaseGame\baseGame.cpp" />
     <ClCompile Include="..\src\Entity2D\entity2D.cpp" />
     <ClCompile Include="..\src\Entity\entity.cpp" />
+    <ClCompile Include="..\src\Frame\frame.cpp" />
     <ClCompile Include="..\src\Input\input.cpp" />
     <ClCompile Include="..\src\Renderer\renderer.cpp" />
     <ClCompile Include="..\src\Shader\shader.cpp" />
@@ -161,10 +163,12 @@
     <ClCompile Include="..\src\Window\window.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\src\Animation\animation.h" />
     <ClInclude Include="..\src\BaseGame\baseGame.h" />
     <ClInclude Include="..\src\Entity2D\entity2D.h" />
     <ClInclude Include="..\src\Entity\entity.h" />
     <ClInclude Include="..\src\exports.h" />
+    <ClInclude Include="..\src\Frame\frame.h" />
     <ClInclude Include="..\src\Input\input.h" />
     <ClInclude Include="..\src\keycodes.h" />
     <ClInclude Include="..\src\Renderer\renderer.h" />
