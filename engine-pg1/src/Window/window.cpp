@@ -3,7 +3,7 @@
 namespace GL
 {
 	Window::Window(float width, float height, std::string title)
-	{
+	{//Crea la ventana partiendo del ancho, alto y titulo ingresados. La ventana de glfw todavia no se inicia.
 		this->glfWindow = NULL;
 		this->height = height;
 		this->width = width;
@@ -20,11 +20,14 @@ namespace GL
 	}
 
 	bool Window::OpenWindow()
-	{
-		glfWindow = glfwCreateWindow(width, height, title.c_str(), NULL, NULL);
-		if (!glfWindow)
+	{//En este paso es que se inicia la ventana de glfw. Devuelve un bool en caso de ser posible (o no) crear la ventana. 
+		glfWindow = glfwCreateWindow(width, height, title.c_str(), NULL, NULL); 
+		//Usando los campos internos ademas de otros 2, se intentara recrear la ventana.
+		//El primer NULL referencia a un monitor* que servira para pantalla completa.
+		//El segundo NULL referencia a otra ventana para utilizarla y/o compartir recursos con ella.
+		if (!glfWindow) //En caso de no poder abrirse.
 		{
-			glfwTerminate();
+			glfwTerminate(); //El glfw se cierra evitando problemas futuros.
 			return false;
 		}
 		return true;

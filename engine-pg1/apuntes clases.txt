@@ -23,5 +23,6 @@ VAO - Vertex Array Object
 VBO - Vertex Buffer Object
 EBO - Elements Buffer Object
 
-Window -> Renderer -> Shader -> Shape -> entity2D -> entity
+BaseGame -> Window -> Renderer -> Shader -> Shape -> entity2D -> entity
 
+Sprite - Update: Se fija si hay que cambiar alto, por medio de agarrar el uv y fijarse si hay cambios.
