@@ -2,6 +2,15 @@
 
 namespace GL
 {
+	const int triangVertTam = 18;
+	static float triangVertex[triangVertTam]
+	{
+		// positions         // colors
+		 0.5f, -0.5f, 0.0f,  1.0f, 1.0f, 1.0f,   // bottom right
+		-0.5f, -0.5f, 0.0f,  1.0f, 1.0f, 1.0f,   // bottom left
+		 0.0f,  0.5f, 0.0f,  1.0f, 1.0f, 1.0f    // top 
+	};
+
 	Shape::Shape(Render* render) : Entity2D(render)
 	{
 	}
@@ -15,21 +24,17 @@ namespace GL
 		switch (shapeType)
 		{
 		case SHAPE_TYPE::TRIANGLE:
-			float vertex[]
-			{
-				// positions         // colors
-				 0.5f, -0.5f, 0.0f,  1.0f, 1.0f, 1.0f,   // bottom right
-				-0.5f, -0.5f, 0.0f,  1.0f, 1.0f, 1.0f,   // bottom left
-				 0.0f,  0.5f, 0.0f,  1.0f, 1.0f, 1.0f    // top 
-			};
+			
 			unsigned int indexes[]
 			{
 				0, 1, 2
 			};
 			vertices = 3;
+			vertexs = triangVertex;
+			tam = sizeof(vertexs) * triangVertTam;
 
-			render->BindBuffer(VAO, VBO, sizeof(vertex) * 18, vertex);
-			render->BindIndexs(EBO, sizeof(indexes) * 3, indexes);
+			render->BindBuffer(VAO, VBO, tam, vertexs);
+			render->BindIndexs(EBO, sizeof(indexes) * vertices, indexes);
 			BindAttrib();
 
 			break;

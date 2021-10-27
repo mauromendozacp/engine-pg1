@@ -30,8 +30,10 @@ namespace GL
 		void BindBuffer(unsigned int& VAO, unsigned int& VBO, int tam, float* vertices);
 		void BindIndexs(unsigned int& EBO, int tam, unsigned int* indexs);
 		void UnBind(unsigned int& VAO, unsigned int& VBO, unsigned int& EBO);
-		void Draw(glm::mat4 model, unsigned int VAO, unsigned int vertex, unsigned int shaderId);
+		
+		void BindTextureBuffer(unsigned int& VBO, int tam, float* vertices);
 
+		void Draw(glm::mat4 model, unsigned int VAO, unsigned int VBO, unsigned int& EBO, unsigned int vertices, unsigned int tamVerts, float* vertexs, unsigned int shaderId);
 		void SetClearColor(float r, float g, float b, float a);
 		void ClearScreen();
 		void PostRender(Window* window);

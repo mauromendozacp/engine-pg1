@@ -148,6 +148,6 @@ namespace GL
 
 	void Entity::Draw(unsigned int shaderId)
 	{
-		render->Draw(model, VAO, vertices, shaderId);
+		render->Draw(model, VAO, VBO, EBO, vertices, tam, vertexs, shaderId);
 	}
 }

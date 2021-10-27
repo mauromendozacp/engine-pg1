@@ -10,7 +10,7 @@ namespace GL
 		float u, v;
 	};
 
-	class Frame
+	class GRAPHICSENGINE_API Frame
 	{
 	public:
 		Frame();

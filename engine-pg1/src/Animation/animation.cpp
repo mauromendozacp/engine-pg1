@@ -1,4 +1,5 @@
 #include "animation.h"
+#include <iostream>
 
 namespace GL
 {
@@ -18,7 +19,6 @@ namespace GL
 	void Animation::Update(float timer)
 	{
 		currentTime += timer;
-		
 		while (currentTime > length)
 		{
 			currentTime -= length;
@@ -28,7 +28,7 @@ namespace GL
 		currentFrame = static_cast<int>(currentTime / frameLength);
 	}
 
-	void Animation::AddFrame(float frameX, float frameY, float frameWidth, float frameHeight, float textureWidth, float textureHeight, float duration, float frameCount)
+	void Animation::AddFrame(float frameX, float frameY, float frameWidth, float frameHeight, float textureWidth, float textureHeight, float duration, int frameCount)
 	{
 		length = duration / 1000;
 		float frameXIndex = 0;
@@ -37,24 +37,24 @@ namespace GL
 		{
 			Frame frame;
 
-			frame.GetUVCords()[0].u = (frameX + frameXIndex) / textureWidth;
-			frame.GetUVCords()[0].v = frameY / textureHeight;
+			frame.GetUVCords()[0].u = (frameWidth * (frameX + 1)) / textureWidth;
+			frame.GetUVCords()[0].v = (frameHeight / textureHeight) * frameY;
 
-			frame.GetUVCords()[1].u = ((frameX + frameXIndex) + frameWidth) / textureWidth;
-			frame.GetUVCords()[1].v = frameY / textureHeight;
+			frame.GetUVCords()[1].u = (frameWidth * (frameX + 1)) / textureWidth;
+			frame.GetUVCords()[1].v = (frameHeight / textureHeight) * (frameY - 1);
 
-			frame.GetUVCords()[2].u = (frameX + frameXIndex) / textureWidth;
-			frame.GetUVCords()[2].v = (frameY + frameHeight) / textureHeight;
+			frame.GetUVCords()[2].u = (frameWidth * frameX) / textureWidth;
+			frame.GetUVCords()[2].v = (frameHeight / textureHeight) * (frameY - 1);
 
-			frame.GetUVCords()[3].u = ((frameX + frameXIndex) + frameWidth) / textureWidth;
-			frame.GetUVCords()[3].v = (frameY + frameHeight) / textureHeight;
+			frame.GetUVCords()[3].u = (frameWidth * frameX) / textureWidth;
+			frame.GetUVCords()[3].v = (frameHeight / textureHeight) * frameY;
 
 			frames.push_back(frame);
 			frameXIndex += frameWidth;
 		}
 	}
 
-	float Animation::GetCurrentFrame()
+	int Animation::GetCurrentFrame()
 	{
 		return currentFrame;
 	}

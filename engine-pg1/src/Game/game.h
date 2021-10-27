@@ -19,6 +19,7 @@ namespace GameXD
 	private:
 		GL::Shape* shape;
 		GL::Sprite* sprite;
+		GL::Sprite* rockstar;
 
 		void Inputs();
 	};

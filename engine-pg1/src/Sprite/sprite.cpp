@@ -3,37 +3,52 @@
 
 namespace GL
 {
+	const int textureVertTam = 32;
+	static float textureVertex[textureVertTam]
+	{
+		// positions          // colors           // texture coords
+		 0.5f,  0.5f, 0.0f,   1.0f, 1.0f, 1.0f,   1.0f, 1.0f,   // top right
+		 0.5f, -0.5f, 0.0f,   1.0f, 1.0f, 1.0f,   1.0f, 0.0f,   // bottom right
+		-0.5f, -0.5f, 0.0f,   1.0f, 1.0f, 1.0f,   0.0f, 0.0f,   // bottom left
+		-0.5f,  0.5f, 0.0f,   1.0f, 1.0f, 1.0f,   0.0f, 1.0f    // top left 
+	};
+
 	Sprite::Sprite(Render* render) : Entity2D(render)
 	{
 		textureId = 0;
+		anim = NULL;
+		height = 0;
+		width = 0;
 	}
 
 	Sprite::~Sprite()
 	{
 		glDeleteTextures(1, &textureId);
+
+		if (anim != NULL)
+		{
+			delete anim;
+			anim = NULL;
+		}
 	}
 
 	void Sprite::Init(std::string path)
 	{
-		float vertex[]
-		{
-			// positions          // colors           // texture coords
-			 0.5f,  0.5f, 0.0f,   1.0f, 1.0f, 1.0f,   1.0f, 1.0f,   // top right
-			 0.5f, -0.5f, 0.0f,   1.0f, 1.0f, 1.0f,   1.0f, 0.0f,   // bottom right
-			-0.5f, -0.5f, 0.0f,   1.0f, 1.0f, 1.0f,   0.0f, 0.0f,   // bottom left
-			-0.5f,  0.5f, 0.0f,   1.0f, 1.0f, 1.0f,   0.0f, 1.0f    // top left 
-		};
 		unsigned int indexes[]
 		{
 			0, 1, 3,
 			1, 2, 3
 		};
 		vertices = 6;
+		vertexs = textureVertex;
+		tam = sizeof(textureVertex);
 
-		render->BindBuffer(VAO, VBO, sizeof(vertex), vertex);
+		render->BindBuffer(VAO, VBO, tam, vertexs);
 		render->BindIndexs(EBO, sizeof(indexes), indexes);
 		BindAttrib();
 		LoadTexture(path);
+
+		anim = new Animation();
 	}
 
 	void Sprite::Update(float timer)
@@ -41,12 +56,33 @@ namespace GL
 		if (!anim)
 			return;
 
-		anim->Update(timer);
+		anim->Update(1.0f);
 
-		float currFrame = anim->GetCurrentFrame();
+		int currFrame = anim->GetCurrentFrame();
 		if (currFrame != 0)
 		{
+			Frame f = anim->GetFrames()[currFrame];
 
+			float uvCoords[]
+			{
+				f.GetUVCords()[0].u, f.GetUVCords()[0].v,
+				f.GetUVCords()[1].u, f.GetUVCords()[1].v,
+				f.GetUVCords()[2].u, f.GetUVCords()[2].v,
+				f.GetUVCords()[3].u, f.GetUVCords()[3].v
+			};
+
+			vertexs[6]  = uvCoords[0];
+			vertexs[14] = uvCoords[2];
+			vertexs[22] = uvCoords[4];
+			vertexs[30] = uvCoords[6];
+
+			vertexs[7]	= uvCoords[1];
+			vertexs[15] = uvCoords[3];
+			vertexs[23] = uvCoords[5];
+			vertexs[31] = uvCoords[7];
+
+			/*render->BindTextureBuffer(VBO, sizeof(uvCoords), uvCoords);
+			BindAttrib();*/
 		}
 	}
 
@@ -59,6 +95,17 @@ namespace GL
 		Entity::Draw(shaderId);
 	}
 
+	void Sprite::AddAnimation(int rows, int cols)
+	{
+		for (int i = 0; i < rows; i++)
+		{
+			for (int j = 0; j < cols; j++)
+			{
+				anim->AddFrame(i, j, width / cols, height / rows, width, height, 1.0f, 10);
+			}
+		}
+	}
+
 	void Sprite::LoadTexture(std::string path)
 	{
 		glGenTextures(1, &textureId);
@@ -69,12 +116,31 @@ namespace GL
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 		// load and generate the texture
-		int width, height, nrChannels;
+		int nrChannels;
 		stbi_set_flip_vertically_on_load(true);
 		unsigned char* data = stbi_load(path.c_str(), &width, &height, &nrChannels, 0);
 		if (data)
 		{
-			glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
+			int channelType = GL_RGB;
+			switch (nrChannels)
+			{
+			case 1:
+				channelType = GL_R;
+				break;
+			case 2:
+				channelType = GL_RG;
+				break;
+			case 3:
+				channelType = GL_RGB;
+				break;
+			case 4:
+				channelType = GL_RGBA;
+				break;
+			default:
+				break;
+			}
+
+			glTexImage2D(GL_TEXTURE_2D, 0, channelType, width, height, 0, channelType, GL_UNSIGNED_BYTE, data);
 			glGenerateMipmap(GL_TEXTURE_2D);
 		}
 		else

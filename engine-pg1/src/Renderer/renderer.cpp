@@ -14,11 +14,11 @@ namespace GL
 		projection = glm::mat4(1.0f);
 		projection = glm::perspective(glm::radians(90.0f), 640.0f / 480.0f, 0.1f, 1000.0f);
 		
-		glEnable(GL_DEPTH_TEST);
-		glDepthFunc(GL_LESS);
+		/*glEnable(GL_DEPTH_TEST);
+		glDepthFunc(GL_LESS);*/
 		
-		/*glEnable(GL_BLEND);
-		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);*/
+		glEnable(GL_BLEND);
+		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	}
 
 	Render::~Render()
@@ -81,8 +81,20 @@ namespace GL
 		glDeleteBuffers(1, &EBO);
 	}
 
-	void Render::Draw(glm::mat4 model, unsigned int VAO, unsigned int vertex, unsigned int shaderId)
+	void Render::BindTextureBuffer(unsigned int& VBO, int tam, float* vertices)
 	{
+		glGenBuffers(tam, &VBO);
+		glBindBuffer(GL_ARRAY_BUFFER, VBO);
+		glBufferData(GL_ARRAY_BUFFER, tam, vertices, GL_STATIC_DRAW);
+	}
+
+	void Render::Draw(glm::mat4 model, unsigned int VAO, unsigned int VBO, unsigned int& EBO, unsigned int vertices, unsigned int tamVerts, float *vertexs, unsigned int shaderId)
+	{
+		glBindVertexArray(VAO);
+		glBindBuffer(GL_ARRAY_BUFFER, VBO);
+		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
+		glBufferData(GL_ARRAY_BUFFER, tamVerts, vertexs, GL_STATIC_DRAW);
+
 		unsigned int modelLoc = glGetUniformLocation(shaderId, "model");
 		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
 
@@ -92,8 +104,15 @@ namespace GL
 		unsigned int projectionLoc = glGetUniformLocation(shaderId, "projection");
 		glUniformMatrix4fv(projectionLoc, 1, GL_FALSE, glm::value_ptr(projection));
 
-		glBindVertexArray(VAO);
-		glDrawElements(GL_TRIANGLES, vertex, GL_UNSIGNED_INT, 0);
+		if (vertices == 3)
+			glDrawArrays(GL_TRIANGLES, 0, vertices);
+		else
+			glDrawElements(GL_TRIANGLES, vertices, GL_UNSIGNED_INT, 0);
+
+		glBindVertexArray(0);
+		glBindBuffer(GL_ARRAY_BUFFER, 0);
+		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+		glUseProgram(0);
 	}
 
 	void Render::SetClearColor(float r, float g, float b, float a)

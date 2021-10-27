@@ -32,15 +32,22 @@ namespace GameXD
 		shape->SetColor(1.0f, 1.0f, 0.0f, 0.5f);
 
 		sprite = new GL::Sprite(render);
-		sprite->Init("../res/Textures/izumi.png");
-		sprite->SetScale(10.0f, 10.0f, 10.0f);
+		/*sprite->Init("../res/Textures/izumi.png");
+		sprite->SetScale(10.0f, 10.0f, 10.0f);*/
+
+		rockstar = new GL::Sprite(render);
+		rockstar->Init("../res/Textures/rock.png");
+		rockstar->SetScale(10.0f, 10.0f, 1.0f);
+		rockstar->AddAnimation(2, 3);
 	}
 
 	void Game::Update()
 	{
 		Inputs();
 		shape->Draw();
-		sprite->Draw();
+		//sprite->Draw();
+		rockstar->Update(1.0f);
+		rockstar->Draw();
 	}
 
 	void Game::DeInit()
@@ -54,6 +61,11 @@ namespace GameXD
 		{
 			delete sprite;
 			sprite = NULL;
+		}
+		if (rockstar != NULL)
+		{
+			delete rockstar;
+			rockstar = NULL;
 		}
 	}
 

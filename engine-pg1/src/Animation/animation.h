@@ -15,13 +15,13 @@ namespace GL
 
 		void Update(float timer);
 		void AddFrame(float frameX, float frameY, float frameWidth, float frameHeight, 
-			float textureWidth, float textureHeight, float duration, float frameCount);
-		float GetCurrentFrame();
+			float textureWidth, float textureHeight, float duration, int frameCount);
+		int GetCurrentFrame();
 		std::vector<Frame> GetFrames();
 
 	private:
 		float currentTime;
-		float currentFrame;
+		int currentFrame;
 		float length;
 		std::vector<Frame> frames;
 	};

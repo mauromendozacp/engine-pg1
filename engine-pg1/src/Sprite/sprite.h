@@ -3,6 +3,7 @@
 
 #include "Entity2D/entity2D.h"
 #include "Animation/animation.h"
+#include <vector>
 
 namespace GL
 {
@@ -16,14 +17,17 @@ namespace GL
 		void Update(float timer);
 		void Draw();
 
+		void AddAnimation(int rows, int cols);
+
 	private:
 		void LoadTexture(std::string path);
-		void SetTextureCoords();
 		void SetShader(unsigned int shaderId) override;
 		void BindAttrib();
 
 		unsigned int textureId;
+		int width, height;
 		Animation* anim;
+		Frame currFrame;
 	};
 }
 

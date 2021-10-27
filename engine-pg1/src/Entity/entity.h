@@ -57,7 +57,8 @@ namespace GL
 		glm::vec4 color;
 		glm::mat4 model;
 
-		unsigned int VAO, VBO, EBO, vertices;
+		unsigned int VAO, VBO, EBO, tam, vertices;
+		float *vertexs;
 	};
 
 	
