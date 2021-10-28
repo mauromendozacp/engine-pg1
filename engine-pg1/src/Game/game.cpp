@@ -38,7 +38,7 @@ namespace GameXD
 		rockstar = new GL::Sprite(render);
 		rockstar->Init("../res/Textures/rock.png");
 		rockstar->SetScale(10.0f, 10.0f, 1.0f);
-		rockstar->AddAnimation(2, 3);
+		rockstar->AddAnimation(2, 3, 1.0f);
 	}
 
 	void Game::Update()
@@ -46,7 +46,7 @@ namespace GameXD
 		Inputs();
 		shape->Draw();
 		//sprite->Draw();
-		rockstar->Update(1.0f);
+		rockstar->Update(timer->GetDeltaTime());
 		rockstar->Draw();
 	}
 

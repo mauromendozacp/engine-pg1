@@ -56,7 +56,7 @@ namespace GL
 		if (!anim)
 			return;
 
-		anim->Update(1.0f);
+		anim->Update(timer);
 
 		int currFrame = anim->GetCurrentFrame();
 		if (currFrame != 0)
@@ -95,13 +95,13 @@ namespace GL
 		Entity::Draw(shaderId);
 	}
 
-	void Sprite::AddAnimation(int rows, int cols)
+	void Sprite::AddAnimation(int rows, int cols, float duration)
 	{
 		for (int i = 0; i < rows; i++)
 		{
 			for (int j = 0; j < cols; j++)
 			{
-				anim->AddFrame(i, j, width / cols, height / rows, width, height, 1.0f, 10);
+				anim->AddFrame(i, j, width / cols, height / rows, width, height, duration, 10);
 			}
 		}
 	}

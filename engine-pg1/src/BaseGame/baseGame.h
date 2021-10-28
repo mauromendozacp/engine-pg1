@@ -6,6 +6,7 @@
 #include "Sprite/sprite.h"
 #include "Renderer/renderer.h"
 #include "Input/input.h"
+#include "Timer/timer.h"
 
 namespace GL
 {
@@ -19,6 +20,7 @@ namespace GL
 		Window* window;
 		Render* render;
 		Input* input;
+		Timer* timer;
 		std::string title;
 
 		void InitBase();

@@ -17,7 +17,7 @@ namespace GL
 		void Update(float timer);
 		void Draw();
 
-		void AddAnimation(int rows, int cols);
+		void AddAnimation(int rows, int cols, float duration);
 
 	private:
 		void LoadTexture(std::string path);

@@ -10,6 +10,7 @@ namespace GL
 		window = NULL;
 		render = NULL;
 		input = NULL;
+		timer = NULL;
 	}
 
 	BaseGame::~BaseGame()
@@ -31,6 +32,12 @@ namespace GL
 			delete input;
 			input = NULL;
 		}
+
+		if (timer != NULL)
+		{
+			delete timer;
+			timer = NULL;
+		}
 	}
 
 	void BaseGame::InitBase()
@@ -50,6 +57,7 @@ namespace GL
 
 		render = new Render();
 		input = new Input(window);
+		timer = new Timer();
 
 		std::cout << glGetString(GL_VERSION) << std::endl;
 
@@ -63,6 +71,7 @@ namespace GL
 		while (!glfwWindowShouldClose(window->GetWindow()))
 		{
 			render->ClearScreen();
+			timer->Update();
 			Update();
 			render->PostRender(window);
 		}

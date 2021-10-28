@@ -2,19 +2,23 @@
 
 namespace GL
 {
-
 	Timer::Timer()
 	{
-		start = std::chrono::high_resolution_clock::now();
+		deltaTime = 0.0f;
+		oldTimer = glfwGetTime();
 	}
 
 	Timer::~Timer() {}
 
-	float Timer::GetTimeElapsed()
+	void Timer::Update()
 	{
-		end = std::chrono::high_resolution_clock::now();
-		duration = end - start;
-		return duration.count();
+		double t = glfwGetTime();
+		deltaTime = (t - oldTimer) / 1000.0f;
+		oldTimer = t;
 	}
 
+	float Timer::GetDeltaTime()
+	{
+		return deltaTime;
+	}
 }

@@ -1,25 +1,22 @@
 #ifndef TIMER_H
 #define TIMER_H
 
-#include <iostream>
-#include <thread>
-#include <chrono>
-
 #include "exports.h"
 
 namespace GL
 {
-	
-	std::chrono::time_point<std::chrono::steady_clock> start, end;
-	std::chrono::duration<float> duration;
-
-	struct Timer
+	class GRAPHICSENGINE_API Timer
 	{
+	public:
 		Timer();
 		~Timer();
-		float GetTimeElapsed();
-	};
+		void Update();
+		float GetDeltaTime();
 
+	private:
+		double oldTimer;
+		float deltaTime;
+	};
 }
 
-#endif // !FRAME_H
+#endif // !TIMER_H
