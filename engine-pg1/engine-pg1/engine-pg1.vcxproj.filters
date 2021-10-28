@@ -37,6 +37,9 @@
     <ClCompile Include="..\src\Frame\frame.cpp">
       <Filter>Frame</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\Timer\timer.cpp">
+      <Filter>Timer</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Window">
@@ -78,6 +81,9 @@
     <Filter Include="Frame">
       <UniqueIdentifier>{ef26ce1c-90b9-43b4-b078-0ca3b6d8bc74}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Timer">
+      <UniqueIdentifier>{fe142bac-2035-44dc-9242-4a8840f8d5ae}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\Window\window.h">
@@ -117,6 +123,9 @@
     </ClInclude>
     <ClInclude Include="..\src\Frame\frame.h">
       <Filter>Frame</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Timer\timer.h">
+      <Filter>Timer</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
