@@ -7,6 +7,7 @@
 #include "Renderer/renderer.h"
 #include "Input/input.h"
 #include "Timer/timer.h"
+#include "Collision/collision.h"
 
 namespace GL
 {

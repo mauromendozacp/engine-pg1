@@ -40,6 +40,9 @@
     <ClCompile Include="..\src\Timer\timer.cpp">
       <Filter>Timer</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\Collision\collision.cpp">
+      <Filter>Collision</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Window">
@@ -84,6 +87,9 @@
     <Filter Include="Timer">
       <UniqueIdentifier>{fe142bac-2035-44dc-9242-4a8840f8d5ae}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Collision">
+      <UniqueIdentifier>{b2f9783c-b5f4-45a7-91ab-ef302896e668}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\Window\window.h">
@@ -126,6 +132,9 @@
     </ClInclude>
     <ClInclude Include="..\src\Timer\timer.h">
       <Filter>Timer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Collision\collision.h">
+      <Filter>Collision</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

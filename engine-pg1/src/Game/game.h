@@ -2,6 +2,9 @@
 #define GAME_H
 
 #include "BaseGame/baseGame.h"
+#include <iostream>
+
+using namespace GL;
 
 namespace GameXD
 {

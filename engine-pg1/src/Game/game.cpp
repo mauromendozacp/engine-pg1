@@ -28,7 +28,7 @@ namespace GameXD
 	{
 		shape = new GL::Shape(render);
 		shape->Init(GL::SHAPE_TYPE::TRIANGLE);
-		shape->SetPos(0.0f, 0.0f, -10.0f);
+		shape->SetPos(-5.0f, 0.0f, 0.0f);
 		shape->SetColor(1.0f, 1.0f, 0.0f, 0.5f);
 
 		sprite = new GL::Sprite(render);
@@ -37,6 +37,7 @@ namespace GameXD
 
 		rockstar = new GL::Sprite(render);
 		rockstar->Init("../res/Textures/rock.png");
+		rockstar->SetPos(5.0f, 0.0f, 0.0f);
 		rockstar->SetScale(10.0f, 10.0f, 1.0f);
 		rockstar->AddAnimation(2, 3, 1.0f);
 	}
@@ -94,6 +95,11 @@ namespace GameXD
 		else if (input->IsKeyPressed(KEY_S))
 		{
 			shape->SetScale(shape->GetScaleX() - scaleSpeed, shape->GetScaleY() - scaleSpeed, shape->GetScaleZ() - scaleSpeed);
+		}
+
+		if (Collision::CheckCollision(shape, rockstar))
+		{
+			std::cout << "Collision!" << std::endl;
 		}
 	}
 }
