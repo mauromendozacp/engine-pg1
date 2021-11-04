@@ -7,7 +7,8 @@ namespace GL
 {
 	enum class SHAPE_TYPE
 	{
-		TRIANGLE
+		TRIANGLE,
+		QUAD
 	};
 
 	class GRAPHICSENGINE_API Shape : public Entity2D
