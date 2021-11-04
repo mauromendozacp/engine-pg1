@@ -43,6 +43,9 @@
     <ClCompile Include="..\src\Collision\collision.cpp">
       <Filter>Collision</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\Tilemap\tilemap.cpp">
+      <Filter>Tilemap</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Window">
@@ -90,6 +93,9 @@
     <Filter Include="Collision">
       <UniqueIdentifier>{b2f9783c-b5f4-45a7-91ab-ef302896e668}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Tilemap">
+      <UniqueIdentifier>{3b266780-3918-412e-b08e-d7dc62709a6c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\Window\window.h">
@@ -135,6 +141,9 @@
     </ClInclude>
     <ClInclude Include="..\src\Collision\collision.h">
       <Filter>Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Tilemap\tilemap.h">
+      <Filter>Tilemap</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
