@@ -38,6 +38,8 @@ namespace GL
 		float GetScaleY();
 		float GetScaleZ();
 
+		glm::vec3 GetPivot();
+
 		void Draw(unsigned int shaderId);
 		virtual void SetShader(unsigned int shaderId) = 0;
 

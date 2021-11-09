@@ -146,8 +146,18 @@ namespace GL
 		return v3Scale[2];
 	}
 
+	glm::vec3 Entity::GetPivot()
+	{
+		glm::vec3 pivot = glm::vec3();
+		pivot.x = v3Pos.x + v3Scale.x / 2;
+		pivot.y = v3Pos.y + v3Scale.y / 2;
+		pivot.z = v3Pos.z + v3Scale.z / 2;
+		return pivot;
+	}
+
 	void Entity::Draw(unsigned int shaderId)
 	{
 		render->Draw(model, VAO, VBO, EBO, vertices, tam, vertexs, shaderId);
 	}
+
 }

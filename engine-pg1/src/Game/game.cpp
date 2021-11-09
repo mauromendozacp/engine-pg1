@@ -97,7 +97,7 @@ namespace GameXD
 			shape->SetScale(shape->GetScaleX() - scaleSpeed, shape->GetScaleY() - scaleSpeed, shape->GetScaleZ() - scaleSpeed);
 		}
 
-		if (Collision::CheckCollision(shape, rockstar))
+		if (Collision::CheckCollisionRecRec(shape, rockstar))
 		{
 			std::cout << "Collision!" << std::endl;
 		}

@@ -4,6 +4,7 @@ namespace GL
 {
 	Frame::Frame()
 	{
+
 	}
 
 	Frame::~Frame()
