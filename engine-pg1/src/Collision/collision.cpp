@@ -35,7 +35,7 @@ namespace GL
 		{
 			
 			pos1 = entity1->GetPivot();
-			pos2 = entity1->GetPivot();
+			pos2 = entity2->GetPivot();
 
 
 			if (director.x > 0) //entity1 esta mas a la derecha que entity2
@@ -44,11 +44,18 @@ namespace GL
 				{
 					entity1->SetPos(pos1.x-collisionMover, pos1.y+collisionMover,pos1.z);
 					entity2->SetPos(pos2.x+collisionMover, pos2.y-collisionMover,pos2.z);
+
+					std::cout << " 1: Movido hacia arriba y a la izquierda" << std::endl;
+					std::cout << " 2: Movido hacia abajo y a la derecha" << std::endl;
 				}
 				else //entity1 esta mas abajo que entity2
 				{
 					entity1->SetPos(pos1.x - collisionMover, pos1.y - collisionMover, pos1.z);
 					entity2->SetPos(pos2.x + collisionMover, pos2.y + collisionMover, pos2.z);
+
+					std::cout << " 1: Movido hacia abajo y a la izquierda" << std::endl;
+					std::cout << " 2: Movido hacia arriba y a la derecha" << std::endl;
+				
 				}
 			}
 			else //entity 1 esta mas a la izquierda que entity2
@@ -57,13 +64,21 @@ namespace GL
 				{
 					entity1->SetPos(pos1.x + collisionMover, pos1.y + collisionMover, pos1.z);
 					entity2->SetPos(pos2.x - collisionMover, pos2.y - collisionMover, pos2.z);
+
+					std::cout << " 1: Movido hacia arriba y a la derecha" << std::endl;
+					std::cout << " 2: Movido hacia abajo y a la izquierda" << std::endl;
 				}
 				else //entity1 esta mas abajo que entity2
 				{
 					entity1->SetPos(pos1.x + collisionMover, pos1.y - collisionMover, pos1.z);
 					entity2->SetPos(pos2.x - collisionMover, pos2.y + collisionMover, pos2.z);
+
+					std::cout << " 1: Movido hacia abajo y a la derecha" << std::endl;
+					std::cout << " 2: Movido hacia arriba y a la izquierda" << std::endl;
 				}
 			}
+
+			
 
 		};
 	}

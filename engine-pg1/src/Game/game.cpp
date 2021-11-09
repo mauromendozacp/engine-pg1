@@ -28,7 +28,7 @@ namespace GameXD
 	{
 		shape = new GL::Shape(render);
 		shape->Init(GL::SHAPE_TYPE::TRIANGLE);
-		shape->SetPos(-5.0f, 0.0f, 0.0f);
+		shape->SetPos(0.0f, 0.0f, 0.0f);
 		shape->SetColor(1.0f, 1.0f, 0.0f, 0.5f);
 
 		sprite = new GL::Sprite(render);
@@ -37,7 +37,7 @@ namespace GameXD
 
 		rockstar = new GL::Sprite(render);
 		rockstar->Init("../res/Textures/rock.png");
-		rockstar->SetPos(5.0f, 0.0f, 0.0f);
+		rockstar->SetPos(0.0f, 0.0f, 0.0f);
 		rockstar->SetScale(10.0f, 10.0f, 1.0f);
 		rockstar->AddAnimation(2, 3, 1.0f);
 	}
@@ -96,10 +96,12 @@ namespace GameXD
 		{
 			shape->SetScale(shape->GetScaleX() - scaleSpeed, shape->GetScaleY() - scaleSpeed, shape->GetScaleZ() - scaleSpeed);
 		}
-
+		/*
 		if (Collision::CheckCollisionRecRec(shape, rockstar))
 		{
-			std::cout << "Collision!" << std::endl;
+			//std::cout << "Collision!" << std::endl;
 		}
+		*/
+		Collision::Overlap(shape, rockstar);
 	}
 }
