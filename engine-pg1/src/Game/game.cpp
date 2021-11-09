@@ -96,12 +96,13 @@ namespace GameXD
 		{
 			shape->SetScale(shape->GetScaleX() - scaleSpeed, shape->GetScaleY() - scaleSpeed, shape->GetScaleZ() - scaleSpeed);
 		}
-		/*
+		
 		if (Collision::CheckCollisionRecRec(shape, rockstar))
 		{
 			//std::cout << "Collision!" << std::endl;
+
+			Collision::Overlap(shape, rockstar);
 		}
-		*/
-		Collision::Overlap(shape, rockstar);
+		
 	}
 }

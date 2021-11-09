@@ -37,48 +37,128 @@ namespace GL
 			pos1 = entity1->GetPivot();
 			pos2 = entity2->GetPivot();
 
-
 			if (director.x > 0) //entity1 esta mas a la derecha que entity2
 			{
 				if (director.y > 0) //entity1 esta mas arriba que entity2
 				{
-					entity1->SetPos(pos1.x-collisionMover, pos1.y+collisionMover,pos1.z);
-					entity2->SetPos(pos2.x+collisionMover, pos2.y-collisionMover,pos2.z);
+					glm::vec3 point1;
+					point1.x = entity1->GetPosX() + entity1->GetScaleX() / 2;
+					point1.y = entity1->GetPosY() - entity1->GetScaleY() / 2;
+
+					glm::vec3 point2;
+					point2.x = entity2->GetPosX() - entity2->GetScaleX() / 2;
+					point2.y = entity2->GetPosY() + entity2->GetScaleY() / 2;
+
+					glm::vec3 dir = point2 - point1;
+
+					entity1->SetPos(pos1.x - dir.x / 2, pos1.y + dir.y / 2, pos1.z);
+					entity2->SetPos(pos2.x + dir.x / 2, pos2.y - dir.y / 2, pos2.z);
 
 					std::cout << " 1: Movido hacia arriba y a la izquierda" << std::endl;
 					std::cout << " 2: Movido hacia abajo y a la derecha" << std::endl;
 				}
 				else //entity1 esta mas abajo que entity2
 				{
-					entity1->SetPos(pos1.x - collisionMover, pos1.y - collisionMover, pos1.z);
-					entity2->SetPos(pos2.x + collisionMover, pos2.y + collisionMover, pos2.z);
+					
+					glm::vec3 point1;
+					point1.x = entity1->GetPosX() + entity1->GetScaleX() / 2;
+					point1.y = entity1->GetPosY() + entity1->GetScaleY() / 2;
+
+					glm::vec3 point2;
+					point2.x = entity2->GetPosX() - entity2->GetScaleX() / 2;
+					point2.y = entity2->GetPosY() - entity2->GetScaleY() / 2;
+
+					glm::vec3 dir = point2 - point1;
+
+					entity1->SetPos(pos1.x - dir.x / 2, pos1.y - dir.y / 2, pos1.z);
+					entity2->SetPos(pos2.x + dir.x / 2, pos2.y + dir.y / 2, pos2.z);
 
 					std::cout << " 1: Movido hacia abajo y a la izquierda" << std::endl;
 					std::cout << " 2: Movido hacia arriba y a la derecha" << std::endl;
-				
+
 				}
 			}
 			else //entity 1 esta mas a la izquierda que entity2
 			{
 				if (director.y > 0) //entity1 esta mas arriba que entity2
 				{
-					entity1->SetPos(pos1.x + collisionMover, pos1.y + collisionMover, pos1.z);
-					entity2->SetPos(pos2.x - collisionMover, pos2.y - collisionMover, pos2.z);
+					
+					glm::vec3 point1;
+					point1.x = entity1->GetPosX() - entity1->GetScaleX() / 2;
+					point1.y = entity1->GetPosY() - entity1->GetScaleY() / 2;
+
+					glm::vec3 point2;
+					point2.x = entity2->GetPosX() + entity2->GetScaleX() / 2;
+					point2.y = entity2->GetPosY() + entity2->GetScaleY() / 2;
+
+					glm::vec3 dir = point1 - point2;
+
+					entity1->SetPos(pos1.x + dir.x / 2, pos1.y + dir.y / 2, pos1.z);
+					entity2->SetPos(pos2.x - dir.x / 2, pos2.y - dir.y / 2, pos2.z);
 
 					std::cout << " 1: Movido hacia arriba y a la derecha" << std::endl;
 					std::cout << " 2: Movido hacia abajo y a la izquierda" << std::endl;
 				}
 				else //entity1 esta mas abajo que entity2
 				{
-					entity1->SetPos(pos1.x + collisionMover, pos1.y - collisionMover, pos1.z);
-					entity2->SetPos(pos2.x - collisionMover, pos2.y + collisionMover, pos2.z);
+					
+					glm::vec3 point1;
+					point1.x = entity1->GetPosX() - entity1->GetScaleX() / 2;
+					point1.y = entity1->GetPosY() + entity1->GetScaleY() / 2;
+
+					glm::vec3 point2;
+					point2.x = entity2->GetPosX() + entity2->GetScaleX() / 2;
+					point2.y = entity2->GetPosY() - entity2->GetScaleY() / 2;
+
+					glm::vec3 dir = point1 - point2;
+
+					entity1->SetPos(pos1.x + dir.x / 2, pos1.y - dir.y / 2, pos1.z);
+					entity2->SetPos(pos2.x - dir.x / 2, pos2.y + dir.y / 2, pos2.z);
 
 					std::cout << " 1: Movido hacia abajo y a la derecha" << std::endl;
 					std::cout << " 2: Movido hacia arriba y a la izquierda" << std::endl;
 				}
 			}
 
-			
+			//if (director.x > 0) //entity1 esta mas a la derecha que entity2
+			//{
+			//	if (director.y > 0) //entity1 esta mas arriba que entity2
+			//	{
+			//		entity1->SetPos(pos1.x-collisionMover, pos1.y+collisionMover,pos1.z);
+			//		entity2->SetPos(pos2.x+collisionMover, pos2.y-collisionMover,pos2.z);
+
+			//		std::cout << " 1: Movido hacia arriba y a la izquierda" << std::endl;
+			//		std::cout << " 2: Movido hacia abajo y a la derecha" << std::endl;
+			//	}
+			//	else //entity1 esta mas abajo que entity2
+			//	{
+			//		entity1->SetPos(pos1.x - collisionMover, pos1.y - collisionMover, pos1.z);
+			//		entity2->SetPos(pos2.x + collisionMover, pos2.y + collisionMover, pos2.z);
+
+			//		std::cout << " 1: Movido hacia abajo y a la izquierda" << std::endl;
+			//		std::cout << " 2: Movido hacia arriba y a la derecha" << std::endl;
+			//	
+			//	}
+			//}
+			//else //entity 1 esta mas a la izquierda que entity2
+			//{
+			//	if (director.y > 0) //entity1 esta mas arriba que entity2
+			//	{
+			//		entity1->SetPos(pos1.x + collisionMover, pos1.y + collisionMover, pos1.z);
+			//		entity2->SetPos(pos2.x - collisionMover, pos2.y - collisionMover, pos2.z);
+
+			//		std::cout << " 1: Movido hacia arriba y a la derecha" << std::endl;
+			//		std::cout << " 2: Movido hacia abajo y a la izquierda" << std::endl;
+			//	}
+			//	else //entity1 esta mas abajo que entity2
+			//	{
+			//		entity1->SetPos(pos1.x + collisionMover, pos1.y - collisionMover, pos1.z);
+			//		entity2->SetPos(pos2.x - collisionMover, pos2.y + collisionMover, pos2.z);
+
+			//		std::cout << " 1: Movido hacia abajo y a la derecha" << std::endl;
+			//		std::cout << " 2: Movido hacia arriba y a la izquierda" << std::endl;
+			//	}
+			//}
 
 		};
 	}
