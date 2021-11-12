@@ -13,6 +13,14 @@ namespace GL
 		-0.5f,  0.5f, 0.0f,   1.0f, 1.0f, 1.0f,   0.0f, 1.0f    // top left 
 	};
 
+	Sprite::Sprite() : Entity2D()
+	{
+		textureId = 0;
+		anim = NULL;
+		height = 0;
+		width = 0;
+	}
+
 	Sprite::Sprite(Render* render) : Entity2D(render)
 	{
 		textureId = 0;

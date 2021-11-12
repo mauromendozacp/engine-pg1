@@ -2,6 +2,10 @@
 
 namespace GL
 {
+	Entity2D::Entity2D() : Entity()
+	{
+	}
+
 	Entity2D::Entity2D(Render* render) : Entity(render)
 	{
 	}

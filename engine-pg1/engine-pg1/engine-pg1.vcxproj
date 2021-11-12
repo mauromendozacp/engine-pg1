@@ -162,6 +162,7 @@
     <ClCompile Include="..\src\Sprite\sprite.cpp" />
     <ClCompile Include="..\src\StbImage\stb_image.cpp" />
     <ClCompile Include="..\src\Tilemap\tilemap.cpp" />
+    <ClCompile Include="..\src\Tile\tile.cpp" />
     <ClCompile Include="..\src\Timer\timer.cpp" />
     <ClCompile Include="..\src\Window\window.cpp" />
   </ItemGroup>
@@ -181,6 +182,7 @@
     <ClInclude Include="..\src\Sprite\sprite.h" />
     <ClInclude Include="..\src\StbImage\stb_image.h" />
     <ClInclude Include="..\src\Tilemap\tilemap.h" />
+    <ClInclude Include="..\src\Tile\tile.h" />
     <ClInclude Include="..\src\Timer\timer.h" />
     <ClInclude Include="..\src\Window\window.h" />
   </ItemGroup>

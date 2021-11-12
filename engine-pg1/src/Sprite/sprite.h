@@ -10,6 +10,7 @@ namespace GL
 	class GRAPHICSENGINE_API Sprite : public Entity2D
 	{
 	public:
+		Sprite();
 		Sprite(Render* render);
 		~Sprite();
 
