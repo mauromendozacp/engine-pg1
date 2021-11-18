@@ -16,7 +16,7 @@ namespace GL
 	Sprite::Sprite() : Entity2D()
 	{
 		textureId = 0;
-		anim = NULL;
+		anim = nullptr;
 		height = 0;
 		width = 0;
 	}
@@ -24,7 +24,7 @@ namespace GL
 	Sprite::Sprite(Render* render) : Entity2D(render)
 	{
 		textureId = 0;
-		anim = NULL;
+		anim = nullptr;
 		height = 0;
 		width = 0;
 	}
@@ -33,10 +33,10 @@ namespace GL
 	{
 		glDeleteTextures(1, &textureId);
 
-		if (anim != NULL)
+		if (anim != nullptr)
 		{
 			delete anim;
-			anim = NULL;
+			anim = nullptr;
 		}
 	}
 

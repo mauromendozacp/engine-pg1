@@ -23,15 +23,15 @@ namespace GL
 
 	Render::~Render()
 	{
-		if (solidShader != NULL)
+		if (solidShader != nullptr)
 		{
 			delete solidShader;
-			solidShader = NULL;
+			solidShader = nullptr;
 		}
-		if (textureShader != NULL)
+		if (textureShader != nullptr)
 		{
 			delete textureShader;
-			textureShader = NULL;
+			textureShader = nullptr;
 		}
 	}
 

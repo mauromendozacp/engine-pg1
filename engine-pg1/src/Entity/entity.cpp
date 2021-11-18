@@ -4,7 +4,7 @@ namespace GL
 {
 	Entity::Entity()
 	{
-		this->render = NULL;
+		this->render = nullptr;
 
 		v3Pos = glm::vec3(0.0f);
 		v3Rot = glm::vec3(0.0f);

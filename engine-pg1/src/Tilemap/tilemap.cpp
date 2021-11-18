@@ -33,7 +33,7 @@ namespace GL
 			}
 		}
 
-		return NULL;
+		return nullptr;
 	}
 
 	void Tilemap::SetTile(Tile tile)

@@ -7,36 +7,36 @@ namespace GL
 {
 	BaseGame::BaseGame()
 	{
-		window = NULL;
-		render = NULL;
-		input = NULL;
-		timer = NULL;
+		window = nullptr;
+		render = nullptr;
+		input = nullptr;
+		timer = nullptr;
 	}
 
 	BaseGame::~BaseGame()
 	{
-		if (window != NULL) 
+		if (window != nullptr) 
 		{
 			delete window;
-			window = NULL;
+			window = nullptr;
 		}
 
-		if (render != NULL)
+		if (render != nullptr)
 		{
 			delete render;
-			render = NULL;
+			render = nullptr;
 		}
 
-		if (input != NULL)
+		if (input != nullptr)
 		{
 			delete input;
-			input = NULL;
+			input = nullptr;
 		}
 
-		if (timer != NULL)
+		if (timer != nullptr)
 		{
 			delete timer;
-			timer = NULL;
+			timer = nullptr;
 		}
 	}
 

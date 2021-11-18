@@ -8,10 +8,10 @@ namespace GameXD
 
 	Game::Game()
 	{
-		this->shape = NULL;
-		this->shape2 = NULL;
-		this->sprite = NULL;
-		this->rockstar = NULL;
+		this->shape = nullptr;
+		this->shape2 = nullptr;
+		this->sprite = nullptr;
+		this->rockstar = nullptr;
 	}
 
 	Game::~Game()
@@ -69,25 +69,25 @@ namespace GameXD
 
 	void Game::DeInit()
 	{
-		if (shape != NULL)
+		if (shape != nullptr)
 		{
 			delete shape;
-			shape = NULL;
+			shape = nullptr;
 		}
-		if (shape2 != NULL)
+		if (shape2 != nullptr)
 		{
 			delete shape2;
-			shape2 = NULL;
+			shape2 = nullptr;
 		}
-		if (sprite != NULL)
+		if (sprite != nullptr)
 		{
 			delete sprite;
-			sprite = NULL;
+			sprite = nullptr;
 		}
-		if (rockstar != NULL)
+		if (rockstar != nullptr)
 		{
 			delete rockstar;
-			rockstar = NULL;
+			rockstar = nullptr;
 		}
 	}
 

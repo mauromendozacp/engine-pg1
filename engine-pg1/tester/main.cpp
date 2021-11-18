@@ -6,7 +6,7 @@ int main()
 {
     Game* game = new Game();
     
-    if (game != NULL)
+    if (game != nullptr)
     {
         game->Play();
         delete game;
