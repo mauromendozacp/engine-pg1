@@ -72,7 +72,10 @@ namespace GL
 		{
 			render->ClearScreen();
 			timer->Update();
+
 			Update();
+			Draw();
+
 			render->PostRender(window);
 		}
 	}

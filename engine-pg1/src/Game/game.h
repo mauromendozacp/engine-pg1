@@ -17,6 +17,7 @@ namespace GameXD
 
 		void Init() override;
 		void Update() override;
+		void Draw() override;
 		void DeInit() override;
 
 	private:

@@ -24,7 +24,7 @@ namespace GL
 		vertices = 0;
 
 		hasCollider = false;
-		moveable = true;
+		moveable = false;
 
 	}
 
@@ -43,6 +43,9 @@ namespace GL
 		VBO = 0;
 		EBO = 0;
 		vertices = 0;
+
+		hasCollider = false;
+		moveable = false;
 
 		UpdateModel();
 	}

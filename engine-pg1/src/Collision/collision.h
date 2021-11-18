@@ -15,6 +15,7 @@ namespace GL
 		Collision();
 		~Collision();
 
+		static void CollisionUpdate(Entity* entity1, Entity* entity2);
 		static bool CheckCollisionRecRec(Entity* entity1, Entity* entity2);
 		static void Overlap(Entity* entity1, Entity* entity2);
 

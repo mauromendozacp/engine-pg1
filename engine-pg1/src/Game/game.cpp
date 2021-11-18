@@ -11,6 +11,7 @@ namespace GameXD
 		this->shape = NULL;
 		this->shape2 = NULL;
 		this->sprite = NULL;
+		this->rockstar = NULL;
 	}
 
 	Game::~Game()
@@ -47,15 +48,22 @@ namespace GameXD
 		shape2->SetPos(5.0f, 5.0f, 0.0f);
 		shape2->SetScale(10.0f, 10.0f, 1.0f);
 		shape2->SetColor(1.0f, 0.0f, 1.0f, 0.5f);
+		shape2->SetCollider(true);
+		shape2->SetMoveable(true);
 	}
 
 	void Game::Update()
 	{
 		Inputs();
+		Collision::CollisionUpdate(shape, shape2);
+		//rockstar->Update(timer->GetDeltaTime());
+	}
+
+	void Game::Draw()
+	{
 		shape->Draw();
 		shape2->Draw();
 		//sprite->Draw();
-		//rockstar->Update(timer->GetDeltaTime());
 		//rockstar->Draw();
 	}
 
@@ -111,14 +119,5 @@ namespace GameXD
 			shape->SetPos(shape->GetPosX(), shape->GetPosY() - posSpeed, shape->GetPosZ());
 			//shape->SetScale(shape->GetScaleX() - scaleSpeed, shape->GetScaleY() - scaleSpeed, shape->GetScaleZ() - scaleSpeed);
 		}
-		
-		
-		if (Collision::CheckCollisionRecRec(shape, shape2))
-		{
-			std::cout << "Collision!" << std::endl;
-
-			Collision::Overlap(shape, shape2);
-		}
-		
 	}
 }

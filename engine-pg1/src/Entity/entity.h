@@ -71,8 +71,6 @@ namespace GL
 		float *vertexs;
 		bool hasCollider, moveable;
 	};
-
-	
 }
 
 #endif // !ENTITY_H
