@@ -15,6 +15,8 @@ namespace GL
 
 	bool Collision::CheckCollisionRecRec(Entity* entity1, Entity* entity2)
 	{
+
+		//bool collisionX = entity1->GetPosX() + entity1->GetScaleX() >= entity2->GetPosX() && entity2->GetPosX() + entity2->GetScaleX() >= entity1->GetPosX();
 		bool collisionX = entity1->GetPosX() + entity1->GetScaleX() >= entity2->GetPosX() && entity2->GetPosX() + entity2->GetScaleX() >= entity1->GetPosX();
 		// collision y-axis?
 		bool collisionY = entity1->GetPosY() + entity1->GetScaleY() >= entity2->GetPosY() && entity2->GetPosY() + entity2->GetScaleY() >= entity1->GetPosY();
@@ -31,7 +33,14 @@ namespace GL
 		glm::vec3 director = glm::vec3(); 
 
 		director = entity1->GetPivot() - entity2->GetPivot(); //Genero el vector director para saber hacia donde puedo 
-		
+
+		do
+		{
+			director = glm::normalize(entity2->GetPivot() - entity1->GetPivot());
+			entity2->SetPos(entity2->GetPivot()+director);
+		} while (CheckCollisionRecRec(entity1, entity2));
+
+		/*
 		while (CheckCollisionRecRec(entity1, entity2)) //Siempre y cuando haya colisión entre las entidades,
 		{
 			
@@ -161,6 +170,6 @@ namespace GL
 			//	}
 			//}
 
-		};
+		};*/
 	}
 }

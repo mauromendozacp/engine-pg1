@@ -22,6 +22,10 @@ namespace GL
 		VBO = 0;
 		EBO = 0;
 		vertices = 0;
+
+		hasCollider = false;
+		moveable = true;
+
 	}
 
 	Entity::Entity(Render* render)
@@ -53,6 +57,10 @@ namespace GL
 		v3Pos = glm::vec3(x, y, z);
 		translate = glm::translate(glm::mat4(1.0f), v3Pos);
 		UpdateModel();
+	}
+	void Entity::SetPos(glm::vec3 pos)
+	{
+		SetPos(pos.x, pos.y, pos.z);
 	}
 
 	void Entity::SetRotX(float x) 
@@ -91,6 +99,15 @@ namespace GL
 		this->color = glm::vec4(r, g, b, a);
 	}
 
+	void Entity::SetCollider(bool col)
+	{
+		hasCollider = col;
+	}
+	void Entity::SetMoveable(bool mov)
+	{
+		moveable = mov;
+	}
+
 	glm::mat4 Entity::GetRotation()
 	{
 		return (rotationX * rotationY * rotationZ);
@@ -114,6 +131,11 @@ namespace GL
 	float Entity::GetPosZ()
 	{
 		return v3Pos[2];
+	}
+
+	glm::vec3 Entity::GetPos()
+	{
+		return v3Pos;
 	}
 
 	float Entity::GetRotX()
@@ -153,6 +175,15 @@ namespace GL
 		pivot.y = v3Pos.y + v3Scale.y / 2;
 		pivot.z = v3Pos.z + v3Scale.z / 2;
 		return pivot;
+	}
+
+	bool Entity::IsMoveable()
+	{
+		return moveable;
+	}
+	bool Entity::HasCollider()
+	{
+		return hasCollider;
 	}
 
 	void Entity::Draw(unsigned int shaderId)

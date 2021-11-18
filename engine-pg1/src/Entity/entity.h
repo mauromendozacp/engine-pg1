@@ -17,11 +17,15 @@ namespace GL
 		~Entity();
 
 		void SetPos(float x, float y, float z);
+		void SetPos(glm::vec3 pos);
 		void SetRotX(float x);
 		void SetRotY(float y);
 		void SetRotZ(float z);
 		void SetScale(float x, float y, float z);
 		void SetColor(float r, float g, float b, float a);
+
+		void SetCollider(bool col);
+		void SetMoveable(bool mov);
 
 		glm::mat4 GetRotation();
 		void UpdateModel();
@@ -29,6 +33,7 @@ namespace GL
 		float GetPosX();
 		float GetPosY();
 		float GetPosZ();
+		glm::vec3 GetPos();
 
 		float GetRotX();
 		float GetRotY();
@@ -39,6 +44,9 @@ namespace GL
 		float GetScaleZ();
 
 		glm::vec3 GetPivot();
+
+		bool IsMoveable();
+		bool HasCollider();
 
 		void Draw(unsigned int shaderId);
 		virtual void SetShader(unsigned int shaderId) = 0;
@@ -61,6 +69,7 @@ namespace GL
 
 		unsigned int VAO, VBO, EBO, tam, vertices;
 		float *vertexs;
+		bool hasCollider, moveable;
 	};
 
 	

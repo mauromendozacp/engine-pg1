@@ -21,6 +21,7 @@ namespace GameXD
 
 	private:
 		GL::Shape* shape;
+		GL::Shape* shape2;
 		GL::Sprite* sprite;
 		GL::Sprite* rockstar;
 
