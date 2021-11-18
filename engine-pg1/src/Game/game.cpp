@@ -44,7 +44,7 @@ namespace GameXD
 
 		shape2 = new GL::Shape(render);
 		shape2->Init(GL::SHAPE_TYPE::QUAD);
-		shape2->SetPos(0.0f, 0.0f, 0.0f);
+		shape2->SetPos(5.0f, 5.0f, 0.0f);
 		shape2->SetScale(10.0f, 10.0f, 1.0f);
 		shape2->SetColor(1.0f, 0.0f, 1.0f, 0.5f);
 	}
@@ -87,11 +87,11 @@ namespace GameXD
 	{
 		if (input->IsKeyPressed(KEY_A))
 		{
-			shape->SetPos(shape->GetPosX() + posSpeed, shape->GetPosY(), shape->GetPosZ());
+			shape->SetPos(shape->GetPosX() - posSpeed, shape->GetPosY(), shape->GetPosZ());
 		}
 		else if (input->IsKeyPressed(KEY_D))
 		{
-			shape->SetPos(shape->GetPosX() - posSpeed, shape->GetPosY(), shape->GetPosZ());
+			shape->SetPos(shape->GetPosX() + posSpeed, shape->GetPosY(), shape->GetPosZ());
 		}
 		else if (input->IsKeyPressed(KEY_Q))
 		{
@@ -111,6 +111,7 @@ namespace GameXD
 			shape->SetPos(shape->GetPosX(), shape->GetPosY() - posSpeed, shape->GetPosZ());
 			//shape->SetScale(shape->GetScaleX() - scaleSpeed, shape->GetScaleY() - scaleSpeed, shape->GetScaleZ() - scaleSpeed);
 		}
+		
 		
 		if (Collision::CheckCollisionRecRec(shape, shape2))
 		{
