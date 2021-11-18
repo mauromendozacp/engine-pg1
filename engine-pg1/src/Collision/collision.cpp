@@ -3,6 +3,8 @@
 
 namespace GL
 {
+	const float overlapSpeed = 0.25f;
+
 	Collision::Collision()
 	{
 
@@ -15,7 +17,6 @@ namespace GL
 
 	bool Collision::CheckCollisionRecRec(Entity* entity1, Entity* entity2)
 	{
-
 		//bool collisionX = entity1->GetPosX() + entity1->GetScaleX() >= entity2->GetPosX() && entity2->GetPosX() + entity2->GetScaleX() >= entity1->GetPosX();
 		bool collisionX = entity1->GetPosX() - (entity1->GetScaleX() / 2) + entity1->GetScaleX() >= entity2->GetPosX() - (entity2->GetScaleX() / 2) 
 			&& entity2->GetPosX() - (entity2->GetScaleX() / 2) + entity2->GetScaleX() >= entity1->GetPosX() - (entity1->GetScaleX() / 2);
@@ -34,7 +35,7 @@ namespace GL
 		do
 		{
 			director = glm::normalize(entity2->GetPivot() - entity1->GetPivot());
-			entity2->SetPos(entity2->GetPivot() + director);
+			entity2->SetPos(entity2->GetPivot() + director * overlapSpeed);
 		} while (CheckCollisionRecRec(entity1, entity2));
 
 		/*
