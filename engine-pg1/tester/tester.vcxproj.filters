@@ -16,6 +16,9 @@
     <Filter Include="Archivos de origen\Game">
       <UniqueIdentifier>{ec26acd1-2799-4ef7-9985-814ca3079dc5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Archivos de origen\Player">
+      <UniqueIdentifier>{03993866-5048-40e2-b63b-a876d8c5abd0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -24,10 +27,16 @@
     <ClCompile Include="..\src\Game\game.cpp">
       <Filter>Archivos de origen\Game</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\Player\player.cpp">
+      <Filter>Archivos de origen\Player</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\Game\game.h">
       <Filter>Archivos de origen\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Player\player.h">
+      <Filter>Archivos de origen\Player</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

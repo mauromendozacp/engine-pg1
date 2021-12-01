@@ -2,6 +2,7 @@
 #define GAME_H
 
 #include "BaseGame/baseGame.h"
+#include "Player/player.h"
 #include <iostream>
 
 using namespace GL;
@@ -21,12 +22,9 @@ namespace GameXD
 		void DeInit() override;
 
 	private:
+		Player* player;
 		GL::Shape* shape;
-		GL::Shape* shape2;
-		GL::Sprite* sprite;
 		GL::Sprite* rockstar;
-
-		void Inputs();
 	};
 }
 

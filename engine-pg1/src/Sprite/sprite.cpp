@@ -88,9 +88,6 @@ namespace GL
 			vertexs[15] = uvCoords[3];
 			vertexs[23] = uvCoords[5];
 			vertexs[31] = uvCoords[7];
-
-			/*render->BindTextureBuffer(VBO, sizeof(uvCoords), uvCoords);
-			BindAttrib();*/
 		}
 	}
 
