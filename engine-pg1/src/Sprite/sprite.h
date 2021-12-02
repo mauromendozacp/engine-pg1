@@ -9,6 +9,7 @@
 
 namespace GL
 {
+	const int textureTamVert = 32;
 	class GRAPHICSENGINE_API Sprite : public Entity2D
 	{
 	public:
@@ -24,6 +25,15 @@ namespace GL
 		void AddAnimation(int rows, int cols, float duration);
 
 	private:
+		float textureVertex[textureTamVert]
+		{
+			// positions          // colors           // texture coords
+			 0.5f,  0.5f, 0.0f,   1.0f, 1.0f, 1.0f,   1.0f, 1.0f,   // top right
+			 0.5f, -0.5f, 0.0f,   1.0f, 1.0f, 1.0f,   1.0f, 0.0f,   // bottom right
+			-0.5f, -0.5f, 0.0f,   1.0f, 1.0f, 1.0f,   0.0f, 0.0f,   // bottom left
+			-0.5f,  0.5f, 0.0f,   1.0f, 1.0f, 1.0f,   0.0f, 1.0f    // top left 
+		};
+
 		void SetShader(unsigned int shaderId) override;
 		void BindAttrib();
 		void BindTexture(Frame f);

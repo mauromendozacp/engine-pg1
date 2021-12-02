@@ -49,7 +49,7 @@ namespace GameXD
 	{
 		player->Draw();
 		rockstar->Draw();
-		shape->Draw();
+		//shape->Draw();
 	}
 
 	void Game::DeInit()
