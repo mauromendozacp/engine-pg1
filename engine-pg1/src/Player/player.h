@@ -13,10 +13,12 @@ namespace GameXD
 		Player();
 		~Player();
 
-		void Init(GL::Render* render, float speed, std::string textureUrl);
-		void Update(GL::Input* input, float timer);
+		void Init(GL::Render* render, float speed, const char* textureUrl);
+		void Update(GL::Input* input);
 		void Draw();
 		void DeInit();
+
+		GL::Sprite* GetSprite();
 
 	private:
 		GL::Sprite* sprite;

@@ -3,6 +3,8 @@
 
 #include "Entity2D/entity2D.h"
 #include "Animation/animation.h"
+#include "TextureImporter/textureImporter.h"
+#include "Animation/atlasConfig.h"
 #include <vector>
 
 namespace GL
@@ -14,19 +16,19 @@ namespace GL
 		Sprite(Render* render);
 		~Sprite();
 
-		void Init(std::string path);
-		void Update(float timer);
+		void Init(const char* path, bool invertImage);
+		void Update();
 		void Draw();
 
+		void AddAnimation(AtlasConfig atlas, float speed);
 		void AddAnimation(int rows, int cols, float duration);
 
 	private:
-		void LoadTexture(std::string path);
 		void SetShader(unsigned int shaderId) override;
 		void BindAttrib();
+		void BindTexture(Frame f);
 
-		unsigned int textureId;
-		int width, height;
+		TextureData* textureData;
 		Animation* anim;
 		Frame currFrame;
 	};

@@ -27,36 +27,35 @@ namespace GameXD
 
 		shape = new GL::Shape(render);
 		shape->Init(GL::SHAPE_TYPE::QUAD);
-		shape->SetPos(0.0f, 0.0f, 0.0f);
+		shape->SetPos(5.0f, 0.0f, 0.0f);
 		shape->SetColor(1.0f, 1.0f, 0.0f, 0.5f);
+		shape->SetMoveable(true);
+		shape->SetCollider(true);
 		
 		rockstar = new GL::Sprite(render);
-		rockstar->Init("../res/Textures/rock.png");
+		rockstar->Init("../res/Textures/rock.png", true);
 		rockstar->SetPos(0.0f, 10.0f, 0.0f);
 		rockstar->SetScale(10.0f, 10.0f, 1.0f);
-		rockstar->AddAnimation(2, 3, 2.0f);
+		rockstar->AddAnimation(2, 3, 25);
 	}
 
 	void Game::Update()
 	{
-		//Collision::CollisionUpdate(shape, shape2);
-		float timerF = timer->GetDeltaTime();
-		player->Update(input, timerF);
-		rockstar->Update(timerF);
+		Collision::CollisionUpdate(player->GetSprite(), shape);
+		player->Update(input);
 	}
 
 	void Game::Draw()
 	{
 		player->Draw();
-		shape->Draw();
 		rockstar->Draw();
+		shape->Draw();
 	}
 
 	void Game::DeInit()
 	{
 		if (player != nullptr)
 		{
-			player->DeInit();
 			delete player;
 			player = nullptr;
 		}

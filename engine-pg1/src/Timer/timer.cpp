@@ -4,21 +4,20 @@ namespace GL
 {
 	Timer::Timer()
 	{
-		deltaTime = 0.0f;
 		oldTimer = glfwGetTime();
 	}
 
 	Timer::~Timer() {}
 
-	void Timer::Update()
+	void Timer::Update(float currentTime)
 	{
-		double t = glfwGetTime();
-		deltaTime = (t - oldTimer) / 1000.0f;
-		oldTimer = t;
+		deltaTime = currentTime - oldTimer;
+		oldTimer = currentTime;
 	}
 
 	float Timer::GetDeltaTime()
 	{
 		return deltaTime;
 	}
+	float Timer::deltaTime = 0.0f;
 }

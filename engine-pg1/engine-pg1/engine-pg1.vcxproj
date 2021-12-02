@@ -161,6 +161,7 @@
     <ClCompile Include="..\src\Shape\shape.cpp" />
     <ClCompile Include="..\src\Sprite\sprite.cpp" />
     <ClCompile Include="..\src\StbImage\stb_image.cpp" />
+    <ClCompile Include="..\src\TextureImporter\textureImporter.cpp" />
     <ClCompile Include="..\src\Tilemap\tilemap.cpp" />
     <ClCompile Include="..\src\Tile\tile.cpp" />
     <ClCompile Include="..\src\Timer\timer.cpp" />
@@ -168,6 +169,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\Animation\animation.h" />
+    <ClInclude Include="..\src\Animation\atlasConfig.h" />
     <ClInclude Include="..\src\BaseGame\baseGame.h" />
     <ClInclude Include="..\src\Collision\collision.h" />
     <ClInclude Include="..\src\Entity2D\entity2D.h" />
@@ -181,6 +183,7 @@
     <ClInclude Include="..\src\Shape\shape.h" />
     <ClInclude Include="..\src\Sprite\sprite.h" />
     <ClInclude Include="..\src\StbImage\stb_image.h" />
+    <ClInclude Include="..\src\TextureImporter\textureImporter.h" />
     <ClInclude Include="..\src\Tilemap\tilemap.h" />
     <ClInclude Include="..\src\Tile\tile.h" />
     <ClInclude Include="..\src\Timer\timer.h" />

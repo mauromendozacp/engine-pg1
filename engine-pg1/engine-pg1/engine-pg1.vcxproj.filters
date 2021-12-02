@@ -49,6 +49,9 @@
     <ClCompile Include="..\src\Tile\tile.cpp">
       <Filter>Tile</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\TextureImporter\textureImporter.cpp">
+      <Filter>TextureImporter</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Window">
@@ -102,6 +105,9 @@
     <Filter Include="Tile">
       <UniqueIdentifier>{ec769838-63c6-4995-a830-ea89aa08b8a5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TextureImporter">
+      <UniqueIdentifier>{7a1f3920-d9c2-4338-b7f9-dada9bbc43aa}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\Window\window.h">
@@ -153,6 +159,12 @@
     </ClInclude>
     <ClInclude Include="..\src\Tile\tile.h">
       <Filter>Tile</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\TextureImporter\textureImporter.h">
+      <Filter>TextureImporter</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Animation\atlasConfig.h">
+      <Filter>Animation</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

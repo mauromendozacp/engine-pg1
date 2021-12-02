@@ -3,6 +3,9 @@
 
 #include "exports.h"
 #include "Frame/frame.h"
+#include "Timer/timer.h"
+#include "TextureImporter/textureImporter.h"
+#include "atlasConfig.h"
 #include <vector>
 
 namespace GL
@@ -13,16 +16,18 @@ namespace GL
 		Animation();
 		~Animation();
 
-		void Update(float timer);
-		void AddFrame(float frameX, float frameY, float frameWidth, float frameHeight, 
-			float textureWidth, float textureHeight, float duration, int frameCount);
+		bool Update();
+		void SetAnimation(TextureData* textureData, float speed);
+		void AddFrame(float frameX, float frameY, float frameWidth, float frameHeight, int frameCount);
+		void AddFrames(AtlasConfig atlas);
 		int GetCurrentFrame();
 		std::vector<Frame> GetFrames();
 
 	private:
 		float currentTime;
 		int currentFrame;
-		float length;
+		float speed;
+		TextureData* textureData;
 		std::vector<Frame> frames;
 	};
 }

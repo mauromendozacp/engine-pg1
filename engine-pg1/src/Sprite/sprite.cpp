@@ -15,24 +15,25 @@ namespace GL
 
 	Sprite::Sprite() : Entity2D()
 	{
-		textureId = 0;
+		textureData = nullptr;
 		anim = nullptr;
-		height = 0;
-		width = 0;
 	}
 
 	Sprite::Sprite(Render* render) : Entity2D(render)
 	{
-		textureId = 0;
+		textureData = nullptr;
 		anim = nullptr;
-		height = 0;
-		width = 0;
 	}
 
 	Sprite::~Sprite()
 	{
-		glDeleteTextures(1, &textureId);
+		glDeleteTextures(1, &textureData->id);
 
+		if (textureData != nullptr)
+		{
+			delete textureData;
+			textureData = nullptr;
+		}
 		if (anim != nullptr)
 		{
 			delete anim;
@@ -40,7 +41,7 @@ namespace GL
 		}
 	}
 
-	void Sprite::Init(std::string path)
+	void Sprite::Init(const char* path, bool invertImage)
 	{
 		unsigned int indexes[]
 		{
@@ -54,40 +55,20 @@ namespace GL
 		render->BindBuffer(VAO, VBO, tam, vertexs);
 		render->BindIndexs(EBO, sizeof(indexes), indexes);
 		BindAttrib();
-		LoadTexture(path);
+		textureData = new TextureData(TextureImporter::LoadTexture(path, invertImage));
 
 		anim = new Animation();
 	}
 
-	void Sprite::Update(float timer)
+	void Sprite::Update()
 	{
 		if (!anim)
 			return;
 
-		anim->Update(timer);
-
-		int currFrame = anim->GetCurrentFrame();
-		if (currFrame != 0)
+		if (anim->Update())
 		{
-			Frame f = anim->GetFrames()[currFrame];
-
-			float uvCoords[]
-			{
-				f.GetUVCords()[0].u, f.GetUVCords()[0].v,
-				f.GetUVCords()[1].u, f.GetUVCords()[1].v,
-				f.GetUVCords()[2].u, f.GetUVCords()[2].v,
-				f.GetUVCords()[3].u, f.GetUVCords()[3].v
-			};
-
-			vertexs[6]  = uvCoords[0];
-			vertexs[14] = uvCoords[2];
-			vertexs[22] = uvCoords[4];
-			vertexs[30] = uvCoords[6];
-
-			vertexs[7]	= uvCoords[1];
-			vertexs[15] = uvCoords[3];
-			vertexs[23] = uvCoords[5];
-			vertexs[31] = uvCoords[7];
+			Frame f = anim->GetFrames()[anim->GetCurrentFrame()];
+			BindTexture(f);
 		}
 	}
 
@@ -95,64 +76,35 @@ namespace GL
 	{
 		unsigned int shaderId = render->GetTextureShaderId();
 		render->UseShaderId(shaderId);
-		glBindTexture(GL_TEXTURE_2D, textureId);
-		SetShader(shaderId);
+		Update();
+		glBindTexture(GL_TEXTURE_2D, textureData->id);
+		SetShader(textureData->id);
 		Entity::Draw(shaderId);
 	}
 
-	void Sprite::AddAnimation(int rows, int cols, float duration)
+	void Sprite::AddAnimation(AtlasConfig atlas, float speed)
 	{
+		anim->SetAnimation(textureData, speed);
+		anim->AddFrames(atlas);
+
+		Frame f = anim->GetFrames()[0];
+		BindTexture(f);
+	}
+
+	void Sprite::AddAnimation(int rows, int cols, float speed)
+	{
+		anim->SetAnimation(textureData, speed);
 		for (int i = 0; i < rows; i++)
 		{
 			for (int j = 0; j < cols; j++)
 			{
-				anim->AddFrame(i, j, width / cols, height / rows, width, height, duration, 10);
+				anim->AddFrame(i, j, textureData->width / cols, textureData->height / rows, rows * cols);
+				//anim->AddFrame(i, j, textureData->width / cols, textureData->height / rows, duration, 10);
 			}
 		}
-	}
 
-	void Sprite::LoadTexture(std::string path)
-	{
-		glGenTextures(1, &textureId);
-		glBindTexture(GL_TEXTURE_2D, textureId);
-		// set the texture wrapping/filtering options (on the currently bound texture object)
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-		// load and generate the texture
-		int nrChannels;
-		stbi_set_flip_vertically_on_load(true);
-		unsigned char* data = stbi_load(path.c_str(), &width, &height, &nrChannels, 0);
-		if (data)
-		{
-			int channelType = GL_RGB;
-			switch (nrChannels)
-			{
-			case 1:
-				channelType = GL_R;
-				break;
-			case 2:
-				channelType = GL_RG;
-				break;
-			case 3:
-				channelType = GL_RGB;
-				break;
-			case 4:
-				channelType = GL_RGBA;
-				break;
-			default:
-				break;
-			}
-
-			glTexImage2D(GL_TEXTURE_2D, 0, channelType, width, height, 0, channelType, GL_UNSIGNED_BYTE, data);
-			glGenerateMipmap(GL_TEXTURE_2D);
-		}
-		else
-		{
-			std::cout << "Failed to load texture" << std::endl;
-		}
-		stbi_image_free(data);
+		Frame f = anim->GetFrames()[0];
+		BindTexture(f);
 	}
 
 	void Sprite::SetShader(unsigned int shaderId)
@@ -165,7 +117,7 @@ namespace GL
 		glUniform1fv(alphaLoc, 1, &(color.a));
 
 		unsigned int textureLoc = glGetUniformLocation(shaderId, "ourTexture");
-		glUniform1f(textureLoc, textureId);
+		glUniform1f(textureLoc, (GLfloat)textureData->id);
 	}
 
 	void Sprite::BindAttrib()
@@ -177,5 +129,26 @@ namespace GL
 		glEnableVertexAttribArray(0);
 		glEnableVertexAttribArray(1);
 		glEnableVertexAttribArray(2);
+	}
+
+	void Sprite::BindTexture(Frame f)
+	{
+		float uvCoords[]
+		{
+			f.GetUVCords()[0].u, f.GetUVCords()[0].v,
+			f.GetUVCords()[1].u, f.GetUVCords()[1].v,
+			f.GetUVCords()[2].u, f.GetUVCords()[2].v,
+			f.GetUVCords()[3].u, f.GetUVCords()[3].v
+		};
+
+		vertexs[6] = uvCoords[0];
+		vertexs[14] = uvCoords[2];
+		vertexs[22] = uvCoords[4];
+		vertexs[30] = uvCoords[6];
+
+		vertexs[7] = uvCoords[1];
+		vertexs[15] = uvCoords[3];
+		vertexs[23] = uvCoords[5];
+		vertexs[31] = uvCoords[7];
 	}
 }

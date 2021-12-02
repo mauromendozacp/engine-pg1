@@ -71,7 +71,7 @@ namespace GL
 		while (!glfwWindowShouldClose(window->GetWindow()))
 		{
 			render->ClearScreen();
-			timer->Update();
+			timer->Update(glfwGetTime());
 
 			Update();
 			Draw();

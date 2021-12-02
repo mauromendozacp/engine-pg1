@@ -10,24 +10,30 @@ namespace GameXD
 
 	Player::~Player()
 	{
+		if (sprite != nullptr)
+		{
+			delete sprite;
+			sprite = nullptr;
+		}
 	}
 
-	void Player::Init(GL::Render* render, float speed, std::string textureUrl)
+	void Player::Init(GL::Render* render, float speed, const char* textureUrl)
 	{
 		sprite = new GL::Sprite(render);
-		sprite->Init(textureUrl);
-		sprite->SetPos(0.0f, 0.0f, 0.0f);
+		sprite->Init(textureUrl, false);
 		sprite->SetScale(5.0f, 5.0f, 1.0f);
+		sprite->SetMoveable(true);
+		sprite->SetCollider(true);
 
-		sprite->AddAnimation(3, 6, 1.0f);
+		GL::AtlasConfig atlas = GL::AtlasConfig(6, 11, 0, 0, 1, 18);
+		sprite->AddAnimation(atlas, 10.f);
 
 		this->speed = speed;
 	}
 
-	void Player::Update(GL::Input* input, float timer)
+	void Player::Update(GL::Input* input)
 	{
 		Inputs(input);
-		sprite->Update(timer);
 	}
 
 	void Player::Draw()
@@ -37,11 +43,11 @@ namespace GameXD
 
 	void Player::DeInit()
 	{
-		if (sprite != nullptr)
-		{
-			delete sprite;
-			sprite = nullptr;
-		}
+	}
+
+	GL::Sprite* Player::GetSprite()
+	{
+		return sprite;
 	}
 
 	void Player::Inputs(GL::Input* input)
