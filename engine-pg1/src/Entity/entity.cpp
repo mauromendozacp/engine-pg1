@@ -21,6 +21,8 @@ namespace GL
 		VAO = 0;
 		VBO = 0;
 		EBO = 0;
+		tam = 0;
+		vertexs = 0;
 		vertices = 0;
 
 		hasCollider = false;

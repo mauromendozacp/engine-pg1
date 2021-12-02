@@ -23,6 +23,7 @@ namespace GL
 
 		void AddAnimation(AtlasConfig atlas, float speed);
 		void AddAnimation(int rows, int cols, float duration);
+		void ChangeAnimation(int index);
 
 	private:
 		float textureVertex[textureTamVert]
@@ -39,7 +40,8 @@ namespace GL
 		void BindTexture(Frame f);
 
 		TextureData* textureData;
-		Animation* anim;
+		int animIndex = 0;
+		std::vector<Animation*> anim;
 		Frame currFrame;
 	};
 }

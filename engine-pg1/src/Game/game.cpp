@@ -6,6 +6,7 @@ namespace GameXD
 	{
 		player = nullptr;
 		shape = nullptr;
+		shape2 = nullptr;
 		rockstar = nullptr;
 	}
 
@@ -31,6 +32,13 @@ namespace GameXD
 		shape->SetColor(1.0f, 1.0f, 0.0f, 0.5f);
 		shape->SetMoveable(true);
 		shape->SetCollider(true);
+
+		shape2 = new GL::Shape(render);
+		shape2->Init(GL::SHAPE_TYPE::QUAD);
+		shape2->SetPos(-5.0f, 0.0f, 0.0f);
+		shape2->SetColor(1.0f, 0.0f, 1.0f, 1.0f);
+		shape2->SetMoveable(true);
+		shape2->SetCollider(true);
 		
 		rockstar = new GL::Sprite(render);
 		rockstar->Init("../res/Textures/rock.png", true);
@@ -42,14 +50,16 @@ namespace GameXD
 	void Game::Update()
 	{
 		Collision::CollisionUpdate(player->GetSprite(), shape);
+		Collision::CollisionUpdate(player->GetSprite(), shape2);
 		player->Update(input);
 	}
 
 	void Game::Draw()
 	{
-		player->Draw();
 		rockstar->Draw();
-		//shape->Draw();
+		player->Draw();
+		shape->Draw();
+		shape2->Draw();
 	}
 
 	void Game::DeInit()
@@ -63,6 +73,11 @@ namespace GameXD
 		{
 			delete shape;
 			shape = nullptr;
+		}
+		if (shape2 != nullptr)
+		{
+			delete shape2;
+			shape2 = nullptr;
 		}
 		if (rockstar != nullptr)
 		{

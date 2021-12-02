@@ -6,13 +6,14 @@ namespace GL
 	Sprite::Sprite() : Entity2D()
 	{
 		textureData = nullptr;
-		anim = nullptr;
+		anim = std::vector<Animation*>();
+		animIndex = 0;
 	}
 
 	Sprite::Sprite(Render* render) : Entity2D(render)
 	{
 		textureData = nullptr;
-		anim = nullptr;
+		anim = std::vector<Animation*>();
 	}
 
 	Sprite::~Sprite()
@@ -24,10 +25,10 @@ namespace GL
 			delete textureData;
 			textureData = nullptr;
 		}
-		if (anim != nullptr)
+		
+		for (int i = 0; i < anim.size(); i++)
 		{
-			delete anim;
-			anim = nullptr;
+			delete[] anim[i];
 		}
 	}
 
@@ -46,18 +47,17 @@ namespace GL
 		render->BindIndexs(EBO, sizeof(indexes), indexes);
 		BindAttrib();
 		textureData = new TextureData(TextureImporter::LoadTexture(path, invertImage));
-
-		anim = new Animation();
+		animIndex = 0;
 	}
 
 	void Sprite::Update()
 	{
-		if (!anim)
+		if (anim.size() == 0)
 			return;
 
-		if (anim->Update())
+		if (anim[animIndex]->Update())
 		{
-			Frame f = anim->GetFrames()[anim->GetCurrentFrame()];
+			Frame f = anim[animIndex]->GetFrames()[anim[animIndex]->GetCurrentFrame()];
 			BindTexture(f);
 		}
 	}
@@ -74,27 +74,36 @@ namespace GL
 
 	void Sprite::AddAnimation(AtlasConfig atlas, float speed)
 	{
-		anim->SetAnimation(textureData, speed);
-		anim->AddFrames(atlas);
+		Animation* a = new Animation();
+		a->SetAnimation(textureData, speed);
+		a->AddFrames(atlas);
+		anim.push_back(a);
 
-		Frame f = anim->GetFrames()[0];
+		Frame f = anim[animIndex]->GetFrames()[0];
 		BindTexture(f);
 	}
 
 	void Sprite::AddAnimation(int rows, int cols, float speed)
 	{
-		anim->SetAnimation(textureData, speed);
+		
+		Animation* a = new Animation();
+		a->SetAnimation(textureData, speed);
 		for (int i = 0; i < rows; i++)
 		{
 			for (int j = 0; j < cols; j++)
 			{
-				anim->AddFrame(i, j, textureData->width / cols, textureData->height / rows, rows * cols);
-				//anim->AddFrame(i, j, textureData->width / cols, textureData->height / rows, duration, 10);
+				a->AddFrame(i, j, textureData->width / cols, textureData->height / rows, rows * cols);
 			}
 		}
+		anim.push_back(a);
 
-		Frame f = anim->GetFrames()[0];
+		Frame f = anim[animIndex]->GetFrames()[0];
 		BindTexture(f);
+	}
+
+	void Sprite::ChangeAnimation(int index)
+	{
+		animIndex = index;
 	}
 
 	void Sprite::SetShader(unsigned int shaderId)

@@ -24,6 +24,7 @@ namespace GameXD
 	private:
 		Player* player;
 		GL::Shape* shape;
+		GL::Shape* shape2;
 		GL::Sprite* rockstar;
 	};
 }

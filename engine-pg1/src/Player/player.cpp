@@ -28,6 +28,18 @@ namespace GameXD
 		GL::AtlasConfig atlas = GL::AtlasConfig(6, 11, 0, 0, 1, 18);
 		sprite->AddAnimation(atlas, 10.f);
 
+		atlas = GL::AtlasConfig(6, 11, 0, 7, 1, 12);
+		sprite->AddAnimation(atlas, 10.f);
+
+		atlas = GL::AtlasConfig(6, 11, 0, 3, 1, 12);
+		sprite->AddAnimation(atlas, 10.f);
+
+		atlas = GL::AtlasConfig(6, 11, 0, 5, 1, 12);
+		sprite->AddAnimation(atlas, 10.f);
+
+		atlas = GL::AtlasConfig(6, 11, 0, 9, 1, 12);
+		sprite->AddAnimation(atlas, 10.f);
+
 		this->speed = speed;
 	}
 
@@ -55,10 +67,12 @@ namespace GameXD
 		if (input->IsKeyPressed(KEY_A))
 		{
 			sprite->SetPos(sprite->GetPosX() - speed, sprite->GetPosY(), sprite->GetPosZ());
+			sprite->ChangeAnimation(1);
 		}
 		else if (input->IsKeyPressed(KEY_D))
 		{
 			sprite->SetPos(sprite->GetPosX() + speed, sprite->GetPosY(), sprite->GetPosZ());
+			sprite->ChangeAnimation(2);
 		}
 		else if (input->IsKeyPressed(KEY_Q))
 		{
@@ -71,10 +85,16 @@ namespace GameXD
 		else if (input->IsKeyPressed(KEY_W))
 		{
 			sprite->SetPos(sprite->GetPosX(), sprite->GetPosY() + speed, sprite->GetPosZ());
+			sprite->ChangeAnimation(4);
 		}
 		else if (input->IsKeyPressed(KEY_S))
 		{
 			sprite->SetPos(sprite->GetPosX(), sprite->GetPosY() - speed, sprite->GetPosZ());
+			sprite->ChangeAnimation(3);
+		}
+		else
+		{
+			sprite->ChangeAnimation(0);
 		}
 	}
 }
