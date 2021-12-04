@@ -45,7 +45,7 @@ namespace GL
 
 		render->BindBuffer(VAO, VBO, tam, vertexs);
 		render->BindIndexs(EBO, sizeof(indexes), indexes);
-		BindAttrib();
+		render->BindExtraAttrib();
 		textureData = new TextureData(TextureImporter::LoadTexture(path, invertImage));
 		animIndex = 0;
 	}
@@ -67,8 +67,7 @@ namespace GL
 		unsigned int shaderId = render->GetTextureShaderId();
 		render->UseShaderId(shaderId);
 		Update();
-		glBindTexture(GL_TEXTURE_2D, textureData->id);
-		SetShader(textureData->id);
+		render->SetShader(shaderId, color, textureData->id);
 		Entity::Draw(shaderId);
 	}
 
@@ -85,7 +84,6 @@ namespace GL
 
 	void Sprite::AddAnimation(int rows, int cols, float speed)
 	{
-		
 		Animation* a = new Animation();
 		a->SetAnimation(textureData, speed);
 		for (int i = 0; i < rows; i++)
@@ -104,30 +102,6 @@ namespace GL
 	void Sprite::ChangeAnimation(int index)
 	{
 		animIndex = index;
-	}
-
-	void Sprite::SetShader(unsigned int shaderId)
-	{
-		glm::vec3 newColor = glm::vec3(color.r, color.g, color.b);
-		unsigned int colorLoc = glGetUniformLocation(shaderId, "color");
-		glUniform3fv(colorLoc, 1, glm::value_ptr(newColor));
-
-		unsigned int alphaLoc = glGetUniformLocation(shaderId, "a");
-		glUniform1fv(alphaLoc, 1, &(color.a));
-
-		unsigned int textureLoc = glGetUniformLocation(shaderId, "ourTexture");
-		glUniform1f(textureLoc, (GLfloat)textureData->id);
-	}
-
-	void Sprite::BindAttrib()
-	{
-		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)0);
-		glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(3 * sizeof(float)));
-		glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(6 * sizeof(float)));
-
-		glEnableVertexAttribArray(0);
-		glEnableVertexAttribArray(1);
-		glEnableVertexAttribArray(2);
 	}
 
 	void Sprite::BindTexture(Frame f)

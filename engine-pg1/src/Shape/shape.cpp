@@ -76,33 +76,14 @@ namespace GL
 
 		render->BindBuffer(VAO, VBO, tam, vertexs);
 		render->BindIndexs(EBO, sizeof(indexes) * vertices, indexes);
-		BindAttrib();
+		render->BindBaseAttrib();
 	}
 
 	void Shape::Draw()
 	{
 		unsigned int shaderId = render->GetSolidShaderId();
 		render->UseShaderId(shaderId);
-		SetShader(shaderId);
+		render->SetShader(shaderId, color);
 		Entity::Draw(shaderId);
-	}
-
-	void Shape::SetShader(unsigned int shaderId)
-	{
-		glm::vec3 newColor = glm::vec3(color.r, color.g, color.b);
-		unsigned int colorLoc = glGetUniformLocation(shaderId, "color");
-		glUniform3fv(colorLoc, 1, glm::value_ptr(newColor));
-
-		unsigned int alphaLoc = glGetUniformLocation(shaderId, "a");
-		glUniform1fv(alphaLoc, 1, &(color.a));
-	}
-
-	void Shape::BindAttrib()
-	{
-		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)0);
-		glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)(3 * sizeof(float)));
-
-		glEnableVertexAttribArray(0);
-		glEnableVertexAttribArray(1);
 	}
 }

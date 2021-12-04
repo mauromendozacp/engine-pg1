@@ -13,12 +13,6 @@ namespace GL
 		view = glm::lookAt(glm::vec3(0, 0, 15), glm::vec3(0, 0, 0), glm::vec3(0, 1, 0));
 		projection = glm::mat4(1.0f);
 		projection = glm::perspective(glm::radians(90.0f), 640.0f / 480.0f, 0.1f, 1000.0f);
-		
-		/*glEnable(GL_DEPTH_TEST);
-		glDepthFunc(GL_LESS);*/
-		
-		glEnable(GL_BLEND);
-		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	}
 
 	Render::~Render()
@@ -35,8 +29,19 @@ namespace GL
 		}
 	}
 
-	void Render::InitShader()
+	void Render::Init(bool alpha)
 	{
+		if (alpha)
+		{
+			glEnable(GL_BLEND);
+			glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+		}
+		else
+		{
+			glEnable(GL_DEPTH_TEST);
+			glDepthFunc(GL_LESS);
+		}
+
 		solidShader->CreateShader("../src/ShadersCode/SolidVertex.shader", "../src/ShadersCode/SolidFragment.shader");
 		textureShader->CreateShader("../src/ShadersCode/TextureVertex.shader", "../src/ShadersCode/TextureFragment.shader");
 	}
@@ -74,11 +79,51 @@ namespace GL
 		glBufferData(GL_ELEMENT_ARRAY_BUFFER, tam, indexs, GL_STATIC_DRAW);
 	}
 
+	void Render::BindBaseAttrib()
+	{
+		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)0);
+		glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)(3 * sizeof(float)));
+
+		glEnableVertexAttribArray(0);
+		glEnableVertexAttribArray(1);
+	}
+
+	void Render::BindExtraAttrib()
+	{
+		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)0);
+		glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(3 * sizeof(float)));
+		glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(6 * sizeof(float)));
+
+		glEnableVertexAttribArray(0);
+		glEnableVertexAttribArray(1);
+		glEnableVertexAttribArray(2);
+	}
+
 	void Render::UnBind(unsigned int& VAO, unsigned int& VBO, unsigned int& EBO)
 	{
 		glDeleteVertexArrays(1, &VAO);
 		glDeleteBuffers(1, &VBO);
 		glDeleteBuffers(1, &EBO);
+	}
+
+	void Render::SetShader(unsigned int shaderId, glm::vec4 color)
+	{
+		glm::vec3 newColor = glm::vec3(color.r, color.g, color.b);
+		unsigned int colorLoc = glGetUniformLocation(shaderId, "color");
+		glUniform3fv(colorLoc, 1, glm::value_ptr(newColor));
+
+		unsigned int alphaLoc = glGetUniformLocation(shaderId, "a");
+		glUniform1fv(alphaLoc, 1, &(color.a));
+	}
+
+	void Render::SetShader(unsigned int shaderId, glm::vec4 color, unsigned int textureId)
+	{
+		glBindTexture(GL_TEXTURE_2D, textureId);
+
+		SetShader(shaderId, color);
+
+		unsigned int textureLoc = glGetUniformLocation(shaderId, "ourTexture");
+		glUniform1f(textureLoc, (GLfloat)textureId);
 	}
 
 	void Render::BindTextureBuffer(unsigned int& VBO, int tam, float* vertices)

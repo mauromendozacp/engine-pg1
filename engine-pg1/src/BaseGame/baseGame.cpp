@@ -61,7 +61,7 @@ namespace GL
 
 		std::cout << glGetString(GL_VERSION) << std::endl;
 
-		render->InitShader();
+		render->Init(true);
 
 		Init();
 	}

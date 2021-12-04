@@ -21,8 +21,7 @@ namespace GL
 		void Draw();
 
 	private:
-		void BindAttrib();
-		void SetShader(unsigned int shaderId) override;
+
 	};
 }
 

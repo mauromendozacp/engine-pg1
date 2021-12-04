@@ -49,7 +49,6 @@ namespace GL
 		bool HasCollider();
 
 		void Draw(unsigned int shaderId);
-		virtual void SetShader(unsigned int shaderId) = 0;
 
 	protected:
 		Render* render;
