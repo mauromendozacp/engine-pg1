@@ -7,6 +7,15 @@
 
 namespace GameXD
 {
+	enum class STATUS
+	{
+		IDLE,
+		LEFT,
+		RIGHT,
+		UP,
+		DOWN
+	};
+
 	class GRAPHICSENGINE_API Player
 	{
 	public:
@@ -22,9 +31,11 @@ namespace GameXD
 
 	private:
 		GL::Sprite* sprite;
+		STATUS status;
 		float speed;
 
 		void Inputs(GL::Input* input);
+		void ChangeStatus(STATUS status);
 	};
 }
 

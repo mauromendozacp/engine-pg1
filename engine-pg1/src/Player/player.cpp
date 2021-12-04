@@ -5,6 +5,7 @@ namespace GameXD
 	Player::Player()
 	{
 		sprite = nullptr;
+		status = STATUS::IDLE;
 		speed = 0.0f;
 	}
 
@@ -34,10 +35,10 @@ namespace GameXD
 		atlas = GL::AtlasConfig(6, 11, 0, 3, 1, 12);
 		sprite->AddAnimation(atlas, 10.f);
 
-		atlas = GL::AtlasConfig(6, 11, 0, 5, 1, 12);
+		atlas = GL::AtlasConfig(6, 11, 0, 9, 1, 12);
 		sprite->AddAnimation(atlas, 10.f);
 
-		atlas = GL::AtlasConfig(6, 11, 0, 9, 1, 12);
+		atlas = GL::AtlasConfig(6, 11, 0, 5, 1, 12);
 		sprite->AddAnimation(atlas, 10.f);
 
 		this->speed = speed;
@@ -64,15 +65,25 @@ namespace GameXD
 
 	void Player::Inputs(GL::Input* input)
 	{
-		if (input->IsKeyPressed(KEY_A))
+		if (input->IsKeyPressed(KEY_A) || input->IsKeyPressed(KEY_LEFT))
 		{
 			sprite->SetPos(sprite->GetPosX() - speed, sprite->GetPosY(), sprite->GetPosZ());
-			sprite->ChangeAnimation(1);
+			ChangeStatus(STATUS::LEFT);
 		}
-		else if (input->IsKeyPressed(KEY_D))
+		else if (input->IsKeyPressed(KEY_D) || input->IsKeyPressed(KEY_RIGHT))
 		{
 			sprite->SetPos(sprite->GetPosX() + speed, sprite->GetPosY(), sprite->GetPosZ());
-			sprite->ChangeAnimation(2);
+			ChangeStatus(STATUS::RIGHT);
+		}
+		else if (input->IsKeyPressed(KEY_W) || input->IsKeyPressed(KEY_UP))
+		{
+			sprite->SetPos(sprite->GetPosX(), sprite->GetPosY() + speed, sprite->GetPosZ());
+			ChangeStatus(STATUS::UP);
+		}
+		else if (input->IsKeyPressed(KEY_S) || input->IsKeyPressed(KEY_DOWN))
+		{
+			sprite->SetPos(sprite->GetPosX(), sprite->GetPosY() - speed, sprite->GetPosZ());
+			ChangeStatus(STATUS::DOWN);
 		}
 		else if (input->IsKeyPressed(KEY_Q))
 		{
@@ -82,19 +93,23 @@ namespace GameXD
 		{
 			sprite->SetRotZ(sprite->GetRotZ() + speed);
 		}
-		else if (input->IsKeyPressed(KEY_W))
+		else if (input->IsKeyPressed(KEY_Z))
 		{
-			sprite->SetPos(sprite->GetPosX(), sprite->GetPosY() + speed, sprite->GetPosZ());
-			sprite->ChangeAnimation(4);
+			sprite->SetScale(sprite->GetScaleX() - speed, sprite->GetScaleY() - speed, sprite->GetScaleZ());
 		}
-		else if (input->IsKeyPressed(KEY_S))
+		else if (input->IsKeyPressed(KEY_C))
 		{
-			sprite->SetPos(sprite->GetPosX(), sprite->GetPosY() - speed, sprite->GetPosZ());
-			sprite->ChangeAnimation(3);
+			sprite->SetScale(sprite->GetScaleX() + speed, sprite->GetScaleY() + speed, sprite->GetScaleZ());
 		}
 		else
 		{
-			sprite->ChangeAnimation(0);
+			ChangeStatus(STATUS::IDLE);
 		}
+	}
+
+	void Player::ChangeStatus(STATUS status)
+	{
+		this->status = status;
+		sprite->ChangeAnimation(static_cast<int>(this->status));
 	}
 }
