@@ -26,14 +26,15 @@ namespace GL
 
 		void SetCollider(bool col);
 		void SetMoveable(bool mov);
-
-		glm::mat4 GetRotation();
-		void UpdateModel();
+		bool IsMoveable();
+		bool HasCollider();
 
 		float GetPosX();
 		float GetPosY();
 		float GetPosZ();
 		glm::vec3 GetPos();
+		glm::mat4 GetRotation();
+		glm::vec3 GetPivot();
 
 		float GetRotX();
 		float GetRotY();
@@ -42,11 +43,6 @@ namespace GL
 		float GetScaleX();
 		float GetScaleY();
 		float GetScaleZ();
-
-		glm::vec3 GetPivot();
-
-		bool IsMoveable();
-		bool HasCollider();
 
 		void Draw(unsigned int shaderId);
 
@@ -69,6 +65,8 @@ namespace GL
 		unsigned int VAO, VBO, EBO, tam, vertices;
 		float *vertexs;
 		bool hasCollider, moveable;
+
+		void UpdateModel();
 	};
 }
 

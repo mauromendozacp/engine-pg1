@@ -19,9 +19,6 @@ namespace GL
 
 		void Init(SHAPE_TYPE shapeType);
 		void Draw();
-
-	private:
-
 	};
 }
 

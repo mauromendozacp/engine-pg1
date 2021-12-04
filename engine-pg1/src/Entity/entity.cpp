@@ -27,7 +27,6 @@ namespace GL
 
 		hasCollider = false;
 		moveable = false;
-
 	}
 
 	Entity::Entity(Render* render)
@@ -44,6 +43,8 @@ namespace GL
 		VAO = 0;
 		VBO = 0;
 		EBO = 0;
+		tam = 0;
+		vertexs = 0;
 		vertices = 0;
 
 		hasCollider = false;
@@ -191,5 +192,4 @@ namespace GL
 	{
 		render->Draw(model, VAO, VBO, EBO, vertices, tam, vertexs, shaderId);
 	}
-
 }
