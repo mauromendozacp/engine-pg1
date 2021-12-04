@@ -14,13 +14,6 @@ namespace GameXD
 	{
 	}
 
-	void Game::Play()
-	{
-		InitBase();
-		UpdateBase();
-		DeInitBase();
-	}
-
 	void Game::Init()
 	{
 		player = new Player();

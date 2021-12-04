@@ -16,6 +16,7 @@ namespace GL
 	public:
 		BaseGame();
 		~BaseGame();
+		void Play();
 
 	protected:
 		Window* window;
@@ -24,9 +25,9 @@ namespace GL
 		Timer* timer;
 		std::string title;
 
-		void InitBase();
-		void UpdateBase();
-		void DeInitBase();
+		void InitEngine();
+		void UpdateEngine();
+		void DeInitEngine();
 
 		virtual void Init() = 0;
 		virtual void Update() = 0;

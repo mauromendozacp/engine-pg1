@@ -40,7 +40,14 @@ namespace GL
 		}
 	}
 
-	void BaseGame::InitBase()
+	void BaseGame::Play()
+	{
+		InitEngine();
+		UpdateEngine();
+		DeInitEngine();
+	}
+
+	void BaseGame::InitEngine()
 	{
 		if (!glfwInit())
 			return;
@@ -66,7 +73,7 @@ namespace GL
 		Init();
 	}
 
-	void BaseGame::UpdateBase()
+	void BaseGame::UpdateEngine()
 	{
 		while (!glfwWindowShouldClose(window->GetWindow()))
 		{
@@ -80,7 +87,7 @@ namespace GL
 		}
 	}
 
-	void BaseGame::DeInitBase()
+	void BaseGame::DeInitEngine()
 	{
 		window->DestroyWindow();
 		glfwTerminate();
