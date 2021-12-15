@@ -3,6 +3,7 @@
 
 #include "BaseGame/baseGame.h"
 #include "Player/player.h"
+#include "Tilemap/tilemap.h"
 #include <iostream>
 
 using namespace GL;
@@ -23,9 +24,10 @@ namespace GameXD
 
 	private:
 		Player* player;
-		GL::Shape* shape;
-		GL::Shape* shape2;
-		GL::Sprite* rockstar;
+		Shape* shape;
+		Shape* shape2;
+		Sprite* rockstar;
+		Tilemap* tileMap;
 	};
 }
 

@@ -13,6 +13,7 @@ namespace GameXD
 	{
 		if (sprite != nullptr)
 		{
+			sprite->DeInit();
 			delete sprite;
 			sprite = nullptr;
 		}
@@ -21,7 +22,8 @@ namespace GameXD
 	void Player::Init(GL::Render* render, float speed, const char* textureUrl)
 	{
 		sprite = new GL::Sprite(render);
-		sprite->Init(textureUrl, false);
+		sprite->Init();
+		sprite->LoadTexture(textureUrl, false);
 		sprite->SetScale(5.0f, 5.0f, 1.0f);
 		sprite->SetMoveable(true);
 		sprite->SetCollider(true);

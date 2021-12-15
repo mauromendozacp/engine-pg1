@@ -1,5 +1,4 @@
 #include "Renderer/renderer.h"
-
 #include "../GLEW/glew.h"
 
 namespace GL
@@ -10,9 +9,9 @@ namespace GL
 		this->textureShader = new Shader();
 
 		view = glm::mat4(1.0f);
-		view = glm::lookAt(glm::vec3(0, 0, 15), glm::vec3(0, 0, 0), glm::vec3(0, 1, 0));
+		view = glm::lookAt(glm::vec3(0, 0, 25), glm::vec3(0, 0, 0), glm::vec3(0, 1, 0));
 		projection = glm::mat4(1.0f);
-		projection = glm::perspective(glm::radians(90.0f), 640.0f / 480.0f, 0.1f, 1000.0f);
+		projection = glm::perspective(glm::radians(90.0f), 640.0f / 480.0f, 0.1f, 100.0f);
 	}
 
 	Render::~Render()

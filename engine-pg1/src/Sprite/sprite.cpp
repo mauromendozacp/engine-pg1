@@ -14,25 +14,14 @@ namespace GL
 	{
 		textureData = nullptr;
 		anim = std::vector<Animation*>();
+		animIndex = 0;
 	}
 
 	Sprite::~Sprite()
 	{
-		glDeleteTextures(1, &textureData->id);
-
-		if (textureData != nullptr)
-		{
-			delete textureData;
-			textureData = nullptr;
-		}
-		
-		for (int i = 0; i < anim.size(); i++)
-		{
-			delete[] anim[i];
-		}
 	}
 
-	void Sprite::Init(const char* path, bool invertImage)
+	void Sprite::Init()
 	{
 		unsigned int indexes[]
 		{
@@ -46,8 +35,6 @@ namespace GL
 		render->BindBuffer(VAO, VBO, tam, vertexs);
 		render->BindIndexs(EBO, sizeof(indexes), indexes);
 		render->BindExtraAttrib();
-		textureData = new TextureData(TextureImporter::LoadTexture(path, invertImage));
-		animIndex = 0;
 	}
 
 	void Sprite::Update()
@@ -69,6 +56,33 @@ namespace GL
 		Update();
 		render->SetShader(shaderId, color, textureData->id);
 		Entity::Draw(shaderId);
+	}
+
+	void Sprite::DeInit()
+	{
+		glDeleteTextures(1, &textureData->id);
+
+		if (textureData != nullptr)
+		{
+			delete textureData;
+			textureData = nullptr;
+		}
+
+		for (int i = 0; i < anim.size(); i++)
+		{
+			delete[] anim[i];
+		}
+	}
+
+	void Sprite::SetTexture(TextureData* texture)
+	{
+		textureData = texture;
+	}
+
+	void Sprite::LoadTexture(const char* path, bool invertImage)
+	{
+		textureData = new TextureData(TextureImporter::LoadTexture(path, invertImage));
+		animIndex = 0;
 	}
 
 	void Sprite::AddAnimation(AtlasConfig atlas, float speed)

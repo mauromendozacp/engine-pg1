@@ -165,6 +165,7 @@
     <ClCompile Include="..\src\Tilemap\tilemap.cpp" />
     <ClCompile Include="..\src\Tile\tile.cpp" />
     <ClCompile Include="..\src\Timer\timer.cpp" />
+    <ClCompile Include="..\src\Tinyxml2\tinyxml2.cpp" />
     <ClCompile Include="..\src\Window\window.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -187,6 +188,7 @@
     <ClInclude Include="..\src\Tilemap\tilemap.h" />
     <ClInclude Include="..\src\Tile\tile.h" />
     <ClInclude Include="..\src\Timer\timer.h" />
+    <ClInclude Include="..\src\Tinyxml2\tinyxml2.h" />
     <ClInclude Include="..\src\Window\window.h" />
   </ItemGroup>
   <ItemGroup>

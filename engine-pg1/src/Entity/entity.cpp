@@ -64,6 +64,7 @@ namespace GL
 		translate = glm::translate(glm::mat4(1.0f), v3Pos);
 		UpdateModel();
 	}
+
 	void Entity::SetPos(glm::vec3 pos)
 	{
 		SetPos(pos.x, pos.y, pos.z);
@@ -137,6 +138,21 @@ namespace GL
 	float Entity::GetPosZ()
 	{
 		return v3Pos[2];
+	}
+
+	void Entity::SetPosX(float x)
+	{
+		v3Pos.x = x;
+	}
+
+	void Entity::SetPosY(float y)
+	{
+		v3Pos.y = y;
+	}
+
+	void Entity::SetPosZ(float z)
+	{
+		v3Pos.z = z;
 	}
 
 	glm::vec3 Entity::GetPos()

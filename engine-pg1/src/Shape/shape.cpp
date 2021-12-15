@@ -13,6 +13,7 @@ namespace GL
 	static float triangVertex[triangVertTam]
 	{
 		// positions         // colors
+		//X		Y	  Z		 R	   G	 B
 		 0.5f, -0.5f, 0.0f,  1.0f, 1.0f, 1.0f,   // bottom right
 		-0.5f, -0.5f, 0.0f,  1.0f, 1.0f, 1.0f,   // bottom left
 		 0.0f,  0.5f, 0.0f,  1.0f, 1.0f, 1.0f    // top 
@@ -32,10 +33,10 @@ namespace GL
 	static float quadVertex[quadVertTam]
 	{
 		// positions          // colors        
-		 0.5f,  0.5f, 0.0f,   1.0f, 1.0f, 1.0f,   // bottom right
-		 0.5f, -0.5f, 0.0f,   1.0f, 1.0f, 1.0f,   // bottom left
-		-0.5f, -0.5f, 0.0f,   1.0f, 1.0f, 1.0f,   // top 
-		-0.5f,  0.5f, 0.0f,	  1.0f, 1.0f, 1.0f,
+		 0.5f,  0.5f, 0.0f,   1.0f, 1.0f, 1.0f,   // top right
+		 0.5f, -0.5f, 0.0f,   1.0f, 1.0f, 1.0f,   // bottom right
+		-0.5f, -0.5f, 0.0f,   1.0f, 1.0f, 1.0f,   // bottom right
+		-0.5f,  0.5f, 0.0f,	  1.0f, 1.0f, 1.0f,	  // top left
 	};
 
 	#pragma endregion

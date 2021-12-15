@@ -52,6 +52,9 @@
     <ClCompile Include="..\src\TextureImporter\textureImporter.cpp">
       <Filter>TextureImporter</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\Tinyxml2\tinyxml2.cpp">
+      <Filter>Tinyxml2</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Window">
@@ -107,6 +110,9 @@
     </Filter>
     <Filter Include="TextureImporter">
       <UniqueIdentifier>{7a1f3920-d9c2-4338-b7f9-dada9bbc43aa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Tinyxml2">
+      <UniqueIdentifier>{d0cdb81a-ee03-4247-8eb9-a660d290974b}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -165,6 +171,9 @@
     </ClInclude>
     <ClInclude Include="..\src\Animation\atlasConfig.h">
       <Filter>Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Tinyxml2\tinyxml2.h">
+      <Filter>Tinyxml2</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

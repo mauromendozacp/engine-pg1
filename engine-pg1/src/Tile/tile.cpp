@@ -37,4 +37,8 @@ namespace GL
 	{
 		isWalkeable = walkeable;
 	}
+	void Tile::SetRender(Render* render)
+	{
+		this->render = render;
+	}
 }

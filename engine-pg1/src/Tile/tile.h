@@ -6,7 +6,7 @@
 
 namespace GL
 {
-	class GRAPHICSENGINE_API Tile : Sprite
+	class GRAPHICSENGINE_API Tile : public Sprite
 	{
 	public:
 		Tile();
@@ -18,6 +18,8 @@ namespace GL
 
 		bool IsWalkeable();
 		void SetWalkeable(bool walkeable);
+
+		void SetRender(Render* render);
 
 	private:
 		unsigned int id;

@@ -17,13 +17,17 @@ namespace GL
 		Sprite(Render* render);
 		~Sprite();
 
-		void Init(const char* path, bool invertImage);
+		void Init();
 		void Update();
 		void Draw();
+		void DeInit();
 
+		void SetTexture(TextureData* texture);
+		void LoadTexture(const char* path, bool invertImage);
 		void AddAnimation(AtlasConfig atlas, float speed);
 		void AddAnimation(int rows, int cols, float duration);
 		void ChangeAnimation(int index);
+		void BindTexture(Frame f);
 
 	private:
 		float textureVertex[textureTamVert]
@@ -34,8 +38,6 @@ namespace GL
 			-0.5f, -0.5f, 0.0f,   1.0f, 1.0f, 1.0f,   0.0f, 0.0f,   // bottom left
 			-0.5f,  0.5f, 0.0f,   1.0f, 1.0f, 1.0f,   0.0f, 1.0f    // top left 
 		};
-
-		void BindTexture(Frame f);
 
 		TextureData* textureData;
 		int animIndex = 0;

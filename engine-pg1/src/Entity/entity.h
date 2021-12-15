@@ -32,9 +32,10 @@ namespace GL
 		float GetPosX();
 		float GetPosY();
 		float GetPosZ();
-		glm::vec3 GetPos();
-		glm::mat4 GetRotation();
-		glm::vec3 GetPivot();
+
+		void SetPosX(float x);
+		void SetPosY(float y);
+		void SetPosZ(float z);
 
 		float GetRotX();
 		float GetRotY();
@@ -43,6 +44,10 @@ namespace GL
 		float GetScaleX();
 		float GetScaleY();
 		float GetScaleZ();
+
+		glm::vec3 GetPos();
+		glm::mat4 GetRotation();
+		glm::vec3 GetPivot();
 
 		void Draw(unsigned int shaderId);
 

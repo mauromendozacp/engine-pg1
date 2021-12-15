@@ -1,0 +1,14 @@
+{ "columns":10,
+ "image":"..\/PG 1 - TPs\/engine-pg1\/engine-pg1\/res\/Textures\/Tileset.png",
+ "imageheight":192,
+ "imagewidth":320,
+ "margin":0,
+ "name":"engine1-tileset",
+ "spacing":0,
+ "tilecount":60,
+ "tiledversion":"1.7.2",
+ "tileheight":32,
+ "tilewidth":32,
+ "type":"tileset",
+ "version":"1.6"
+}
