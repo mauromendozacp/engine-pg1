@@ -32,7 +32,7 @@ namespace GL
 		vertexs = textureVertex;
 		tam = sizeof(textureVertex);
 
-		render->BindBuffer(VAO, VBO, tam, vertexs);
+		render->BindBuffer(VAO, VBO, sizeof(textureVertex), textureVertex);
 		render->BindIndexs(EBO, sizeof(indexes), indexes);
 		render->BindExtraAttrib();
 	}
@@ -45,7 +45,7 @@ namespace GL
 		if (anim[animIndex]->Update())
 		{
 			Frame f = anim[animIndex]->GetFrames()[anim[animIndex]->GetCurrentFrame()];
-			BindTexture(f);
+			SetTextureCoordinates(f);
 		}
 	}
 
@@ -55,6 +55,7 @@ namespace GL
 		render->UseShaderId(shaderId);
 		Update();
 		render->SetShader(shaderId, color, textureData->id);
+		//render->Draw(model, VAO, VBO, EBO, vertices, tam, textureVertex, shaderId);
 		Entity::Draw(shaderId);
 	}
 
@@ -93,7 +94,7 @@ namespace GL
 		anim.push_back(a);
 
 		Frame f = anim[animIndex]->GetFrames()[0];
-		BindTexture(f);
+		SetTextureCoordinates(f);
 	}
 
 	void Sprite::AddAnimation(int rows, int cols, float speed)
@@ -110,7 +111,7 @@ namespace GL
 		anim.push_back(a);
 
 		Frame f = anim[animIndex]->GetFrames()[0];
-		BindTexture(f);
+		SetTextureCoordinates(f);
 	}
 
 	void Sprite::ChangeAnimation(int index)
@@ -118,7 +119,7 @@ namespace GL
 		animIndex = index;
 	}
 
-	void Sprite::BindTexture(Frame f)
+	void Sprite::SetTextureCoordinates(Frame f)
 	{
 		float uvCoords[]
 		{
@@ -126,6 +127,27 @@ namespace GL
 			f.GetUVCords()[1].u, f.GetUVCords()[1].v,
 			f.GetUVCords()[2].u, f.GetUVCords()[2].v,
 			f.GetUVCords()[3].u, f.GetUVCords()[3].v
+		};
+
+		vertexs[6] = uvCoords[0];
+		vertexs[14] = uvCoords[2];
+		vertexs[22] = uvCoords[4];
+		vertexs[30] = uvCoords[6];
+		
+		vertexs[7] = uvCoords[1];
+		vertexs[15] = uvCoords[3];
+		vertexs[23] = uvCoords[5];
+		vertexs[31] = uvCoords[7];
+	}
+
+	void Sprite::SetTextureCoordinates(float u1, float v1, float u2, float v2, float u3, float v3, float u4, float v4)
+	{
+		float uvCoords[]
+		{
+			u1, v1,
+			u2, v2,
+			u3, v3,
+			u4, v4
 		};
 
 		vertexs[6] = uvCoords[0];

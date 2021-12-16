@@ -27,7 +27,8 @@ namespace GL
 		void AddAnimation(AtlasConfig atlas, float speed);
 		void AddAnimation(int rows, int cols, float duration);
 		void ChangeAnimation(int index);
-		void BindTexture(Frame f);
+		void SetTextureCoordinates(Frame f);
+		void SetTextureCoordinates(float u1, float v1, float u2, float v2, float u3, float v3, float u4, float v4);
 
 	private:
 		float textureVertex[textureTamVert]

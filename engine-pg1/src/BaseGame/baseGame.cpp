@@ -52,7 +52,7 @@ namespace GL
 		if (!glfwInit())
 			return;
 
-		window = new Window(640.0f, 480.0f, "COCO 2, LA VENGANZA ANASHEEEE");
+		window = new Window(1280.0f, 720.0f, "COCO 2, LA VENGANZA ANASHEEEE");
 		
 		if (!window->OpenWindow())
 			return;

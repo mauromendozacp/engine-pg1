@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="25" height="25" tilewidth="32" tileheight="32" infinite="0" nextlayerid="3" nextobjectid="1">
+ <editorsettings>
+  <export target="engine1_test.xml" format="tmx"/>
+ </editorsettings>
  <tileset firstgid="1" name="engine1_tileset" tilewidth="32" tileheight="32" tilecount="60" columns="10">
+  <grid orientation="orthogonal" width="16" height="16"/>
   <image source="../Textures/tileset.png" width="320" height="192"/>
   <tile id="0">
    <properties>
@@ -303,7 +307,10 @@
    </properties>
   </tile>
  </tileset>
- <layer id="1" name="tileset" width="25" height="25" visible="0">
+ <tileset firstgid="61" name="engine1_tileset2" tilewidth="16" tileheight="16" tilecount="240" columns="20">
+  <image source="../Textures/tileset.png" width="320" height="192"/>
+ </tileset>
+ <layer id="1" name="tileset" width="25" height="25">
   <data>
    <tile gid="1"/>
    <tile gid="12"/>

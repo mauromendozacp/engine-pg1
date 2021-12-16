@@ -11,7 +11,7 @@ namespace GL
 		view = glm::mat4(1.0f);
 		view = glm::lookAt(glm::vec3(0, 0, 25), glm::vec3(0, 0, 0), glm::vec3(0, 1, 0));
 		projection = glm::mat4(1.0f);
-		projection = glm::perspective(glm::radians(90.0f), 640.0f / 480.0f, 0.1f, 100.0f);
+		projection = glm::perspective(glm::radians(90.0f), 1280.0f / 720.0f, 0.1f, 1000.f);
 	}
 
 	Render::~Render()
