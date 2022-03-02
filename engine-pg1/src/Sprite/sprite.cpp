@@ -55,8 +55,8 @@ namespace GL
 		render->UseShaderId(shaderId);
 		Update();
 		render->SetShader(shaderId, color, textureData->id);
-		//render->Draw(model, VAO, VBO, EBO, vertices, tam, textureVertex, shaderId);
-		Entity::Draw(shaderId);
+		render->Draw(model, VAO, VBO, EBO, vertices, tam, textureVertex, shaderId);
+		//Entity::Draw(shaderId);
 	}
 
 	void Sprite::DeInit()
@@ -129,15 +129,15 @@ namespace GL
 			f.GetUVCords()[3].u, f.GetUVCords()[3].v
 		};
 
-		vertexs[6] = uvCoords[0];
-		vertexs[14] = uvCoords[2];
-		vertexs[22] = uvCoords[4];
-		vertexs[30] = uvCoords[6];
+		textureVertex[6] = uvCoords[0];
+		textureVertex[14] = uvCoords[2];
+		textureVertex[22] = uvCoords[4];
+		textureVertex[30] = uvCoords[6];
 		
-		vertexs[7] = uvCoords[1];
-		vertexs[15] = uvCoords[3];
-		vertexs[23] = uvCoords[5];
-		vertexs[31] = uvCoords[7];
+		textureVertex[7] = uvCoords[1];
+		textureVertex[15] = uvCoords[3];
+		textureVertex[23] = uvCoords[5];
+		textureVertex[31] = uvCoords[7];
 	}
 
 	void Sprite::SetTextureCoordinates(float u1, float v1, float u2, float v2, float u3, float v3, float u4, float v4)

@@ -5,6 +5,7 @@
 #include "Renderer/renderer.h"
 #include "glm.hpp"
 #include "../glm/ext/matrix_transform.hpp"
+#include <../glm/gtc/type_ptr.hpp>
 
 namespace GL
 {
@@ -46,6 +47,7 @@ namespace GL
 		glm::vec3 GetPivot();
 
 		void Draw(unsigned int shaderId);
+		void DeInit();
 
 	protected:
 		Render* render;

@@ -26,6 +26,7 @@ namespace GL
 		void CheckCollision(Entity2D* entity);
 
 		void Draw();
+		void DeInit();
 
 	private:
 		Render* render;

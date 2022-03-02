@@ -57,7 +57,6 @@ namespace GL
 
 	Entity::~Entity()
 	{
-		render->UnBind(VAO, VBO, EBO);
 	}
 
 	void Entity::SetPos(float x, float y, float z)
@@ -76,7 +75,7 @@ namespace GL
 	{
 		v3Rot[0] = x;
 		glm::vec3 axis = glm::vec3(1, 0, 0);
-		rotationX = glm::rotate(glm::mat4(1.0f), x, axis);
+		rotationX = glm::rotate(glm::mat4(1.0f), glm::radians(x), axis);
 		UpdateModel();
 	}
 
@@ -84,7 +83,7 @@ namespace GL
 	{
 		v3Rot[1] = y;
 		glm::vec3 axis = glm::vec3(0, 1, 0);
-		rotationY = glm::rotate(glm::mat4(1.0f), y, axis);
+		rotationY = glm::rotate(glm::mat4(1.0f), glm::radians(y), axis);
 		UpdateModel();
 	}
 
@@ -92,7 +91,7 @@ namespace GL
 	{
 		v3Rot[2] = z;
 		glm::vec3 axis = glm::vec3(0, 0, 1);
-		rotationZ = glm::rotate(glm::mat4(1.0f), z, axis);
+		rotationZ = glm::rotate(glm::mat4(1.0f), glm::radians(z), axis);
 		UpdateModel();
 	}
 
@@ -196,5 +195,10 @@ namespace GL
 	void Entity::Draw(unsigned int shaderId)
 	{
 		render->Draw(model, VAO, VBO, EBO, vertices, tam, vertexs, shaderId);
+	}
+
+	void Entity::DeInit()
+	{
+		render->UnBind(VAO, VBO, EBO);
 	}
 }

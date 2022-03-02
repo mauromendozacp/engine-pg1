@@ -18,7 +18,7 @@ namespace GameXD
 	void Game::Init()
 	{
 		player = new Player();
-		player->Init(render, 0.25f, "../res/Textures/player.png");
+		//player->Init(render, 0.25f, "../res/Textures/player.png");
 
 		/*shape = new Shape(render);
 		shape->Init(SHAPE_TYPE::TRIANGLE);
@@ -50,13 +50,13 @@ namespace GameXD
 	{
 		/*Collision::CollisionUpdate(player->GetSprite(), shape);
 		Collision::CollisionUpdate(player->GetSprite(), shape2);*/
-		player->Update(input);
+		//player->Update(input);
 	}
 
 	void Game::Draw()
 	{
 		//rockstar->Draw();
-		player->Draw();
+		//player->Draw();
 		//shape->Draw();
 		//shape2->Draw();
 		tileMap->Draw();
@@ -66,16 +66,19 @@ namespace GameXD
 	{
 		if (player != nullptr)
 		{
+			player->DeInit();
 			delete player;
 			player = nullptr;
 		}
 		if (shape != nullptr)
 		{
+			shape->DeInit();
 			delete shape;
 			shape = nullptr;
 		}
 		if (shape2 != nullptr)
 		{
+			shape2->DeInit();
 			delete shape2;
 			shape2 = nullptr;
 		}
