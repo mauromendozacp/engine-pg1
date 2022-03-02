@@ -33,10 +33,6 @@ namespace GL
 		float GetPosY();
 		float GetPosZ();
 
-		void SetPosX(float x);
-		void SetPosY(float y);
-		void SetPosZ(float z);
-
 		float GetRotX();
 		float GetRotY();
 		float GetRotZ();

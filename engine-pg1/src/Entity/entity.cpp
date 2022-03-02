@@ -27,6 +27,8 @@ namespace GL
 
 		hasCollider = false;
 		moveable = false;
+
+		UpdateModel();
 	}
 
 	Entity::Entity(Render* render)
@@ -110,6 +112,7 @@ namespace GL
 	{
 		hasCollider = col;
 	}
+
 	void Entity::SetMoveable(bool mov)
 	{
 		moveable = mov;
@@ -138,21 +141,6 @@ namespace GL
 	float Entity::GetPosZ()
 	{
 		return v3Pos[2];
-	}
-
-	void Entity::SetPosX(float x)
-	{
-		v3Pos.x = x;
-	}
-
-	void Entity::SetPosY(float y)
-	{
-		v3Pos.y = y;
-	}
-
-	void Entity::SetPosZ(float z)
-	{
-		v3Pos.z = z;
 	}
 
 	glm::vec3 Entity::GetPos()
@@ -199,6 +187,7 @@ namespace GL
 	{
 		return moveable;
 	}
+
 	bool Entity::HasCollider()
 	{
 		return hasCollider;

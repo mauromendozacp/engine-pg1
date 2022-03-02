@@ -18,21 +18,21 @@ namespace GameXD
 	void Game::Init()
 	{
 		player = new Player();
-		//player->Init(render, 0.25f, "../res/Textures/player.png");
+		player->Init(render, 0.25f, "../res/Textures/player.png");
 
-		shape = new Shape(render);
+		/*shape = new Shape(render);
 		shape->Init(SHAPE_TYPE::TRIANGLE);
 		shape->SetPos(5.0f, 0.0f, 0.0f);
 		shape->SetColor(0.0f, 0.0f, 1.0f, 0.5f);
 		shape->SetMoveable(true);
-		shape->SetCollider(true);
+		shape->SetCollider(true);*/
 
-		shape2 = new Shape(render);
+		/*shape2 = new Shape(render);
 		shape2->Init(SHAPE_TYPE::QUAD);
 		shape2->SetPos(-5.0f, 0.0f, 0.0f);
 		shape2->SetColor(1.0f, 0.0f, 1.0f, 1.0f);
 		shape2->SetMoveable(true);
-		shape2->SetCollider(true);
+		shape2->SetCollider(true);*/
 		
 		rockstar = new Sprite(render);
 		/*rockstar->Init();
@@ -42,23 +42,23 @@ namespace GameXD
 		rockstar->AddAnimation(2, 3, 25);*/
 
 		tileMap = new Tilemap(render);
-		tileMap->ImportTileMap("../res/Tiled/engine1_test.xml", "../res/Textures/tileset.png");
-		//tileMap->SetDimentions(15.f, 15.f);
+		tileMap->ImportTileMap("../res/Tiled/engine1_test2.xml", "../res/Textures/tileset.png");
+		tileMap->SetDimentions(5.f, 5.f);
 	}
 
 	void Game::Update()
 	{
 		/*Collision::CollisionUpdate(player->GetSprite(), shape);
-		Collision::CollisionUpdate(player->GetSprite(), shape2);
-		player->Update(input);*/
+		Collision::CollisionUpdate(player->GetSprite(), shape2);*/
+		player->Update(input);
 	}
 
 	void Game::Draw()
 	{
 		//rockstar->Draw();
-		//player->Draw();
-		shape->Draw();
-		shape2->Draw();
+		player->Draw();
+		//shape->Draw();
+		//shape2->Draw();
 		tileMap->Draw();
 	}
 

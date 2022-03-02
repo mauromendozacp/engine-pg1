@@ -106,14 +106,13 @@ namespace GL
 		{
 			for (int j = 0; j < columns; j++)
 			{
-				Tile newTile;
+				Tile newTile = Tile(render);
 
 				newTile.Init();
 				newTile.SetId(_id);
 				newTile.SetRender(render);
 				//newTile.LoadTexture(imagePath.c_str(), false);
 				newTile.SetTexture(&texture);
-				newTile.SetScale(tileWidth, tileHeight, 1.f);
 
 				Frame frame;
 				frame.GetUVCords()[0].u = (tileX + tileWidth) / imageWidth;
@@ -124,7 +123,11 @@ namespace GL
 				frame.GetUVCords()[2].v = (tileY + tileHeight) / imageHeight;
 				frame.GetUVCords()[3].u = tileX / imageWidth;
 				frame.GetUVCords()[3].v = tileY / imageHeight;
-				newTile.BindTexture(frame);
+				newTile.SetTextureCoordinates(frame);
+
+				newTile.SetPos(0.f, 0.f, 0.f);
+				newTile.SetScale(50.f, 50.f, 1.f);
+				newTile.SetRotY(0.75f);
 
 				tileX += tileWidth;
 				SetTile(newTile);
@@ -235,8 +238,8 @@ namespace GL
 
 	void Tilemap::Draw()
 	{
-		float mapWidth = -(width * tileWidth) / 2;
-		float mapHeight = (height * tileHeight) / 2;
+		float mapWidth = -(width * tileWidth) / 2.f;
+		float mapHeight = (height * tileHeight) / 2.f;
 
 		for (int i = 0; i < grid.size(); i++)
 		{
@@ -246,9 +249,8 @@ namespace GL
 				{
 					if (grid[i][y][x].GetId() != NULL)
 					{
-						grid[i][y][x].SetPosX(mapWidth + (tileWidth * x));
-						grid[i][y][x].SetPosY(mapHeight - (tileHeight * y));
-						grid[i][y][x].SetPosZ(0.f);
+						/*glm::vec3 pos = glm::vec3(mapWidth + (tileWidth * x), mapHeight - (tileHeight * y), 0.0f);
+						grid[i][y][x].SetPos(pos);*/
 						grid[i][y][x].Draw();
 					}
 				}
