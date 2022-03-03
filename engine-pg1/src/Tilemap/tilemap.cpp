@@ -92,8 +92,7 @@ namespace GL
 		int rows = tileCount / columns;
 
 		texture = TextureImporter::LoadTexture(imagePath.c_str(), true);
-		pTileset->FirstChildElement("image")->Attribute("source");		// Loading Textures
-		//setTexture(rkRenderer.loadTexture(_imagePath.c_str(), D3DCOLOR_XRGB(255, 255, 255))); //
+		pTileset->FirstChildElement("image")->Attribute("source");// Loading Textures
 
 		// Save the Tiles in the TileMap
 		imageWidth = pTileset->FirstChildElement("image")->IntAttribute("width");
@@ -153,53 +152,34 @@ namespace GL
 		if (pLayer == NULL)
 			return false;
 
-		int layerCount = 0;
-		while (pLayer) 
+		tinyxml2::XMLElement* pData = pLayer->FirstChildElement("data");
+		if (pData == NULL)
+			return false;
+
+		std::vector<int> tileGids;
+		for (tinyxml2::XMLElement* pTile = pData->FirstChildElement("tile");
+			pTile != NULL;
+			pTile = pTile->NextSiblingElement("tile"))
 		{
-			// Loading Data element
-			tinyxml2::XMLElement* pData = pLayer->FirstChildElement("data");
-			if (pData == NULL)
-				return false;
-
-			if (layerCount > 0)
-			{
-				Tile** tileMap;
-				tileMap = new Tile * [height];
-				for (int i = 0; i < height; i++)
-				{
-					tileMap[i] = new Tile[width];
-				}
-				grid.push_back(tileMap);
-			}
-
-			while (pData)
-			{
-				std::vector<int> tileGids;
-				for (tinyxml2::XMLElement* pTile = pData->FirstChildElement("tile");
-					pTile != NULL;
-					pTile = pTile->NextSiblingElement("tile"))
-				{
-					unsigned int gid = std::atoi(pTile->Attribute("gid")); // tile's id is saved
-					tileGids.push_back(gid);
-				}
-
-				int gid = 0;
-				for (int y = 0; y < height; y++)
-				{
-					for (int x = 0; x < width; x++)
-					{
-						if (tileGids[gid] != 0)
-							SetMapTileId(layerCount, y, x, tileGids[gid]);
-
-						gid++;
-					}
-				}
-
-				pData = pData->NextSiblingElement("data");
-			}
-			layerCount++;
-			pLayer = pLayer->NextSiblingElement("layer");
+			unsigned int gid = std::atoi(pTile->Attribute("gid")); // tile's id is saved
+			tileGids.push_back(gid);
 		}
+
+		int gid = 0;
+		for (int y = 0; y < height; y++)
+		{
+			for (int x = 0; x < width; x++)
+			{
+				if (tileGids[gid] != 0)
+				{
+					SetMapTileId(0, y, x, tileGids[gid]);
+				}
+
+				gid++;
+			}
+		}
+
+		pData = pData->NextSiblingElement("data");
 
 		return true;
 	}
@@ -294,7 +274,7 @@ namespace GL
 		int right_tile = (convertedPosX + entity->GetScaleX()) / tileWidth;
 
 		int top_tile = (convertedPosY / tileHeight) * -1;
-		int bottom_tile = ((convertedPosY - entity->GetScaleY()) / tileHeight) * -1; // Se resta porque el eje Y crece hacia arriba
+		int bottom_tile = ((convertedPosY - entity->GetScaleY()) / tileHeight) * -1;
 
 		if (left_tile < 0)
 			left_tile = 0;

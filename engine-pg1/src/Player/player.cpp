@@ -25,7 +25,7 @@ namespace GameXD
 		sprite->Init();
 		sprite->LoadTexture(textureUrl, false);
 		sprite->SetPos(0.f, 55.f, 0.0f);
-		sprite->SetScale(15.f, 15.f, 1.0f);
+		sprite->SetScale(25.f, 25.f, 1.0f);
 		sprite->SetMoveable(true);
 		sprite->SetCollider(true);
 

@@ -35,8 +35,8 @@ namespace GameXD
 		rockstar = new Sprite(render);
 		rockstar->Init();
 		rockstar->LoadTexture("../res/Textures/rock.png", true);
-		rockstar->SetPos(0.0f, 10.0f, 0.0f);
-		rockstar->SetScale(8.f, 8.f, 1.0f);
+		rockstar->SetPos(0.0f, 100.0f, 0.0f);
+		rockstar->SetScale(55.f, 55.f, 1.0f);
 		rockstar->AddAnimation(2, 3, 25);
 
 		tileMap = new Tilemap(render);
