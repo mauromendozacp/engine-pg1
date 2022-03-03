@@ -22,6 +22,7 @@ namespace GL
 		void SetRotX(float x);
 		void SetRotY(float y);
 		void SetRotZ(float z);
+		void SetScale(float size);
 		void SetScale(float x, float y, float z);
 		void SetColor(float r, float g, float b, float a);
 

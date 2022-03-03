@@ -56,7 +56,6 @@ namespace GL
 		Update();
 		render->SetShader(shaderId, color, textureData->id);
 		render->Draw(model, VAO, VBO, EBO, vertices, tam, textureVertex, shaderId);
-		//Entity::Draw(shaderId);
 	}
 
 	void Sprite::DeInit()

@@ -23,6 +23,7 @@ namespace GL
 		bool ImportTileMap(std::string filePath, std::string imagePath);
 		void SetTileDimentions(float tileWidth, float tileHeight);
 		void SetDimentions(float width, float height);
+		void SetSize(float size);
 		void CheckCollision(Entity2D* entity);
 
 		void Draw();

@@ -18,48 +18,47 @@ namespace GameXD
 	void Game::Init()
 	{
 		player = new Player();
-		//player->Init(render, 0.25f, "../res/Textures/player.png");
+		player->Init(render, 1.f, "../res/Textures/player.png");
 
 		/*shape = new Shape(render);
 		shape->Init(SHAPE_TYPE::TRIANGLE);
-		shape->SetPos(5.0f, 0.0f, 0.0f);
+		shape->SetPos(65.0f, 0.0f, 0.0f);
 		shape->SetColor(0.0f, 0.0f, 1.0f, 0.5f);
-		shape->SetMoveable(true);
-		shape->SetCollider(true);*/
+		shape->SetScale(20.f, 20.f, 10.f);*/
 
 		/*shape2 = new Shape(render);
 		shape2->Init(SHAPE_TYPE::QUAD);
-		shape2->SetPos(-5.0f, 0.0f, 0.0f);
+		shape2->SetPos(-65.0f, 0.0f, 0.0f);
 		shape2->SetColor(1.0f, 0.0f, 1.0f, 1.0f);
-		shape2->SetMoveable(true);
-		shape2->SetCollider(true);*/
+		shape2->SetScale(20.f, 20.f, 10.f);*/
 		
 		rockstar = new Sprite(render);
-		/*rockstar->Init();
+		rockstar->Init();
 		rockstar->LoadTexture("../res/Textures/rock.png", true);
 		rockstar->SetPos(0.0f, 10.0f, 0.0f);
-		rockstar->SetScale(10.0f, 10.0f, 1.0f);
-		rockstar->AddAnimation(2, 3, 25);*/
+		rockstar->SetScale(8.f, 8.f, 1.0f);
+		rockstar->AddAnimation(2, 3, 25);
 
 		tileMap = new Tilemap(render);
-		tileMap->ImportTileMap("../res/Tiled/engine1_test2.xml", "../res/Textures/tileset.png");
-		tileMap->SetDimentions(5.f, 5.f);
+		tileMap->ImportTileMap("../res/Tiled/engine1_test.tmx", "../res/Textures/tileset.png");
+		tileMap->SetSize(0.5f);
 	}
 
 	void Game::Update()
 	{
-		/*Collision::CollisionUpdate(player->GetSprite(), shape);
-		Collision::CollisionUpdate(player->GetSprite(), shape2);*/
-		//player->Update(input);
+		/*Collision::CollisionUpdate(shape, player->GetSprite());
+		Collision::CollisionUpdate(shape2, player->GetSprite());*/
+		player->Update(input);
+		tileMap->CheckCollision(player->GetSprite());
 	}
 
 	void Game::Draw()
 	{
-		//rockstar->Draw();
-		//player->Draw();
-		//shape->Draw();
-		//shape2->Draw();
 		tileMap->Draw();
+		rockstar->Draw();
+		/*shape->Draw();
+		shape2->Draw();*/
+		player->Draw();
 	}
 
 	void Game::DeInit()
@@ -90,6 +89,7 @@ namespace GameXD
 		}
 		if (tileMap != nullptr)
 		{
+			tileMap->DeInit();
 			delete tileMap;
 			tileMap = nullptr;
 		}

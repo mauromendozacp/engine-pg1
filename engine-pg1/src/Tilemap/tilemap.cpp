@@ -111,8 +111,7 @@ namespace GL
 				newTile.Init();
 				newTile.SetId(_id);
 				newTile.SetRender(render);
-				//newTile.LoadTexture(imagePath.c_str(), false);
-				newTile.SetTexture(&texture);
+				newTile.LoadTexture(imagePath.c_str(), false);
 				newTile.SetScale(tileWidth, tileHeight, 1.f);
 
 				Frame frame;
@@ -143,16 +142,8 @@ namespace GL
 			tinyxml2::XMLElement* pProperty = pTile->FirstChildElement("properties")->FirstChildElement("property");
 			std::string propertyName = pProperty->Attribute("value");
 
-			if (propertyName == "false")
-			{
-				tiles[id].SetWalkeable(false);
-				tiles[id].SetCollider(true);
-			}
-			else
-			{
-				tiles[id].SetWalkeable(true);
-				tiles[id].SetCollider(true);
-			}
+			tiles[id].SetWalkeable(propertyName == "true");
+			tiles[id].SetCollider(true);
 
 			pTile = pTile->NextSiblingElement("tile");
 		}
@@ -233,11 +224,35 @@ namespace GL
 		grid.push_back(tileMap);
 	}
 
+	void Tilemap::SetSize(float size)
+	{
+		float mapWidth = -(width * tileWidth / 2.f);
+		float mapHeight = height * tileHeight / 2.f;
+
+		for (int i = 0; i < grid.size(); i++)
+		{
+			for (int y = 0; y < this->height; y++)
+			{
+				for (int x = 0; x < this->width; x++)
+				{
+					if (grid[i][y][x].GetId() != NULL)
+					{
+						glm::vec3 pos = glm::vec3(.0f, .0f, .0f);
+						pos.x = (mapWidth + (tileWidth * x)) * size;
+						pos.y = (mapHeight - (tileHeight * y)) * size;
+						grid[i][y][x].SetPos(pos);
+						grid[i][y][x].SetScale(tileWidth * size, tileHeight * size, 1.f);
+					}
+				}
+			}
+		}
+
+		tileWidth *= size;
+		tileHeight *= size;
+	}
+
 	void Tilemap::Draw()
 	{
-		float mapWidth = -(width * tileWidth) / 2.f;
-		float mapHeight = (height * tileHeight) / 2.f;
-
 		for (int i = 0; i < grid.size(); i++)
 		{
 			for (int y = 0; y < height; y++)
@@ -246,8 +261,6 @@ namespace GL
 				{
 					if (grid[i][y][x].GetId() != NULL)
 					{
-						glm::vec3 pos = glm::vec3(mapWidth + (tileWidth * x), mapHeight - (tileHeight * y), 0.0f);
-						grid[i][y][x].SetPos(pos);
 						grid[i][y][x].Draw();
 					}
 				}
@@ -272,7 +285,7 @@ namespace GL
 		}
 	}
 
-	void Tilemap::CheckCollision(Entity2D* entity) 
+	void Tilemap::CheckCollision(Entity2D* entity)
 	{
 		float convertedPosX = entity->GetPosX() + (width / 2) * tileWidth;
 		float convertedPosY = entity->GetPosY() - (height / 2) * tileHeight;
@@ -301,11 +314,9 @@ namespace GL
 			{
 				for (int k = 0; k < grid.size(); k++)
 				{
-					//cout << "caminable " << "[" << k << "]" << "[" << j << "]" << "[" << i << "] : "<< _tileMapGrid[k][j][i].isWalkable() << endl; // true == 1  ; false == 0
-					//cout << true << endl;
 					if (!grid[k][j][i].IsWalkeable())
 					{
-						//Collision::CheckCollisionRecRec(&grid[k][j][i], entity);
+						Collision::CollisionUpdate(&grid[k][j][i], entity);
 					}
 				}
 			}

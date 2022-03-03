@@ -95,6 +95,11 @@ namespace GL
 		UpdateModel();
 	}
 
+	void Entity::SetScale(float size)
+	{
+		SetScale(size, size, size);
+	}
+
 	void Entity::SetScale(float x, float y, float z)
 	{
 		v3Scale = glm::vec3(x, y, z);
