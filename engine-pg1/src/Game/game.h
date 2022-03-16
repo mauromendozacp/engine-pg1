@@ -23,11 +23,6 @@ namespace GameXD
 		void DeInit() override;
 
 	private:
-		Player* player;
-		Shape* shape;
-		Shape* shape2;
-		Sprite* rockstar;
-		Tilemap* tileMap;
 	};
 }
 
