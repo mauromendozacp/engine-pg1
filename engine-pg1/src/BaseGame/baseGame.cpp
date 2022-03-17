@@ -9,6 +9,7 @@ namespace GL
 	{
 		window = nullptr;
 		render = nullptr;
+		camera = nullptr;
 		input = nullptr;
 		timer = nullptr;
 	}
@@ -25,6 +26,12 @@ namespace GL
 		{
 			delete render;
 			render = nullptr;
+		}
+
+		if (camera != nullptr)
+		{
+			delete camera;
+			camera = nullptr;
 		}
 
 		if (input != nullptr)
@@ -52,23 +59,24 @@ namespace GL
 		if (!glfwInit())
 			return;
 
-		window = new Window(1280.0f, 720.0f, "COCO 2, LA VENGANZA ANASHEEEE");
+		window = new Window(1280.0f, 720.0f, "ENGINARDOOOOUUU");
 		
 		if (!window->OpenWindow())
 			return;
 
 		glfwMakeContextCurrent(window->GetWindow());
+		std::cout << glGetString(GL_VERSION) << std::endl;
 
 		if (glewInit() != GLEW_OK)
 			std::cout << "ERROR" << std::endl;
 
-		render = new Render();
+		camera = new Camera();
+		render = new Render(camera);
 		input = new Input(window);
 		timer = new Timer();
 
-		std::cout << glGetString(GL_VERSION) << std::endl;
-
 		render->Init(true);
+		camera->Init(glm::vec3(0.f), 45.f, window->GetWidth(), window->GetHeight, 0.1f, 100.f);
 
 		Init();
 	}

@@ -11,15 +11,21 @@ namespace GL
 	public:
 		Window(float width, float height, std::string title); 
 		~Window();
+
 		GLFWwindow* GetWindow();
 		bool OpenWindow();
 		void CloseWindow();
 		void DestroyWindow();
+
+		float GetHeight();
+		float GetWidth();
 	private:
+
 		GLFWwindow* glfWindow;
+		std::string title;
+
 		float height;
 		float width;
-		std::string title;
 	};
 }
 

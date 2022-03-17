@@ -3,15 +3,11 @@
 
 namespace GL
 {
-	Render::Render()
+	Render::Render(Camera* camera)
 	{
 		this->solidShader = new Shader();
 		this->textureShader = new Shader();
-
-		view = glm::mat4(1.0f);
-		view = glm::lookAt(glm::vec3(0, 0, 205), glm::vec3(0, 0, 0), glm::vec3(0, 1, 0));
-		projection = glm::mat4(1.0f);
-		projection = glm::perspective(glm::radians(90.0f), 1280.0f / 720.0f, 0.1f, 1000.f);
+		this->camera = camera;
 	}
 
 	Render::~Render()
@@ -143,10 +139,10 @@ namespace GL
 		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
 
 		unsigned int viewLoc = glGetUniformLocation(shaderId, "view");
-		glUniformMatrix4fv(viewLoc, 1, GL_FALSE, glm::value_ptr(view));
+		glUniformMatrix4fv(viewLoc, 1, GL_FALSE, glm::value_ptr(camera->GetView()));
 
 		unsigned int projectionLoc = glGetUniformLocation(shaderId, "projection");
-		glUniformMatrix4fv(projectionLoc, 1, GL_FALSE, glm::value_ptr(projection));
+		glUniformMatrix4fv(projectionLoc, 1, GL_FALSE, glm::value_ptr(camera->GetProjection()));
 
 		if (vertices == 3)
 			glDrawArrays(GL_TRIANGLES, 0, vertices);

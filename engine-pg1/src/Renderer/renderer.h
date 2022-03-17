@@ -2,6 +2,7 @@
 #define RENDER_H
 
 #include "Window/window.h"
+#include "Camera/camera.h"
 #include "Shader/shader.h"
 #include "glm.hpp"
 #include "../glm/ext/matrix_transform.hpp"
@@ -15,11 +16,10 @@ namespace GL
 		Shader* solidShader;
 		Shader* textureShader;
 
-		glm::mat4 view;
-		glm::mat4 projection;
+		Camera* camera;
 
 	public:
-		Render();
+		Render(Camera* camera);
 		~Render();
 
 		void Init(bool alpha);

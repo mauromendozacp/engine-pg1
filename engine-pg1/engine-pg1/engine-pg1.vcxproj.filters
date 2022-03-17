@@ -55,6 +55,9 @@
     <ClCompile Include="..\src\Tinyxml2\tinyxml2.cpp">
       <Filter>Tinyxml2</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\Camera\camera.cpp">
+      <Filter>Camera</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Window">
@@ -113,6 +116,9 @@
     </Filter>
     <Filter Include="Tinyxml2">
       <UniqueIdentifier>{d0cdb81a-ee03-4247-8eb9-a660d290974b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Camera">
+      <UniqueIdentifier>{75270a2f-625e-4c17-a424-c329238d7554}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -174,6 +180,9 @@
     </ClInclude>
     <ClInclude Include="..\src\Tinyxml2\tinyxml2.h">
       <Filter>Tinyxml2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Camera\camera.h">
+      <Filter>Camera</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
