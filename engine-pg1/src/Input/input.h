@@ -2,6 +2,7 @@
 #define INPUT_H
 
 #include "Window/window.h"
+#include "../glm/ext/matrix_transform.hpp"
 #include "keycodes.h"
 #include <list>
 
@@ -15,6 +16,11 @@ namespace GL
 		void Init();
 		bool IsKeyPressed(int keycode);
 		bool IsKeyDown(int keycode);
+
+		glm::vec2 GetLastPosition();
+		glm::vec2 GetOffsetPosition();
+		void SetOffsetPosition(glm::vec2 offsetPos);
+
 	private:
 		Window* window;
 	};

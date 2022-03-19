@@ -4,6 +4,7 @@
 #include "BaseGame/baseGame.h"
 #include "Player/player.h"
 #include "Tilemap/tilemap.h"
+#include "Camera/camera.h"
 #include <iostream>
 
 using namespace GL;
@@ -23,6 +24,7 @@ namespace GameXD
 		void DeInit() override;
 
 	private:
+		Shape* shape;
 	};
 }
 

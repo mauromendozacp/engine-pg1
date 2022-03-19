@@ -1,8 +1,5 @@
 #include "baseGame.h"
 
-#include "Renderer/renderer.h"
-#include "Input/input.h"
-
 namespace GL
 {
 	BaseGame::BaseGame()
@@ -76,7 +73,8 @@ namespace GL
 		timer = new Timer();
 
 		render->Init(true);
-		camera->Init(glm::vec3(0.f), 45.f, window->GetWidth(), window->GetHeight, 0.1f, 100.f);
+		camera->Init(input, timer, 45.f, window->GetWidth(), window->GetHeight(), 0.1f, 100.f);
+		camera->SetData(glm::vec3(0.f, 0.f, 25.f), 1.5f, 2.f);
 
 		Init();
 	}
@@ -87,6 +85,8 @@ namespace GL
 		{
 			render->ClearScreen();
 			timer->Update(glfwGetTime());
+			camera->Update();
+			//input->SetOffsetPosition(glm::vec2(0, 0));
 
 			Update();
 			Draw();
