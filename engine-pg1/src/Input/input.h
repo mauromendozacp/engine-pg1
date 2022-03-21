@@ -17,8 +17,11 @@ namespace GL
 		bool IsKeyPressed(int keycode);
 		bool IsKeyDown(int keycode);
 
+		float GetFOV();
 		glm::vec2 GetLastPosition();
 		glm::vec2 GetOffsetPosition();
+
+		void SetFOV(float fovValue);
 		void SetOffsetPosition(glm::vec2 offsetPos);
 
 	private:

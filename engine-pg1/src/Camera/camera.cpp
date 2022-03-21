@@ -10,6 +10,9 @@ namespace GL
 		view = glm::mat4(1.0f);
 		projection = glm::mat4(1.0f);
 
+		modeType = CAMERA_TYPE::FPS;
+		target = glm::vec3(0.f);
+
 		pos = glm::vec3(0.0f);
 		front = glm::vec3(0.0f);
 		up = glm::vec3(0.0f);
@@ -30,25 +33,36 @@ namespace GL
 		pos = glm::vec3(0.f);
 		front = glm::vec3(0.0f, 0.0f, -1.0f);
 		up = glm::vec3(0.0f, 1.0f, 0.0f);
+		aspect = width / height;
+		this->fov = fov;
+		this->near = near;
+		this->far = far;
 
 		UpdateView();
-		projection = glm::perspective(glm::radians(fov), width / height, near, far);
-		render->SetProjection(projection);
+		UpdateProjection();
+		input->SetFOV(fov);
 	}
 
 	void Camera::Update(float deltaTime)
 	{
 		InputMove(deltaTime);
 		Rotate();
+		Zoom();
 	}
 
-	void Camera::SetData(glm::vec3 pos, float speed, float sensitivity)
+	void Camera::SetData(CAMERA_TYPE modeType, glm::vec3 pos, float speed, float sensitivity)
 	{
+		this->modeType = modeType;
 		this->pos = pos;
 		this->speed = speed;
 		this->sensitivity = sensitivity;
 
 		UpdateView();
+	}
+
+	void Camera::SetTarget(glm::vec3 target)
+	{
+		this->target = target;
 	}
 
 	void Camera::SetPosition(glm::vec3 pos)
@@ -147,9 +161,24 @@ namespace GL
 		UpdateView();
 	}
 
+	void Camera::Zoom()
+	{
+		if (fov != input->GetFOV())
+		{
+			fov = input->GetFOV();
+			UpdateProjection();
+		}
+	}
+
 	void Camera::UpdateView()
 	{
 		view = glm::lookAt(pos, pos + front, up);
 		render->SetView(view);
+	}
+
+	void Camera::UpdateProjection()
+	{
+		projection = glm::perspective(glm::radians(fov), aspect, near, far);
+		render->SetProjection(projection);
 	}
 }

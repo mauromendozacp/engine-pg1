@@ -7,6 +7,13 @@
 
 namespace GL
 {
+	enum class CAMERA_TYPE
+	{
+		FPS,
+		TPS,
+		TOP_DOWN
+	};
+
 	class GRAPHICSENGINE_API Camera
 	{
 	public:
@@ -16,8 +23,10 @@ namespace GL
 		void Init(float fov, float width, float height, float near, float far);
 		void Update(float deltaTime);
 
-		void SetData(glm::vec3 pos, float speed, float sensitivity);
+		void SetData(CAMERA_TYPE modeType, glm::vec3 pos, float speed, float sensitivity);
+		void SetTarget(glm::vec3 target);
 		void SetPosition(glm::vec3 pos);
+
 		glm::vec3 GetPosition();
 		glm::vec3 GetFront();
 		glm::vec3 GetUp();
@@ -32,6 +41,9 @@ namespace GL
 		glm::mat4 view;
 		glm::mat4 projection;
 
+		CAMERA_TYPE modeType;
+		glm::vec3 target;
+
 		glm::vec3 pos;
 		glm::vec3 front;
 		glm::vec3 up;
@@ -39,12 +51,20 @@ namespace GL
 		float yaw;
 		float pitch;
 
+		float fov;
+		float aspect;
+		float near;
+		float far;
+
 		float speed;
 		float sensitivity;
 
 		void InputMove(float deltaTime);
 		void Rotate();
+
+		void Zoom();
 		void UpdateView();
+		void UpdateProjection();
 	};
 }
 
