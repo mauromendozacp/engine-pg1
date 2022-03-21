@@ -85,7 +85,5 @@ namespace GL
 
 		lastPos.x = posX;
 		lastPos.y = posY;
-
-		std::cout << "pos x: " << lastPos.x << " - pos y: " << lastPos.y;
 	}
 }

@@ -64,7 +64,7 @@ namespace GL
 		input = new Input(window);
 		timer = new Timer();
 
-		render->Init(false);
+		render->Init();
 		input->Init();
 
 		Init();

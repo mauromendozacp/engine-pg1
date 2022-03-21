@@ -22,7 +22,10 @@ namespace GL
 		Render();
 		~Render();
 
-		void Init(bool alpha);
+		void Init();
+		void SetBlend();
+		void SetDepth();
+
 		void UseShaderId(unsigned int shaderId);
 		unsigned int GetSolidShaderId();
 		unsigned int GetTextureShaderId();

@@ -30,6 +30,8 @@ namespace GameXD
 
 	void Game::Init()
 	{
+		render->SetDepth();
+
 		camera = new Camera(render, input);
 		camera->Init(45.f, window->GetWidth(), window->GetHeight(), 0.1f, 100.f);
 		camera->SetData(glm::vec3(0.f, 0.f, 25.f), 1.5f, 0.1f);

@@ -26,19 +26,8 @@ namespace GL
 		}
 	}
 
-	void Render::Init(bool alpha)
+	void Render::Init()
 	{
-		if (alpha)
-		{
-			glEnable(GL_BLEND);
-			glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-		}
-		else
-		{
-			glEnable(GL_DEPTH_TEST);
-			glDepthFunc(GL_LESS);
-		}
-
 		solidShader->CreateShader("../src/ShadersCode/SolidVertex.shader", "../src/ShadersCode/SolidFragment.shader");
 		textureShader->CreateShader("../src/ShadersCode/TextureVertex.shader", "../src/ShadersCode/TextureFragment.shader");
 	}
@@ -56,6 +45,18 @@ namespace GL
 	unsigned int Render::GetTextureShaderId()
 	{
 		return textureShader->GetShader();
+	}
+
+	void Render::SetBlend()
+	{
+		glEnable(GL_BLEND);
+		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	}
+
+	void Render::SetDepth()
+	{
+		glEnable(GL_DEPTH_TEST);
+		glDepthFunc(GL_LESS);
 	}
 
 	void Render::BindBuffer(unsigned int& VAO, unsigned int& VBO, int tam, float* vertices)
