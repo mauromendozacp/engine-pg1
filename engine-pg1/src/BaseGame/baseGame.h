@@ -2,10 +2,7 @@
 #define BASEGAME_H
 
 #include "exports.h"
-#include "Shape/shape.h"
-#include "Sprite/sprite.h"
 #include "Renderer/renderer.h"
-#include "Camera/camera.h"
 #include "Input/input.h"
 #include "Timer/timer.h"
 #include "Collision/collision.h"
@@ -22,7 +19,6 @@ namespace GL
 	protected:
 		Window* window;
 		Render* render;
-		Camera* camera;
 		Input* input;
 		Timer* timer;
 		std::string title;

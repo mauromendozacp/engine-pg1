@@ -154,8 +154,10 @@
     <ClCompile Include="..\src\Camera\camera.cpp" />
     <ClCompile Include="..\src\Collision\collision.cpp" />
     <ClCompile Include="..\src\Entity2D\entity2D.cpp" />
+    <ClCompile Include="..\src\Entity3D\entity3d.cpp" />
     <ClCompile Include="..\src\Entity\entity.cpp" />
     <ClCompile Include="..\src\Frame\frame.cpp" />
+    <ClCompile Include="..\src\Geometry\geometry.cpp" />
     <ClCompile Include="..\src\Input\input.cpp" />
     <ClCompile Include="..\src\Renderer\renderer.cpp" />
     <ClCompile Include="..\src\Shader\shader.cpp" />
@@ -176,9 +178,11 @@
     <ClInclude Include="..\src\Camera\camera.h" />
     <ClInclude Include="..\src\Collision\collision.h" />
     <ClInclude Include="..\src\Entity2D\entity2D.h" />
+    <ClInclude Include="..\src\Entity3D\entity3d.h" />
     <ClInclude Include="..\src\Entity\entity.h" />
     <ClInclude Include="..\src\exports.h" />
     <ClInclude Include="..\src\Frame\frame.h" />
+    <ClInclude Include="..\src\Geometry\geometry.h" />
     <ClInclude Include="..\src\Input\input.h" />
     <ClInclude Include="..\src\keycodes.h" />
     <ClInclude Include="..\src\Renderer\renderer.h" />

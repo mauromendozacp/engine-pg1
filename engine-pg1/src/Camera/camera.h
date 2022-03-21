@@ -2,31 +2,32 @@
 #define CAMERA_H
 
 #include "exports.h"
+#include "Renderer/renderer.h"
 #include "Input/input.h"
-#include "Timer/timer.h"
-#include "glm.hpp"
-#include "../glm/ext/matrix_transform.hpp"
-#include "../glm/gtc/type_ptr.hpp"
 
 namespace GL
 {
-	class Camera
+	class GRAPHICSENGINE_API Camera
 	{
 	public:
-		Camera();
+		Camera(Render* render, Input* input);
 		~Camera();
 
-		void Init(Input* input, Timer* timer, float fov, float width, float height, float near, float far);
-		void Update();
+		void Init(float fov, float width, float height, float near, float far);
+		void Update(float deltaTime);
 
 		void SetData(glm::vec3 pos, float speed, float sensitivity);
+		void SetPosition(glm::vec3 pos);
+		glm::vec3 GetPosition();
+		glm::vec3 GetFront();
+		glm::vec3 GetUp();
 
 		glm::mat4 GetView();
 		glm::mat4 GetProjection();
 
 	private:
+		Render* render;
 		Input* input;
-		Timer* timer;
 
 		glm::mat4 view;
 		glm::mat4 projection;
@@ -41,7 +42,7 @@ namespace GL
 		float speed;
 		float sensitivity;
 
-		void InputMove();
+		void InputMove(float deltaTime);
 		void Rotate();
 		void UpdateView();
 	};

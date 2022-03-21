@@ -2,10 +2,10 @@
 
 namespace GL
 {
-	Camera::Camera()
+	Camera::Camera(Render* render, Input* input)
 	{
-		input = nullptr;
-		timer = nullptr;
+		this->render = render;
+		this->input = input;
 
 		view = glm::mat4(1.0f);
 		projection = glm::mat4(1.0f);
@@ -25,22 +25,20 @@ namespace GL
 	{
 	}
 
-	void Camera::Init(Input* input, Timer* timer, float fov, float width, float height, float near, float far)
+	void Camera::Init(float fov, float width, float height, float near, float far)
 	{
-		this->input = input;
-		this->timer = timer;
-
 		pos = glm::vec3(0.f);
 		front = glm::vec3(0.0f, 0.0f, -1.0f);
 		up = glm::vec3(0.0f, 1.0f, 0.0f);
 
 		UpdateView();
 		projection = glm::perspective(glm::radians(fov), width / height, near, far);
+		render->SetProjection(projection);
 	}
 
-	void Camera::Update()
+	void Camera::Update(float deltaTime)
 	{
-		InputMove();
+		InputMove(deltaTime);
 		Rotate();
 	}
 
@@ -53,6 +51,26 @@ namespace GL
 		UpdateView();
 	}
 
+	void Camera::SetPosition(glm::vec3 pos)
+	{
+		this->pos = pos;
+	}
+
+	glm::vec3 Camera::GetPosition()
+	{
+		return pos;
+	}
+
+	glm::vec3 Camera::GetFront()
+	{
+		return front;
+	}
+
+	glm::vec3 Camera::GetUp()
+	{
+		return up;
+	}
+
 	glm::mat4 Camera::GetView()
 	{
 		return view;
@@ -63,40 +81,38 @@ namespace GL
 		return projection;
 	}
 
-	void Camera::InputMove()
+	void Camera::InputMove(float deltaTime)
 	{
-		float deltaSpeed = speed * timer->GetDeltaTime();
-
 		if (input->IsKeyPressed(KEY_W))
 		{
-			pos += deltaSpeed * front;
+			pos += speed * deltaTime * front;
 			UpdateView();
 		}
 		else if (input->IsKeyPressed(KEY_S))
 		{
-			pos -= deltaSpeed * front;
+			pos -= speed * deltaTime * front;
 			UpdateView();
 		}
 
 		if (input->IsKeyPressed(KEY_LEFT_SHIFT))
 		{
-			pos += deltaSpeed * up;
+			pos += speed * deltaTime * up;
 			UpdateView();
 		}
 		else if (input->IsKeyPressed(KEY_LEFT_CONTROL))
 		{
-			pos -= deltaSpeed * up;
+			pos -= speed * deltaTime * up;
 			UpdateView();
 		}
 
 		if (input->IsKeyPressed(KEY_A))
 		{
-			pos -= glm::normalize(glm::cross(front, up)) * deltaSpeed;
+			pos -= glm::normalize(glm::cross(front, up)) * speed * deltaTime;
 			UpdateView();
 		}
 		else if (input->IsKeyPressed(KEY_D))
 		{
-			pos += glm::normalize(glm::cross(front, up)) * deltaSpeed;
+			pos += glm::normalize(glm::cross(front, up)) * speed * deltaTime;
 			UpdateView();
 		}
 
@@ -134,5 +150,6 @@ namespace GL
 	void Camera::UpdateView()
 	{
 		view = glm::lookAt(pos, pos + front, up);
+		render->SetView(view);
 	}
 }

@@ -3,11 +3,13 @@
 
 namespace GL
 {
-	Render::Render(Camera* camera)
+	Render::Render()
 	{
 		this->solidShader = new Shader();
 		this->textureShader = new Shader();
-		this->camera = camera;
+
+		view = glm::mat4(0.f);
+		projection = glm::mat4(0.f);
 	}
 
 	Render::~Render()
@@ -121,6 +123,16 @@ namespace GL
 		glUniform1f(textureLoc, (GLfloat)textureId);
 	}
 
+	void Render::SetView(glm::mat4 view)
+	{
+		this->view = view;
+	}
+
+	void Render::SetProjection(glm::mat4 projection)
+	{
+		this->projection = projection;
+	}
+
 	void Render::BindTextureBuffer(unsigned int& VBO, int tam, float* vertices)
 	{
 		glGenBuffers(tam, &VBO);
@@ -139,10 +151,10 @@ namespace GL
 		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
 
 		unsigned int viewLoc = glGetUniformLocation(shaderId, "view");
-		glUniformMatrix4fv(viewLoc, 1, GL_FALSE, glm::value_ptr(camera->GetView()));
+		glUniformMatrix4fv(viewLoc, 1, GL_FALSE, glm::value_ptr(view));
 
 		unsigned int projectionLoc = glGetUniformLocation(shaderId, "projection");
-		glUniformMatrix4fv(projectionLoc, 1, GL_FALSE, glm::value_ptr(camera->GetProjection()));
+		glUniformMatrix4fv(projectionLoc, 1, GL_FALSE, glm::value_ptr(projection));
 
 		if (vertices == 3)
 			glDrawArrays(GL_TRIANGLES, 0, vertices);

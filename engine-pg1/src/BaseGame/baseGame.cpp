@@ -6,7 +6,6 @@ namespace GL
 	{
 		window = nullptr;
 		render = nullptr;
-		camera = nullptr;
 		input = nullptr;
 		timer = nullptr;
 	}
@@ -23,12 +22,6 @@ namespace GL
 		{
 			delete render;
 			render = nullptr;
-		}
-
-		if (camera != nullptr)
-		{
-			delete camera;
-			camera = nullptr;
 		}
 
 		if (input != nullptr)
@@ -67,14 +60,12 @@ namespace GL
 		if (glewInit() != GLEW_OK)
 			std::cout << "ERROR" << std::endl;
 
-		camera = new Camera();
-		render = new Render(camera);
+		render = new Render();
 		input = new Input(window);
 		timer = new Timer();
 
-		render->Init(true);
-		camera->Init(input, timer, 45.f, window->GetWidth(), window->GetHeight(), 0.1f, 100.f);
-		camera->SetData(glm::vec3(0.f, 0.f, 25.f), 1.5f, 2.f);
+		render->Init(false);
+		input->Init();
 
 		Init();
 	}
@@ -85,8 +76,6 @@ namespace GL
 		{
 			render->ClearScreen();
 			timer->Update(glfwGetTime());
-			camera->Update();
-			//input->SetOffsetPosition(glm::vec2(0, 0));
 
 			Update();
 			Draw();
