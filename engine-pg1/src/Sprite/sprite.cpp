@@ -70,7 +70,7 @@ namespace GL
 
 		for (int i = 0; i < anim.size(); i++)
 		{
-			delete[] anim[i];
+			delete anim[i];
 		}
 	}
 

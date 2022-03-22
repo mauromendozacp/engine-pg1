@@ -21,11 +21,13 @@ namespace GL
 		~Camera();
 
 		void Init(float fov, float width, float height, float near, float far);
-		void Update(float deltaTime);
+		void Update();
 
-		void SetData(CAMERA_TYPE modeType, glm::vec3 pos, float speed, float sensitivity);
-		void SetTarget(glm::vec3 target);
+		void SetData(glm::vec3 pos, float sensitivity);
+		void SetCameraType(CAMERA_TYPE cameraType);
+		void SetFocus(glm::vec3 target, float distance);
 		void SetPosition(glm::vec3 pos);
+		void Reset();
 
 		glm::vec3 GetPosition();
 		glm::vec3 GetFront();
@@ -41,8 +43,9 @@ namespace GL
 		glm::mat4 view;
 		glm::mat4 projection;
 
-		CAMERA_TYPE modeType;
+		CAMERA_TYPE cameraType;
 		glm::vec3 target;
+		float distance;
 
 		glm::vec3 pos;
 		glm::vec3 front;
@@ -56,13 +59,11 @@ namespace GL
 		float near;
 		float far;
 
-		float speed;
 		float sensitivity;
 
-		void InputMove(float deltaTime);
 		void Rotate();
-
 		void Zoom();
+
 		void UpdateView();
 		void UpdateProjection();
 	};

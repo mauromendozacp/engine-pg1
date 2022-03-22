@@ -5,7 +5,6 @@
 #include "Player/player.h"
 #include "Camera/camera.h"
 #include "Shape/shape.h"
-#include "Geometry/geometry.h"
 #include <iostream>
 
 using namespace GL;
@@ -25,9 +24,9 @@ namespace GameXD
 		void DeInit() override;
 
 	private:
+		Player* player;
 		Camera* camera;
-		Shape* shape;
-		Geometry* geometry;
+		Shape* floor;
 	};
 }
 

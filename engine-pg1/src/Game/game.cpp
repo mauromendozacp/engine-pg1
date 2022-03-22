@@ -4,27 +4,27 @@ namespace GameXD
 {
 	Game::Game()
 	{
+		player = nullptr;
 		camera = nullptr;
-		shape = nullptr;
-		geometry = nullptr;
+		floor = nullptr;
 	}
 
 	Game::~Game()
 	{
+		if (player != nullptr)
+		{
+			delete player;
+			player = nullptr;
+		}
 		if (camera != nullptr)
 		{
 			delete camera;
 			camera = nullptr;
 		}
-		if (shape != nullptr)
+		if (floor != nullptr)
 		{
-			delete shape;
-			shape = nullptr;
-		}
-		if (geometry != nullptr)
-		{
-			delete geometry;
-			geometry = nullptr;
+			delete floor;
+			floor = nullptr;
 		}
 	}
 
@@ -32,35 +32,37 @@ namespace GameXD
 	{
 		render->SetDepth();
 
-		camera = new Camera(render, input);
+		camera = new GL::Camera(render, input);
+		player = new Player(camera, input, timer);
+		player->Init(render, 5.f, "../res/Textures/player.png");
+
 		camera->Init(45.f, window->GetWidth(), window->GetHeight(), 0.1f, 100.f);
-		camera->SetData(CAMERA_TYPE::FPS, glm::vec3(0.f, 0.f, 25.f), 1.5f, 0.1f);
+		camera->SetData(player->GetPos(), 0.25f);
+		camera->SetCameraType(GL::CAMERA_TYPE::TPS);
+		camera->SetFocus(player->GetPos(), 10.f);
 
-		shape = new Shape(render);
-		shape->Init(SHAPE_TYPE::TRIANGLE);
-		shape->SetPos(glm::vec3(0.f));
-		shape->SetScale(2.5f);
-		shape->SetColor(1.f, 1.f, 1.f, 1.f);
-
-		/*geometry = new Geometry(render);
-		geometry->Init(GEOMETRY_TYPE::CUBE);
-		geometry->SetPos(glm::vec3(0.f));
-		geometry->SetScale(2.5f);
-		geometry->SetColor(1.f, 1.f, 1.f, 1.f);*/
+		floor = new GL::Shape(render);
+		floor->Init(GL::SHAPE_TYPE::QUAD);
+		floor->SetPos(glm::vec3(0.f, -.5f, 0.f));
+		floor->SetRotX(90.F);
+		floor->SetScale(25.f, 25.f, 1.f);
+		floor->SetColor(0.f, 1.f, 1.f, 1.f);
 	}
 
 	void Game::Update()
 	{
-		camera->Update(timer->GetDeltaTime());
+		player->Update();
+		camera->Update();
 	}
 
 	void Game::Draw()
 	{
-		shape->Draw();
-		//geometry->Draw();
+		player->Draw();
+		floor->Draw();
 	}
 
 	void Game::DeInit()
 	{
+		player->DeInit();
 	}
 }

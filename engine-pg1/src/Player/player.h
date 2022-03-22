@@ -4,6 +4,7 @@
 #include "exports.h"
 #include "Input/input.h"
 #include "Sprite/sprite.h"
+#include "Camera/camera.h"
 
 namespace GameXD
 {
@@ -19,23 +20,29 @@ namespace GameXD
 	class GRAPHICSENGINE_API Player
 	{
 	public:
-		Player();
+		Player(GL::Camera* camera, GL::Input* input, GL::Timer* timer);
 		~Player();
 
 		void Init(GL::Render* render, float speed, const char* textureUrl);
-		void Update(GL::Input* input);
+		void Update();
 		void Draw();
 		void DeInit();
 
 		GL::Sprite* GetSprite();
+		glm::vec3 GetPos();
 
 	private:
 		GL::Sprite* sprite;
+		GL::Camera* camera;
+		GL::Input* input;
+		GL::Timer* timer;
+
 		STATUS status;
 		float speed;
 
-		void Inputs(GL::Input* input);
+		void Inputs();
 		void ChangeStatus(STATUS status);
+		float GetSpeedDelta();
 	};
 }
 

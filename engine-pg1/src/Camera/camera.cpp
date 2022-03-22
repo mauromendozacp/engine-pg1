@@ -10,7 +10,7 @@ namespace GL
 		view = glm::mat4(1.0f);
 		projection = glm::mat4(1.0f);
 
-		modeType = CAMERA_TYPE::FPS;
+		cameraType = CAMERA_TYPE::FPS;
 		target = glm::vec3(0.f);
 
 		pos = glm::vec3(0.0f);
@@ -20,7 +20,11 @@ namespace GL
 		yaw = -90.f;
 		pitch = 0.f;
 
-		speed = 0.f;
+		fov = 0.f;
+		aspect = 0.f;
+		near = 0.f;
+		far = 0.f;
+
 		sensitivity = 0.f;
 	}
 
@@ -30,7 +34,6 @@ namespace GL
 
 	void Camera::Init(float fov, float width, float height, float near, float far)
 	{
-		pos = glm::vec3(0.f);
 		front = glm::vec3(0.0f, 0.0f, -1.0f);
 		up = glm::vec3(0.0f, 1.0f, 0.0f);
 		aspect = width / height;
@@ -43,31 +46,48 @@ namespace GL
 		input->SetFOV(fov);
 	}
 
-	void Camera::Update(float deltaTime)
+	void Camera::Update()
 	{
-		InputMove(deltaTime);
 		Rotate();
 		Zoom();
 	}
 
-	void Camera::SetData(CAMERA_TYPE modeType, glm::vec3 pos, float speed, float sensitivity)
+	void Camera::SetData(glm::vec3 pos, float sensitivity)
 	{
-		this->modeType = modeType;
 		this->pos = pos;
-		this->speed = speed;
 		this->sensitivity = sensitivity;
 
 		UpdateView();
 	}
 
-	void Camera::SetTarget(glm::vec3 target)
+	void Camera::SetCameraType(CAMERA_TYPE cameraType)
+	{
+		this->cameraType = cameraType;
+	}
+
+	void Camera::SetFocus(glm::vec3 target, float distance)
 	{
 		this->target = target;
+		this->distance = distance;
 	}
 
 	void Camera::SetPosition(glm::vec3 pos)
-	{
-		this->pos = pos;
+	{	
+		switch (cameraType)
+		{
+		case GL::CAMERA_TYPE::FPS:
+			this->pos = pos;
+			break;
+		case GL::CAMERA_TYPE::TPS:
+			target = pos;
+			break;
+		case GL::CAMERA_TYPE::TOP_DOWN:
+			break;
+		default:
+			break;
+		}
+
+		UpdateView();
 	}
 
 	glm::vec3 Camera::GetPosition()
@@ -95,48 +115,6 @@ namespace GL
 		return projection;
 	}
 
-	void Camera::InputMove(float deltaTime)
-	{
-		if (input->IsKeyPressed(KEY_W))
-		{
-			pos += speed * deltaTime * front;
-			UpdateView();
-		}
-		else if (input->IsKeyPressed(KEY_S))
-		{
-			pos -= speed * deltaTime * front;
-			UpdateView();
-		}
-
-		if (input->IsKeyPressed(KEY_LEFT_SHIFT))
-		{
-			pos += speed * deltaTime * up;
-			UpdateView();
-		}
-		else if (input->IsKeyPressed(KEY_LEFT_CONTROL))
-		{
-			pos -= speed * deltaTime * up;
-			UpdateView();
-		}
-
-		if (input->IsKeyPressed(KEY_A))
-		{
-			pos -= glm::normalize(glm::cross(front, up)) * speed * deltaTime;
-			UpdateView();
-		}
-		else if (input->IsKeyPressed(KEY_D))
-		{
-			pos += glm::normalize(glm::cross(front, up)) * speed * deltaTime;
-			UpdateView();
-		}
-
-		if (input->IsKeyPressed(KEY_R))
-		{
-			pos = glm::vec3(0.f);
-			UpdateView();
-		}
-	}
-
 	void Camera::Rotate()
 	{
 		glm::vec2 offsetPos = input->GetOffsetPosition();
@@ -157,6 +135,19 @@ namespace GL
 		direction.y = sin(glm::radians(pitch));
 		direction.z = sin(glm::radians(yaw)) * cos(glm::radians(pitch));
 		front = glm::normalize(direction);
+		
+		switch (cameraType)
+		{
+		case GL::CAMERA_TYPE::FPS:
+			break;
+		case GL::CAMERA_TYPE::TPS:
+			pos = target - glm::normalize(direction) * distance;
+			break;
+		case GL::CAMERA_TYPE::TOP_DOWN:
+			break;
+		default:
+			break;
+		}
 
 		UpdateView();
 	}
@@ -170,9 +161,28 @@ namespace GL
 		}
 	}
 
+	void Camera::Reset()
+	{
+		pos = glm::vec3(0.f);
+		UpdateView();
+	}
+
 	void Camera::UpdateView()
 	{
-		view = glm::lookAt(pos, pos + front, up);
+		switch (cameraType)
+		{
+		case GL::CAMERA_TYPE::FPS:
+			view = glm::lookAt(pos, pos + front, up);
+			break;
+		case GL::CAMERA_TYPE::TPS:
+			view = glm::lookAt(pos, target, up);
+			break;
+		case GL::CAMERA_TYPE::TOP_DOWN:
+			break;
+		default:
+			break;
+		}
+
 		render->SetView(view);
 	}
 
