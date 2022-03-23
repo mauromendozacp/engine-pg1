@@ -39,6 +39,13 @@ namespace GL
 
 	void BaseGame::Play()
 	{
+		if (!glfwInit())
+			return;
+
+		window = new Window(1280.0f, 720.0f, "ENGINARDOOOOUUU");
+		if (!window->OpenWindow())
+			return;
+
 		InitEngine();
 		UpdateEngine();
 		DeInitEngine();
@@ -46,16 +53,7 @@ namespace GL
 
 	void BaseGame::InitEngine()
 	{
-		if (!glfwInit())
-			return;
-
-		window = new Window(1280.0f, 720.0f, "ENGINARDOOOOUUU");
-		
-		if (!window->OpenWindow())
-			return;
-
-		glfwMakeContextCurrent(window->GetWindow());
-		std::cout << glGetString(GL_VERSION) << std::endl;
+		window->Init();
 
 		if (glewInit() != GLEW_OK)
 			std::cout << "ERROR" << std::endl;

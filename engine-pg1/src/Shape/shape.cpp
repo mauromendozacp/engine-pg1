@@ -41,7 +41,40 @@ namespace GL
 
 	#pragma endregion
 
-	Shape::Shape(Render* render) : Entity2D(render)
+	#pragma region CUBE_VERTEX
+
+	const int cubeVertTam = 48;
+	const int cubeIndexTam = 42;
+	static unsigned int cubeIndexes[cubeIndexTam] = {
+		0, 1, 2,
+		2, 3, 0,
+		3, 2, 0,
+		2, 1, 0,
+		1, 5, 6,
+		6, 2, 1,
+		7, 6, 5,
+		5, 4, 7,
+		4, 0, 3,
+		3, 7, 4,
+		4, 5, 1,
+		1, 0, 4,
+		3, 2, 6,
+		6, 7, 3
+	};
+	static float cubeVertex[cubeVertTam]{
+		-1.0, -1.0, 1.0,/**/  1.0f, 1.0f, 1.0f,
+		1.0, -1.0, 1.0,	/**/  1.0f, 1.0f, 1.0f,
+		1.0, 1.0, 1.0,	/**/  1.0f, 1.0f, 1.0f,
+		-1.0, 1.0, 1.0,	/**/  1.0f, 1.0f, 1.0f,
+		-1.0, -1.0, -1.0,/**/ 1.0f, 1.0f, 1.0f,
+		1.0, -1.0, -1.0, /**/ 1.0f, 1.0f, 1.0f,
+		1.0, 1.0, -1.0,	 /**/ 1.0f, 1.0f, 1.0f,
+		-1.0, 1.0, -1.0, /**/ 1.0f, 1.0f, 1.0f,
+	};
+
+	#pragma endregion
+
+	Shape::Shape(Render* render) : Entity(render)
 	{
 	}
 
@@ -69,6 +102,14 @@ namespace GL
 			vertices = quadIndexTam;
 			vertexs = quadVertex;
 			tam = sizeof(vertexs) * quadVertTam;
+
+			break;
+		case SHAPE_TYPE::CUBE:
+
+			indexes = cubeIndexes;
+			vertices = cubeIndexTam;
+			vertexs = cubeVertex;
+			tam = sizeof(vertexs) * cubeVertTam;
 
 			break;
 		default:

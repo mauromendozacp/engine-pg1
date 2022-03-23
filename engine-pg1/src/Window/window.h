@@ -12,6 +12,8 @@ namespace GL
 		Window(float width, float height, std::string title); 
 		~Window();
 
+		void Init();
+
 		GLFWwindow* GetWindow();
 		bool OpenWindow();
 		void CloseWindow();

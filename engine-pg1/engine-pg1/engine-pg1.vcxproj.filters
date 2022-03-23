@@ -58,12 +58,6 @@
     <ClCompile Include="..\src\Camera\camera.cpp">
       <Filter>Camera</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\Entity3D\entity3d.cpp">
-      <Filter>Entity3D</Filter>
-    </ClCompile>
-    <ClCompile Include="..\src\Geometry\geometry.cpp">
-      <Filter>Geometry</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Window">
@@ -125,12 +119,6 @@
     </Filter>
     <Filter Include="Camera">
       <UniqueIdentifier>{75270a2f-625e-4c17-a424-c329238d7554}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Entity3D">
-      <UniqueIdentifier>{76a00a45-3a7b-404a-b168-72394a43244d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Geometry">
-      <UniqueIdentifier>{7426b69e-8d69-49a2-ba12-51d5089f1f68}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -195,12 +183,6 @@
     </ClInclude>
     <ClInclude Include="..\src\Camera\camera.h">
       <Filter>Camera</Filter>
-    </ClInclude>
-    <ClInclude Include="..\src\Entity3D\entity3d.h">
-      <Filter>Entity3D</Filter>
-    </ClInclude>
-    <ClInclude Include="..\src\Geometry\geometry.h">
-      <Filter>Geometry</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

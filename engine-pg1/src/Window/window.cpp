@@ -2,6 +2,8 @@
 
 namespace GL
 {
+	void FramebufferSizeCallback(GLFWwindow* window, int width, int height);
+
 	Window::Window(float width, float height, std::string title)
 	{
 		this->glfWindow = nullptr;
@@ -12,6 +14,13 @@ namespace GL
 
 	Window::~Window()
 	{
+	}
+
+	void Window::Init()
+	{
+		glfwMakeContextCurrent(glfWindow);
+		glfwSetFramebufferSizeCallback(glfWindow, FramebufferSizeCallback);
+		std::cout << glGetString(GL_VERSION) << std::endl;
 	}
 
 	GLFWwindow* Window::GetWindow()
@@ -48,5 +57,10 @@ namespace GL
 	float Window::GetWidth()
 	{
 		return width;
+	}
+
+	void FramebufferSizeCallback(GLFWwindow* window, int width, int height)
+	{
+		glViewport(0, 0, width, height);
 	}
 }

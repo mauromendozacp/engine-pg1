@@ -10,7 +10,8 @@ namespace GameXD
 
 		sprite = nullptr;
 		status = STATUS::IDLE;
-		speed = 0.0f;
+		moveSpeed = 0.f;
+		rotSpeed = 0.f;
 	}
 
 	Player::~Player()
@@ -23,7 +24,7 @@ namespace GameXD
 		}
 	}
 
-	void Player::Init(GL::Render* render, float speed, const char* textureUrl)
+	void Player::Init(GL::Render* render, float moveSpeed, float rotSpeed, const char* textureUrl)
 	{
 		sprite = new GL::Sprite(render);
 		sprite->Init();
@@ -48,7 +49,8 @@ namespace GameXD
 		atlas = GL::AtlasConfig(6, 11, 0, 5, 1, 12);
 		sprite->AddAnimation(atlas, 10.f);
 
-		this->speed = speed;
+		this->moveSpeed = moveSpeed;
+		this->rotSpeed = rotSpeed;
 	}
 
 	void Player::Update()
@@ -103,11 +105,11 @@ namespace GameXD
 
 		if (input->IsKeyPressed(KEY_Q))
 		{
-			sprite->SetRotZ(sprite->GetRotZ() - GetSpeedDelta());
+			sprite->SetRotY(sprite->GetRotY() + rotSpeed * timer->GetDeltaTime());
 		}
 		else if (input->IsKeyPressed(KEY_E))
 		{
-			sprite->SetRotZ(sprite->GetRotZ() + GetSpeedDelta());
+			sprite->SetRotY(sprite->GetRotY() - rotSpeed * timer->GetDeltaTime());
 		}
 
 		if (input->IsKeyPressed(KEY_Z))
@@ -136,7 +138,7 @@ namespace GameXD
 
 	float Player::GetSpeedDelta()
 	{
-		return speed * timer->GetDeltaTime();
+		return moveSpeed * timer->GetDeltaTime();
 	}
 
 	glm::vec3 Player::GetPos()

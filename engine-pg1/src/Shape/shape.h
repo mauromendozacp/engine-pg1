@@ -8,10 +8,11 @@ namespace GL
 	enum class SHAPE_TYPE
 	{
 		TRIANGLE,
-		QUAD
+		QUAD,
+		CUBE
 	};
 
-	class GRAPHICSENGINE_API Shape : public Entity2D
+	class GRAPHICSENGINE_API Shape : public Entity
 	{
 	public:
 		Shape(Render* render);

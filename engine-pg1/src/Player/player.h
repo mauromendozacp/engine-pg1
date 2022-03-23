@@ -23,7 +23,7 @@ namespace GameXD
 		Player(GL::Camera* camera, GL::Input* input, GL::Timer* timer);
 		~Player();
 
-		void Init(GL::Render* render, float speed, const char* textureUrl);
+		void Init(GL::Render* render, float moveSpeed, float rotSpeed, const char* textureUrl);
 		void Update();
 		void Draw();
 		void DeInit();
@@ -38,7 +38,8 @@ namespace GameXD
 		GL::Timer* timer;
 
 		STATUS status;
-		float speed;
+		float moveSpeed;
+		float rotSpeed;
 
 		void Inputs();
 		void ChangeStatus(STATUS status);
