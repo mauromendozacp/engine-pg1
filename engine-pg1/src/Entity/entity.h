@@ -55,13 +55,6 @@ namespace GL
 		void SetScale(float x, float y, float z);
 		void SetScale(float size);
 
-		void SetColor(float r, float g, float b, float a);
-
-		void SetCollider(bool col);
-		void SetMoveable(bool mov);
-		bool IsMoveable();
-		bool HasCollider();
-
 		glm::vec3 GetPos();
 		glm::vec3 GetRot();
 		glm::vec3 GetScale();
@@ -78,9 +71,6 @@ namespace GL
 		float GetScaleY();
 		float GetScaleZ();
 
-		void Draw(unsigned int shaderId);
-		void DeInit();
-
 	protected:
 		Render* render;
 
@@ -90,12 +80,6 @@ namespace GL
 		uint uniformModel;
 		uint uniformView;
 		uint uniformProjection;
-
-		glm::vec4 color;
-
-		unsigned int VAO, VBO, EBO, tam, vertices;
-		float *vertexs;
-		bool hasCollider, moveable;
 
 		glm::quat EulerToQuat(glm::vec3 euler);
 		glm::vec3 QuatToVec(glm::quat quat, glm::vec3 euler);

@@ -74,7 +74,11 @@ namespace GL
 
 	#pragma endregion
 
-	Shape::Shape(Render* render) : Entity(render)
+	Shape::Shape() : Entity2D()
+	{
+	}
+
+	Shape::Shape(Render* render) : Entity2D(render)
 	{
 	}
 
@@ -126,6 +130,6 @@ namespace GL
 		unsigned int shaderId = render->GetSolidShaderId();
 		render->UseShaderId(shaderId);
 		render->SetShader(shaderId, color);
-		Entity::Draw(shaderId);
+		Entity2D::Draw(shaderId);
 	}
 }

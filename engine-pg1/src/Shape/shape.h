@@ -12,9 +12,10 @@ namespace GL
 		CUBE
 	};
 
-	class GRAPHICSENGINE_API Shape : public Entity
+	class GRAPHICSENGINE_API Shape : public Entity2D
 	{
 	public:
+		Shape();
 		Shape(Render* render);
 		~Shape();
 

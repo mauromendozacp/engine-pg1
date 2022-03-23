@@ -13,7 +13,7 @@ namespace GL
 	{
 	}
 
-	void Collision::CollisionUpdate(Entity* entity1, Entity* entity2)
+	void Collision::CollisionUpdate(Entity2D* entity1, Entity2D* entity2)
 	{
 		if (CheckCollisionRecRec(entity1, entity2))
 		{
@@ -23,7 +23,7 @@ namespace GL
 		}
 	}
 
-	bool Collision::CheckCollisionRecRec(Entity* entity1, Entity* entity2)
+	bool Collision::CheckCollisionRecRec(Entity2D* entity1, Entity2D* entity2)
 	{
 		if (entity2->HasCollider())
 		{
@@ -40,7 +40,7 @@ namespace GL
 		return false;
 	}
 
-	void Collision::Overlap(Entity* entity1, Entity* entity2) //Separa ambos objetos en el caso de existir overlap
+	void Collision::Overlap(Entity2D* entity1, Entity2D* entity2) //Separa ambos objetos en el caso de existir overlap
 	{
 		if (entity2->IsMoveable())
 		{

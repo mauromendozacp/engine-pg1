@@ -29,21 +29,9 @@ namespace GL
 		matrix.rotationZ = glm::mat4(1.f);
 		matrix.scale = glm::mat4(1.f);
 
-		color = glm::vec4(1.0f, 1.0f, 1.0f, 1.0f);
-
 		uniformModel = 0;
 		uniformView = 0;
 		uniformProjection = 0;
-
-		VAO = 0;
-		VBO = 0;
-		EBO = 0;
-		tam = 0;
-		vertexs = 0;
-		vertices = 0;
-
-		hasCollider = false;
-		moveable = false;
 
 		UpdateMatrix();
 	}
@@ -73,21 +61,9 @@ namespace GL
 		matrix.rotationZ = glm::mat4(1.f);
 		matrix.scale = glm::mat4(1.f);
 
-		color = glm::vec4(1.0f, 1.0f, 1.0f, 1.0f);
-
 		uniformModel = 0;
 		uniformView = 0;
 		uniformProjection = 0;
-
-		VAO = 0;
-		VBO = 0;
-		EBO = 0;
-		tam = 0;
-		vertexs = 0;
-		vertices = 0;
-
-		hasCollider = false;
-		moveable = false;
 
 		UpdateMatrix();
 	}
@@ -178,21 +154,6 @@ namespace GL
 		SetScale({ size, size, size });
 	}
 
-	void Entity::SetColor(float r, float g, float b, float a)
-	{
-		this->color = glm::vec4(r, g, b, a);
-	}
-
-	void Entity::SetCollider(bool col)
-	{
-		hasCollider = col;
-	}
-
-	void Entity::SetMoveable(bool mov)
-	{
-		moveable = mov;
-	}
-
 	glm::vec3 Entity::GetPos()
 	{
 		return transform.position;
@@ -253,15 +214,7 @@ namespace GL
 		return transform.scale.z;
 	}
 
-	bool Entity::IsMoveable()
-	{
-		return moveable;
-	}
-
-	bool Entity::HasCollider()
-	{
-		return hasCollider;
-	}
+	
 
 	glm::quat Entity::EulerToQuat(glm::vec3 euler)
 	{
@@ -315,15 +268,5 @@ namespace GL
 		transform.forward = QuatToVec(transform.rotation, glm::vec3(0.f, 0.f, 1.f));
 		transform.up = QuatToVec(transform.rotation, glm::vec3(0.f, 1.f, 0.f));
 		transform.right = QuatToVec(transform.rotation, glm::vec3(1.f, 0.f, 0.f));
-	}
-
-	void Entity::Draw(unsigned int shaderId)
-	{
-		render->Draw(matrix.model, VAO, VBO, EBO, vertices, tam, vertexs, shaderId);
-	}
-
-	void Entity::DeInit()
-	{
-		render->UnBind(VAO, VBO, EBO);
 	}
 }

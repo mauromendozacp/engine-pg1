@@ -12,8 +12,24 @@ namespace GL
 		Entity2D(Render* render);
 		~Entity2D();
 
-	private:
+		void SetColor(glm::vec4 color);
+		void SetColor(float r, float g, float b, float a);
+		glm::vec4 GetColor();
 
+		void SetCollider(bool col);
+		void SetMoveable(bool mov);
+		bool IsMoveable();
+		bool HasCollider();
+
+		void Draw(unsigned int shaderId);
+		void DeInit();
+
+	protected:
+		glm::vec4 color;
+
+		uint VAO, VBO, EBO, tam, vertices;
+		float* vertexs;
+		bool hasCollider, moveable;
 	};
 }
 

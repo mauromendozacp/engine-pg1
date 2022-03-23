@@ -2,7 +2,7 @@
 #define COLLISION_H
 
 #include "exports.h"
-#include "Entity/entity.h"
+#include "Entity2D/entity2d.h"
 
 namespace GL
 {
@@ -15,9 +15,9 @@ namespace GL
 		Collision();
 		~Collision();
 
-		static void CollisionUpdate(Entity* entity1, Entity* entity2);
-		static bool CheckCollisionRecRec(Entity* entity1, Entity* entity2);
-		static void Overlap(Entity* entity1, Entity* entity2);
+		static void CollisionUpdate(Entity2D* entity1, Entity2D* entity2);
+		static bool CheckCollisionRecRec(Entity2D* entity1, Entity2D* entity2);
+		static void Overlap(Entity2D* entity1, Entity2D* entity2);
 
 	private:
 		
