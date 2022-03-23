@@ -7,7 +7,6 @@ namespace GL
 		window = nullptr;
 		render = nullptr;
 		mainCamera = nullptr;
-		timer = nullptr;
 	}
 
 	BaseGame::~BaseGame()
@@ -28,12 +27,6 @@ namespace GL
 		{
 			delete mainCamera;
 			mainCamera = nullptr;
-		}
-
-		if (timer != nullptr)
-		{
-			delete timer;
-			timer = nullptr;
 		}
 	}
 
@@ -69,7 +62,6 @@ namespace GL
 
 		render = new Render();
 		mainCamera = new Camera(render);
-		timer = new Timer();
 
 		render->Init();
 		mainCamera->Init(45.f, window->GetWidth(), window->GetHeight(), 0.1f, 100.f);
@@ -83,7 +75,7 @@ namespace GL
 		while (!glfwWindowShouldClose(window->GetWindow()))
 		{
 			render->ClearScreen();
-			timer->Update(glfwGetTime());
+			Timer::Update(glfwGetTime());
 
 			Update();
 			Draw();

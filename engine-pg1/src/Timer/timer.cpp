@@ -2,9 +2,11 @@
 
 namespace GL
 {
+	float Timer::deltaTime = 0.0f;
+	double Timer::oldTimer = glfwGetTime();
+
 	Timer::Timer()
 	{
-		oldTimer = glfwGetTime();
 	}
 
 	Timer::~Timer() {}
@@ -19,5 +21,4 @@ namespace GL
 	{
 		return deltaTime;
 	}
-	float Timer::deltaTime = 0.0f;
 }

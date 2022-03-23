@@ -2,10 +2,9 @@
 
 namespace GameXD
 {
-	Player::Player(GL::Camera* camera, GL::Timer* timer)
+	Player::Player(GL::Camera* camera)
 	{
 		this->camera = camera;
-		this->timer = timer;
 
 		sprite = nullptr;
 		status = STATUS::IDLE;
@@ -105,11 +104,11 @@ namespace GameXD
 
 		if (GL::Input::IsKeyPressed(KEY_Q))
 		{
-			sprite->SetRotY(sprite->GetRotY() + rotSpeed * timer->GetDeltaTime());
+			sprite->SetRotY(sprite->GetRotY() + rotSpeed * GL::Timer::GetDeltaTime());
 		}
 		else if (GL::Input::IsKeyPressed(KEY_E))
 		{
-			sprite->SetRotY(sprite->GetRotY() - rotSpeed * timer->GetDeltaTime());
+			sprite->SetRotY(sprite->GetRotY() - rotSpeed * GL::Timer::GetDeltaTime());
 		}
 
 		if (GL::Input::IsKeyPressed(KEY_Z))
@@ -138,7 +137,7 @@ namespace GameXD
 
 	float Player::GetSpeedDelta()
 	{
-		return moveSpeed * timer->GetDeltaTime();
+		return moveSpeed * GL::Timer::GetDeltaTime();
 	}
 
 	glm::vec3 Player::GetPos()

@@ -19,7 +19,7 @@ namespace GameXD
 	class GRAPHICSENGINE_API Player
 	{
 	public:
-		Player(GL::Camera* camera, GL::Timer* timer);
+		Player(GL::Camera* camera);
 		~Player();
 
 		void Init(GL::Render* render, float moveSpeed, float rotSpeed, const char* textureUrl);
@@ -33,7 +33,6 @@ namespace GameXD
 	private:
 		GL::Sprite* sprite;
 		GL::Camera* camera;
-		GL::Timer* timer;
 
 		STATUS status;
 		float moveSpeed;

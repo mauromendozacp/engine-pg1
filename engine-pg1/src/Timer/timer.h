@@ -10,11 +10,12 @@ namespace GL
 	public:
 		Timer();
 		~Timer();
-		void Update(float currentTime);
+
+		static void Update(float currentTime);
 		static float GetDeltaTime();
 
 	private:
-		double oldTimer;
+		static double oldTimer;
 		static float deltaTime;
 	};
 }

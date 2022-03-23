@@ -21,7 +21,6 @@ namespace GL
 		Window* window;
 		Render* render;
 		Camera* mainCamera;
-		Timer* timer;
 		std::string title;
 
 		void InitEngine();
