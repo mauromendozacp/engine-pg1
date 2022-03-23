@@ -26,27 +26,30 @@ namespace GL
 		void SetBlend();
 		void SetDepth();
 
-		void UseShaderId(unsigned int shaderId);
-		unsigned int GetSolidShaderId();
-		unsigned int GetTextureShaderId();
+		void UseShaderId(uint shaderId);
+		uint GetSolidShaderId();
+		uint GetTextureShaderId();
 		void CleanShaderId();
 
-		void BindBuffer(unsigned int& VAO, unsigned int& VBO, int tam, float* vertices);
-		void BindIndexs(unsigned int& EBO, int tam, unsigned int* indexs);
-		void BindTextureBuffer(unsigned int& VBO, int tam, float* vertices);
+		void BindBuffer(uint& VAO, uint& VBO, int tam, float* vertices);
+		void BindIndexs(uint& EBO, int tam, uint* indexs);
+		void BindTextureBuffer(uint& VBO, int tam, float* vertices);
 		void BindBaseAttrib();
 		void BindExtraAttrib();
-		void UnBind(unsigned int& VAO, unsigned int& VBO, unsigned int& EBO);
+		void UnBind(uint& VAO, uint& VBO, uint& EBO);
 
 		void SetUniform(uint shaderId, uint& uniform, const char* loc);
+		void UpdateMVP(glm::mat4 model, uint uniformModel, uint uniformView, uint uniformProjection);
+		void UpdateColor(glm::vec4 color, uint uniformColor, uint uniformAlpha);
+		void UpdateTexture(uint textureId, uint uniformTexture);
 
-		void SetShader(unsigned int shaderId, glm::vec4 color);
-		void SetShader(unsigned int shaderId, glm::vec4 color, unsigned int textureId);
+		void SetShader(uint shaderId, glm::vec4 color);
+		void SetShader(uint shaderId, glm::vec4 color, uint textureId);
 
 		void SetView(glm::mat4 view);
 		void SetProjection(glm::mat4 projection);
 
-		void Draw(glm::mat4 model, unsigned int VAO, unsigned int VBO, unsigned int& EBO, unsigned int vertices, unsigned int tamVerts, float* vertexs, unsigned int shaderId);
+		void Draw(uint VAO, uint VBO, uint& EBO, uint vertices, uint tamVerts, float* vertexs);
 		void SetClearColor(float r, float g, float b, float a);
 		void ClearScreen();
 		void PostRender(Window* window);

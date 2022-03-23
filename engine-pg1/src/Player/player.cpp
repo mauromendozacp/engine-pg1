@@ -56,6 +56,7 @@ namespace GameXD
 	void Player::Update()
 	{
 		Inputs();
+		sprite->Update();
 	}
 
 	void Player::Draw()

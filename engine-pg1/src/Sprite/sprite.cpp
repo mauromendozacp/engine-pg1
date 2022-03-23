@@ -5,16 +5,20 @@ namespace GL
 {
 	Sprite::Sprite() : Entity2D()
 	{
+		uniformTexture = 0;
 		textureData = nullptr;
 		anim = std::vector<Animation*>();
 		animIndex = 0;
+		currFrame = Frame();
 	}
 
 	Sprite::Sprite(Render* render) : Entity2D(render)
 	{
+		uniformTexture = 0;
 		textureData = nullptr;
 		anim = std::vector<Animation*>();
 		animIndex = 0;
+		currFrame = Frame();
 	}
 
 	Sprite::~Sprite()
@@ -55,9 +59,11 @@ namespace GL
 	{
 		unsigned int shaderId = render->GetTextureShaderId();
 		render->UseShaderId(shaderId);
-		Update();
-		render->SetShader(shaderId, color, textureData->id);
-		render->Draw(matrix.model, VAO, VBO, EBO, vertices, tam, textureVertex, shaderId);
+		render->UpdateMVP(matrix.model, uniformModel, uniformView, uniformProjection);
+		render->UpdateColor(color, uniformColor, uniformAlpha);
+		render->UpdateTexture(textureData->id, uniformTexture);
+
+		render->Draw(VAO, VBO, EBO, vertices, tam, textureVertex);
 	}
 
 	void Sprite::DeInit()

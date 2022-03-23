@@ -32,17 +32,17 @@ namespace GL
 		textureShader->CreateShader("../src/ShadersCode/TextureVertex.shader", "../src/ShadersCode/TextureFragment.shader");
 	}
 
-	void Render::UseShaderId(unsigned int shaderId)
+	void Render::UseShaderId(uint shaderId)
 	{
 		glUseProgram(shaderId);
 	}
 
-	unsigned int Render::GetSolidShaderId()
+	uint Render::GetSolidShaderId()
 	{
 		return solidShader->GetShader();
 	}
 
-	unsigned int Render::GetTextureShaderId()
+	uint Render::GetTextureShaderId()
 	{
 		return textureShader->GetShader();
 	}
@@ -64,7 +64,7 @@ namespace GL
 		glDepthFunc(GL_LESS);
 	}
 
-	void Render::BindBuffer(unsigned int& VAO, unsigned int& VBO, int tam, float* vertices)
+	void Render::BindBuffer(uint& VAO, uint& VBO, int tam, float* vertices)
 	{
 		glGenVertexArrays(1, &VAO);
 		glGenBuffers(1, &VBO);
@@ -75,7 +75,7 @@ namespace GL
 		glBufferData(GL_ARRAY_BUFFER, tam, vertices, GL_STATIC_DRAW);
 	}
 
-	void Render::BindIndexs(unsigned int& EBO, int tam, unsigned int* indexs)
+	void Render::BindIndexs(uint& EBO, int tam, uint* indexs)
 	{
 		glGenBuffers(1, &EBO);
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
@@ -102,7 +102,7 @@ namespace GL
 		glEnableVertexAttribArray(2);
 	}
 
-	void Render::UnBind(unsigned int& VAO, unsigned int& VBO, unsigned int& EBO)
+	void Render::UnBind(uint& VAO, uint& VBO, uint& EBO)
 	{
 		glDeleteVertexArrays(1, &VAO);
 		glDeleteBuffers(1, &VBO);
@@ -114,7 +114,26 @@ namespace GL
 		uniform = glGetUniformLocation(shaderId, loc);
 	}
 
-	void Render::SetShader(unsigned int shaderId, glm::vec4 color)
+	void Render::UpdateMVP(glm::mat4 model, uint uniformModel, uint uniformView, uint uniformProjection)
+	{
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		glUniformMatrix4fv(uniformView, 1, GL_FALSE, glm::value_ptr(view));
+		glUniformMatrix4fv(uniformProjection, 1, GL_FALSE, glm::value_ptr(projection));
+	}
+
+	void Render::UpdateColor(glm::vec4 color, uint uniformColor, uint uniformAlpha)
+	{
+		glUniform3fv(uniformColor, 1, glm::value_ptr(glm::vec3(color.r, color.g, color.b)));
+		glUniform1fv(uniformAlpha, 1, &(color.a));
+	}
+
+	void Render::UpdateTexture(uint textureId, uint uniformTexture)
+	{
+		glBindTexture(GL_TEXTURE_2D, textureId);
+		glUniform1f(uniformTexture, (GLfloat)textureId);
+	}
+
+	void Render::SetShader(uint shaderId, glm::vec4 color)
 	{
 		glm::vec3 newColor = glm::vec3(color.r, color.g, color.b);
 		unsigned int colorLoc = glGetUniformLocation(shaderId, "color");
@@ -124,7 +143,7 @@ namespace GL
 		glUniform1fv(alphaLoc, 1, &(color.a));
 	}
 
-	void Render::SetShader(unsigned int shaderId, glm::vec4 color, unsigned int textureId)
+	void Render::SetShader(uint shaderId, glm::vec4 color, uint textureId)
 	{
 		glBindTexture(GL_TEXTURE_2D, textureId);
 
@@ -144,28 +163,19 @@ namespace GL
 		this->projection = projection;
 	}
 
-	void Render::BindTextureBuffer(unsigned int& VBO, int tam, float* vertices)
+	void Render::BindTextureBuffer(uint& VBO, int tam, float* vertices)
 	{
 		glGenBuffers(tam, &VBO);
 		glBindBuffer(GL_ARRAY_BUFFER, VBO);
 		glBufferData(GL_ARRAY_BUFFER, tam, vertices, GL_STATIC_DRAW);
 	}
 
-	void Render::Draw(glm::mat4 model, unsigned int VAO, unsigned int VBO, unsigned int& EBO, unsigned int vertices, unsigned int tamVerts, float *vertexs, unsigned int shaderId)
+	void Render::Draw(uint VAO, uint VBO, uint& EBO, uint vertices, uint tamVerts, float *vertexs)
 	{
 		glBindVertexArray(VAO);
 		glBindBuffer(GL_ARRAY_BUFFER, VBO);
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
 		glBufferData(GL_ARRAY_BUFFER, tamVerts, vertexs, GL_STATIC_DRAW);
-
-		unsigned int modelLoc = glGetUniformLocation(shaderId, "model");
-		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
-
-		unsigned int viewLoc = glGetUniformLocation(shaderId, "view");
-		glUniformMatrix4fv(viewLoc, 1, GL_FALSE, glm::value_ptr(view));
-
-		unsigned int projectionLoc = glGetUniformLocation(shaderId, "projection");
-		glUniformMatrix4fv(projectionLoc, 1, GL_FALSE, glm::value_ptr(projection));
 
 		if (vertices == 3)
 			glDrawArrays(GL_TRIANGLES, 0, vertices);

@@ -73,7 +73,7 @@ namespace GL
 
 	void Entity2D::Draw(unsigned int shaderId)
 	{
-		render->Draw(matrix.model, VAO, VBO, EBO, vertices, tam, vertexs, shaderId);
+		render->Draw(VAO, VBO, EBO, vertices, tam, vertexs);
 	}
 
 	void Entity2D::DeInit()

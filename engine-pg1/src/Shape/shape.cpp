@@ -131,7 +131,9 @@ namespace GL
 	{
 		unsigned int shaderId = render->GetSolidShaderId();
 		render->UseShaderId(shaderId);
-		render->SetShader(shaderId, color);
+		render->UpdateMVP(matrix.model, uniformModel, uniformView, uniformProjection);
+		render->UpdateColor(color, uniformColor, uniformAlpha);
+
 		Entity2D::Draw(shaderId);
 	}
 }
