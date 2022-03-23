@@ -81,6 +81,8 @@ namespace GL
 		uint uniformView;
 		uint uniformProjection;
 
+		virtual void SetUniforms(uint shaderId);
+
 		glm::quat EulerToQuat(glm::vec3 euler);
 		glm::vec3 QuatToVec(glm::quat quat, glm::vec3 euler);
 

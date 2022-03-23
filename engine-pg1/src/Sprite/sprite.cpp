@@ -23,6 +23,8 @@ namespace GL
 
 	void Sprite::Init()
 	{
+		SetUniforms(render->GetTextureShaderId());
+
 		unsigned int indexes[]
 		{
 			0, 1, 3,
@@ -158,5 +160,11 @@ namespace GL
 		vertexs[15] = uvCoords[3];
 		vertexs[23] = uvCoords[5];
 		vertexs[31] = uvCoords[7];
+	}
+
+	void Sprite::SetUniforms(uint shaderId)
+	{
+		Entity2D::SetUniforms(shaderId);
+		render->SetUniform(shaderId, uniformTexture, "outTexture");
 	}
 }

@@ -29,6 +29,7 @@ namespace GL
 		void UseShaderId(unsigned int shaderId);
 		unsigned int GetSolidShaderId();
 		unsigned int GetTextureShaderId();
+		void CleanShaderId();
 
 		void BindBuffer(unsigned int& VAO, unsigned int& VBO, int tam, float* vertices);
 		void BindIndexs(unsigned int& EBO, int tam, unsigned int* indexs);
@@ -36,6 +37,8 @@ namespace GL
 		void BindBaseAttrib();
 		void BindExtraAttrib();
 		void UnBind(unsigned int& VAO, unsigned int& VBO, unsigned int& EBO);
+
+		void SetUniform(uint shaderId, uint& uniform, const char* loc);
 
 		void SetShader(unsigned int shaderId, glm::vec4 color);
 		void SetShader(unsigned int shaderId, glm::vec4 color, unsigned int textureId);

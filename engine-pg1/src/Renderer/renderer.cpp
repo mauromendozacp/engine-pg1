@@ -47,6 +47,11 @@ namespace GL
 		return textureShader->GetShader();
 	}
 
+	void Render::CleanShaderId()
+	{
+		glUseProgram(0);
+	}
+
 	void Render::SetBlend()
 	{
 		glEnable(GL_BLEND);
@@ -102,6 +107,11 @@ namespace GL
 		glDeleteVertexArrays(1, &VAO);
 		glDeleteBuffers(1, &VBO);
 		glDeleteBuffers(1, &EBO);
+	}
+
+	void Render::SetUniform(uint shaderId, uint& uniform, const char* loc)
+	{
+		uniform = glGetUniformLocation(shaderId, loc);
 	}
 
 	void Render::SetShader(unsigned int shaderId, glm::vec4 color)

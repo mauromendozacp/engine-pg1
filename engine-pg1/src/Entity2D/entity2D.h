@@ -27,9 +27,14 @@ namespace GL
 	protected:
 		glm::vec4 color;
 
+		uint uniformColor;
+		uint uniformAlpha;
+
 		uint VAO, VBO, EBO, tam, vertices;
 		float* vertexs;
 		bool hasCollider, moveable;
+
+		void SetUniforms(uint shaderId);
 	};
 }
 

@@ -88,6 +88,8 @@ namespace GL
 
 	void Shape::Init(SHAPE_TYPE shapeType)
 	{
+		SetUniforms(render->GetSolidShaderId());
+
 		unsigned int* indexes;
 
 		switch (shapeType)

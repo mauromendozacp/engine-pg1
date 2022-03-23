@@ -80,4 +80,11 @@ namespace GL
 	{
 		render->UnBind(VAO, VBO, EBO);
 	}
+
+	void Entity2D::SetUniforms(uint shaderId)
+	{
+		Entity::SetUniforms(shaderId);
+		render->SetUniform(shaderId, uniformColor, "color");
+		render->SetUniform(shaderId, uniformAlpha, "a");
+	}
 }
