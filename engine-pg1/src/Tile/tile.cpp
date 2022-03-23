@@ -2,7 +2,7 @@
 
 namespace GL
 {
-	Tile::Tile() : Sprite()
+	Tile::Tile()
 	{
 		id = 0;
 		isWalkeable = false;

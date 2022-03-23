@@ -46,8 +46,8 @@ namespace GL
 		{
 			do
 			{
-				glm::vec3 director = glm::normalize(entity2->GetPivot() - entity1->GetPivot()); //Genero el vector director para saber hacia donde puedo
-				entity2->SetPos(entity2->GetPivot() + director * overlapSpeed);
+				glm::vec3 director = glm::normalize(entity2->GetPos() - entity1->GetPos()); //Genero el vector director para saber hacia donde puedo
+				entity2->SetPos(entity2->GetPos() + director * overlapSpeed);
 			} while (CheckCollisionRecRec(entity1, entity2));
 		}
 	}
