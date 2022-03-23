@@ -2,6 +2,7 @@
 #define INPUT_H
 
 #include "Window/window.h"
+#include "Camera/camera.h"
 #include "../glm/ext/matrix_transform.hpp"
 #include "keycodes.h"
 #include <list>
@@ -10,22 +11,29 @@ namespace GL
 {
 	class GRAPHICSENGINE_API Input
 	{
+		static Window* window;
+		static Camera* camera;
+
+		static std::list<int> currentKeysDown;
+		static glm::vec2 lastPos;
+		static glm::vec2 offsetPos;
+		static bool firstMouse;
+
 	public:
-		Input(Window* window);
+		Input();
 		~Input();
-		void Init();
-		bool IsKeyPressed(int keycode);
-		bool IsKeyDown(int keycode);
 
-		float GetFOV();
-		glm::vec2 GetLastPosition();
-		glm::vec2 GetOffsetPosition();
+		static void Init(Window* wind, Camera* cam);
+		static void SetCamera(Camera* cam);
+		static bool IsKeyPressed(int keycode);
+		static bool IsKeyDown(int keycode);
 
-		void SetFOV(float fovValue);
-		void SetOffsetPosition(glm::vec2 offsetPos);
+		static void KeyCallback(GLFWwindow* window, int key, int scancode, int action, int mods);
+		static void MouseCallback(GLFWwindow* window, double posX, double posY);
+		static void ScrollCallback(GLFWwindow* window, double xoffset, double yoffset);
 
 	private:
-		Window* window;
+		
 	};
 }
 

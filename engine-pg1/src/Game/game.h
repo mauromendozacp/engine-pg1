@@ -25,7 +25,6 @@ namespace GameXD
 
 	private:
 		Player* player;
-		Camera* camera;
 		Sprite* floor;
 		Shape* cube;
 	};

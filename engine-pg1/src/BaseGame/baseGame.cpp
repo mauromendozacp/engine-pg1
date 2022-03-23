@@ -6,7 +6,7 @@ namespace GL
 	{
 		window = nullptr;
 		render = nullptr;
-		input = nullptr;
+		mainCamera = nullptr;
 		timer = nullptr;
 	}
 
@@ -24,10 +24,10 @@ namespace GL
 			render = nullptr;
 		}
 
-		if (input != nullptr)
+		if (mainCamera != nullptr)
 		{
-			delete input;
-			input = nullptr;
+			delete mainCamera;
+			mainCamera = nullptr;
 		}
 
 		if (timer != nullptr)
@@ -68,11 +68,12 @@ namespace GL
 			std::cout << "ERROR" << std::endl;
 
 		render = new Render();
-		input = new Input(window);
+		mainCamera = new Camera(render);
 		timer = new Timer();
 
 		render->Init();
-		input->Init();
+		mainCamera->Init(45.f, window->GetWidth(), window->GetHeight(), 0.1f, 100.f);
+		Input::Init(window, mainCamera);
 
 		Init();
 	}

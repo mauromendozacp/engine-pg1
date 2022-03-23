@@ -3,7 +3,6 @@
 
 #include "exports.h"
 #include "Renderer/renderer.h"
-#include "Input/input.h"
 
 namespace GL
 {
@@ -17,16 +16,16 @@ namespace GL
 	class GRAPHICSENGINE_API Camera
 	{
 	public:
-		Camera(Render* render, Input* input);
+		Camera(Render* render);
 		~Camera();
 
 		void Init(float fov, float width, float height, float near, float far);
-		void Update();
 
 		void SetData(glm::vec3 pos, float sensitivity);
 		void SetCameraType(CAMERA_TYPE cameraType);
 		void SetFocus(glm::vec3 target, float distance);
 		void SetPosition(glm::vec3 pos);
+		void Rotate();
 		void Reset();
 
 		glm::vec3 GetPosition();
@@ -36,9 +35,20 @@ namespace GL
 		glm::mat4 GetView();
 		glm::mat4 GetProjection();
 
+		void SetFOV(float fov);
+		float GetFOV();
+
+		void SetSensitivity(float sensitivity);
+		float GetSensitivity();
+
+		void SetYaw(float yaw);
+		float GetYaw();
+
+		void SetPitch(float pitch);
+		float GetPitch();
+
 	private:
 		Render* render;
-		Input* input;
 
 		glm::mat4 view;
 		glm::mat4 projection;
@@ -61,9 +71,7 @@ namespace GL
 
 		float sensitivity;
 
-		void Rotate();
-		void Zoom();
-
+		void UpdateDirection();
 		void UpdateView();
 		void UpdateProjection();
 	};

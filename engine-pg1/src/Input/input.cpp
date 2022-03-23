@@ -2,34 +2,36 @@
 
 namespace GL
 {
-	void KeyCallback(GLFWwindow* window, int key, int scancode, int action, int mods);
-	void MouseCallback(GLFWwindow* window, double posX, double posY);
-	void ScrollCallback(GLFWwindow* window, double xoffset, double yoffset);
+	Window* Input::window = nullptr;
+	Camera* Input::camera = nullptr;
 
-	std::list<int> currentKeysDown;
-	glm::vec2 lastPos;
-	glm::vec2 offsetPos;
-	float fov;
-	bool firstMouse;
+	std::list<int> Input::currentKeysDown = std::list<int>();
+	glm::vec2 Input::lastPos = glm::vec2(0.f);
+	glm::vec2 Input::offsetPos = glm::vec2(0.f);
+	bool Input::firstMouse = true;
 
-	Input::Input(Window* window)
+	Input::Input()
 	{
-		this->window = window;
 	}
 
 	Input::~Input()
 	{
 	}
 
-	void Input::Init()
+	void Input::Init(Window* wind, Camera* cam)
 	{
-		firstMouse = true;
-		fov = 0.f;
+		window = wind;
+		SetCamera(cam);
 
 		glfwSetKeyCallback(window->GetWindow(), KeyCallback);
 		glfwSetCursorPosCallback(window->GetWindow(), MouseCallback);
 		glfwSetInputMode(window->GetWindow(), GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 		glfwSetScrollCallback(window->GetWindow(), ScrollCallback);
+	}
+
+	void Input::SetCamera(Camera* cam)
+	{
+		camera = cam;
 	}
 
 	bool Input::IsKeyPressed(int keycode)
@@ -49,32 +51,7 @@ namespace GL
 		return false;
 	}
 
-	float Input::GetFOV()
-	{
-		return fov;
-	}
-
-	glm::vec2 Input::GetLastPosition()
-	{
-		return lastPos;
-	}
-
-	glm::vec2 Input::GetOffsetPosition()
-	{
-		return offsetPos;
-	}
-
-	void Input::SetFOV(float fovValue)
-	{
-		fov = fovValue;
-	}
-
-	void Input::SetOffsetPosition(glm::vec2 offset)
-	{
-		offsetPos = offset;
-	}
-
-	void KeyCallback(GLFWwindow* window, int key, int scancode, int action, int mods)
+	void Input::KeyCallback(GLFWwindow* window, int key, int scancode, int action, int mods)
 	{
 		if (action == GLFW_PRESS)
 		{
@@ -86,7 +63,7 @@ namespace GL
 		}
 	}
 
-	void MouseCallback(GLFWwindow* window, double posX, double posY)
+	void Input::MouseCallback(GLFWwindow* window, double posX, double posY)
 	{
 		if (firstMouse)
 		{
@@ -100,14 +77,22 @@ namespace GL
 
 		lastPos.x = posX;
 		lastPos.y = posY;
+
+		offsetPos.x *= camera->GetSensitivity();
+		offsetPos.y *= camera->GetSensitivity();
+
+		camera->SetYaw(camera->GetYaw() + offsetPos.x);
+		camera->SetPitch(camera->GetPitch() + offsetPos.y);
+
+		camera->Rotate();
 	}
 
-	void ScrollCallback(GLFWwindow* window, double xoffset, double yoffset)
+	void Input::ScrollCallback(GLFWwindow* window, double xoffset, double yoffset)
 	{
-		fov -= (float)yoffset;
-		if (fov < 1.0f)
-			fov = 1.0f;
-		if (fov > 45.0f)
-			fov = 45.0f;
+		camera->SetFOV(camera->GetFOV() - (float)yoffset);
+		if (camera->GetFOV() < 1.0f)
+			camera->SetFOV(1.0f);
+		if (camera->GetFOV() > 45.0f)
+			camera->SetFOV(45.0f);
 	}
 }

@@ -5,7 +5,6 @@ namespace GameXD
 	Game::Game()
 	{
 		player = nullptr;
-		camera = nullptr;
 		floor = nullptr;
 		cube = nullptr;
 	}
@@ -16,11 +15,6 @@ namespace GameXD
 		{
 			delete player;
 			player = nullptr;
-		}
-		if (camera != nullptr)
-		{
-			delete camera;
-			camera = nullptr;
 		}
 		if (floor != nullptr)
 		{
@@ -39,14 +33,12 @@ namespace GameXD
 		render->SetBlend();
 		render->SetDepth();
 
-		camera = new GL::Camera(render, input);
-		player = new Player(camera, input, timer);
+		player = new Player(mainCamera, timer);
 		player->Init(render, 5.f, 75.f, "../res/Textures/player.png");
 
-		camera->Init(45.f, window->GetWidth(), window->GetHeight(), 0.1f, 100.f);
-		camera->SetData(player->GetPos(), 0.25f);
-		camera->SetCameraType(GL::CAMERA_TYPE::TPS);
-		camera->SetFocus(player->GetPos(), 10.f);
+		mainCamera->SetData(player->GetPos(), 0.25f);
+		mainCamera->SetCameraType(GL::CAMERA_TYPE::TPS);
+		mainCamera->SetFocus(player->GetPos(), 10.f);
 
 		floor = new GL::Sprite(render);
 		floor->Init();
@@ -64,7 +56,6 @@ namespace GameXD
 	void Game::Update()
 	{
 		player->Update();
-		camera->Update();
 	}
 
 	void Game::Draw()

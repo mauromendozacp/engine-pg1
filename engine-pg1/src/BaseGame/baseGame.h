@@ -3,6 +3,7 @@
 
 #include "exports.h"
 #include "Renderer/renderer.h"
+#include "Camera/camera.h"
 #include "Input/input.h"
 #include "Timer/timer.h"
 #include "Collision/collision.h"
@@ -19,7 +20,7 @@ namespace GL
 	protected:
 		Window* window;
 		Render* render;
-		Input* input;
+		Camera* mainCamera;
 		Timer* timer;
 		std::string title;
 

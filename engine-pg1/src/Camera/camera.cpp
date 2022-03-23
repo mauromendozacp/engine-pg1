@@ -2,16 +2,16 @@
 
 namespace GL
 {
-	Camera::Camera(Render* render, Input* input)
+	Camera::Camera(Render* render)
 	{
 		this->render = render;
-		this->input = input;
 
 		view = glm::mat4(1.0f);
 		projection = glm::mat4(1.0f);
 
 		cameraType = CAMERA_TYPE::FPS;
 		target = glm::vec3(0.f);
+		distance = 0.f;
 
 		pos = glm::vec3(0.0f);
 		front = glm::vec3(0.0f);
@@ -34,8 +34,8 @@ namespace GL
 
 	void Camera::Init(float fov, float width, float height, float near, float far)
 	{
-		front = glm::vec3(0.0f, 0.0f, -1.0f);
-		up = glm::vec3(0.0f, 1.0f, 0.0f);
+		front = glm::vec3(0.f, 0.f, -1.f);
+		up = glm::vec3(0.f, 1.f, 0.f);
 		aspect = width / height;
 		this->fov = fov;
 		this->near = near;
@@ -43,21 +43,12 @@ namespace GL
 
 		UpdateView();
 		UpdateProjection();
-		input->SetFOV(fov);
-	}
-
-	void Camera::Update()
-	{
-		Rotate();
-		Zoom();
 	}
 
 	void Camera::SetData(glm::vec3 pos, float sensitivity)
 	{
 		this->pos = pos;
 		this->sensitivity = sensitivity;
-
-		UpdateView();
 	}
 
 	void Camera::SetCameraType(CAMERA_TYPE cameraType)
@@ -69,6 +60,8 @@ namespace GL
 	{
 		this->target = target;
 		this->distance = distance;
+
+		UpdateDirection();
 	}
 
 	void Camera::SetPosition(glm::vec3 pos)
@@ -87,7 +80,7 @@ namespace GL
 			break;
 		}
 
-		UpdateView();
+		UpdateDirection();
 	}
 
 	glm::vec3 Camera::GetPosition()
@@ -115,33 +108,77 @@ namespace GL
 		return projection;
 	}
 
+	void Camera::SetFOV(float fov)
+	{
+		this->fov = fov;
+		UpdateProjection();
+	}
+
+	float Camera::GetFOV()
+	{
+		return fov;
+	}
+
+	void Camera::SetSensitivity(float sensitivity)
+	{
+		this->sensitivity = sensitivity;
+	}
+
+	float Camera::GetSensitivity()
+	{
+		return sensitivity;
+	}
+
+	void Camera::SetYaw(float yaw)
+	{
+		this->yaw = yaw;
+	}
+
+	float Camera::GetYaw()
+	{
+		return yaw;
+	}
+
+	void Camera::SetPitch(float pitch)
+	{
+		this->pitch = pitch;
+	}
+
+	float Camera::GetPitch()
+	{
+		return pitch;
+	}
+
 	void Camera::Rotate()
 	{
-		glm::vec2 offsetPos = input->GetOffsetPosition();
-		offsetPos.x *= sensitivity;
-		offsetPos.y *= sensitivity;
-		input->SetOffsetPosition(offsetPos);
-
-		yaw += offsetPos.x;
-		pitch += offsetPos.y;
-
 		if (pitch > 89.0f)
 			pitch = 89.0f;
 		if (pitch < -89.0f)
 			pitch = -89.0f;
 
+		UpdateDirection();
+	}
+
+	void Camera::Reset()
+	{
+		pos = glm::vec3(0.f);
+		UpdateView();
+	}
+
+	void Camera::UpdateDirection()
+	{
 		glm::vec3 direction;
 		direction.x = cos(glm::radians(yaw)) * cos(glm::radians(pitch));
 		direction.y = sin(glm::radians(pitch));
 		direction.z = sin(glm::radians(yaw)) * cos(glm::radians(pitch));
 		front = glm::normalize(direction);
-		
+
 		switch (cameraType)
 		{
 		case GL::CAMERA_TYPE::FPS:
 			break;
 		case GL::CAMERA_TYPE::TPS:
-			pos = target - glm::normalize(direction) * distance;
+			pos = target - front * distance;
 			break;
 		case GL::CAMERA_TYPE::TOP_DOWN:
 			break;
@@ -149,21 +186,6 @@ namespace GL
 			break;
 		}
 
-		UpdateView();
-	}
-
-	void Camera::Zoom()
-	{
-		if (fov != input->GetFOV())
-		{
-			fov = input->GetFOV();
-			UpdateProjection();
-		}
-	}
-
-	void Camera::Reset()
-	{
-		pos = glm::vec3(0.f);
 		UpdateView();
 	}
 
