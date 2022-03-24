@@ -7,7 +7,6 @@ namespace GL
 
 	std::list<int> Input::currentKeysDown = std::list<int>();
 	glm::vec2 Input::lastPos = glm::vec2(0.f);
-	glm::vec2 Input::offsetPos = glm::vec2(0.f);
 	bool Input::firstMouse = true;
 
 	Input::Input()
@@ -72,6 +71,7 @@ namespace GL
 			firstMouse = false;
 		}
 
+		glm::vec2 offsetPos;
 		offsetPos.x = posX - lastPos.x;
 		offsetPos.y = lastPos.y - posY;
 

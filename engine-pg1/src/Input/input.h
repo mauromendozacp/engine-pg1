@@ -16,7 +16,6 @@ namespace GL
 
 		static std::list<int> currentKeysDown;
 		static glm::vec2 lastPos;
-		static glm::vec2 offsetPos;
 		static bool firstMouse;
 
 	public:
