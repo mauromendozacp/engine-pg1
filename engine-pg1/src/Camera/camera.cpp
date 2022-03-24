@@ -43,6 +43,8 @@ namespace GL
 
 		UpdateView();
 		UpdateProjection();
+
+		render->SetUniform(uniformViewPosition, "viewPosition");
 	}
 
 	void Camera::SetData(glm::vec3 pos, float sensitivity)
@@ -81,6 +83,13 @@ namespace GL
 		}
 
 		UpdateDirection();
+	}
+
+	void Camera::UseCamera()
+	{
+		render->UseShader();
+		render->UpdateViewPosition(pos, uniformViewPosition);
+		render->CleanShader();
 	}
 
 	glm::vec3 Camera::GetPosition()

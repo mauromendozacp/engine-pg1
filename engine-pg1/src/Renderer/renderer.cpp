@@ -36,7 +36,7 @@ namespace GL
 		return shader->GetShaderId();
 	}
 
-	void Render::CleanShaderId()
+	void Render::CleanShader()
 	{
 		glUseProgram(0);
 	}
@@ -114,6 +114,11 @@ namespace GL
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 		glUniformMatrix4fv(uniformView, 1, GL_FALSE, glm::value_ptr(view));
 		glUniformMatrix4fv(uniformProjection, 1, GL_FALSE, glm::value_ptr(projection));
+	}
+
+	void Render::UpdateViewPosition(glm::vec3 viewPosition, uint uniformViewPosition)
+	{
+		glUniform3f(uniformViewPosition, viewPosition.x, viewPosition.y, viewPosition.z);
 	}
 
 	void Render::UpdateColor(glm::vec4 baseColor, uint uniformBaseColor, uint uniformAlpha)

@@ -44,6 +44,7 @@ uniform PointLight pointLight;
 uniform sampler2D ourTexture;
 uniform bool useTexture;
 uniform bool affectedLight;
+uniform vec3 viewPosition;
 
 vec3 CalculateDirLight();
 
@@ -80,13 +81,12 @@ vec3 CalculateDirLight()
 
 	float diff = max(dot(norm, lightDir), 0.0f);
 	vec3 diffuse = directionalLight.diffuse * diff;
-	/*vec3 viewDir = normalize(eyePosition - FragPos);
-	vec3 reflectDir = reflect(-lightDir, norm);*/
+	vec3 viewDir = normalize(viewPosition - FragPos);
+	vec3 reflectDir = reflect(-lightDir, norm);
 
-	/*float spec = pow(max(dot(viewDir, reflectDir), 0.0f), material.shininess);
+	float spec = pow(max(dot(viewDir, reflectDir), 0.0f), 32);
 	vec3 specular = directionalLight.specular * spec;
-	vec3 result = (ambient + diffuse + specular) * directionalLight.colour;*/
-	vec3 result = (ambient + diffuse) * color;
+	vec3 result = (ambient + diffuse + specular) * color;
 
 	return result;
 }

@@ -25,6 +25,7 @@ namespace GL
 		void SetCameraType(CAMERA_TYPE cameraType);
 		void SetFocus(glm::vec3 target, float distance);
 		void SetPosition(glm::vec3 pos);
+		void UseCamera();
 		void Rotate();
 		void Reset();
 
@@ -52,6 +53,8 @@ namespace GL
 
 		glm::mat4 view;
 		glm::mat4 projection;
+
+		uint uniformViewPosition;
 
 		CAMERA_TYPE cameraType;
 		glm::vec3 target;

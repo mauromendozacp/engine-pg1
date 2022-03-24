@@ -76,6 +76,7 @@ namespace GameXD
 		cubeLight->Draw();
 		player->Draw();
 
+		mainCamera->UseCamera();
 		directionalLight->UseLight();
 	}
 

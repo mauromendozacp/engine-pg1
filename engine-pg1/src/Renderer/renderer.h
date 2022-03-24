@@ -27,7 +27,7 @@ namespace GL
 
 		void UseShader();
 		uint GetShaderId();
-		void CleanShaderId();
+		void CleanShader();
 
 		void BindBuffer(uint& VAO, uint& VBO, int tam, float* vertices);
 		void BindIndexs(uint& EBO, int tam, uint* indexs);
@@ -40,6 +40,7 @@ namespace GL
 		void SetAttribs(uint uniform, int size, int stride, int offset);
 
 		void UpdateMVP(glm::mat4 model, uint uniformModel, uint uniformView, uint uniformProjection);
+		void UpdateViewPosition(glm::vec3 viewPosition, uint uniformViewPosition);
 		void UpdateColor(glm::vec4 baseColor, uint uniformBaseColor, uint uniformAlpha);
 		void UpdateStatus(bool status, uint uniformStatus);
 		void UpdateLight(glm::vec3 lightColor, uint uniformLightColor);

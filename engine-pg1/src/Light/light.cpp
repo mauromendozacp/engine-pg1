@@ -35,7 +35,7 @@ namespace GL
 		render->UseShader();
 		render->UpdateLight(color, uniformColor);
 		render->UpdateStatus(enabled, uniformEnabled);
-		render->CleanShaderId();
+		render->CleanShader();
 	}
 
 	void Light::SetColor(glm::vec3 color)
