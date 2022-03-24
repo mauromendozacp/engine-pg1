@@ -21,7 +21,7 @@ namespace GL
 		bool IsMoveable();
 		bool HasCollider();
 
-		void Draw(unsigned int shaderId);
+		void Draw();
 		void DeInit();
 
 	protected:

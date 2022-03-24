@@ -40,7 +40,8 @@ namespace GL
 
 		void SetUniform(uint shaderId, uint& uniform, const char* loc);
 		void UpdateMVP(glm::mat4 model, uint uniformModel, uint uniformView, uint uniformProjection);
-		void UpdateColor(glm::vec4 baseColor, glm::vec3 lightColor, uint uniformBaseColor, uint uniformLightColor, uint uniformAlpha);
+		void UpdateColor(glm::vec4 baseColor, uint uniformBaseColor, uint uniformAlpha);
+		void UpdateLight(glm::vec3 lightColor, uint uniformLightColor);
 		void UpdateTexture(uint textureId, uint uniformTexture);
 
 		void SetView(glm::mat4 view);

@@ -134,6 +134,6 @@ namespace GL
 		render->UpdateMVP(matrix.model, uniformModel, uniformView, uniformProjection);
 		render->UpdateColor(color, uniformBaseColor, uniformAlpha);
 
-		Entity2D::Draw(shaderId);
+		Entity2D::Draw();
 	}
 }

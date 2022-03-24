@@ -59,11 +59,14 @@ namespace GameXD
 		cube->SetColor(1.f, 0.f, 1.f, 1.f);
 
 		light = new Light(render);
+		light->Init();
+		light->SetColor(glm::vec3(0.33f, 0.42f, 0.18f));
 	}
 
 	void Game::Update()
 	{
 		player->Update();
+		light->UseLight();
 	}
 
 	void Game::Draw()

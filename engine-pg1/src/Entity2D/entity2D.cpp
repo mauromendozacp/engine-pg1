@@ -71,7 +71,7 @@ namespace GL
 		return hasCollider;
 	}
 
-	void Entity2D::Draw(unsigned int shaderId)
+	void Entity2D::Draw()
 	{
 		render->Draw(VAO, VBO, EBO, vertices, tam, vertexs);
 	}
