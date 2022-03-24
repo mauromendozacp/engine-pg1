@@ -56,10 +56,10 @@ void main()
 		{
 			resultColor = color * light.color;
 		}
-		/*if (directionalLight.enabled == true)
+		if (directionalLight.enabled == true)
 		{
 			resultColor += CalculateDirLight();
-		}*/
+		}
 	}
 	else
 	{
@@ -86,7 +86,7 @@ vec3 CalculateDirLight()
 	/*float spec = pow(max(dot(viewDir, reflectDir), 0.0f), material.shininess);
 	vec3 specular = directionalLight.specular * spec;
 	vec3 result = (ambient + diffuse + specular) * directionalLight.colour;*/
-	vec3 result = (ambient + diffuse) * directionalLight.color;
+	vec3 result = (ambient + diffuse) * color;
 
 	return result;
 }

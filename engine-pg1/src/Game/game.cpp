@@ -6,8 +6,8 @@ namespace GameXD
 	{
 		player = nullptr;
 		floor = nullptr;
-		cube = nullptr;
-		globalLight = nullptr;
+		cubeLight = nullptr;
+		directionalLight = nullptr;
 	}
 
 	Game::~Game()
@@ -22,15 +22,15 @@ namespace GameXD
 			delete floor;
 			floor = nullptr;
 		}
-		if (cube != nullptr)
+		if (cubeLight != nullptr)
 		{
-			delete cube;
-			cube = nullptr;
+			delete cubeLight;
+			cubeLight = nullptr;
 		}
-		if (globalLight != nullptr)
+		if (directionalLight != nullptr)
 		{
-			delete globalLight;
-			globalLight = nullptr;
+			delete directionalLight;
+			directionalLight = nullptr;
 		}
 	}
 
@@ -52,16 +52,17 @@ namespace GameXD
 		floor->SetPos(glm::vec3(0.f, -.5f, 0.f));
 		floor->SetRotX(90.f);
 		floor->SetScale(25.f, 25.f, 1.f);
-		floor->SetAffectedLight(false);
 
-		cube = new GL::Shape(render);
-		cube->Init(GL::SHAPE_TYPE::CUBE);
-		cube->SetPos(glm::vec3(5.f, 2.5f, 0.f));
-		cube->color.SetColor(255, 0, 0);
+		cubeLight = new GL::Shape(render);
+		cubeLight->Init(GL::SHAPE_TYPE::CUBE);
+		cubeLight->SetPos(glm::vec3(5.f, 2.5f, 0.f));
+		cubeLight->color.SetColor(255, 0, 0);
 
-		globalLight = new Light(render);
-		globalLight->Init();
-		globalLight->SetColor(glm::vec3(1.f, 1.f, 1.f));
+		directionalLight = new DirectionalLight(render);
+		directionalLight->Init();
+		directionalLight->SetColor(glm::vec3(0.55f, 0.42f, 0.18f));
+		directionalLight->SetAmbient(glm::vec3(0.75f, 0.75f, 0.75f));
+		directionalLight->SetSpecular(glm::vec3(0.25f, 0.25f, 0.25f));
 	}
 
 	void Game::Update()
@@ -71,11 +72,11 @@ namespace GameXD
 
 	void Game::Draw()
 	{
-		globalLight->UseLight();
-
 		floor->Draw();
-		cube->Draw();
+		cubeLight->Draw();
 		player->Draw();
+
+		directionalLight->UseLight();
 	}
 
 	void Game::DeInit()

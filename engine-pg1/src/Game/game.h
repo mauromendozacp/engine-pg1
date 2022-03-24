@@ -6,6 +6,7 @@
 #include "Camera/camera.h"
 #include "Shape/shape.h"
 #include "Light/light.h"
+#include "DirectionalLight/directionalLight.h"
 #include <iostream>
 
 using namespace GL;
@@ -27,8 +28,9 @@ namespace GameXD
 	private:
 		Player* player;
 		Sprite* floor;
-		Shape* cube;
-		Light* globalLight;
+		Shape* cubeLight;
+
+		DirectionalLight* directionalLight;
 	};
 }
 
