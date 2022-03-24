@@ -57,11 +57,11 @@ namespace GameXD
 		cube = new GL::Shape(render);
 		cube->Init(GL::SHAPE_TYPE::CUBE);
 		cube->SetPos(glm::vec3(5.f, 2.5f, 0.f));
-		cube->SetColor(1.f, 0.f, 1.f, 1.f);
+		cube->color.SetColor(255, 0, 0);
 
 		globalLight = new Light(render);
 		globalLight->Init();
-		globalLight->SetColor(glm::vec3(0.33f, 0.42f, 0.18f));
+		globalLight->SetColor(glm::vec3(1.f, 1.f, 1.f));
 	}
 
 	void Game::Update()

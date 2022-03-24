@@ -2,11 +2,9 @@
 
 namespace GL
 {
-	const float colorValue = 255.f;
-
 	Entity2D::Entity2D() : Entity()
 	{
-		color = glm::vec4(1.f);
+		color = Color();
 
 		uniformColor = 0;
 		uniformAlpha = 0;
@@ -29,7 +27,7 @@ namespace GL
 
 	Entity2D::Entity2D(Render* render) : Entity(render)
 	{
-		color = glm::vec4(1.f);
+		color = Color();
 
 		uniformColor = 0;
 		uniformAlpha = 0;
@@ -58,7 +56,7 @@ namespace GL
 	{
 		render->UseShader();
 		render->UpdateMVP(matrix.model, uniformModel, uniformView, uniformProjection);
-		render->UpdateColor(color, uniformColor, uniformAlpha);
+		render->UpdateColor(color.GetColor(), uniformColor, uniformAlpha);
 		render->UpdateStatus(affectedLight, uniformAffectedLight);
 		render->UpdateUseTexture(useTexture, uniformUseTexture);
 	}
@@ -71,21 +69,6 @@ namespace GL
 	void Entity2D::DeInit()
 	{
 		render->UnBind(VAO, VBO, EBO);
-	}
-
-	void Entity2D::SetColor(glm::vec4 color)
-	{
-		this->color = color;
-	}
-
-	void Entity2D::SetColor(float r, float g, float b, float a)
-	{
-		SetColor({ r, g, b, a });
-	}
-
-	glm::vec4 Entity2D::GetColor()
-	{
-		return color;
 	}
 
 	void Entity2D::SetCollider(bool hasCollider)
@@ -125,10 +108,5 @@ namespace GL
 		render->SetUniform(uniformAlpha, "a");
 		render->SetUniform(uniformUseTexture, "useTexture");
 		render->SetUniform(uniformAffectedLight, "affectedLight");
-	}
-
-	void Entity2D::SetColorRGB(float r, float g, float b, float a)
-	{
-		this->color = glm::vec4(r / color.r, g / color.g, b / color.b, a);
 	}
 }

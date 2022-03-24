@@ -2,6 +2,7 @@
 #define ENTITY2D_H
 
 #include "Entity/entity.h"
+#include "Color/color.h"
 
 namespace GL
 {
@@ -16,10 +17,6 @@ namespace GL
 		void Draw();
 		void DeInit();
 
-		void SetColor(glm::vec4 color);
-		void SetColor(float r, float g, float b, float a);
-		glm::vec4 GetColor();
-
 		void SetCollider(bool hasCollider);
 		void SetMoveable(bool moveable);
 		void SetAffectedLight(bool affectedLight);
@@ -28,9 +25,9 @@ namespace GL
 		bool HasCollider();
 		bool IsAffectedLight();
 
-	protected:
-		glm::vec4 color;
+		Color color;
 
+	protected:
 		uint uniformColor;
 		uint uniformAlpha;
 		uint uniformUseTexture;
@@ -45,7 +42,6 @@ namespace GL
 		bool affectedLight;
 
 		void SetUniforms();
-		void SetColorRGB(float r, float g, float b, float a);
 	};
 }
 
