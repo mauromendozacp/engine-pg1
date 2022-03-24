@@ -2,12 +2,13 @@
 
 namespace GL
 {
+	const float colorValue = 255.f;
+
 	Entity2D::Entity2D() : Entity()
 	{
 		color = glm::vec4(1.f);
 
-		uniformBaseColor = 0;
-		uniformLightColor = 0;
+		uniformColor = 0;
 		uniformAlpha = 0;
 		uniformUseTexture = 0;
 		uniformAffectedLight = 0;
@@ -30,8 +31,7 @@ namespace GL
 	{
 		color = glm::vec4(1.f);
 
-		uniformBaseColor = 0;
-		uniformLightColor = 0;
+		uniformColor = 0;
 		uniformAlpha = 0;
 		uniformUseTexture = 0;
 		uniformAffectedLight = 0;
@@ -58,8 +58,8 @@ namespace GL
 	{
 		render->UseShader();
 		render->UpdateMVP(matrix.model, uniformModel, uniformView, uniformProjection);
-		render->UpdateColor(color, uniformBaseColor, uniformAlpha);
-		render->UpdateAffectedLight(affectedLight, uniformAffectedLight);
+		render->UpdateColor(color, uniformColor, uniformAlpha);
+		render->UpdateStatus(affectedLight, uniformAffectedLight);
 		render->UpdateUseTexture(useTexture, uniformUseTexture);
 	}
 
@@ -121,10 +121,14 @@ namespace GL
 	void Entity2D::SetUniforms()
 	{
 		Entity::SetUniforms();
-		render->SetUniform(uniformBaseColor, "baseColor");
-		render->SetUniform(uniformLightColor, "lightColor");
+		render->SetUniform(uniformColor, "color");
 		render->SetUniform(uniformAlpha, "a");
 		render->SetUniform(uniformUseTexture, "useTexture");
 		render->SetUniform(uniformAffectedLight, "affectedLight");
+	}
+
+	void Entity2D::SetColorRGB(float r, float g, float b, float a)
+	{
+		this->color = glm::vec4(r / color.r, g / color.g, b / color.b, a);
 	}
 }

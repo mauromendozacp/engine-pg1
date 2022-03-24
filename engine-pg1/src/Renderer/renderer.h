@@ -41,7 +41,7 @@ namespace GL
 
 		void UpdateMVP(glm::mat4 model, uint uniformModel, uint uniformView, uint uniformProjection);
 		void UpdateColor(glm::vec4 baseColor, uint uniformBaseColor, uint uniformAlpha);
-		void UpdateAffectedLight(bool affectedLight, uint uniformAffectedLight);
+		void UpdateStatus(bool status, uint uniformStatus);
 		void UpdateLight(glm::vec3 lightColor, uint uniformLightColor);
 		void UpdateTexture(uint textureId, uint uniformTexture);
 		void UpdateUseTexture(bool useTexture, uint uniformUseTexture);

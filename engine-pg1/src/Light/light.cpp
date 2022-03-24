@@ -9,6 +9,7 @@ namespace GL
 		ambient = glm::vec3(0.f);
 		diffuse = glm::vec3(0.f);
 		specular = glm::vec3(0.f);
+		enabled = true;
 
 		uniformColor = 0;
 		uniformPosition = 0;
@@ -16,6 +17,7 @@ namespace GL
 		uniformAmbient = 0;
 		uniformDiffuse = 0;
 		uniformSpecular = 0;
+		uniformEnabled = 0;
 	}
 
 	Light::~Light()
@@ -24,13 +26,15 @@ namespace GL
 
 	void Light::Init()
 	{
-		render->SetUniform(uniformColor, "lightColor");
+		render->SetUniform(uniformColor, "light.color");
+		render->SetUniform(uniformEnabled, "light.enabled");
 	}
 
 	void Light::UseLight()
 	{
 		render->UseShader();
 		render->UpdateLight(color, uniformColor);
+		render->UpdateStatus(enabled, uniformEnabled);
 		render->CleanShaderId();
 	}
 
@@ -59,24 +63,38 @@ namespace GL
 		this->specular = specular;
 	}
 
+	void Light::SetEnabled(bool enabled)
+	{
+		this->enabled = enabled;
+	}
+
 	glm::vec3 Light::GetColor()
 	{
 		return color;
 	}
+
 	glm::vec3 Light::GetDirection()
 	{
 		return direction;
 	}
+
 	glm::vec3 Light::GetAmbient()
 	{
 		return ambient;
 	}
+
 	glm::vec3 Light::GetDiffuse()
 	{
 		return diffuse;
 	}
+
 	glm::vec3 Light::GetSpecular()
 	{
 		return specular;
+	}
+
+	bool Light::IsEnabled()
+	{
+		return enabled;
 	}
 }

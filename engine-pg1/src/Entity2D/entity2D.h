@@ -31,8 +31,7 @@ namespace GL
 	protected:
 		glm::vec4 color;
 
-		uint uniformBaseColor;
-		uint uniformLightColor;
+		uint uniformColor;
 		uint uniformAlpha;
 		uint uniformUseTexture;
 		uint uniformAffectedLight;
@@ -46,6 +45,7 @@ namespace GL
 		bool affectedLight;
 
 		void SetUniforms();
+		void SetColorRGB(float r, float g, float b, float a);
 	};
 }
 

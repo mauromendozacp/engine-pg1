@@ -122,9 +122,9 @@ namespace GL
 		glUniform1fv(uniformAlpha, 1, &(baseColor.a));
 	}
 
-	void Render::UpdateAffectedLight(bool affectedLight, uint uniformAffectedLight)
+	void Render::UpdateStatus(bool status, uint uniformStatus)
 	{
-		glUniform1i(uniformAffectedLight, affectedLight);
+		glUniform1i(uniformStatus, status);
 	}
 
 	void Render::UpdateLight(glm::vec3 lightColor, uint uniformLightColor)

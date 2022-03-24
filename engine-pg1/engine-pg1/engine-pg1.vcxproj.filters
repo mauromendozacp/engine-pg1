@@ -61,6 +61,9 @@
     <ClCompile Include="..\src\Light\light.cpp">
       <Filter>Light</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\DirectionalLight\directionalLight.cpp">
+      <Filter>DirectionalLight</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Window">
@@ -125,6 +128,9 @@
     </Filter>
     <Filter Include="Light">
       <UniqueIdentifier>{7a60f1e0-da31-40e4-ac6b-b8d04eb774a6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DirectionalLight">
+      <UniqueIdentifier>{05bc88f8-1c3c-4db0-8c69-395968d64dcb}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -192,6 +198,9 @@
     </ClInclude>
     <ClInclude Include="..\src\Light\light.h">
       <Filter>Light</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\DirectionalLight\directionalLight.h">
+      <Filter>DirectionalLight</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

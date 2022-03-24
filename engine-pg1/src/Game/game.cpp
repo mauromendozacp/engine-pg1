@@ -7,7 +7,7 @@ namespace GameXD
 		player = nullptr;
 		floor = nullptr;
 		cube = nullptr;
-		light = nullptr;
+		globalLight = nullptr;
 	}
 
 	Game::~Game()
@@ -27,10 +27,10 @@ namespace GameXD
 			delete cube;
 			cube = nullptr;
 		}
-		if (light != nullptr)
+		if (globalLight != nullptr)
 		{
-			delete light;
-			light = nullptr;
+			delete globalLight;
+			globalLight = nullptr;
 		}
 	}
 
@@ -59,19 +59,20 @@ namespace GameXD
 		cube->SetPos(glm::vec3(5.f, 2.5f, 0.f));
 		cube->SetColor(1.f, 0.f, 1.f, 1.f);
 
-		light = new Light(render);
-		light->Init();
-		light->SetColor(glm::vec3(0.33f, 0.42f, 0.18f));
+		globalLight = new Light(render);
+		globalLight->Init();
+		globalLight->SetColor(glm::vec3(0.33f, 0.42f, 0.18f));
 	}
 
 	void Game::Update()
 	{
 		player->Update();
-		light->UseLight();
 	}
 
 	void Game::Draw()
 	{
+		globalLight->UseLight();
+
 		floor->Draw();
 		cube->Draw();
 		player->Draw();

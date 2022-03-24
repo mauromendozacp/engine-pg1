@@ -153,6 +153,7 @@
     <ClCompile Include="..\src\BaseGame\baseGame.cpp" />
     <ClCompile Include="..\src\Camera\camera.cpp" />
     <ClCompile Include="..\src\Collision\collision.cpp" />
+    <ClCompile Include="..\src\DirectionalLight\directionalLight.cpp" />
     <ClCompile Include="..\src\Entity2D\entity2D.cpp" />
     <ClCompile Include="..\src\Entity\entity.cpp" />
     <ClCompile Include="..\src\Frame\frame.cpp" />
@@ -176,6 +177,7 @@
     <ClInclude Include="..\src\BaseGame\baseGame.h" />
     <ClInclude Include="..\src\Camera\camera.h" />
     <ClInclude Include="..\src\Collision\collision.h" />
+    <ClInclude Include="..\src\DirectionalLight\directionalLight.h" />
     <ClInclude Include="..\src\Entity2D\entity2D.h" />
     <ClInclude Include="..\src\Entity\entity.h" />
     <ClInclude Include="..\src\exports.h" />

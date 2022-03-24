@@ -6,24 +6,87 @@ in vec3 FragPos;
 
 out vec4 FragColor;
 
-uniform vec3 baseColor;
-uniform vec3 lightColor;
+struct Light
+{
+	vec3 color;
+	bool enabled;
+};
+
+struct DirectionalLight
+{
+	vec3 color;
+	vec3 direction;
+	vec3 ambient;
+	vec3 diffuse;
+	vec3 specular;
+	bool enabled;
+};
+
+struct PointLight {
+	vec3 color;
+	vec3 position;
+	vec3 ambient;
+	vec3 diffuse;
+	vec3 specular;
+	float constant;
+	float linear;
+	float quadratic;
+	bool enabled;
+};
+
+uniform vec3 color;
 uniform float a;
+
+uniform Light light;
+uniform DirectionalLight directionalLight;
+uniform PointLight pointLight;
 
 uniform sampler2D ourTexture;
 uniform bool useTexture;
 uniform bool affectedLight;
 
+vec3 CalculateDirLight();
+
 void main()
 {
-	vec3 resultColor = vec3(0, 0, 0);
+	vec3 resultColor = vec3(0.0f, 0.0f, 0.0f);
 	if (affectedLight == true)
-		resultColor = baseColor * lightColor;
+	{
+		if (light.enabled == true)
+		{
+			resultColor = color * light.color;
+		}
+		/*if (directionalLight.enabled == true)
+		{
+			resultColor += CalculateDirLight();
+		}*/
+	}
 	else
-		resultColor = baseColor;
+	{
+		resultColor = color;
+	}
 
 	if (useTexture == false)
 		FragColor = vec4(resultColor, a);
 	else
 		FragColor = texture(ourTexture, TexCoord) * vec4(resultColor, a);
+}
+
+vec3 CalculateDirLight()
+{
+	vec3 ambient = directionalLight.ambient;
+	vec3 norm = normalize(Normal);
+	vec3 lightDir = normalize(-directionalLight.direction);
+
+	float diff = max(dot(norm, lightDir), 0.0f);
+	vec3 diffuse = directionalLight.diffuse * diff;
+	/*vec3 viewDir = normalize(eyePosition - FragPos);
+	vec3 reflectDir = reflect(-lightDir, norm);*/
+
+	/*float spec = pow(max(dot(viewDir, reflectDir), 0.0f), material.shininess);
+	vec3 specular = directionalLight.specular * spec;
+	vec3 result = (ambient + diffuse + specular) * directionalLight.colour;*/
+	vec3 result = (ambient + diffuse) * directionalLight.color;
+
+	return result;
 }
