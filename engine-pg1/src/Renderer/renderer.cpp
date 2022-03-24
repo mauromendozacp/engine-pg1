@@ -133,26 +133,6 @@ namespace GL
 		glUniform1f(uniformTexture, (GLfloat)textureId);
 	}
 
-	void Render::SetShader(uint shaderId, glm::vec4 color)
-	{
-		glm::vec3 newColor = glm::vec3(color.r, color.g, color.b);
-		unsigned int colorLoc = glGetUniformLocation(shaderId, "color");
-		glUniform3fv(colorLoc, 1, glm::value_ptr(newColor));
-
-		unsigned int alphaLoc = glGetUniformLocation(shaderId, "a");
-		glUniform1fv(alphaLoc, 1, &(color.a));
-	}
-
-	void Render::SetShader(uint shaderId, glm::vec4 color, uint textureId)
-	{
-		glBindTexture(GL_TEXTURE_2D, textureId);
-
-		SetShader(shaderId, color);
-
-		unsigned int textureLoc = glGetUniformLocation(shaderId, "ourTexture");
-		glUniform1f(textureLoc, (GLfloat)textureId);
-	}
-
 	void Render::SetView(glm::mat4 view)
 	{
 		this->view = view;

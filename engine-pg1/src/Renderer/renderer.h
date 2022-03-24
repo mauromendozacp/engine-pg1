@@ -43,9 +43,6 @@ namespace GL
 		void UpdateColor(glm::vec4 color, uint uniformColor, uint uniformAlpha);
 		void UpdateTexture(uint textureId, uint uniformTexture);
 
-		void SetShader(uint shaderId, glm::vec4 color);
-		void SetShader(uint shaderId, glm::vec4 color, uint textureId);
-
 		void SetView(glm::mat4 view);
 		void SetProjection(glm::mat4 projection);
 
