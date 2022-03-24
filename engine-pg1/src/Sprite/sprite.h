@@ -47,7 +47,7 @@ namespace GL
 		std::vector<Animation*> anim;
 		Frame currFrame;
 
-		void SetUniforms(uint shaderId);
+		void SetUniforms();
 	};
 }
 

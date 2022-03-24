@@ -24,12 +24,12 @@ namespace GL
 
 	void Light::Init()
 	{
-		render->SetUniform(render->GetSolidShaderId(), uniformColor, "lightColor");
+		render->SetUniform(uniformColor, "lightColor");
 	}
 
 	void Light::UseLight()
 	{
-		render->UseShaderId(render->GetSolidShaderId());
+		render->UseShader();
 		render->UpdateLight(color, uniformColor);
 		render->CleanShaderId();
 	}

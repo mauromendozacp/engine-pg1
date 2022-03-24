@@ -127,7 +127,7 @@ namespace GL
 
 	}
 
-	uint Shader::GetShader()
+	uint Shader::GetShaderId()
 	{
 		return shaderId;
 	}

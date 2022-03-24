@@ -31,6 +31,7 @@ namespace GameXD
 		sprite->SetScale(1.f, 1.f, 1.f);
 		sprite->SetMoveable(true);
 		sprite->SetCollider(true);
+		sprite->SetAffectedLight(false);
 
 		GL::AtlasConfig atlas = GL::AtlasConfig(6, 11, 0, 0, 1, 18);
 		sprite->AddAnimation(atlas, 10.f);

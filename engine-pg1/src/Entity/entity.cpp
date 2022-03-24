@@ -214,11 +214,11 @@ namespace GL
 		return transform.scale.z;
 	}
 
-	void Entity::SetUniforms(uint shaderId)
+	void Entity::SetUniforms()
 	{
-		render->SetUniform(shaderId, uniformModel, "model");
-		render->SetUniform(shaderId, uniformView, "view");
-		render->SetUniform(shaderId, uniformProjection, "projection");
+		render->SetUniform(uniformModel, "model");
+		render->SetUniform(uniformView, "view");
+		render->SetUniform(uniformProjection, "projection");
 	}
 
 	glm::quat Entity::EulerToQuat(glm::vec3 euler)

@@ -27,7 +27,7 @@ namespace GL
 
 	void Sprite::Init()
 	{
-		SetUniforms(render->GetTextureShaderId());
+		SetUniforms();
 
 		unsigned int indexes[]
 		{
@@ -57,10 +57,7 @@ namespace GL
 
 	void Sprite::Draw()
 	{
-		unsigned int shaderId = render->GetTextureShaderId();
-		render->UseShaderId(shaderId);
-		render->UpdateMVP(matrix.model, uniformModel, uniformView, uniformProjection);
-		render->UpdateColor(color, uniformBaseColor, uniformAlpha);
+		UpdateShader();
 		render->UpdateTexture(textureData->id, uniformTexture);
 
 		render->Draw(VAO, VBO, EBO, vertices, tam, textureVertex);
@@ -91,6 +88,7 @@ namespace GL
 	{
 		textureData = new TextureData(TextureImporter::LoadTexture(path, invertImage));
 		animIndex = 0;
+		useTexture = true;
 	}
 
 	void Sprite::AddAnimation(AtlasConfig atlas, float speed)
@@ -168,9 +166,9 @@ namespace GL
 		vertexs[31] = uvCoords[7];
 	}
 
-	void Sprite::SetUniforms(uint shaderId)
+	void Sprite::SetUniforms()
 	{
-		Entity2D::SetUniforms(shaderId);
-		render->SetUniform(shaderId, uniformTexture, "outTexture");
+		Entity2D::SetUniforms();
+		render->SetUniform(uniformTexture, "ourTexture");
 	}
 }

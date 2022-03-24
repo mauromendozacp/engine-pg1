@@ -19,7 +19,7 @@ namespace GL
 		void CreateShader(std::string vertexPath, std::string fragmentPath);
 		//Compila, adjunta y linkea los shaders al programa para ser usados más adelante
 
-		uint GetShader();
+		uint GetShaderId();
 		
 	private:
 		uint shaderId;

@@ -12,17 +12,21 @@ namespace GL
 		Entity2D(Render* render);
 		~Entity2D();
 
+		void UpdateShader();
+		void Draw();
+		void DeInit();
+
 		void SetColor(glm::vec4 color);
 		void SetColor(float r, float g, float b, float a);
 		glm::vec4 GetColor();
 
-		void SetCollider(bool col);
-		void SetMoveable(bool mov);
+		void SetCollider(bool hasCollider);
+		void SetMoveable(bool moveable);
+		void SetAffectedLight(bool affectedLight);
+
 		bool IsMoveable();
 		bool HasCollider();
-
-		void Draw();
-		void DeInit();
+		bool IsAffectedLight();
 
 	protected:
 		glm::vec4 color;
@@ -30,12 +34,18 @@ namespace GL
 		uint uniformBaseColor;
 		uint uniformLightColor;
 		uint uniformAlpha;
+		uint uniformUseTexture;
+		uint uniformAffectedLight;
 
 		uint VAO, VBO, EBO, tam, vertices;
 		float* vertexs;
-		bool hasCollider, moveable;
+		bool hasCollider;
+		bool moveable;
 
-		void SetUniforms(uint shaderId);
+		bool useTexture;
+		bool affectedLight;
+
+		void SetUniforms();
 	};
 }
 

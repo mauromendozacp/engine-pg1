@@ -88,7 +88,7 @@ namespace GL
 
 	void Shape::Init(SHAPE_TYPE shapeType)
 	{
-		SetUniforms(render->GetSolidShaderId());
+		SetUniforms();
 
 		unsigned int* indexes;
 
@@ -129,10 +129,7 @@ namespace GL
 
 	void Shape::Draw()
 	{
-		unsigned int shaderId = render->GetSolidShaderId();
-		render->UseShaderId(shaderId);
-		render->UpdateMVP(matrix.model, uniformModel, uniformView, uniformProjection);
-		render->UpdateColor(color, uniformBaseColor, uniformAlpha);
+		UpdateShader();
 
 		Entity2D::Draw();
 	}

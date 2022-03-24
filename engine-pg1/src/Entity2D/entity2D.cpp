@@ -4,7 +4,13 @@ namespace GL
 {
 	Entity2D::Entity2D() : Entity()
 	{
-		color = glm::vec4(1.f, 1.f, 1.f, 1.f);
+		color = glm::vec4(1.f);
+
+		uniformBaseColor = 0;
+		uniformLightColor = 0;
+		uniformAlpha = 0;
+		uniformUseTexture = 0;
+		uniformAffectedLight = 0;
 
 		VAO = 0;
 		VBO = 0;
@@ -15,11 +21,20 @@ namespace GL
 
 		hasCollider = false;
 		moveable = false;
+
+		useTexture = false;
+		affectedLight = true;
 	}
 
 	Entity2D::Entity2D(Render* render) : Entity(render)
 	{
-		color = glm::vec4(1.f, 1.f, 1.f, 1.f);
+		color = glm::vec4(1.f);
+
+		uniformBaseColor = 0;
+		uniformLightColor = 0;
+		uniformAlpha = 0;
+		uniformUseTexture = 0;
+		uniformAffectedLight = 0;
 
 		VAO = 0;
 		VBO = 0;
@@ -30,10 +45,32 @@ namespace GL
 
 		hasCollider = false;
 		moveable = false;
+
+		useTexture = false;
+		affectedLight = true;
 	}
 
 	Entity2D::~Entity2D()
 	{
+	}
+
+	void Entity2D::UpdateShader()
+	{
+		render->UseShader();
+		render->UpdateMVP(matrix.model, uniformModel, uniformView, uniformProjection);
+		render->UpdateColor(color, uniformBaseColor, uniformAlpha);
+		render->UpdateAffectedLight(affectedLight, uniformAffectedLight);
+		render->UpdateUseTexture(useTexture, uniformUseTexture);
+	}
+
+	void Entity2D::Draw()
+	{
+		render->Draw(VAO, VBO, EBO, vertices, tam, vertexs);
+	}
+
+	void Entity2D::DeInit()
+	{
+		render->UnBind(VAO, VBO, EBO);
 	}
 
 	void Entity2D::SetColor(glm::vec4 color)
@@ -51,14 +88,19 @@ namespace GL
 		return color;
 	}
 
-	void Entity2D::SetCollider(bool col)
+	void Entity2D::SetCollider(bool hasCollider)
 	{
-		hasCollider = col;
+		this->hasCollider = hasCollider;
 	}
 
-	void Entity2D::SetMoveable(bool mov)
+	void Entity2D::SetMoveable(bool moveable)
 	{
-		moveable = mov;
+		this->moveable = moveable;
+	}
+
+	void Entity2D::SetAffectedLight(bool affectedLight)
+	{
+		this->affectedLight = affectedLight;
 	}
 
 	bool Entity2D::IsMoveable()
@@ -71,21 +113,18 @@ namespace GL
 		return hasCollider;
 	}
 
-	void Entity2D::Draw()
+	bool Entity2D::IsAffectedLight()
 	{
-		render->Draw(VAO, VBO, EBO, vertices, tam, vertexs);
+		return affectedLight;
 	}
 
-	void Entity2D::DeInit()
+	void Entity2D::SetUniforms()
 	{
-		render->UnBind(VAO, VBO, EBO);
-	}
-
-	void Entity2D::SetUniforms(uint shaderId)
-	{
-		Entity::SetUniforms(shaderId);
-		render->SetUniform(shaderId, uniformBaseColor, "baseColor");
-		render->SetUniform(shaderId, uniformLightColor, "lightColor");
-		render->SetUniform(shaderId, uniformAlpha, "a");
+		Entity::SetUniforms();
+		render->SetUniform(uniformBaseColor, "baseColor");
+		render->SetUniform(uniformLightColor, "lightColor");
+		render->SetUniform(uniformAlpha, "a");
+		render->SetUniform(uniformUseTexture, "useTexture");
+		render->SetUniform(uniformAffectedLight, "affectedLight");
 	}
 }

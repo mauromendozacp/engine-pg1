@@ -12,8 +12,7 @@ namespace GL
 	class GRAPHICSENGINE_API Render
 	{
 	private:
-		Shader* solidShader;
-		Shader* textureShader;
+		Shader* shader;
 
 		glm::mat4 view;
 		glm::mat4 projection;
@@ -26,9 +25,8 @@ namespace GL
 		void SetBlend();
 		void SetDepth();
 
-		void UseShaderId(uint shaderId);
-		uint GetSolidShaderId();
-		uint GetTextureShaderId();
+		void UseShader();
+		uint GetShaderId();
 		void CleanShaderId();
 
 		void BindBuffer(uint& VAO, uint& VBO, int tam, float* vertices);
@@ -38,11 +36,13 @@ namespace GL
 		void BindExtraAttrib();
 		void UnBind(uint& VAO, uint& VBO, uint& EBO);
 
-		void SetUniform(uint shaderId, uint& uniform, const char* loc);
+		void SetUniform(uint& uniform, const char* loc);
 		void UpdateMVP(glm::mat4 model, uint uniformModel, uint uniformView, uint uniformProjection);
 		void UpdateColor(glm::vec4 baseColor, uint uniformBaseColor, uint uniformAlpha);
+		void UpdateAffectedLight(bool affectedLight, uint uniformAffectedLight);
 		void UpdateLight(glm::vec3 lightColor, uint uniformLightColor);
 		void UpdateTexture(uint textureId, uint uniformTexture);
+		void UpdateUseTexture(bool useTexture, uint uniformUseTexture);
 
 		void SetView(glm::mat4 view);
 		void SetProjection(glm::mat4 projection);

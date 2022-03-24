@@ -195,16 +195,10 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\src\ShadersCode\SolidFragment.shader">
+    <None Include="..\src\ShadersCode\fragment.shader">
       <Filter>ShaderCode</Filter>
     </None>
-    <None Include="..\src\ShadersCode\SolidVertex.shader">
-      <Filter>ShaderCode</Filter>
-    </None>
-    <None Include="..\src\ShadersCode\TextureFragment.shader">
-      <Filter>ShaderCode</Filter>
-    </None>
-    <None Include="..\src\ShadersCode\TextureVertex.shader">
+    <None Include="..\src\ShadersCode\vertex.shader">
       <Filter>ShaderCode</Filter>
     </None>
   </ItemGroup>

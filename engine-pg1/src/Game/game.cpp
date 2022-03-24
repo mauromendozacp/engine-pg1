@@ -52,6 +52,7 @@ namespace GameXD
 		floor->SetPos(glm::vec3(0.f, -.5f, 0.f));
 		floor->SetRotX(90.f);
 		floor->SetScale(25.f, 25.f, 1.f);
+		floor->SetAffectedLight(false);
 
 		cube = new GL::Shape(render);
 		cube->Init(GL::SHAPE_TYPE::CUBE);
@@ -79,5 +80,6 @@ namespace GameXD
 	void Game::DeInit()
 	{
 		player->DeInit();
+		floor->DeInit();
 	}
 }

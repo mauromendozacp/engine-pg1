@@ -5,8 +5,7 @@ namespace GL
 {
 	Render::Render()
 	{
-		this->solidShader = new Shader();
-		this->textureShader = new Shader();
+		this->shader = nullptr;
 
 		view = glm::mat4(0.f);
 		projection = glm::mat4(0.f);
@@ -14,37 +13,27 @@ namespace GL
 
 	Render::~Render()
 	{
-		if (solidShader != nullptr)
+		if (shader != nullptr)
 		{
-			delete solidShader;
-			solidShader = nullptr;
-		}
-		if (textureShader != nullptr)
-		{
-			delete textureShader;
-			textureShader = nullptr;
+			delete shader;
+			shader = nullptr;
 		}
 	}
 
 	void Render::Init()
 	{
-		solidShader->CreateShader("../src/ShadersCode/SolidVertex.shader", "../src/ShadersCode/SolidFragment.shader");
-		textureShader->CreateShader("../src/ShadersCode/TextureVertex.shader", "../src/ShadersCode/TextureFragment.shader");
+		shader = new Shader();
+		shader->CreateShader("../src/ShadersCode/vertex.shader", "../src/ShadersCode/fragment.shader");
 	}
 
-	void Render::UseShaderId(uint shaderId)
+	void Render::UseShader()
 	{
-		glUseProgram(shaderId);
+		glUseProgram(GetShaderId());
 	}
 
-	uint Render::GetSolidShaderId()
+	uint Render::GetShaderId()
 	{
-		return solidShader->GetShader();
-	}
-
-	uint Render::GetTextureShaderId()
-	{
-		return textureShader->GetShader();
+		return shader->GetShaderId();
 	}
 
 	void Render::CleanShaderId()
@@ -109,9 +98,9 @@ namespace GL
 		glDeleteBuffers(1, &EBO);
 	}
 
-	void Render::SetUniform(uint shaderId, uint& uniform, const char* loc)
+	void Render::SetUniform(uint& uniform, const char* loc)
 	{
-		uniform = glGetUniformLocation(shaderId, loc);
+		uniform = glGetUniformLocation(GetShaderId(), loc);
 	}
 
 	void Render::UpdateMVP(glm::mat4 model, uint uniformModel, uint uniformView, uint uniformProjection)
@@ -127,6 +116,11 @@ namespace GL
 		glUniform1fv(uniformAlpha, 1, &(baseColor.a));
 	}
 
+	void Render::UpdateAffectedLight(bool affectedLight, uint uniformAffectedLight)
+	{
+		glUniform1i(uniformAffectedLight, affectedLight);
+	}
+
 	void Render::UpdateLight(glm::vec3 lightColor, uint uniformLightColor)
 	{
 		glUniform3fv(uniformLightColor, 1, glm::value_ptr(lightColor));
@@ -136,6 +130,11 @@ namespace GL
 	{
 		glBindTexture(GL_TEXTURE_2D, textureId);
 		glUniform1f(uniformTexture, (GLfloat)textureId);
+	}
+
+	void Render::UpdateUseTexture(bool useTexture, uint uniformUseTexture)
+	{
+		glUniform1i(uniformUseTexture, useTexture);
 	}
 
 	void Render::SetView(glm::mat4 view)
