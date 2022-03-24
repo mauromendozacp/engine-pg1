@@ -103,6 +103,12 @@ namespace GL
 		uniform = glGetUniformLocation(GetShaderId(), loc);
 	}
 
+	void Render::SetAttribs(uint uniform, int size, int stride, int offset)
+	{
+		glVertexAttribPointer(uniform, size, GL_FLOAT, GL_FALSE, stride * sizeof(float), (void*)(offset * sizeof(float)));
+		glEnableVertexAttribArray(uniform);
+	}
+
 	void Render::UpdateMVP(glm::mat4 model, uint uniformModel, uint uniformView, uint uniformProjection)
 	{
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));

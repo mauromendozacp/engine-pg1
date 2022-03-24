@@ -125,6 +125,10 @@ namespace GL
 		render->BindBuffer(VAO, VBO, tam, vertexs);
 		render->BindIndexs(EBO, sizeof(indexes) * vertices, indexes);
 		render->BindBaseAttrib();
+
+		render->SetAttribs(uniformPosition, 3, 8, 0);
+		render->SetAttribs(uniformNormal, 3, 8, 5);
+		render->SetAttribs(uniformTexCoord, 2, 8, 3);
 	}
 
 	void Shape::Draw()

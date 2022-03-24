@@ -37,6 +37,8 @@ namespace GL
 		void UnBind(uint& VAO, uint& VBO, uint& EBO);
 
 		void SetUniform(uint& uniform, const char* loc);
+		void SetAttribs(uint uniform, int size, int stride, int offset);
+
 		void UpdateMVP(glm::mat4 model, uint uniformModel, uint uniformView, uint uniformProjection);
 		void UpdateColor(glm::vec4 baseColor, uint uniformBaseColor, uint uniformAlpha);
 		void UpdateAffectedLight(bool affectedLight, uint uniformAffectedLight);
