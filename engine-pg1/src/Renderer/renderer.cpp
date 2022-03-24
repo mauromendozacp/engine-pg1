@@ -121,10 +121,11 @@ namespace GL
 		glUniformMatrix4fv(uniformProjection, 1, GL_FALSE, glm::value_ptr(projection));
 	}
 
-	void Render::UpdateColor(glm::vec4 color, uint uniformColor, uint uniformAlpha)
+	void Render::UpdateColor(glm::vec4 baseColor, glm::vec3 lightColor, uint uniformBaseColor, uint uniformLightColor, uint uniformAlpha)
 	{
-		glUniform3fv(uniformColor, 1, glm::value_ptr(glm::vec3(color.r, color.g, color.b)));
-		glUniform1fv(uniformAlpha, 1, &(color.a));
+		glUniform3fv(uniformBaseColor, 1, glm::value_ptr(glm::vec3(baseColor.r, baseColor.g, baseColor.b)));
+		glUniform3fv(uniformLightColor, 1, glm::value_ptr(lightColor));
+		glUniform1fv(uniformAlpha, 1, &(baseColor.a));
 	}
 
 	void Render::UpdateTexture(uint textureId, uint uniformTexture)

@@ -7,6 +7,7 @@ namespace GameXD
 		player = nullptr;
 		floor = nullptr;
 		cube = nullptr;
+		light = nullptr;
 	}
 
 	Game::~Game()
@@ -25,6 +26,11 @@ namespace GameXD
 		{
 			delete cube;
 			cube = nullptr;
+		}
+		if (light != nullptr)
+		{
+			delete light;
+			light = nullptr;
 		}
 	}
 
@@ -51,6 +57,8 @@ namespace GameXD
 		cube->Init(GL::SHAPE_TYPE::CUBE);
 		cube->SetPos(glm::vec3(5.f, 2.5f, 0.f));
 		cube->SetColor(1.f, 0.f, 1.f, 1.f);
+
+		light = new Light(render);
 	}
 
 	void Game::Update()

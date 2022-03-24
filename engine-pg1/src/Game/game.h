@@ -5,6 +5,7 @@
 #include "Player/player.h"
 #include "Camera/camera.h"
 #include "Shape/shape.h"
+#include "Light/light.h"
 #include <iostream>
 
 using namespace GL;
@@ -27,6 +28,7 @@ namespace GameXD
 		Player* player;
 		Sprite* floor;
 		Shape* cube;
+		Light* light;
 	};
 }
 

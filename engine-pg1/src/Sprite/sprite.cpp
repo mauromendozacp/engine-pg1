@@ -60,7 +60,7 @@ namespace GL
 		unsigned int shaderId = render->GetTextureShaderId();
 		render->UseShaderId(shaderId);
 		render->UpdateMVP(matrix.model, uniformModel, uniformView, uniformProjection);
-		render->UpdateColor(color, uniformColor, uniformAlpha);
+		render->UpdateColor(color, uniformBaseColor, uniformAlpha);
 		render->UpdateTexture(textureData->id, uniformTexture);
 
 		render->Draw(VAO, VBO, EBO, vertices, tam, textureVertex);

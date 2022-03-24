@@ -84,7 +84,8 @@ namespace GL
 	void Entity2D::SetUniforms(uint shaderId)
 	{
 		Entity::SetUniforms(shaderId);
-		render->SetUniform(shaderId, uniformColor, "color");
+		render->SetUniform(shaderId, uniformBaseColor, "baseColor");
+		render->SetUniform(shaderId, uniformLightColor, "lightColor");
 		render->SetUniform(shaderId, uniformAlpha, "a");
 	}
 }

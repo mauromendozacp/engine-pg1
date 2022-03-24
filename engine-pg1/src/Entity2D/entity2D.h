@@ -27,7 +27,8 @@ namespace GL
 	protected:
 		glm::vec4 color;
 
-		uint uniformColor;
+		uint uniformBaseColor;
+		uint uniformLightColor;
 		uint uniformAlpha;
 
 		uint VAO, VBO, EBO, tam, vertices;
