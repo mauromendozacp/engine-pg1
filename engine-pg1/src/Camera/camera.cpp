@@ -9,11 +9,11 @@ namespace GL
 		view = glm::mat4(1.0f);
 		projection = glm::mat4(1.0f);
 
-		cameraType = CAMERA_TYPE::FPS;
-		target = glm::vec3(0.f);
-		distance = 0.f;
+		uniformViewPosition = 0;
 
-		pos = glm::vec3(0.0f);
+		cameraType = CAMERA_TYPE::FPS;
+		offset = 0.f;
+
 		front = glm::vec3(0.0f);
 		up = glm::vec3(0.0f);
 
@@ -47,40 +47,31 @@ namespace GL
 		render->SetUniform(uniformViewPosition, "viewPosition");
 	}
 
-	void Camera::SetData(glm::vec3 pos, float sensitivity)
+	void Camera::Update()
 	{
-		this->pos = pos;
+		transform.position = target->GetPos();
+		UpdateDirection();
+	}
+
+	void Camera::SetData(Entity* target, float sensitivity, float offset)
+	{
+		this->target = target;
 		this->sensitivity = sensitivity;
+		this->offset = offset;
+
+		UpdateDirection();
 	}
 
 	void Camera::SetCameraType(CAMERA_TYPE cameraType)
 	{
 		this->cameraType = cameraType;
-	}
-
-	void Camera::SetFocus(glm::vec3 target, float distance)
-	{
-		this->target = target;
-		this->distance = distance;
 
 		UpdateDirection();
 	}
 
-	void Camera::SetPosition(glm::vec3 pos)
-	{	
-		switch (cameraType)
-		{
-		case GL::CAMERA_TYPE::FPS:
-			this->pos = pos;
-			break;
-		case GL::CAMERA_TYPE::TPS:
-			target = pos;
-			break;
-		case GL::CAMERA_TYPE::TOP_DOWN:
-			break;
-		default:
-			break;
-		}
+	void Camera::SetTarget(Entity* target)
+	{
+		this->target = target;
 
 		UpdateDirection();
 	}
@@ -88,13 +79,8 @@ namespace GL
 	void Camera::UseCamera()
 	{
 		render->UseShader();
-		render->UpdateViewPosition(pos, uniformViewPosition);
+		render->UpdateViewPosition(transform.position, uniformViewPosition);
 		render->CleanShader();
-	}
-
-	glm::vec3 Camera::GetPosition()
-	{
-		return pos;
 	}
 
 	glm::vec3 Camera::GetFront()
@@ -170,7 +156,7 @@ namespace GL
 
 	void Camera::Reset()
 	{
-		pos = glm::vec3(0.f);
+		transform.position = glm::vec3(0.f);
 		UpdateView();
 	}
 
@@ -182,17 +168,9 @@ namespace GL
 		direction.z = sin(glm::radians(yaw)) * cos(glm::radians(pitch));
 		front = glm::normalize(direction);
 
-		switch (cameraType)
+		if (cameraType == CAMERA_TYPE::TPS)
 		{
-		case GL::CAMERA_TYPE::FPS:
-			break;
-		case GL::CAMERA_TYPE::TPS:
-			pos = target - front * distance;
-			break;
-		case GL::CAMERA_TYPE::TOP_DOWN:
-			break;
-		default:
-			break;
+			transform.position = target->GetPos() - front * offset;
 		}
 
 		UpdateView();
@@ -203,10 +181,10 @@ namespace GL
 		switch (cameraType)
 		{
 		case GL::CAMERA_TYPE::FPS:
-			view = glm::lookAt(pos, pos + front, up);
+			view = glm::lookAt(transform.position, transform.position + front, up);
 			break;
 		case GL::CAMERA_TYPE::TPS:
-			view = glm::lookAt(pos, target, up);
+			view = glm::lookAt(transform.position, target->GetPos(), up);
 			break;
 		case GL::CAMERA_TYPE::TOP_DOWN:
 			break;

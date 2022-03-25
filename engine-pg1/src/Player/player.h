@@ -5,6 +5,8 @@
 #include "Input/input.h"
 #include "Sprite/sprite.h"
 
+using namespace GL;
+
 namespace GameXD
 {
 	enum class STATUS
@@ -19,20 +21,23 @@ namespace GameXD
 	class GRAPHICSENGINE_API Player
 	{
 	public:
-		Player(GL::Camera* camera);
+		Player();
+		Player(Camera* camera);
 		~Player();
 
-		void Init(GL::Render* render, float moveSpeed, float rotSpeed, const char* textureUrl);
+		void Init(Render* render, float moveSpeed, float rotSpeed, const char* textureUrl);
 		void Update();
 		void Draw();
 		void DeInit();
 
-		GL::Sprite* GetSprite();
-		glm::vec3 GetPos();
+		Sprite* GetSprite();
+		
+		void SetPosition(glm::vec3 pos);
+		glm::vec3 GetPosition();
 
 	private:
-		GL::Sprite* sprite;
-		GL::Camera* camera;
+		Sprite* sprite;
+		Camera* camera;
 
 		STATUS status;
 		float moveSpeed;

@@ -2,10 +2,18 @@
 
 namespace GameXD
 {
+	Player::Player()
+	{
+		sprite = nullptr;
+		camera = nullptr;
+		status = STATUS::IDLE;
+		moveSpeed = 0.f;
+		rotSpeed = 0.f;
+	}
+
 	Player::Player(GL::Camera* camera)
 	{
 		this->camera = camera;
-
 		sprite = nullptr;
 		status = STATUS::IDLE;
 		moveSpeed = 0.f;
@@ -75,26 +83,22 @@ namespace GameXD
 	{
 		if (GL::Input::IsKeyPressed(KEY_A) || GL::Input::IsKeyPressed(KEY_LEFT))
 		{
-			sprite->SetPos(GetPos() - glm::normalize(glm::cross(camera->GetFront(), camera->GetUp())) * GetSpeedDelta());
-			camera->SetPosition(GetPos());
+			SetPosition(GetPosition() - glm::normalize(glm::cross(camera->GetFront(), camera->GetUp())) * GetSpeedDelta());
 			ChangeStatus(STATUS::LEFT);
 		}
 		else if (GL::Input::IsKeyPressed(KEY_D) || GL::Input::IsKeyPressed(KEY_RIGHT))
 		{
-			sprite->SetPos(GetPos() + glm::normalize(glm::cross(camera->GetFront(), camera->GetUp())) * GetSpeedDelta());
-			camera->SetPosition(GetPos());
+			SetPosition(GetPosition() + glm::normalize(glm::cross(camera->GetFront(), camera->GetUp())) * GetSpeedDelta());
 			ChangeStatus(STATUS::RIGHT);
 		}
 		else if (GL::Input::IsKeyPressed(KEY_W) || GL::Input::IsKeyPressed(KEY_UP))
 		{
-			sprite->SetPos(GetPos() + GetSpeedDelta() * camera->GetFront());
-			camera->SetPosition(GetPos());
+			SetPosition(GetPosition() + GetSpeedDelta() * camera->GetFront());
 			ChangeStatus(STATUS::UP);
 		}
 		else if (GL::Input::IsKeyPressed(KEY_S) || GL::Input::IsKeyPressed(KEY_DOWN))
 		{
-			sprite->SetPos(GetPos() - GetSpeedDelta() * camera->GetFront());
-			camera->SetPosition(GetPos());
+			SetPosition(GetPosition() - GetSpeedDelta() * camera->GetFront());
 			ChangeStatus(STATUS::DOWN);
 		}
 		else
@@ -114,18 +118,15 @@ namespace GameXD
 		if (GL::Input::IsKeyPressed(KEY_Z))
 		{
 			camera->SetCameraType(GL::CAMERA_TYPE::FPS);
-			camera->SetPosition(GetPos());
 		}
 		else if (GL::Input::IsKeyPressed(KEY_C))
 		{
 			camera->SetCameraType(GL::CAMERA_TYPE::TPS);
-			camera->SetPosition(GetPos());
 		}
 
 		if (GL::Input::IsKeyPressed(KEY_R))
 		{
-			sprite->SetPos(glm::vec3(0.f));
-			camera->SetPosition(GetPos());
+			SetPosition(glm::vec3(0.f));
 		}
 	}
 
@@ -140,7 +141,13 @@ namespace GameXD
 		return moveSpeed * GL::Timer::GetDeltaTime();
 	}
 
-	glm::vec3 Player::GetPos()
+	void Player::SetPosition(glm::vec3 pos)
+	{
+		sprite->SetPos(pos);
+		camera->UpdateDirection();
+	}
+
+	glm::vec3 Player::GetPosition()
 	{
 		return sprite->GetPos();
 	}

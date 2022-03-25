@@ -42,9 +42,8 @@ namespace GameXD
 		player = new Player(mainCamera);
 		player->Init(render, 5.f, 75.f, "../res/Textures/player.png");
 
-		mainCamera->SetData(player->GetPos(), 0.25f);
+		mainCamera->SetData(player->GetSprite(), 0.25f, 10.f);
 		mainCamera->SetCameraType(GL::CAMERA_TYPE::TPS);
-		mainCamera->SetFocus(player->GetPos(), 10.f);
 
 		floor = new GL::Sprite(render);
 		floor->Init();
@@ -68,6 +67,7 @@ namespace GameXD
 	void Game::Update()
 	{
 		player->Update();
+		mainCamera->Update();
 	}
 
 	void Game::Draw()

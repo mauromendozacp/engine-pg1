@@ -2,7 +2,7 @@
 #define CAMERA_H
 
 #include "exports.h"
-#include "Renderer/renderer.h"
+#include "Entity/entity.h"
 
 namespace GL
 {
@@ -13,23 +13,23 @@ namespace GL
 		TOP_DOWN
 	};
 
-	class GRAPHICSENGINE_API Camera
+	class GRAPHICSENGINE_API Camera : public Entity
 	{
 	public:
 		Camera(Render* render);
 		~Camera();
 
 		void Init(float fov, float width, float height, float near, float far);
+		void Update();
 
-		void SetData(glm::vec3 pos, float sensitivity);
+		void SetData(Entity* target, float sensitivity, float offset);
 		void SetCameraType(CAMERA_TYPE cameraType);
-		void SetFocus(glm::vec3 target, float distance);
-		void SetPosition(glm::vec3 pos);
+		void SetTarget(Entity* target);
 		void UseCamera();
 		void Rotate();
 		void Reset();
+		void UpdateDirection();
 
-		glm::vec3 GetPosition();
 		glm::vec3 GetFront();
 		glm::vec3 GetUp();
 
@@ -57,10 +57,9 @@ namespace GL
 		uint uniformViewPosition;
 
 		CAMERA_TYPE cameraType;
-		glm::vec3 target;
-		float distance;
+		Entity* target;
+		float offset;
 
-		glm::vec3 pos;
 		glm::vec3 front;
 		glm::vec3 up;
 
@@ -74,7 +73,6 @@ namespace GL
 
 		float sensitivity;
 
-		void UpdateDirection();
 		void UpdateView();
 		void UpdateProjection();
 	};
