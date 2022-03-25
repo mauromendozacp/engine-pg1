@@ -32,8 +32,6 @@ namespace GL
 		void BindBuffer(uint& VAO, uint& VBO, int tam, float* vertices);
 		void BindIndexs(uint& EBO, int tam, uint* indexs);
 		void BindTextureBuffer(uint& VBO, int tam, float* vertices);
-		void BindBaseAttrib();
-		void BindExtraAttrib();
 		void UnBind(uint& VAO, uint& VBO, uint& EBO);
 
 		void SetLocation(uint& location, const char* loc);

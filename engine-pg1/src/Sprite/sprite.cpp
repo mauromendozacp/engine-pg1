@@ -40,7 +40,10 @@ namespace GL
 
 		render->BindBuffer(VAO, VBO, sizeof(textureVertex), textureVertex);
 		render->BindIndexs(EBO, sizeof(indexes), indexes);
-		render->BindExtraAttrib();
+		
+		render->SetAttribs(locationPosition, 3, 8, 0);
+		render->SetAttribs(locationNormal, 3, 8, 3);
+		render->SetAttribs(locationTexCoord, 2, 8, 6);
 	}
 
 	void Sprite::Update()
