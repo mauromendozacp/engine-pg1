@@ -12,7 +12,7 @@ namespace GL
 		enabled = true;
 
 		uniformColor = 0;
-		uniformPosition = 0;
+		locationPosition = 0;
 		uniformDirection = 0;
 		uniformAmbient = 0;
 		uniformDiffuse = 0;
@@ -26,8 +26,8 @@ namespace GL
 
 	void Light::Init()
 	{
-		render->SetUniform(uniformColor, "light.color");
-		render->SetUniform(uniformEnabled, "light.enabled");
+		render->SetUniform(uniformColor, "baselight.color");
+		render->SetUniform(uniformEnabled, "baselight.enabled");
 	}
 
 	void Light::UseLight()

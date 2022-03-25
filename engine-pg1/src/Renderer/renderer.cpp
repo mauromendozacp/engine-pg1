@@ -98,6 +98,11 @@ namespace GL
 		glDeleteBuffers(1, &EBO);
 	}
 
+	void Render::SetLocation(uint& location, const char* loc)
+	{
+		location = glGetAttribLocation(GetShaderId(), loc);
+	}
+
 	void Render::SetUniform(uint& uniform, const char* loc)
 	{
 		uniform = glGetUniformLocation(GetShaderId(), loc);
@@ -146,6 +151,11 @@ namespace GL
 	void Render::UpdateUseTexture(bool useTexture, uint uniformUseTexture)
 	{
 		glUniform1i(uniformUseTexture, useTexture);
+	}
+
+	void Render::UpdateFloatValue(float value, uint uniform)
+	{
+		glUniform1f(uniform, value);
 	}
 
 	void Render::SetView(glm::mat4 view)

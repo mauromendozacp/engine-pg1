@@ -67,6 +67,9 @@
     <ClCompile Include="..\src\Color\color.cpp">
       <Filter>Color</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\PointLight\pointLight.cpp">
+      <Filter>PointLight</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Window">
@@ -137,6 +140,9 @@
     </Filter>
     <Filter Include="Color">
       <UniqueIdentifier>{074d293d-5383-4303-a065-d7e4df881554}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="PointLight">
+      <UniqueIdentifier>{b2700d8e-f5b0-4886-b794-fcd62941c811}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -210,6 +216,9 @@
     </ClInclude>
     <ClInclude Include="..\src\Color\color.h">
       <Filter>Color</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\PointLight\pointLight.h">
+      <Filter>PointLight</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

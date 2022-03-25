@@ -7,7 +7,9 @@ namespace GameXD
 		player = nullptr;
 		floor = nullptr;
 		cubeLight = nullptr;
+		globalLight = nullptr;
 		directionalLight = nullptr;
+		pointLight = nullptr;
 	}
 
 	Game::~Game()
@@ -27,10 +29,20 @@ namespace GameXD
 			delete cubeLight;
 			cubeLight = nullptr;
 		}
+		if (globalLight != nullptr)
+		{
+			delete globalLight;
+			globalLight = nullptr;
+		}
 		if (directionalLight != nullptr)
 		{
 			delete directionalLight;
 			directionalLight = nullptr;
+		}
+		if (pointLight != nullptr)
+		{
+			delete pointLight;
+			pointLight = nullptr;
 		}
 	}
 
@@ -57,11 +69,27 @@ namespace GameXD
 		cubeLight->SetPos(glm::vec3(5.f, 2.5f, 0.f));
 		cubeLight->color.SetColor(255, 0, 0);
 
+		globalLight = new Light(render);
+		globalLight->Init();
+		globalLight->SetColor(glm::vec3(0.5f, 0.5f, 0.5f));
+
 		directionalLight = new DirectionalLight(render);
 		directionalLight->Init();
 		directionalLight->SetColor(glm::vec3(0.55f, 0.42f, 0.18f));
 		directionalLight->SetAmbient(glm::vec3(0.75f, 0.75f, 0.75f));
 		directionalLight->SetSpecular(glm::vec3(0.25f, 0.25f, 0.25f));
+		directionalLight->SetEnabled(false);
+
+		pointLight = new PointLight(render);
+		pointLight->Init();
+		pointLight->SetPos(glm::vec3(0.f, .5f, 0.f));
+		pointLight->SetColor(glm::vec3(1.0f, 0.0f, 0.0f));
+		pointLight->SetAmbient(glm::vec3(0.2f, 0.2f, 0.2f));
+		pointLight->SetDiffuse(glm::vec3(0.5f, 0.5f, 0.5f));
+		pointLight->SetSpecular(glm::vec3(0.25f, 0.25f, 0.25f));
+		pointLight->SetConstant(1.f);
+		pointLight->SetLinear(0.045f);
+		pointLight->SetQuadratic(0.0075f);
 	}
 
 	void Game::Update()
@@ -77,7 +105,10 @@ namespace GameXD
 		player->Draw();
 
 		mainCamera->UseCamera();
+
+		globalLight->UseLight();
 		directionalLight->UseLight();
+		pointLight->UseLight();
 	}
 
 	void Game::DeInit()

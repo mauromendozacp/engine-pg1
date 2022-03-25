@@ -219,9 +219,13 @@ namespace GL
 		render->SetUniform(uniformModel, "model");
 		render->SetUniform(uniformView, "view");
 		render->SetUniform(uniformProjection, "projection");
-		render->SetUniform(uniformPosition, "aPos");
-		render->SetUniform(uniformTexCoord, "aTex");
-		render->SetUniform(uniformNormal, "aNor");
+		render->SetUniform(locationPosition, "aPos");
+		render->SetUniform(locationTexCoord, "aTex");
+		render->SetUniform(locationNormal, "aNor");
+
+		/*render->SetLocation(locationPosition, "aPos");
+		render->SetLocation(locationTexCoord, "aTex");
+		render->SetLocation(locationNormal, "aNor");*/
 	}
 
 	glm::quat Entity::EulerToQuat(glm::vec3 euler)

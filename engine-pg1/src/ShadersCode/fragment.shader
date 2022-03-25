@@ -37,7 +37,7 @@ struct PointLight {
 uniform vec3 color;
 uniform float a;
 
-uniform Light light;
+uniform Light baselight;
 uniform DirectionalLight directionalLight;
 uniform PointLight pointLight;
 
@@ -47,24 +47,25 @@ uniform bool affectedLight;
 uniform vec3 viewPosition;
 
 vec3 CalculateDirLight();
+vec3 CalculatePointLight();
 
 void main()
 {
-	vec3 resultColor = vec3(0.0f, 0.0f, 0.0f);
+	vec3 resultColor = color;
 	if (affectedLight == true)
 	{
-		if (light.enabled == true)
+		if (baselight.enabled == true)
 		{
-			resultColor = color * light.color;
+			resultColor *= baselight.color;
 		}
 		if (directionalLight.enabled == true)
 		{
 			resultColor += CalculateDirLight();
 		}
-	}
-	else
-	{
-		resultColor = color;
+		if (pointLight.enabled == true)
+		{
+			resultColor += CalculatePointLight();
+		}
 	}
 
 	if (useTexture == false)
@@ -88,5 +89,27 @@ vec3 CalculateDirLight()
 	vec3 specular = directionalLight.specular * spec;
 	vec3 result = (ambient + diffuse + specular) * color;
 
+	return result;
+}
+
+vec3 CalculatePointLight() {
+	vec3 lightDir = pointLight.position - FragPos;
+	float distance = length(lightDir);
+	lightDir = normalize(lightDir);
+
+	vec3 ambient = pointLight.ambient;
+	vec3 norm = normalize(Normal);
+
+	float diff = max(dot(norm, lightDir), 0.0f);
+	vec3 diffuse = pointLight.diffuse * diff;
+	vec3 viewDir = normalize(viewPosition - FragPos);
+	vec3 reflectDir = reflect(-lightDir, norm);
+
+	float spec = pow(max(dot(viewDir, reflectDir), 0.0f), 32);
+	vec3 specular = pointLight.specular * spec;
+
+	float attenuation = pointLight.quadratic * distance * distance + pointLight.linear * distance + pointLight.constant;
+
+	vec3 result = ((ambient + diffuse + specular) / attenuation) * pointLight.color;
 	return result;
 }

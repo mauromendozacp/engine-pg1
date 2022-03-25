@@ -36,6 +36,7 @@ namespace GL
 		void BindExtraAttrib();
 		void UnBind(uint& VAO, uint& VBO, uint& EBO);
 
+		void SetLocation(uint& location, const char* loc);
 		void SetUniform(uint& uniform, const char* loc);
 		void SetAttribs(uint uniform, int size, int stride, int offset);
 
@@ -46,6 +47,7 @@ namespace GL
 		void UpdateLight(glm::vec3 lightColor, uint uniformLightColor);
 		void UpdateTexture(uint textureId, uint uniformTexture);
 		void UpdateUseTexture(bool useTexture, uint uniformUseTexture);
+		void UpdateFloatValue(float value, uint uniform);
 
 		void SetView(glm::mat4 view);
 		void SetProjection(glm::mat4 projection);

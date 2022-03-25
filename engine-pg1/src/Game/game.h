@@ -7,6 +7,7 @@
 #include "Shape/shape.h"
 #include "Light/light.h"
 #include "DirectionalLight/directionalLight.h"
+#include "PointLight/pointLight.h"
 #include <iostream>
 
 using namespace GL;
@@ -30,7 +31,9 @@ namespace GameXD
 		Sprite* floor;
 		Shape* cubeLight;
 
+		Light* globalLight;
 		DirectionalLight* directionalLight;
+		PointLight* pointLight;
 	};
 }
 

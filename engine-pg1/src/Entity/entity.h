@@ -80,9 +80,9 @@ namespace GL
 		uint uniformModel;
 		uint uniformView;
 		uint uniformProjection;
-		uint uniformPosition;
-		uint uniformNormal;
-		uint uniformTexCoord;
+		uint locationPosition;
+		uint locationNormal;
+		uint locationTexCoord;
 
 		virtual void SetUniforms();
 

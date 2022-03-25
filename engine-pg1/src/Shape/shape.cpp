@@ -126,9 +126,9 @@ namespace GL
 		render->BindIndexs(EBO, sizeof(indexes) * vertices, indexes);
 		render->BindBaseAttrib();
 
-		render->SetAttribs(uniformPosition, 3, 8, 0);
-		render->SetAttribs(uniformNormal, 3, 8, 5);
-		render->SetAttribs(uniformTexCoord, 2, 8, 3);
+		/*render->SetAttribs(locationPosition, 3, 8, 0);
+		render->SetAttribs(locationNormal, 3, 8, 5);
+		render->SetAttribs(locationTexCoord, 2, 8, 3);*/
 	}
 
 	void Shape::Draw()
