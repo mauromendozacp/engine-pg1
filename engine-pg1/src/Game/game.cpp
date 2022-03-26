@@ -10,6 +10,7 @@ namespace GameXD
 		globalLight = nullptr;
 		directionalLight = nullptr;
 		pointLight = nullptr;
+		spotLight = nullptr;
 	}
 
 	Game::~Game()
@@ -44,6 +45,11 @@ namespace GameXD
 			delete pointLight;
 			pointLight = nullptr;
 		}
+		if (spotLight != nullptr)
+		{
+			delete spotLight;
+			spotLight = nullptr;
+		}
 	}
 
 	void Game::Init()
@@ -62,11 +68,11 @@ namespace GameXD
 		floor->LoadTexture("../res/Textures/floor.jpg", false);
 		floor->SetPos(glm::vec3(0.f, -.5f, 0.f));
 		floor->SetRotX(90.f);
-		floor->SetScale(25.f, 25.f, 1.f);
+		floor->SetScale(50.f, 50, 1.f);
 
 		cubeLight = new GL::Shape(render);
 		cubeLight->Init(GL::SHAPE_TYPE::CUBE);
-		cubeLight->SetPos(glm::vec3(5.f, 2.5f, 0.f));
+		cubeLight->SetPos(glm::vec3(10.f, 2.5f, 0.f));
 		cubeLight->color.SetColor(255, 0, 0);
 
 		globalLight = new Light(render);
@@ -82,7 +88,7 @@ namespace GameXD
 
 		pointLight = new PointLight(render);
 		pointLight->Init();
-		pointLight->SetPos(glm::vec3(0.f, .5f, 0.f));
+		pointLight->SetPos(glm::vec3(10.5f, 2.75f, 0.f));
 		pointLight->SetColor(glm::vec3(1.0f, 0.0f, 0.0f));
 		pointLight->SetAmbient(glm::vec3(0.2f, 0.2f, 0.2f));
 		pointLight->SetDiffuse(glm::vec3(0.5f, 0.5f, 0.5f));
@@ -90,6 +96,20 @@ namespace GameXD
 		pointLight->SetConstant(1.f);
 		pointLight->SetLinear(0.045f);
 		pointLight->SetQuadratic(0.0075f);
+
+		spotLight = new SpotLight(render);
+		spotLight->Init();
+		spotLight->SetPos(glm::vec3(0.0f, 10.0f, 0.0f));
+		spotLight->SetDirection(glm::vec3(0.0f, -1.0f, 0.0f));
+		spotLight->SetColor(glm::vec3(1.0f, 0.0f, 0.0f));
+		spotLight->SetAmbient(glm::vec3(0.2f, 0.2f, 0.2f));
+		spotLight->SetDiffuse(glm::vec3(0.5f, 0.5f, 0.5f));
+		spotLight->SetSpecular(glm::vec3(0.25f, 0.25f, 0.25f));
+		spotLight->SetConstant(1.f);
+		spotLight->SetLinear(0.045f);
+		spotLight->SetQuadratic(0.0075f);
+		spotLight->SetCutOff(25.f);
+		spotLight->SetEnabled(false);
 	}
 
 	void Game::Update()
@@ -109,6 +129,7 @@ namespace GameXD
 		globalLight->UseLight();
 		directionalLight->UseLight();
 		pointLight->UseLight();
+		spotLight->UseLight();
 	}
 
 	void Game::DeInit()

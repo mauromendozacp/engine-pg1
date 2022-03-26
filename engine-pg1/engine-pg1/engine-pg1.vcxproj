@@ -164,6 +164,7 @@
     <ClCompile Include="..\src\Renderer\renderer.cpp" />
     <ClCompile Include="..\src\Shader\shader.cpp" />
     <ClCompile Include="..\src\Shape\shape.cpp" />
+    <ClCompile Include="..\src\SpotLight\spotLight.cpp" />
     <ClCompile Include="..\src\Sprite\sprite.cpp" />
     <ClCompile Include="..\src\StbImage\stb_image.cpp" />
     <ClCompile Include="..\src\TextureImporter\textureImporter.cpp" />
@@ -192,6 +193,7 @@
     <ClInclude Include="..\src\Renderer\renderer.h" />
     <ClInclude Include="..\src\Shader\shader.h" />
     <ClInclude Include="..\src\Shape\shape.h" />
+    <ClInclude Include="..\src\SpotLight\spotLight.h" />
     <ClInclude Include="..\src\Sprite\sprite.h" />
     <ClInclude Include="..\src\StbImage\stb_image.h" />
     <ClInclude Include="..\src\TextureImporter\textureImporter.h" />

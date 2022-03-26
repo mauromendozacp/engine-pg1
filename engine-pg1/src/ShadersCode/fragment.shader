@@ -34,12 +34,20 @@ struct PointLight {
 	bool enabled;
 };
 
+struct SpotLight {
+	PointLight pointLight;
+	vec3 direction;
+	float cutOff;
+	bool enabled;
+};
+
 uniform vec3 color;
 uniform float a;
 
 uniform Light baselight;
 uniform DirectionalLight directionalLight;
 uniform PointLight pointLight;
+uniform SpotLight spotLight;
 
 uniform sampler2D ourTexture;
 uniform bool useTexture;
@@ -47,7 +55,8 @@ uniform bool affectedLight;
 uniform vec3 viewPosition;
 
 vec3 CalculateDirLight();
-vec3 CalculatePointLight();
+vec3 CalculatePointLight(PointLight pLight);
+vec3 CalculateSpotLight();
 
 void main()
 {
@@ -64,7 +73,11 @@ void main()
 		}
 		if (pointLight.enabled == true)
 		{
-			resultColor += CalculatePointLight();
+			resultColor += CalculatePointLight(pointLight);
+		}
+		if (spotLight.enabled == true)
+		{
+			resultColor += CalculateSpotLight();
 		}
 	}
 
@@ -92,24 +105,33 @@ vec3 CalculateDirLight()
 	return result;
 }
 
-vec3 CalculatePointLight() {
-	vec3 lightDir = pointLight.position - FragPos;
+vec3 CalculatePointLight(PointLight pLight) {
+	vec3 lightDir = pLight.position - FragPos;
 	float distance = length(lightDir);
 	lightDir = normalize(lightDir);
 
-	vec3 ambient = pointLight.ambient;
+	vec3 ambient = pLight.ambient;
 	vec3 norm = normalize(Normal);
 
 	float diff = max(dot(norm, lightDir), 0.0f);
-	vec3 diffuse = pointLight.diffuse * diff;
+	vec3 diffuse = pLight.diffuse * diff;
 	vec3 viewDir = normalize(viewPosition - FragPos);
 	vec3 reflectDir = reflect(-lightDir, norm);
 
 	float spec = pow(max(dot(viewDir, reflectDir), 0.0f), 32);
-	vec3 specular = pointLight.specular * spec;
+	vec3 specular = pLight.specular * spec;
 
-	float attenuation = pointLight.quadratic * distance * distance + pointLight.linear * distance + pointLight.constant;
+	float attenuation = pLight.quadratic * distance * distance + pLight.linear * distance + pLight.constant;
 
-	vec3 result = ((ambient + diffuse + specular) / attenuation) * pointLight.color;
+	vec3 result = ((ambient + diffuse + specular) / attenuation) * pLight.color;
 	return result;
+}
+
+vec3 CalculateSpotLight()
+{
+	vec3 lightDir = normalize(spotLight.pointLight.position - FragPos);
+	float factor = dot(lightDir, normalize(-spotLight.direction));
+
+	vec3 res = CalculatePointLight(spotLight.pointLight) * (1.0f - (1.0f - factor) * (1.0f / (1.0f - spotLight.cutOff)));
+	return res;
 }

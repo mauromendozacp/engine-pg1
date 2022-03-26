@@ -12,7 +12,7 @@ namespace GL
 		enabled = true;
 
 		uniformColor = 0;
-		locationPosition = 0;
+		uniformPosition = 0;
 		uniformDirection = 0;
 		uniformAmbient = 0;
 		uniformDiffuse = 0;

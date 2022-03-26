@@ -12,8 +12,8 @@ namespace GL
 		PointLight(Render* render);
 		~PointLight();
 
-		void Init() override;
-		void UseLight() override;
+		virtual void Init() override;
+		virtual void UseLight() override;
 
 		void SetConstant(float constant);
 		void SetLinear(float linear);
@@ -23,7 +23,7 @@ namespace GL
 		float GetLinear();
 		float GetQuadratic();
 
-	private:
+	protected:
 		float constant;
 		float linear;
 		float quadratic;

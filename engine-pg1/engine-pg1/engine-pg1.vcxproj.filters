@@ -70,6 +70,9 @@
     <ClCompile Include="..\src\PointLight\pointLight.cpp">
       <Filter>PointLight</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\SpotLight\spotLight.cpp">
+      <Filter>SpotLight</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Window">
@@ -143,6 +146,9 @@
     </Filter>
     <Filter Include="PointLight">
       <UniqueIdentifier>{b2700d8e-f5b0-4886-b794-fcd62941c811}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SpotLight">
+      <UniqueIdentifier>{755463ae-a5f4-4917-98f4-945023dd6221}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -219,6 +225,9 @@
     </ClInclude>
     <ClInclude Include="..\src\PointLight\pointLight.h">
       <Filter>PointLight</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\SpotLight\spotLight.h">
+      <Filter>SpotLight</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

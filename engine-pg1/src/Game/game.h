@@ -8,13 +8,14 @@
 #include "Light/light.h"
 #include "DirectionalLight/directionalLight.h"
 #include "PointLight/pointLight.h"
+#include "SpotLight/spotLight.h"
 #include <iostream>
 
 using namespace GL;
 
 namespace GameXD
 {
-	class GRAPHICSENGINE_API Game : public GL::BaseGame
+	class GRAPHICSENGINE_API Game : public BaseGame
 	{
 	public:
 		Game();
@@ -34,6 +35,7 @@ namespace GameXD
 		Light* globalLight;
 		DirectionalLight* directionalLight;
 		PointLight* pointLight;
+		SpotLight* spotLight;
 	};
 }
 
