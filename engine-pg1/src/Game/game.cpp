@@ -64,7 +64,7 @@ namespace GameXD
 		mainCamera->SetCameraType(GL::CAMERA_TYPE::TPS);
 
 		floor = new GL::Sprite(render);
-		floor->Init();
+		floor->Init(SPRITE_TYPE::QUAD);
 		floor->LoadTexture("../res/Textures/floor.jpg", false);
 		floor->SetPos(glm::vec3(0.f, -.5f, 0.f));
 		floor->SetRotX(90.f);

@@ -53,22 +53,37 @@ namespace GL
 		glDepthFunc(GL_LESS);
 	}
 
-	void Render::BindBuffer(uint& VAO, uint& VBO, int tam, float* vertices)
+	void Render::GenBuffers(uint& VAO, uint& VBO, uint& EBO)
 	{
 		glGenVertexArrays(1, &VAO);
 		glGenBuffers(1, &VBO);
+		glGenBuffers(1, &EBO);
+	}
 
+	void Render::GenBuffers(uint& VAO, uint& VBO, uint& EBO, uint& UVB)
+	{
+		GenBuffers(VAO, VBO, EBO);
+		glGenBuffers(1, &UVB);
+	}
+
+	void Render::BindBuffer(uint VAO, uint VBO, int tam, float* vertices)
+	{
 		glBindVertexArray(VAO);
 
 		glBindBuffer(GL_ARRAY_BUFFER, VBO);
 		glBufferData(GL_ARRAY_BUFFER, tam, vertices, GL_STATIC_DRAW);
 	}
 
-	void Render::BindIndexs(uint& EBO, int tam, uint* indexs)
+	void Render::BindIndexs(uint EBO, int tam, uint* indexs)
 	{
-		glGenBuffers(1, &EBO);
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
 		glBufferData(GL_ELEMENT_ARRAY_BUFFER, tam, indexs, GL_STATIC_DRAW);
+	}
+
+	void Render::BindUV(uint UVB, int tam, float* vertices)
+	{
+		glBindBuffer(GL_ARRAY_BUFFER, UVB);
+		glBufferData(GL_ARRAY_BUFFER, tam, vertices, GL_DYNAMIC_DRAW);
 	}
 
 	void Render::UnBind(uint& VAO, uint& VBO, uint& EBO)
@@ -76,6 +91,12 @@ namespace GL
 		glDeleteVertexArrays(1, &VAO);
 		glDeleteBuffers(1, &VBO);
 		glDeleteBuffers(1, &EBO);
+	}
+
+	void Render::UnBind(uint& VAO, uint& VBO, uint& EBO, uint& UVB)
+	{
+		UnBind(VAO, VBO, EBO);
+		glDeleteBuffers(1, &UVB);
 	}
 
 	void Render::SetLocation(uint& location, const char* loc)
@@ -88,10 +109,16 @@ namespace GL
 		uniform = glGetUniformLocation(GetShaderId(), loc);
 	}
 
-	void Render::SetAttribs(uint uniform, int size, int stride, int offset)
+	void Render::SetBaseAttribs(uint location, int size, int stride, int offset)
 	{
-		glVertexAttribPointer(uniform, size, GL_FLOAT, GL_FALSE, stride * sizeof(float), (void*)(offset * sizeof(float)));
-		glEnableVertexAttribArray(uniform);
+		glVertexAttribPointer(location, size, GL_FLOAT, GL_FALSE, stride * sizeof(float), (void*)(offset * sizeof(float)));
+		glEnableVertexAttribArray(location);
+	}
+
+	void Render::SetTextureAttribs(uint location, int size, int stride, int offset)
+	{
+		glVertexAttribPointer(location, size, GL_FLOAT, GL_FALSE, stride * sizeof(float), (void*)offset);
+		glEnableVertexAttribArray(location);
 	}
 
 	void Render::UpdateMVP(glm::mat4 model, uint uniformModel, uint uniformView, uint uniformProjection)
@@ -146,13 +173,6 @@ namespace GL
 	void Render::SetProjection(glm::mat4 projection)
 	{
 		this->projection = projection;
-	}
-
-	void Render::BindTextureBuffer(uint& VBO, int tam, float* vertices)
-	{
-		glGenBuffers(tam, &VBO);
-		glBindBuffer(GL_ARRAY_BUFFER, VBO);
-		glBufferData(GL_ARRAY_BUFFER, tam, vertices, GL_STATIC_DRAW);
 	}
 
 	void Render::Draw(uint VAO, uint VBO, uint& EBO, uint vertices, uint tamVerts, float *vertexs)

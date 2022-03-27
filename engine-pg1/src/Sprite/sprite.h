@@ -9,7 +9,12 @@
 
 namespace GL
 {
-	const int textureTamVert = 32;
+	enum class SPRITE_TYPE
+	{
+		QUAD,
+		CUBE
+	};
+
 	class GRAPHICSENGINE_API Sprite : public Entity2D
 	{
 	public:
@@ -17,7 +22,7 @@ namespace GL
 		Sprite(Render* render);
 		~Sprite();
 
-		void Init();
+		void Init(SPRITE_TYPE type);
 		void Update();
 		void Draw();
 		void DeInit();
@@ -28,21 +33,13 @@ namespace GL
 		void AddAnimation(int rows, int cols, float duration);
 		void ChangeAnimation(int index);
 		void SetTextureCoordinates(Frame f);
-		void SetTextureCoordinates(float u1, float v1, float u2, float v2, float u3, float v3, float u4, float v4);
 
 	private:
-		float textureVertex[textureTamVert]
-		{
-			// positions          // colors           // texture coords
-			 0.5f,  0.5f, 0.0f,   1.0f, 1.0f, 1.0f,   1.0f, 1.0f,   // top right
-			 0.5f, -0.5f, 0.0f,   1.0f, 1.0f, 1.0f,   1.0f, 0.0f,   // bottom right
-			-0.5f, -0.5f, 0.0f,   1.0f, 1.0f, 1.0f,   0.0f, 0.0f,   // bottom left
-			-0.5f,  0.5f, 0.0f,   1.0f, 1.0f, 1.0f,   0.0f, 1.0f    // top left 
-		};
-
-		uint uniformTexture;
-
+		SPRITE_TYPE type;
 		TextureData* textureData;
+		uint uniformTexture;
+		uint UVB;
+
 		int animIndex = 0;
 		std::vector<Animation*> anim;
 		Frame currFrame;

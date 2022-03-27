@@ -29,14 +29,18 @@ namespace GL
 		uint GetShaderId();
 		void CleanShader();
 
-		void BindBuffer(uint& VAO, uint& VBO, int tam, float* vertices);
-		void BindIndexs(uint& EBO, int tam, uint* indexs);
-		void BindTextureBuffer(uint& VBO, int tam, float* vertices);
+		void GenBuffers(uint& VAO, uint& VBO, uint& EBO);
+		void GenBuffers(uint& VAO, uint& VBO, uint& EBO, uint& UVB);
+		void BindBuffer(uint VAO, uint VBO, int tam, float* vertices);
+		void BindIndexs(uint EBO, int tam, uint* indexs);
+		void BindUV(uint UVB, int tam, float* vertices);
 		void UnBind(uint& VAO, uint& VBO, uint& EBO);
+		void UnBind(uint& VAO, uint& VBO, uint& EBO, uint& UVB);
 
 		void SetLocation(uint& location, const char* loc);
 		void SetUniform(uint& uniform, const char* loc);
-		void SetAttribs(uint uniform, int size, int stride, int offset);
+		void SetBaseAttribs(uint location, int size, int stride, int offset);
+		void SetTextureAttribs(uint location, int size, int stride, int offset);
 
 		void UpdateMVP(glm::mat4 model, uint uniformModel, uint uniformView, uint uniformProjection);
 		void UpdateViewPosition(glm::vec3 viewPosition, uint uniformViewPosition);
