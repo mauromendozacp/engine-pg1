@@ -122,9 +122,9 @@ namespace GL
 		glUniformMatrix4fv(uniformProjection, 1, GL_FALSE, glm::value_ptr(projection));
 	}
 
-	void Render::UpdateViewPosition(glm::vec3 viewPosition, uint uniformViewPosition)
+	void Render::UpdateVec3(uint uniformVec3, glm::vec3 vec3Value)
 	{
-		glUniform3f(uniformViewPosition, viewPosition.x, viewPosition.y, viewPosition.z);
+		glUniform3f(uniformVec3, vec3Value.x, vec3Value.y, vec3Value.z);
 	}
 
 	void Render::UpdateColor(glm::vec4 baseColor, uint uniformBaseColor, uint uniformAlpha)

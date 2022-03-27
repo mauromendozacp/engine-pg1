@@ -79,7 +79,7 @@ namespace GL
 	void Camera::UseCamera()
 	{
 		render->UseShader();
-		render->UpdateViewPosition(transform.position, uniformViewPosition);
+		render->UpdateVec3(uniformViewPosition, transform.position);
 		render->CleanShader();
 	}
 

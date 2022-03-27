@@ -3,6 +3,7 @@
 
 #include "Entity/entity.h"
 #include "Color/color.h"
+#include "Material/material.h"
 #include "vertexs.h"
 
 namespace GL
@@ -27,6 +28,7 @@ namespace GL
 		bool IsAffectedLight();
 
 		Color color;
+		Material* material;
 
 	protected:
 		uint uniformColor;

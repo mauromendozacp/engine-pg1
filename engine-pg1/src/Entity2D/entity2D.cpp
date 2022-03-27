@@ -5,6 +5,7 @@ namespace GL
 	Entity2D::Entity2D() : Entity()
 	{
 		color = Color();
+		material = nullptr;
 
 		uniformColor = 0;
 		uniformAlpha = 0;
@@ -28,6 +29,7 @@ namespace GL
 	Entity2D::Entity2D(Render* render) : Entity(render)
 	{
 		color = Color();
+		material = nullptr;
 
 		uniformColor = 0;
 		uniformAlpha = 0;
@@ -63,6 +65,11 @@ namespace GL
 
 	void Entity2D::Draw()
 	{
+		if (material != nullptr)
+		{
+			material->UpdateShader();
+		}
+
 		render->Draw(VAO, VBO, EBO, vertices, tam, vertexs);
 	}
 

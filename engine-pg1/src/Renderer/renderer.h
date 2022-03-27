@@ -42,7 +42,7 @@ namespace GL
 		void SetTextureAttribs(uint location, int size, int stride, int offset);
 
 		void UpdateMVP(glm::mat4 model, uint uniformModel, uint uniformView, uint uniformProjection);
-		void UpdateViewPosition(glm::vec3 viewPosition, uint uniformViewPosition);
+		void UpdateVec3(uint uniformVec3, glm::vec3 vec3Value);
 		void UpdateColor(glm::vec4 baseColor, uint uniformBaseColor, uint uniformAlpha);
 		void UpdateStatus(bool status, uint uniformStatus);
 		void UpdateLight(glm::vec3 lightColor, uint uniformLightColor);

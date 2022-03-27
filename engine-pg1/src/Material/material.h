@@ -10,10 +10,11 @@ namespace GL
 	class GRAPHICSENGINE_API Material
 	{
 	public:
-		Material();
+		Material(Render* render);
 		~Material();
 
-		void Init(Render* render);
+		void Init();
+		void UpdateShader();
 
 		void SetShininess(float shininess);
 		void SetAmbient(glm::vec3 ambient);
@@ -26,6 +27,8 @@ namespace GL
 		glm::vec3 GetSpecular();
 
 	private:
+		Render* render;
+
 		float shininess;
 		glm::vec3 ambient;
 		glm::vec3 diffuse;

@@ -2,8 +2,10 @@
 
 namespace GL
 {
-	Material::Material()
+	Material::Material(Render* render)
 	{
+		this->render = render;
+
 		shininess = 0.f;
 		ambient = glm::vec3(0.f);
 		diffuse = glm::vec3(0.f);
@@ -19,12 +21,22 @@ namespace GL
 	{
 	}
 
-	void Material::Init(Render* render)
+	void Material::Init()
 	{
 		render->SetUniform(uniformShininess, "material.shininess");
 		render->SetUniform(uniformAmbient, "material.ambient");
 		render->SetUniform(uniformDiffuse, "material.diffuse");
 		render->SetUniform(uniformSpecular, "material.specular");
+	}
+
+	void Material::UpdateShader()
+	{
+		render->UseShader();
+		render->UpdateFloatValue(uniformShininess, shininess);
+		render->UpdateVec3(uniformAmbient, ambient);
+		render->UpdateVec3(uniformDiffuse, diffuse);
+		render->UpdateVec3(uniformSpecular, specular * 128.f);
+		render->CleanShader();
 	}
 
 	void Material::SetShininess(float shininess)
