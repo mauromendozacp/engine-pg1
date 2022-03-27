@@ -64,15 +64,56 @@ namespace GL
 	{
 		// positions         // colors
 		//X		Y	  Z		 R	   G	 B
-		-1.0, -1.0,  1.0,	1.0f, 1.0f, 1.0f,   // top right
-		 1.0, -1.0,  1.0,	1.0f, 1.0f, 1.0f,   // bottom right
-		 1.0,  1.0,  1.0,	1.0f, 1.0f, 1.0f,   // bottom right
-		-1.0,  1.0,  1.0,	1.0f, 1.0f, 1.0f,	// top left
-		-1.0, -1.0, -1.0,	1.0f, 1.0f, 1.0f,   // top right
-		 1.0, -1.0, -1.0,	1.0f, 1.0f, 1.0f,   // bottom right
-		 1.0,  1.0, -1.0,	1.0f, 1.0f, 1.0f,   // bottom right
-		-1.0,  1.0, -1.0,	1.0f, 1.0f, 1.0f,	// top left
+		-0.5, -0.5,  0.5,	1.0f, 1.0f, 1.0f,   // near top right
+		 0.5, -0.5,  0.5,	1.0f, 1.0f, 1.0f,   // near bottom right
+		 0.5,  0.5,  0.5,	1.0f, 1.0f, 1.0f,   // near bottom right
+		-0.5,  0.5,  0.5,	1.0f, 1.0f, 1.0f,	// near top left
+		-0.5, -0.5, -0.5,	1.0f, 1.0f, 1.0f,   // far top right
+		 0.5, -0.5, -0.5,	1.0f, 1.0f, 1.0f,   // far bottom right
+		 0.5,  0.5, -0.5,	1.0f, 1.0f, 1.0f,   // far bottom right
+		-0.5,  0.5, -0.5,	1.0f, 1.0f, 1.0f,	// far top left
 	};
 
 	#pragma endregion
+
+	#pragma region CUBE3D_VERTEX
+
+	const int cube3dVertTam = 144;
+	static float cube3dVertex[cube3dVertTam]
+	{
+		// positions         // colors
+		//X		Y	  Z		 R	   G	 B
+		-0.5, -0.5,  0.5,	1.0f, 1.0f, 1.0f,   // top right
+		 0.5, -0.5,  0.5,	1.0f, 1.0f, 1.0f,   // bottom right
+		 0.5,  0.5,  0.5,	1.0f, 1.0f, 1.0f,   // bottom right
+		-0.5,  0.5,  0.5,	1.0f, 1.0f, 1.0f,	// top left
+
+		-0.5, -0.5, -0.5,	1.0f, 1.0f, 1.0f,   // top right
+		 0.5, -0.5, -0.5,	1.0f, 1.0f, 1.0f,   // bottom right
+		 0.5,  0.5, -0.5,	1.0f, 1.0f, 1.0f,   // bottom right
+		-0.5,  0.5, -0.5,	1.0f, 1.0f, 1.0f,	// top left
+
+		-0.5, -0.5, -0.5,	1.0f, 1.0f, 1.0f,   // top right
+		 0.5, -0.5, -0.5,	1.0f, 1.0f, 1.0f,   // bottom right
+		 0.5, -0.5,  0.5,	1.0f, 1.0f, 1.0f,   // bottom right
+		-0.5, -0.5,  0.5,	1.0f, 1.0f, 1.0f,	// top left
+
+		-0.5,  0.5, -0.5,	1.0f, 1.0f, 1.0f,   // top right
+		 0.5,  0.5, -0.5,	1.0f, 1.0f, 1.0f,   // bottom right
+		 0.5,  0.5,  0.5,	1.0f, 1.0f, 1.0f,   // bottom right
+		-0.5,  0.5,  0.5,	1.0f, 1.0f, 1.0f,	// top left
+
+		-0.5, -0.5, -0.5,	1.0f, 1.0f, 1.0f,   // top right
+		-0.5, -0.5,  0.5,	1.0f, 1.0f, 1.0f,   // bottom right
+		-0.5,  0.5,  0.5,	1.0f, 1.0f, 1.0f,   // bottom right
+		-0.5,  0.5, -0.5,	1.0f, 1.0f, 1.0f,	// top left
+
+		 0.5, -0.5, -0.5,	1.0f, 1.0f, 1.0f,   // top right
+		 0.5, -0.5,  0.5,	1.0f, 1.0f, 1.0f,   // bottom right
+		 0.5,  0.5,  0.5,	1.0f, 1.0f, 1.0f,   // bottom right
+		 0.5,  0.5, -0.5,	1.0f, 1.0f, 1.0f,	// top left
+	};
+
+	#pragma endregion
+
 }

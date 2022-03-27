@@ -32,7 +32,7 @@ namespace GL
 		this->type = type;
 		SetUniforms();
 
-		uint* indexes;
+		uint* indexes = 0;
 
 		switch (type)
 		{
@@ -46,8 +46,8 @@ namespace GL
 		case GL::SPRITE_TYPE::CUBE:
 			indexes = cubeIndexes;
 			vertices = cubeIndexTam;
-			vertexs = cubeVertex;
-			tam = sizeof(vertexs) * cubeVertTam;
+			vertexs = cube3dVertex;
+			tam = sizeof(vertexs) * cube3dVertTam;
 
 			break;
 		default:
@@ -56,7 +56,7 @@ namespace GL
 
 		render->GenBuffers(VAO, VBO, EBO, UVB);
 		render->BindBuffer(VAO, VBO, tam, vertexs);
-		render->BindIndexs(EBO, sizeof(indexes) * vertices, quadIndexes);
+		render->BindIndexs(EBO, sizeof(indexes) * vertices, indexes);
 		
 		render->SetBaseAttribs(locationPosition, 3, 6, 0);
 		render->SetBaseAttribs(locationNormal, 3, 6, 3);
@@ -149,7 +149,7 @@ namespace GL
 
 	void Sprite::SetTextureCoordinates(Frame f)
 	{
-		float uvCoords[8]
+		float quadCoords[8] =
 		{
 			f.GetUVCords()[0].u, f.GetUVCords()[0].v,
 			f.GetUVCords()[1].u, f.GetUVCords()[1].v,
@@ -157,7 +157,49 @@ namespace GL
 			f.GetUVCords()[3].u, f.GetUVCords()[3].v
 		};
 
-		render->BindUV(UVB, sizeof(uvCoords), uvCoords);
+		switch (type)
+		{
+		case GL::SPRITE_TYPE::QUAD:
+			render->BindUV(UVB, sizeof(quadCoords), quadCoords);
+
+			break;
+		case GL::SPRITE_TYPE::CUBE:
+			float cubeCoords[48] =
+			{
+				quadCoords[0], quadCoords[1],
+				quadCoords[2], quadCoords[3],
+				quadCoords[4], quadCoords[5],
+				quadCoords[6], quadCoords[7],
+
+				quadCoords[0], quadCoords[1],
+				quadCoords[2], quadCoords[3],
+				quadCoords[4], quadCoords[5],
+				quadCoords[6], quadCoords[7],
+
+				quadCoords[0], quadCoords[1],
+				quadCoords[2], quadCoords[3],
+				quadCoords[4], quadCoords[5],
+				quadCoords[6], quadCoords[7],
+
+				quadCoords[0], quadCoords[1],
+				quadCoords[2], quadCoords[3],
+				quadCoords[4], quadCoords[5],
+				quadCoords[6], quadCoords[7],
+
+				quadCoords[0], quadCoords[1],
+				quadCoords[2], quadCoords[3],
+				quadCoords[4], quadCoords[5],
+				quadCoords[6], quadCoords[7],
+
+				quadCoords[0], quadCoords[1],
+				quadCoords[2], quadCoords[3],
+				quadCoords[4], quadCoords[5],
+				quadCoords[6], quadCoords[7]
+			};
+
+			render->BindUV(UVB, sizeof(cubeCoords), cubeCoords);
+			break;
+		}
 	}
 
 	void Sprite::SetUniforms()
