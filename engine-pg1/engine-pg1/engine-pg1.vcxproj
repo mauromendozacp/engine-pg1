@@ -160,6 +160,7 @@
     <ClCompile Include="..\src\Frame\frame.cpp" />
     <ClCompile Include="..\src\Input\input.cpp" />
     <ClCompile Include="..\src\Light\light.cpp" />
+    <ClCompile Include="..\src\Material\material.cpp" />
     <ClCompile Include="..\src\PointLight\pointLight.cpp" />
     <ClCompile Include="..\src\Renderer\renderer.cpp" />
     <ClCompile Include="..\src\Shader\shader.cpp" />
@@ -189,6 +190,7 @@
     <ClInclude Include="..\src\Input\input.h" />
     <ClInclude Include="..\src\keycodes.h" />
     <ClInclude Include="..\src\Light\light.h" />
+    <ClInclude Include="..\src\Material\material.h" />
     <ClInclude Include="..\src\PointLight\pointLight.h" />
     <ClInclude Include="..\src\Renderer\renderer.h" />
     <ClInclude Include="..\src\Shader\shader.h" />
@@ -201,6 +203,7 @@
     <ClInclude Include="..\src\Tile\tile.h" />
     <ClInclude Include="..\src\Timer\timer.h" />
     <ClInclude Include="..\src\Tinyxml2\tinyxml2.h" />
+    <ClInclude Include="..\src\vertexs.h" />
     <ClInclude Include="..\src\Window\window.h" />
   </ItemGroup>
   <ItemGroup>

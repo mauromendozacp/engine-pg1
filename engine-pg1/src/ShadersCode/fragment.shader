@@ -22,7 +22,8 @@ struct DirectionalLight
 	bool enabled;
 };
 
-struct PointLight {
+struct PointLight
+{
 	vec3 color;
 	vec3 position;
 	vec3 ambient;
@@ -34,11 +35,20 @@ struct PointLight {
 	bool enabled;
 };
 
-struct SpotLight {
+struct SpotLight
+{
 	PointLight pointLight;
 	vec3 direction;
 	float cutOff;
 	bool enabled;
+};
+
+struct Material
+{
+	float shininess;
+	vec3 material;
+	vec3 diffuse;
+	vec3 specular;
 };
 
 uniform vec3 color;
@@ -52,6 +62,7 @@ uniform SpotLight spotLight;
 uniform sampler2D ourTexture;
 uniform bool useTexture;
 uniform bool affectedLight;
+uniform Material material;
 uniform vec3 viewPosition;
 
 vec3 CalculateDirLight();

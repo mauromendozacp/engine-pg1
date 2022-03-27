@@ -73,6 +73,9 @@
     <ClCompile Include="..\src\SpotLight\spotLight.cpp">
       <Filter>SpotLight</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\Material\material.cpp">
+      <Filter>Material</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Window">
@@ -149,6 +152,9 @@
     </Filter>
     <Filter Include="SpotLight">
       <UniqueIdentifier>{755463ae-a5f4-4917-98f4-945023dd6221}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Material">
+      <UniqueIdentifier>{5de5e3b5-1309-4b19-9251-12a6dec8017a}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -229,6 +235,10 @@
     <ClInclude Include="..\src\SpotLight\spotLight.h">
       <Filter>SpotLight</Filter>
     </ClInclude>
+    <ClInclude Include="..\src\Material\material.h">
+      <Filter>Material</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\vertexs.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\src\ShadersCode\fragment.shader">
