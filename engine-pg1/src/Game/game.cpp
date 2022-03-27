@@ -54,7 +54,6 @@ namespace GameXD
 
 	void Game::Init()
 	{
-		//render->SetBlend();
 		render->SetDepth();
 
 		player = new Player(mainCamera);

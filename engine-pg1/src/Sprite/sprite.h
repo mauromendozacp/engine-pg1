@@ -34,6 +34,9 @@ namespace GL
 		void ChangeAnimation(int index);
 		void SetTextureCoordinates(Frame f);
 
+		void SetTransparent(bool transparent);
+		bool GetTransparent();
+
 	private:
 		SPRITE_TYPE type;
 		TextureData* textureData;
@@ -43,6 +46,7 @@ namespace GL
 		int animIndex = 0;
 		std::vector<Animation*> anim;
 		Frame currFrame;
+		bool transparent;
 
 		void SetUniforms();
 	};

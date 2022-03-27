@@ -11,6 +11,7 @@ namespace GL
 		animIndex = 0;
 		anim = std::vector<Animation*>();
 		currFrame = Frame();
+		transparent = false;
 	}
 
 	Sprite::Sprite(Render* render) : Entity2D(render)
@@ -21,6 +22,7 @@ namespace GL
 		animIndex = 0;
 		anim = std::vector<Animation*>();
 		currFrame = Frame();
+		transparent = false;
 	}
 
 	Sprite::~Sprite()
@@ -82,7 +84,9 @@ namespace GL
 		UpdateShader();
 		render->UpdateTexture(textureData->id, uniformTexture);
 
+		render->BlendEnabled();
 		Entity2D::Draw();
+		render->BlendDisabled();
 	}
 
 	void Sprite::DeInit()
@@ -200,6 +204,16 @@ namespace GL
 			render->BindUV(UVB, sizeof(cubeCoords), cubeCoords);
 			break;
 		}
+	}
+
+	void Sprite::SetTransparent(bool tranparent)
+	{
+		this->transparent = tranparent;
+	}
+
+	bool Sprite::GetTransparent()
+	{
+		return transparent;
 	}
 
 	void Sprite::SetUniforms()

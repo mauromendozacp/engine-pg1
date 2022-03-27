@@ -22,7 +22,6 @@ namespace GL
 		~Render();
 
 		void Init();
-		void SetBlend();
 		void SetDepth();
 
 		void UseShader();
@@ -58,6 +57,8 @@ namespace GL
 		void SetClearColor(float r, float g, float b, float a);
 		void ClearScreen();
 		void PostRender(Window* window);
+		void BlendEnabled();
+		void BlendDisabled();
 	};
 }
 

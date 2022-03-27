@@ -41,12 +41,6 @@ namespace GL
 		glUseProgram(0);
 	}
 
-	void Render::SetBlend()
-	{
-		glEnable(GL_BLEND);
-		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-	}
-
 	void Render::SetDepth()
 	{
 		glEnable(GL_DEPTH_TEST);
@@ -208,5 +202,16 @@ namespace GL
 	{
 		glfwSwapBuffers(window->GetWindow());
 		glfwPollEvents();
+	}
+
+	void Render::BlendEnabled()
+	{
+		glEnable(GL_BLEND);
+		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	}
+
+	void Render::BlendDisabled()
+	{
+		glDisable(GL_BLEND);
 	}
 }
