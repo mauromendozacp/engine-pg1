@@ -31,6 +31,7 @@ namespace GameXD
 		Player* player;
 		Sprite* floor;
 		Shape* cubeLight;
+		Sprite* tnt;
 
 		Light* globalLight;
 		DirectionalLight* directionalLight;

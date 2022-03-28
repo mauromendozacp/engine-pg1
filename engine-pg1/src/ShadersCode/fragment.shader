@@ -91,7 +91,7 @@ void main()
 	{
 		if (baselight.enabled == true)
 		{
-			resultColor *= mat.ambient * baselight.color;
+			resultColor = color;
 		}
 		if (directionalLight.enabled == true)
 		{

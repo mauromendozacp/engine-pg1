@@ -25,7 +25,6 @@ namespace GL
 		void SetSpecular(glm::vec3 specular);
 		void SetEnabled(bool enabled);
 
-		glm::vec3 GetColor();
 		glm::vec3 GetDirection();
 		glm::vec3 GetAmbient();
 		glm::vec3 GetDiffuse();

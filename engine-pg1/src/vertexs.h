@@ -38,7 +38,7 @@ namespace GL
 		-0.5f,  0.5f, 0.0f,	  1.0f, 1.0f, 1.0f,	  // top left
 	};
 
-#pragma endregion
+	#pragma endregion
 
 	#pragma region CUBE_VERTEX
 
@@ -79,41 +79,65 @@ namespace GL
 	#pragma region CUBE3D_VERTEX
 
 	const int cube3dVertTam = 144;
+	const int cube3dIndexTam = 42;
+	static unsigned int cube3dIndexes[cube3dIndexTam]
+	{
+		0, 1, 3, // FRONT
+		1, 2, 3,
+
+		4, 5, 7, // BACK
+		5, 6, 7,
+
+		8, 9, 11, // LEFT
+		9, 10, 11,
+
+		12, 13, 15, // BOTTOM
+		13, 14, 15,
+
+		16, 17, 19, // RIGHT 
+		17, 18, 19,
+
+		20, 21, 23, // TOP
+		21, 22, 23
+	};
 	static float cube3dVertex[cube3dVertTam]
 	{
-		// positions         // colors
-		//X		Y	  Z		 R	   G	 B
-		-0.5, -0.5,  0.5,	1.0f, 1.0f, 1.0f,   // top right
-		 0.5, -0.5,  0.5,	1.0f, 1.0f, 1.0f,   // bottom right
-		 0.5,  0.5,  0.5,	1.0f, 1.0f, 1.0f,   // bottom right
-		-0.5,  0.5,  0.5,	1.0f, 1.0f, 1.0f,	// top left
+		//far
+		 0.5f,  0.5f, 0.0f, 1.0f, 1.0f, 1.0f,
+		 0.5f, -0.5f, 0.0f, 1.0f, 1.0f, 1.0f,
+		-0.5f, -0.5f, 0.0f, 1.0f, 1.0f, 1.0f,
+		-0.5f,  0.5f, 0.0f, 1.0f, 1.0f, 1.0f,
 
-		-0.5, -0.5, -0.5,	1.0f, 1.0f, 1.0f,   // top right
-		 0.5, -0.5, -0.5,	1.0f, 1.0f, 1.0f,   // bottom right
-		 0.5,  0.5, -0.5,	1.0f, 1.0f, 1.0f,   // bottom right
-		-0.5,  0.5, -0.5,	1.0f, 1.0f, 1.0f,	// top left
+		//near
+		 0.5f,  0.5f, 1.0f, 1.0f, 1.0f, 1.0f,
+		 0.5f, -0.5f, 1.0f, 1.0f, 1.0f, 1.0f,
+		-0.5f, -0.5f, 1.0f, 1.0f, 1.0f, 1.0f,
+		-0.5f,  0.5f, 1.0f, 1.0f, 1.0f, 1.0f,
 
-		-0.5, -0.5, -0.5,	1.0f, 1.0f, 1.0f,   // top right
-		 0.5, -0.5, -0.5,	1.0f, 1.0f, 1.0f,   // bottom right
-		 0.5, -0.5,  0.5,	1.0f, 1.0f, 1.0f,   // bottom right
-		-0.5, -0.5,  0.5,	1.0f, 1.0f, 1.0f,	// top left
+		//left
+		-0.5f,  0.5f, 1.0f, 1.0f, 1.0f, 1.0f,
+		-0.5f, -0.5f, 1.0f, 1.0f, 1.0f, 1.0f,
+		-0.5f, -0.5f, 0.0f, 1.0f, 1.0f, 1.0f,
+		-0.5f,  0.5f, 0.0f, 1.0f, 1.0f, 1.0f,
 
-		-0.5,  0.5, -0.5,	1.0f, 1.0f, 1.0f,   // top right
-		 0.5,  0.5, -0.5,	1.0f, 1.0f, 1.0f,   // bottom right
-		 0.5,  0.5,  0.5,	1.0f, 1.0f, 1.0f,   // bottom right
-		-0.5,  0.5,  0.5,	1.0f, 1.0f, 1.0f,	// top left
+		//right
+		 0.5f,  0.5f, 0.0f, 1.0f, 1.0f, 1.0f,
+		 0.5f, -0.5f, 0.0f, 1.0f, 1.0f, 1.0f,
+		 0.5f, -0.5f, 1.0f, 1.0f, 1.0f, 1.0f,
+		 0.5f,  0.5f, 1.0f, 1.0f, 1.0f, 1.0f,
 
-		-0.5, -0.5, -0.5,	1.0f, 1.0f, 1.0f,   // top right
-		-0.5, -0.5,  0.5,	1.0f, 1.0f, 1.0f,   // bottom right
-		-0.5,  0.5,  0.5,	1.0f, 1.0f, 1.0f,   // bottom right
-		-0.5,  0.5, -0.5,	1.0f, 1.0f, 1.0f,	// top left
+		 //top
+		 0.5f,  0.5f, 0.0f, 1.0f, 1.0f, 1.0f,
+		 0.5f,  0.5f, 1.0f, 1.0f, 1.0f, 1.0f,
+		-0.5f,  0.5f, 1.0f, 1.0f, 1.0f, 1.0f,
+		-0.5f,  0.5f, 0.0f, 1.0f, 1.0f, 1.0f,
 
-		 0.5, -0.5, -0.5,	1.0f, 1.0f, 1.0f,   // top right
-		 0.5, -0.5,  0.5,	1.0f, 1.0f, 1.0f,   // bottom right
-		 0.5,  0.5,  0.5,	1.0f, 1.0f, 1.0f,   // bottom right
-		 0.5,  0.5, -0.5,	1.0f, 1.0f, 1.0f,	// top left
+		 //bottom
+		 0.5f, -0.5f, 0.0f, 1.0f, 1.0f, 1.0f,
+		 0.5f, -0.5f, 1.0f, 1.0f, 1.0f, 1.0f,
+		-0.5f, -0.5f, 1.0f, 1.0f, 1.0f, 1.0f,
+		-0.5f, -0.5f, 0.0f, 1.0f, 1.0f, 1.0f,
 	};
 
 	#pragma endregion
-
 }

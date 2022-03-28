@@ -46,8 +46,8 @@ namespace GL
 
 			break;
 		case GL::SPRITE_TYPE::CUBE:
-			indexes = cubeIndexes;
-			vertices = cubeIndexTam;
+			indexes = cube3dIndexes;
+			vertices = cube3dIndexTam;
 			vertexs = cube3dVertex;
 			tam = sizeof(vertexs) * cube3dVertTam;
 

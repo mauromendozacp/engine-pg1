@@ -33,7 +33,7 @@ namespace GameXD
 	void Player::Init(GL::Render* render, float moveSpeed, float rotSpeed, const char* textureUrl)
 	{
 		sprite = new GL::Sprite(render);
-		sprite->Init(SPRITE_TYPE::CUBE);
+		sprite->Init(SPRITE_TYPE::QUAD);
 		sprite->LoadTexture(textureUrl, false);
 		sprite->SetPos(0.f, 0.f, 0.f);
 		sprite->SetScale(1.f, 1.f, 1.f);

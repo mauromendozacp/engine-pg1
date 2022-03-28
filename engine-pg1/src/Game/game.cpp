@@ -7,6 +7,7 @@ namespace GameXD
 		player = nullptr;
 		floor = nullptr;
 		cubeLight = nullptr;
+		tnt = nullptr;
 		globalLight = nullptr;
 		directionalLight = nullptr;
 		pointLight = nullptr;
@@ -29,6 +30,11 @@ namespace GameXD
 		{
 			delete cubeLight;
 			cubeLight = nullptr;
+		}
+		if (tnt != nullptr)
+		{
+			delete tnt;
+			tnt = nullptr;
 		}
 		if (globalLight != nullptr)
 		{
@@ -62,17 +68,22 @@ namespace GameXD
 		mainCamera->SetData(player->GetSprite(), 0.25f, 10.f);
 		mainCamera->SetCameraType(GL::CAMERA_TYPE::TPS);
 
-		floor = new GL::Sprite(render);
+		floor = new Sprite(render);
 		floor->Init(SPRITE_TYPE::QUAD);
 		floor->LoadTexture("../res/Textures/floor.jpg", false);
 		floor->SetPos(glm::vec3(0.f, -.5f, 0.f));
 		floor->SetRotX(90.f);
 		floor->SetScale(50.f, 50, 1.f);
 
-		cubeLight = new GL::Shape(render);
-		cubeLight->Init(GL::SHAPE_TYPE::CUBE);
+		cubeLight = new Shape(render);
+		cubeLight->Init(SHAPE_TYPE::CUBE);
 		cubeLight->SetPos(glm::vec3(15.f, 2.5f, 0.f));
 		cubeLight->color.SetColor(255, 0, 0);
+
+		tnt = new Sprite(render);
+		tnt->Init(SPRITE_TYPE::CUBE);
+		tnt->LoadTexture("../res/Textures/tnt.png", true);
+		tnt->SetPos(glm::vec3(10.f, .5f, 10.f));
 
 		globalLight = new Light(render);
 		globalLight->Init();
@@ -120,6 +131,7 @@ namespace GameXD
 		floor->Draw();
 		cubeLight->Draw();
 		player->Draw();
+		tnt->Draw();
 
 		mainCamera->UseCamera();
 
@@ -134,5 +146,6 @@ namespace GameXD
 		player->DeInit();
 		floor->DeInit();
 		cubeLight->DeInit();
+		tnt->DeInit();
 	}
 }
