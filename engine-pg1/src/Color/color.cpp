@@ -46,4 +46,9 @@ namespace GL
 	{
 		return glm::vec4(r, g, b, a);
 	}
+
+	glm::vec3 Color::GetColorRGB()
+	{
+		return glm::vec3(r, g, b);
+	}
 }

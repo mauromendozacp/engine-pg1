@@ -30,7 +30,7 @@ namespace GL
 	void SpotLight::UseLight()
 	{
 		render->UseShader();
-		render->UpdateLight(uniformColor, color);
+		render->UpdateLight(uniformColor, color.GetColorRGB());
 		render->UpdateLight(uniformDirection, direction);
 		render->UpdateLight(uniformPosition, transform.position);
 		render->UpdateLight(uniformAmbient, ambient);

@@ -18,6 +18,7 @@ namespace GL
 		void SetColor(float r, float g, float b, float a);
 
 		glm::vec4 GetColor();
+		glm::vec3 GetColorRGB();
 
 	private:
 		float r, g, b, a;

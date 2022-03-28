@@ -23,7 +23,7 @@ namespace GL
 	void DirectionalLight::UseLight()
 	{
 		render->UseShader();
-		render->UpdateLight(uniformColor, color);
+		render->UpdateLight(uniformColor, color.GetColorRGB());
 		render->UpdateLight(uniformDirection, direction);
 		render->UpdateLight(uniformAmbient, ambient);
 		render->UpdateLight(uniformDiffuse, diffuse);

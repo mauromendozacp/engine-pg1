@@ -4,7 +4,7 @@ namespace GL
 {
 	Light::Light(Render* render) : Entity(render)
 	{
-		color = glm::vec3(0.f);
+		color = Color();
 		direction = glm::vec3(0.f);
 		ambient = glm::vec3(0.f);
 		diffuse = glm::vec3(0.f);
@@ -33,14 +33,9 @@ namespace GL
 	void Light::UseLight()
 	{
 		render->UseShader();
-		render->UpdateLight(uniformColor, color);
+		render->UpdateLight(uniformColor, color.GetColorRGB());
 		render->UpdateStatus(uniformEnabled, enabled);
 		render->CleanShader();
-	}
-
-	void Light::SetColor(glm::vec3 color)
-	{
-		this->color = color;
 	}
 
 	void Light::SetDirection(glm::vec3 direction)
@@ -66,11 +61,6 @@ namespace GL
 	void Light::SetEnabled(bool enabled)
 	{
 		this->enabled = enabled;
-	}
-
-	glm::vec3 Light::GetColor()
-	{
-		return color;
 	}
 
 	glm::vec3 Light::GetDirection()

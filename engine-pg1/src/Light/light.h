@@ -3,6 +3,7 @@
 
 #include "exports.h"
 #include "Entity/entity.h"
+#include "Color/color.h"
 #include "../glm/ext/matrix_transform.hpp"
 
 namespace GL
@@ -13,10 +14,11 @@ namespace GL
 		Light(Render* render);
 		~Light();
 
+		Color color;
+
 		virtual void Init();
 		virtual void UseLight();
 
-		void SetColor(glm::vec3 color);
 		void SetDirection(glm::vec3 direction);
 		void SetAmbient(glm::vec3 ambient);
 		void SetDiffuse(glm::vec3 diffuse);
@@ -31,7 +33,6 @@ namespace GL
 		bool IsEnabled();
 
 	protected:
-		glm::vec3 color;
 		glm::vec3 direction;
 		glm::vec3 ambient;
 		glm::vec3 diffuse;

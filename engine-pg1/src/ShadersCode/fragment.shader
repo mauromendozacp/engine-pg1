@@ -72,7 +72,7 @@ vec3 CalculateSpotLight(Material m);
 
 void main()
 {
-	vec3 resultColor = color;
+	vec3 resultColor = vec3(0.0f, 0.0f, 0.0f);
 	Material mat;
 
 	if (useMaterial)
@@ -105,6 +105,10 @@ void main()
 		{
 			resultColor += CalculateSpotLight(mat);
 		}
+	}
+	else
+	{
+		resultColor = color;
 	}
 
 	if (useTexture == false)
