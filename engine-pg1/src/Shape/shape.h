@@ -21,6 +21,7 @@ namespace GL
 
 		void Init(SHAPE_TYPE shapeType);
 		void Draw();
+		void DeInit();
 	};
 }
 

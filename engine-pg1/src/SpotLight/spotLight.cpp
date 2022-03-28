@@ -40,7 +40,7 @@ namespace GL
 		render->UpdateFloatValue(linear, uniformLinear);
 		render->UpdateFloatValue(quadratic, uniformQuadratic);
 		render->UpdateFloatValue(cutOff, uniformCutOff);
-		render->UpdateStatus(enabled, uniformEnabled);
+		render->UpdateStatus(uniformEnabled, enabled);
 		render->CleanShader();
 	}
 

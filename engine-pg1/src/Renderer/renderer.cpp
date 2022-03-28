@@ -133,7 +133,7 @@ namespace GL
 		glUniform1fv(uniformAlpha, 1, &(baseColor.a));
 	}
 
-	void Render::UpdateStatus(bool status, uint uniformStatus)
+	void Render::UpdateStatus(uint uniformStatus, bool status)
 	{
 		glUniform1i(uniformStatus, status);
 	}
@@ -147,11 +147,6 @@ namespace GL
 	{
 		glBindTexture(GL_TEXTURE_2D, textureId);
 		glUniform1f(uniformTexture, (GLfloat)textureId);
-	}
-
-	void Render::UpdateUseTexture(bool useTexture, uint uniformUseTexture)
-	{
-		glUniform1i(uniformUseTexture, useTexture);
 	}
 
 	void Render::UpdateFloatValue(float value, uint uniform)
@@ -184,7 +179,6 @@ namespace GL
 		glBindVertexArray(0);
 		glBindBuffer(GL_ARRAY_BUFFER, 0);
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
-		glUseProgram(0);
 	}
 
 	void Render::SetClearColor(float r, float g, float b, float a)

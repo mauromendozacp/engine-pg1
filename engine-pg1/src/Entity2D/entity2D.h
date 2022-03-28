@@ -34,6 +34,7 @@ namespace GL
 		uint uniformColor;
 		uint uniformAlpha;
 		uint uniformUseTexture;
+		uint uniformUseMaterial;
 		uint uniformAffectedLight;
 
 		uint VAO, VBO, EBO, tam, vertices;
@@ -42,6 +43,7 @@ namespace GL
 		bool moveable;
 
 		bool useTexture;
+		bool useMaterial;
 		bool affectedLight;
 
 		void SetUniforms();

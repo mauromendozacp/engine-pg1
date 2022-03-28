@@ -28,7 +28,7 @@ namespace GL
 		render->UpdateLight(ambient, uniformAmbient);
 		render->UpdateLight(diffuse, uniformDiffuse);
 		render->UpdateLight(specular, uniformSpecular);
-		render->UpdateStatus(enabled, uniformEnabled);
+		render->UpdateStatus(uniformEnabled, enabled);
 		render->CleanShader();
 	}
 }

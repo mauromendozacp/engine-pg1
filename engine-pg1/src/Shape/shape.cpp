@@ -60,8 +60,14 @@ namespace GL
 
 	void Shape::Draw()
 	{
+		render->UseShader();
 		UpdateShader();
-
 		Entity2D::Draw();
+		render->CleanShader();
+	}
+
+	void Shape::DeInit()
+	{
+		render->UnBind(VAO, VBO, EBO);
 	}
 }

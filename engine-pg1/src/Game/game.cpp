@@ -108,7 +108,6 @@ namespace GameXD
 		spotLight->SetLinear(0.045f);
 		spotLight->SetQuadratic(0.0075f);
 		spotLight->SetCutOff(25.f);
-		spotLight->SetEnabled(false);
 	}
 
 	void Game::Update()
@@ -135,5 +134,6 @@ namespace GameXD
 	{
 		player->DeInit();
 		floor->DeInit();
+		cubeLight->DeInit();
 	}
 }

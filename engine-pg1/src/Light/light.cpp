@@ -34,7 +34,7 @@ namespace GL
 	{
 		render->UseShader();
 		render->UpdateLight(color, uniformColor);
-		render->UpdateStatus(enabled, uniformEnabled);
+		render->UpdateStatus(uniformEnabled, enabled);
 		render->CleanShader();
 	}
 

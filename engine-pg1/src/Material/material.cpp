@@ -31,12 +31,10 @@ namespace GL
 
 	void Material::UpdateShader()
 	{
-		render->UseShader();
 		render->UpdateFloatValue(uniformShininess, shininess);
 		render->UpdateVec3(uniformAmbient, ambient);
 		render->UpdateVec3(uniformDiffuse, diffuse);
 		render->UpdateVec3(uniformSpecular, specular * 128.f);
-		render->CleanShader();
 	}
 
 	void Material::SetShininess(float shininess)

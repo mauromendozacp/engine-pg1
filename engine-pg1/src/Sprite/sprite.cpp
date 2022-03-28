@@ -81,17 +81,18 @@ namespace GL
 
 	void Sprite::Draw()
 	{
+		render->UseShader();
 		UpdateShader();
 		render->UpdateTexture(textureData->id, uniformTexture);
-
 		render->BlendEnabled();
 		Entity2D::Draw();
 		render->BlendDisabled();
+		render->CleanShader();
 	}
 
 	void Sprite::DeInit()
 	{
-		render->UnBind(VAO, VBO, EBO);
+		render->UnBind(VAO, VBO, EBO, UVB);
 		glDeleteTextures(1, &textureData->id);
 
 		if (textureData != nullptr)
