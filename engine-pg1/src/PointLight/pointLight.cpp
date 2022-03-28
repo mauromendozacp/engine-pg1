@@ -33,14 +33,14 @@ namespace GL
 	void PointLight::UseLight()
 	{
 		render->UseShader();
-		render->UpdateLight(color, uniformColor);
-		render->UpdateLight(transform.position, uniformPosition);
-		render->UpdateLight(ambient, uniformAmbient);
-		render->UpdateLight(diffuse, uniformDiffuse);
-		render->UpdateLight(specular, uniformSpecular);
-		render->UpdateFloatValue(constant, uniformConstant);
-		render->UpdateFloatValue(linear, uniformLinear);
-		render->UpdateFloatValue(quadratic, uniformQuadratic);
+		render->UpdateLight(uniformColor, color);
+		render->UpdateLight(uniformPosition, transform.position);
+		render->UpdateLight(uniformAmbient, ambient);
+		render->UpdateLight(uniformDiffuse, diffuse);
+		render->UpdateLight(uniformSpecular, specular);
+		render->UpdateFloatValue(uniformConstant, constant);
+		render->UpdateFloatValue(uniformLinear, linear);
+		render->UpdateFloatValue(uniformQuadratic, quadratic);
 		render->UpdateStatus(uniformEnabled, enabled);
 		render->CleanShader();
 	}

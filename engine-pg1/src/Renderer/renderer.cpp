@@ -115,7 +115,7 @@ namespace GL
 		glEnableVertexAttribArray(location);
 	}
 
-	void Render::UpdateMVP(glm::mat4 model, uint uniformModel, uint uniformView, uint uniformProjection)
+	void Render::UpdateMVP(uint uniformModel, uint uniformView, uint uniformProjection, glm::mat4 model)
 	{
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 		glUniformMatrix4fv(uniformView, 1, GL_FALSE, glm::value_ptr(view));
@@ -127,7 +127,7 @@ namespace GL
 		glUniform3f(uniformVec3, vec3Value.x, vec3Value.y, vec3Value.z);
 	}
 
-	void Render::UpdateColor(glm::vec4 baseColor, uint uniformBaseColor, uint uniformAlpha)
+	void Render::UpdateColor(uint uniformBaseColor, uint uniformAlpha, glm::vec4 baseColor)
 	{
 		glUniform3fv(uniformBaseColor, 1, glm::value_ptr(glm::vec3(baseColor.r, baseColor.g, baseColor.b)));
 		glUniform1fv(uniformAlpha, 1, &(baseColor.a));
@@ -138,18 +138,17 @@ namespace GL
 		glUniform1i(uniformStatus, status);
 	}
 
-	void Render::UpdateLight(glm::vec3 lightColor, uint uniformLightColor)
+	void Render::UpdateLight(uint uniformLight, glm::vec3 light)
 	{
-		glUniform3fv(uniformLightColor, 1, glm::value_ptr(lightColor));
+		glUniform3fv(uniformLight, 1, glm::value_ptr(light));
 	}
 
-	void Render::UpdateTexture(uint textureId, uint uniformTexture)
+	void Render::UpdateTexture(uint uniformTexture, uint textureId)
 	{
-		glBindTexture(GL_TEXTURE_2D, textureId);
 		glUniform1f(uniformTexture, (GLfloat)textureId);
 	}
 
-	void Render::UpdateFloatValue(float value, uint uniform)
+	void Render::UpdateFloatValue(uint uniform, float value)
 	{
 		glUniform1f(uniform, value);
 	}
@@ -198,13 +197,29 @@ namespace GL
 		glfwPollEvents();
 	}
 
-	void Render::BlendEnabled()
+	void Render::TextureEnable(uint textureId)
+	{
+		glActiveTexture(GL_TEXTURE0);
+		glBindTexture(GL_TEXTURE_2D, textureId);
+	}
+
+	void Render::TextureDisable()
+	{
+		glDisable(GL_TEXTURE_2D);
+	}
+
+	void Render::TextureDelete(uint uniformTexture, uint& textureId)
+	{
+		glDeleteTextures(uniformTexture, &textureId);
+	}
+
+	void Render::BlendEnable()
 	{
 		glEnable(GL_BLEND);
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	}
 
-	void Render::BlendDisabled()
+	void Render::BlendDisable()
 	{
 		glDisable(GL_BLEND);
 	}

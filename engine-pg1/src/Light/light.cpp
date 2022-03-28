@@ -33,7 +33,7 @@ namespace GL
 	void Light::UseLight()
 	{
 		render->UseShader();
-		render->UpdateLight(color, uniformColor);
+		render->UpdateLight(uniformColor, color);
 		render->UpdateStatus(uniformEnabled, enabled);
 		render->CleanShader();
 	}

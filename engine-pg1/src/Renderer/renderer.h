@@ -41,13 +41,13 @@ namespace GL
 		void SetBaseAttribs(uint location, int size, int stride, int offset);
 		void SetTextureAttribs(uint location, int size, int stride, int offset);
 
-		void UpdateMVP(glm::mat4 model, uint uniformModel, uint uniformView, uint uniformProjection);
+		void UpdateMVP(uint uniformModel, uint uniformView, uint uniformProjection, glm::mat4 model);
 		void UpdateVec3(uint uniformVec3, glm::vec3 vec3Value);
-		void UpdateColor(glm::vec4 baseColor, uint uniformBaseColor, uint uniformAlpha);
+		void UpdateColor(uint uniformBaseColor, uint uniformAlpha, glm::vec4 baseColor);
 		void UpdateStatus(uint uniformStatus, bool status);
-		void UpdateLight(glm::vec3 lightColor, uint uniformLightColor);
-		void UpdateTexture(uint textureId, uint uniformTexture);
-		void UpdateFloatValue(float value, uint uniform);
+		void UpdateLight(uint uniformLight, glm::vec3 light);
+		void UpdateTexture(uint uniformTexture, uint textureId);
+		void UpdateFloatValue(uint uniform, float value);
 
 		void SetView(glm::mat4 view);
 		void SetProjection(glm::mat4 projection);
@@ -56,8 +56,11 @@ namespace GL
 		void SetClearColor(float r, float g, float b, float a);
 		void ClearScreen();
 		void PostRender(Window* window);
-		void BlendEnabled();
-		void BlendDisabled();
+		void TextureEnable(uint textureId);
+		void TextureDisable();
+		void TextureDelete(uint uniformTexture, uint& textureId);
+		void BlendEnable();
+		void BlendDisable();
 	};
 }
 

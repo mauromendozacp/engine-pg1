@@ -60,8 +60,8 @@ namespace GL
 
 	void Entity2D::UpdateShader()
 	{
-		render->UpdateMVP(matrix.model, uniformModel, uniformView, uniformProjection);
-		render->UpdateColor(color.GetColor(), uniformColor, uniformAlpha);
+		render->UpdateMVP(uniformModel, uniformView, uniformProjection, matrix.model);
+		render->UpdateColor(uniformColor, uniformAlpha, color.GetColor());
 		render->UpdateStatus(uniformAffectedLight, affectedLight);
 		render->UpdateStatus(uniformUseTexture, useTexture);
 		render->UpdateStatus(uniformUseMaterial, useMaterial);

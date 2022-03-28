@@ -23,11 +23,11 @@ namespace GL
 	void DirectionalLight::UseLight()
 	{
 		render->UseShader();
-		render->UpdateLight(color, uniformColor);
-		render->UpdateLight(direction, uniformDirection);
-		render->UpdateLight(ambient, uniformAmbient);
-		render->UpdateLight(diffuse, uniformDiffuse);
-		render->UpdateLight(specular, uniformSpecular);
+		render->UpdateLight(uniformColor, color);
+		render->UpdateLight(uniformDirection, direction);
+		render->UpdateLight(uniformAmbient, ambient);
+		render->UpdateLight(uniformDiffuse, diffuse);
+		render->UpdateLight(uniformSpecular, specular);
 		render->UpdateStatus(uniformEnabled, enabled);
 		render->CleanShader();
 	}
