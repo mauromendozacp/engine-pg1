@@ -7,6 +7,7 @@ namespace GameXD
 		player = nullptr;
 		floor = nullptr;
 		cubeLight = nullptr;
+		spotCubeLight = nullptr;
 		tnt = nullptr;
 		globalLight = nullptr;
 		directionalLight = nullptr;
@@ -30,6 +31,11 @@ namespace GameXD
 		{
 			delete cubeLight;
 			cubeLight = nullptr;
+		}
+		if (spotCubeLight != nullptr)
+		{
+			delete spotCubeLight;
+			spotCubeLight = nullptr;
 		}
 		if (tnt != nullptr)
 		{
@@ -80,6 +86,14 @@ namespace GameXD
 		cubeLight->SetPos(glm::vec3(15.f, 2.5f, 0.f));
 		cubeLight->color.SetColor(255, 0, 0);
 
+		cubeLight->material = new Material(render);
+		
+		spotCubeLight = new Shape(render);
+		spotCubeLight->Init(SHAPE_TYPE::CUBE);
+		spotCubeLight->SetPos(glm::vec3(0.f, 10.f, 0.f));
+		spotCubeLight->color.SetColor(255, 0, 0);
+		spotCubeLight->SetScale(0.75f);
+
 		tnt = new Sprite(render);
 		tnt->Init(SPRITE_TYPE::CUBE);
 		tnt->LoadTexture("../res/Textures/tnt.png", true);
@@ -91,24 +105,26 @@ namespace GameXD
 
 		directionalLight = new DirectionalLight(render);
 		directionalLight->Init();
-		directionalLight->color.SetColor(44, 44, 44);
+		directionalLight->color.SetColor(230, 230, 230);
 		directionalLight->SetAmbient(glm::vec3(0.75f, 0.75f, 0.75f));
 		directionalLight->SetSpecular(glm::vec3(0.25f, 0.25f, 0.25f));
+		directionalLight->SetEnabled(false);
 
 		pointLight = new PointLight(render);
 		pointLight->Init();
 		pointLight->SetPos(cubeLight->GetPos());
-		pointLight->color.SetColor(255, 0, 0);
+		pointLight->color.SetColor(0, 255, 0);
 		pointLight->SetAmbient(glm::vec3(0.2f, 0.2f, 0.2f));
 		pointLight->SetDiffuse(glm::vec3(0.5f, 0.5f, 0.5f));
 		pointLight->SetSpecular(glm::vec3(0.25f, 0.25f, 0.25f));
-		pointLight->SetConstant(0.5f);
-		pointLight->SetLinear(0.045f);
-		pointLight->SetQuadratic(0.075f);
+		pointLight->SetConstant(1.f);
+		pointLight->SetLinear(0.09f);
+		pointLight->SetQuadratic(0.032f);
+		//pointLight->SetEnabled(false);
 
 		spotLight = new SpotLight(render);
 		spotLight->Init();
-		spotLight->SetPos(glm::vec3(0.0f, 10.0f, 0.0f));
+		spotLight->SetPos(spotCubeLight->GetPos());
 		spotLight->SetDirection(glm::vec3(0.0f, -1.0f, 0.0f));
 		spotLight->color.SetColor(255, 0, 0);
 		spotLight->SetAmbient(glm::vec3(0.2f, 0.2f, 0.2f));
@@ -118,6 +134,7 @@ namespace GameXD
 		spotLight->SetLinear(0.045f);
 		spotLight->SetQuadratic(0.0075f);
 		spotLight->SetCutOff(25.f);
+		//spotLight->SetEnabled(false);
 	}
 
 	void Game::Update()
@@ -130,8 +147,9 @@ namespace GameXD
 	{
 		floor->Draw();
 		cubeLight->Draw();
-		player->Draw();
+		spotCubeLight->Draw();
 		tnt->Draw();
+		player->Draw();
 
 		mainCamera->UseCamera();
 
@@ -146,6 +164,7 @@ namespace GameXD
 		player->DeInit();
 		floor->DeInit();
 		cubeLight->DeInit();
+		spotCubeLight->DeInit();
 		tnt->DeInit();
 	}
 }
