@@ -21,14 +21,14 @@ namespace GL
 	{
 		std::string indexSTR = std::to_string(index).c_str();
 		render->SetUniform(uniformColor, ("pointLight[" + indexSTR + "].color").c_str());
-		render->SetUniform(uniformPosition, "pointLight.position");
-		render->SetUniform(uniformAmbient, "pointLight.ambient");
-		render->SetUniform(uniformDiffuse, "pointLight.diffuse");
-		render->SetUniform(uniformSpecular, "pointLight.specular");
-		render->SetUniform(uniformConstant, "pointLight.constant");
-		render->SetUniform(uniformLinear, "pointLight.linear");
-		render->SetUniform(uniformQuadratic, "pointLight.quadratic");
-		render->SetUniform(uniformEnabled, "pointLight.enabled");
+		render->SetUniform(uniformPosition, ("pointLight[" + indexSTR + "].position").c_str());
+		render->SetUniform(uniformAmbient, ("pointLight[" + indexSTR + "].ambient").c_str());
+		render->SetUniform(uniformDiffuse, ("pointLight[" + indexSTR + "].diffuse").c_str());
+		render->SetUniform(uniformSpecular, ("pointLight[" + indexSTR + "].specular").c_str());
+		render->SetUniform(uniformConstant, ("pointLight[" + indexSTR + "].constant").c_str());
+		render->SetUniform(uniformLinear, ("pointLight[" + indexSTR + "].linear").c_str());
+		render->SetUniform(uniformQuadratic, ("pointLight[" + indexSTR + "].quadratic").c_str());
+		render->SetUniform(uniformEnabled, ("pointLight[" + indexSTR + "].enabled").c_str());
 	}
 
 	void PointLight::UseLight()

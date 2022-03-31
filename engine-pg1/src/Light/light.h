@@ -16,7 +16,6 @@ namespace GL
 
 		Color color;
 
-		virtual void Init(int index) = 0;
 		virtual void UseLight() = 0;
 
 		void SetAmbient(glm::vec3 ambient);

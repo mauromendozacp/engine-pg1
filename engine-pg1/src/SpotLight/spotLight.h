@@ -12,7 +12,7 @@ namespace GL
 		SpotLight(Render* render);
 		~SpotLight();
 
-		void Init() override;
+		virtual void Init(int index);
 		void UseLight() override;
 
 		void SetDirection(glm::vec3 direction);

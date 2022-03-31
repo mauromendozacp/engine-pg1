@@ -17,20 +17,21 @@ namespace GL
 	{
 	}
 
-	void SpotLight::Init()
+	void SpotLight::Init(int index)
 	{
-		render->SetUniform(uniformColor, "spotLight.pointLight.color");
-		render->SetUniform(uniformPosition, "spotLight.pointLight.position");
-		render->SetUniform(uniformAmbient, "spotLight.pointLight.ambient");
-		render->SetUniform(uniformDiffuse, "spotLight.pointLight.diffuse");
-		render->SetUniform(uniformSpecular, "spotLight.pointLight.specular");
-		render->SetUniform(uniformConstant, "spotLight.pointLight.constant");
-		render->SetUniform(uniformLinear, "spotLight.pointLight.linear");
-		render->SetUniform(uniformQuadratic, "spotLight.pointLight.quadratic");
-		render->SetUniform(uniformDirection, "spotLight.direction");
-		render->SetUniform(uniformCutOff, "spotLight.cutOff");
-		render->SetUniform(uniformOuterCutOff, "spotLight.outerCutOff");
-		render->SetUniform(uniformEnabled, "spotLight.enabled");
+		std::string indexSTR = std::to_string(index).c_str();
+		render->SetUniform(uniformColor, ("spotLight[" + indexSTR + "].pointLight.color").c_str());
+		render->SetUniform(uniformPosition, ("spotLight[" + indexSTR + "].pointLight.position").c_str());
+		render->SetUniform(uniformAmbient, ("spotLight[" + indexSTR + "].pointLight.ambient").c_str());
+		render->SetUniform(uniformDiffuse, ("spotLight[" + indexSTR + "].pointLight.diffuse").c_str());
+		render->SetUniform(uniformSpecular, ("spotLight[" + indexSTR + "].pointLight.specular").c_str());
+		render->SetUniform(uniformConstant, ("spotLight[" + indexSTR + "].pointLight.constant").c_str());
+		render->SetUniform(uniformLinear, ("spotLight[" + indexSTR + "].pointLight.linear").c_str());
+		render->SetUniform(uniformQuadratic, ("spotLight[" + indexSTR + "].pointLight.quadratic").c_str());
+		render->SetUniform(uniformDirection, ("spotLight[" + indexSTR + "].direction").c_str());
+		render->SetUniform(uniformCutOff, ("spotLight[" + indexSTR + "].cutOff").c_str());
+		render->SetUniform(uniformOuterCutOff, ("spotLight[" + indexSTR + "].outerCutOff").c_str());
+		render->SetUniform(uniformEnabled, ("spotLight[" + indexSTR + "].enabled").c_str());
 	}
 
 	void SpotLight::UseLight()

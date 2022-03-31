@@ -97,7 +97,6 @@ namespace GameXD
 		directionalLight->SetEnabled(true);
 
 		PointLight* pointLight = lightManager->GetPointLight(0);
-		pointLight->Init();
 		pointLight->SetPos(cubeLight->GetPos() + glm::vec3(0.f, 2.5f, 0.f));
 		pointLight->color = cubeLight->color;
 		pointLight->SetAmbient(glm::vec3(0.05f, 0.05f, 0.05f));
@@ -109,7 +108,6 @@ namespace GameXD
 		pointLight->SetEnabled(true);
 
 		SpotLight* spotLight = lightManager->GetSpotLight(0);
-		spotLight->Init();
 		spotLight->SetPos(spotCubeLight->GetPos());
 		spotLight->SetDirection(glm::vec3(0.0f, -1.0f, 0.0f));
 		spotLight->color = spotCubeLight->color;

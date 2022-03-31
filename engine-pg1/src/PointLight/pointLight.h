@@ -13,7 +13,7 @@ namespace GL
 		PointLight(Render* render);
 		~PointLight();
 
-		virtual void Init(int index) override;
+		virtual void Init(int index);
 		virtual void UseLight() override;
 
 		void SetConstant(float constant);

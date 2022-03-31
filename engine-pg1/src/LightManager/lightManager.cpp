@@ -45,10 +45,10 @@ namespace GL
 		for (int i = 0; i < lightMax; i++)
 		{
 			pointLights[i] = new PointLight(render);
-			pointLights[i]->Init();
+			pointLights[i]->Init(i);
 
 			spotLights[i] = new SpotLight(render);
-			spotLights[i]->Init();
+			spotLights[i]->Init(i);
 		}
 	}
 
