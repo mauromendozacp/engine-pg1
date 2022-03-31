@@ -2,10 +2,13 @@
 
 namespace GL
 {
-	LightManager::LightManager()
+	LightManager::LightManager(Render* render)
 	{
-		directionalLight = nullptr;
+		this->render = render;
+		pointLightsCreated = 0;
+		spotLightsCreated = 0;
 
+		directionalLight = nullptr;
 		for (int i = 0; i < lightMax; i++)
 		{
 			pointLights[i] = nullptr;
@@ -20,7 +23,6 @@ namespace GL
 			delete directionalLight;
 			directionalLight = nullptr;
 		}
-
 		for (int i = 0; i < lightMax; i++)
 		{
 			if (pointLights[i] != nullptr)
@@ -37,37 +39,60 @@ namespace GL
 		}
 	}
 
-	void LightManager::Init(Render* render)
+	void LightManager::AddLight(LIGHT_TYPE type)
 	{
-		directionalLight = new DirectionalLight(render);
-		directionalLight->Init();
-
-		for (int i = 0; i < lightMax; i++)
+		switch (type)
 		{
-			pointLights[i] = new PointLight(render);
-			pointLights[i]->Init(i);
-
-			spotLights[i] = new SpotLight(render);
-			spotLights[i]->Init(i);
+		case LIGHT_TYPE::DIRECTIONAL:
+			directionalLight = new DirectionalLight(render);
+			directionalLight->Init();
+			break;
+		case LIGHT_TYPE::POINTLIGHT:
+			if (pointLightsCreated < lightMax)
+			{
+				pointLights[pointLightsCreated] = new PointLight(render);
+				pointLights[pointLightsCreated]->Init(pointLightsCreated);
+				pointLightsCreated++;
+			}
+			break;
+		case LIGHT_TYPE::SPOTLIGHT:
+			if (spotLightsCreated < lightMax)
+			{
+				spotLights[spotLightsCreated] = new SpotLight(render);
+				spotLights[spotLightsCreated]->Init(spotLightsCreated);
+				spotLightsCreated++;
+			}
+			break;
+		default:
+			break;
 		}
 	}
 
 	void LightManager::UseLights()
 	{
-		if (directionalLight->IsEnabled())
+		if (directionalLight != nullptr)
 		{
-			directionalLight->UseLight();
+			if (directionalLight->IsEnabled())
+			{
+				directionalLight->UseLight();
+			}
 		}
 
 		for (int i = 0; i < lightMax; i++)
 		{
-			if (pointLights[i]->IsEnabled())
+			if (pointLights[i] != nullptr)
 			{
-				pointLights[i]->UseLight();
+				if (pointLights[i]->IsEnabled())
+				{
+					pointLights[i]->UseLight();
+				}
 			}
-			if (spotLights[i]->IsEnabled())
+			if (spotLights[i] != nullptr)
 			{
-				spotLights[i]->UseLight();
+				if (spotLights[i]->IsEnabled())
+				{
+					spotLights[i]->UseLight();
+				}
 			}
 		}
 	}
@@ -95,5 +120,15 @@ namespace GL
 		}
 
 		return spotLights[index];
+	}
+
+	PointLight* LightManager::GetLasPointLightCreated()
+	{
+		return GetPointLight(pointLightsCreated - 1);
+	}
+
+	SpotLight* LightManager::GetLasSpotLightCreated()
+	{
+		return GetSpotLight(spotLightsCreated - 1);
 	}
 }

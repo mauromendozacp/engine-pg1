@@ -8,7 +8,7 @@ namespace GL
 		ambient = glm::vec3(0.f);
 		diffuse = glm::vec3(0.f);
 		specular = glm::vec3(0.f);
-		enabled = false;
+		enabled = true;
 
 		uniformColor = 0;
 		uniformPosition = 0;

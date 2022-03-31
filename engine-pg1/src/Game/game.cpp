@@ -87,6 +87,7 @@ namespace GameXD
 		defaultMaterial->SetSpecular(glm::vec3(0.5f, 0.5f, 0.5f));
 		defaultMaterial->UpdateShader();
 
+		lightManager->AddLight(LIGHT_TYPE::DIRECTIONAL);
 		DirectionalLight* directionalLight = lightManager->GetDirectionalLight();
 		directionalLight->Init();
 		directionalLight->color.SetColor(240, 240, 240);
@@ -94,9 +95,9 @@ namespace GameXD
 		directionalLight->SetAmbient(glm::vec3(0.5f, 0.5f, 0.5f));
 		directionalLight->SetDiffuse(glm::vec3(0.4f, 0.4f, 0.4f));
 		directionalLight->SetSpecular(glm::vec3(0.5f, 0.5f, 0.5f));
-		directionalLight->SetEnabled(true);
 
-		PointLight* pointLight = lightManager->GetPointLight(0);
+		lightManager->AddLight(LIGHT_TYPE::POINTLIGHT);
+		PointLight* pointLight = lightManager->GetLasPointLightCreated();
 		pointLight->SetPos(cubeLight->GetPos() + glm::vec3(0.f, 2.5f, 0.f));
 		pointLight->color = cubeLight->color;
 		pointLight->SetAmbient(glm::vec3(0.05f, 0.05f, 0.05f));
@@ -105,9 +106,9 @@ namespace GameXD
 		pointLight->SetConstant(1.f);
 		pointLight->SetLinear(0.09f);
 		pointLight->SetQuadratic(0.032f);
-		pointLight->SetEnabled(true);
 
-		SpotLight* spotLight = lightManager->GetSpotLight(0);
+		lightManager->AddLight(LIGHT_TYPE::SPOTLIGHT);
+		SpotLight* spotLight = lightManager->GetLasSpotLightCreated();
 		spotLight->SetPos(spotCubeLight->GetPos());
 		spotLight->SetDirection(glm::vec3(0.0f, -1.0f, 0.0f));
 		spotLight->color = spotCubeLight->color;
@@ -119,7 +120,6 @@ namespace GameXD
 		spotLight->SetQuadratic(0.032f);
 		spotLight->SetCutOff(25.f);
 		spotLight->SetOuterCutOff(15.f);
-		spotLight->SetEnabled(true);
 	}
 
 	void Game::Update()
