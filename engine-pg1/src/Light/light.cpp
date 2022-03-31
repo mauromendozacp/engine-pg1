@@ -5,7 +5,6 @@ namespace GL
 	Light::Light(Render* render) : Entity(render)
 	{
 		color = Color();
-		direction = glm::vec3(0.f);
 		ambient = glm::vec3(0.f);
 		diffuse = glm::vec3(0.f);
 		specular = glm::vec3(0.f);
@@ -13,7 +12,6 @@ namespace GL
 
 		uniformColor = 0;
 		uniformPosition = 0;
-		uniformDirection = 0;
 		uniformAmbient = 0;
 		uniformDiffuse = 0;
 		uniformSpecular = 0;
@@ -38,11 +36,6 @@ namespace GL
 		render->CleanShader();
 	}
 
-	void Light::SetDirection(glm::vec3 direction)
-	{
-		this->direction = direction;
-	}
-
 	void Light::SetAmbient(glm::vec3 ambient)
 	{
 		this->ambient = ambient;
@@ -61,11 +54,6 @@ namespace GL
 	void Light::SetEnabled(bool enabled)
 	{
 		this->enabled = enabled;
-	}
-
-	glm::vec3 Light::GetDirection()
-	{
-		return direction;
 	}
 
 	glm::vec3 Light::GetAmbient()

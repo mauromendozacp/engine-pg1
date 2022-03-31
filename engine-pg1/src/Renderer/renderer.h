@@ -47,7 +47,8 @@ namespace GL
 		void UpdateStatus(uint uniformStatus, bool status);
 		void UpdateLight(uint uniformLight, glm::vec3 light);
 		void UpdateTexture(uint uniformTexture, uint textureId);
-		void UpdateFloatValue(uint uniform, float value);
+		void UpdateFloatValue(uint uniformFloat, float value);
+		void UpdateIntValue(uint uniformInt, int value);
 
 		void SetView(glm::mat4 view);
 		void SetProjection(glm::mat4 projection);

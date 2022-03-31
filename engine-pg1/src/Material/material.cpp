@@ -34,7 +34,7 @@ namespace GL
 		render->UpdateFloatValue(uniformShininess, shininess);
 		render->UpdateVec3(uniformAmbient, ambient);
 		render->UpdateVec3(uniformDiffuse, diffuse);
-		render->UpdateVec3(uniformSpecular, specular * 128.f);
+		render->UpdateVec3(uniformSpecular, specular);
 	}
 
 	void Material::SetShininess(float shininess)

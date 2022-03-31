@@ -14,6 +14,14 @@ namespace GL
 		
 		void Init() override;
 		void UseLight() override;
+
+		void SetDirection(glm::vec3 direction);
+		glm::vec3 GetDirection();
+
+	private:
+		glm::vec3 direction;
+
+		uint uniformDirection;
 	};
 }
 

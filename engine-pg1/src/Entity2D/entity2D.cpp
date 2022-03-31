@@ -50,7 +50,7 @@ namespace GL
 		moveable = false;
 
 		useTexture = false;
-		useMaterial = false;
+		useMaterial = true;
 		affectedLight = true;
 	}
 

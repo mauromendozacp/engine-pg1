@@ -2,7 +2,7 @@
 
 namespace GL
 {
-	const int colorValue = 255;
+	const float colorValue = 255.f;
 
 	Color::Color()
 	{
@@ -18,15 +18,15 @@ namespace GL
 
 	void Color::SetColor(int r, int g, int b)
 	{
-		this->r = glm::clamp(r, 0, colorValue) / colorValue;
-		this->g = glm::clamp(g, 0, colorValue) / colorValue;
-		this->b = glm::clamp(b, 0, colorValue) / colorValue;
+		this->r = glm::clamp(static_cast<float>(r), 0.f, colorValue) / colorValue;
+		this->g = glm::clamp(static_cast<float>(g), 0.f, colorValue) / colorValue;
+		this->b = glm::clamp(static_cast<float>(b), 0.f, colorValue) / colorValue;
 	}
 
 	void Color::SetColor(int r, int g, int b, int a)
 	{
 		SetColor(r, g, b);
-		this->a = glm::clamp(a, 0, colorValue) / colorValue;
+		this->a = glm::clamp(static_cast<float>(a), 0.f, colorValue) / colorValue;
 	}
 
 	void Color::SetColor(float r, float g, float b)

@@ -4,6 +4,8 @@ namespace GL
 {
 	DirectionalLight::DirectionalLight(Render* render) : Light(render)
 	{
+		direction = glm::vec3(0.f);
+		uniformDirection = 0;
 	}
 
 	DirectionalLight::~DirectionalLight()
@@ -30,5 +32,15 @@ namespace GL
 		render->UpdateLight(uniformSpecular, specular);
 		render->UpdateStatus(uniformEnabled, enabled);
 		render->CleanShader();
+	}
+
+	void DirectionalLight::SetDirection(glm::vec3 direction)
+	{
+		this->direction = direction;
+	}
+
+	glm::vec3 DirectionalLight::GetDirection()
+	{
+		return direction;
 	}
 }

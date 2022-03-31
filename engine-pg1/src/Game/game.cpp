@@ -9,7 +9,7 @@ namespace GameXD
 		cubeLight = nullptr;
 		spotCubeLight = nullptr;
 		tnt = nullptr;
-		globalLight = nullptr;
+		defaultMaterial = nullptr;
 		directionalLight = nullptr;
 		pointLight = nullptr;
 		spotLight = nullptr;
@@ -37,15 +37,15 @@ namespace GameXD
 			delete spotCubeLight;
 			spotCubeLight = nullptr;
 		}
+		if (defaultMaterial != nullptr)
+		{
+			delete defaultMaterial;
+			defaultMaterial = nullptr;
+		}
 		if (tnt != nullptr)
 		{
 			delete tnt;
 			tnt = nullptr;
-		}
-		if (globalLight != nullptr)
-		{
-			delete globalLight;
-			globalLight = nullptr;
 		}
 		if (directionalLight != nullptr)
 		{
@@ -84,13 +84,11 @@ namespace GameXD
 		cubeLight = new Shape(render);
 		cubeLight->Init(SHAPE_TYPE::CUBE);
 		cubeLight->SetPos(glm::vec3(15.f, 2.5f, 0.f));
-		cubeLight->color.SetColor(255, 0, 0);
-
-		cubeLight->material = new Material(render);
+		cubeLight->color.SetColor(0, 255, 0);
 		
 		spotCubeLight = new Shape(render);
 		spotCubeLight->Init(SHAPE_TYPE::CUBE);
-		spotCubeLight->SetPos(glm::vec3(0.f, 10.f, 0.f));
+		spotCubeLight->SetPos(glm::vec3(0.f, 5.f, 0.f));
 		spotCubeLight->color.SetColor(255, 0, 0);
 		spotCubeLight->SetScale(0.75f);
 
@@ -99,24 +97,30 @@ namespace GameXD
 		tnt->LoadTexture("../res/Textures/tnt.png", true);
 		tnt->SetPos(glm::vec3(10.f, .5f, 10.f));
 
-		globalLight = new Light(render);
-		globalLight->Init();
-		globalLight->color.SetColor(255, 255, 255);
+		defaultMaterial = new Material(render);
+		defaultMaterial->Init();
+		defaultMaterial->SetShininess(32.f);
+		defaultMaterial->SetAmbient(glm::vec3(0.05f, 0.05f, 0.05f));
+		defaultMaterial->SetDiffuse(glm::vec3(0.4f, 0.4f, 0.4f));
+		defaultMaterial->SetSpecular(glm::vec3(0.5f, 0.5f, 0.5f));
+		defaultMaterial->UpdateShader();
 
 		directionalLight = new DirectionalLight(render);
 		directionalLight->Init();
-		directionalLight->color.SetColor(230, 230, 230);
-		directionalLight->SetAmbient(glm::vec3(0.75f, 0.75f, 0.75f));
-		directionalLight->SetSpecular(glm::vec3(0.25f, 0.25f, 0.25f));
-		directionalLight->SetEnabled(false);
+		directionalLight->color.SetColor(240, 240, 240);
+		directionalLight->SetDirection(glm::vec3(-0.2f, -1.0f, -0.3f));
+		directionalLight->SetAmbient(glm::vec3(0.5f, 0.5f, 0.5f));
+		directionalLight->SetDiffuse(glm::vec3(0.4f, 0.4f, 0.4f));
+		directionalLight->SetSpecular(glm::vec3(0.5f, 0.5f, 0.5f));
+		//directionalLight->SetEnabled(false);
 
 		pointLight = new PointLight(render);
 		pointLight->Init();
-		pointLight->SetPos(cubeLight->GetPos());
-		pointLight->color.SetColor(0, 255, 0);
-		pointLight->SetAmbient(glm::vec3(0.2f, 0.2f, 0.2f));
-		pointLight->SetDiffuse(glm::vec3(0.5f, 0.5f, 0.5f));
-		pointLight->SetSpecular(glm::vec3(0.25f, 0.25f, 0.25f));
+		pointLight->SetPos(cubeLight->GetPos() + glm::vec3(0.f, 2.5f, 0.f));
+		pointLight->color = cubeLight->color;
+		pointLight->SetAmbient(glm::vec3(0.05f, 0.05f, 0.05f));
+		pointLight->SetDiffuse(glm::vec3(0.8f, 0.8f, 0.8f));
+		pointLight->SetSpecular(glm::vec3(1.0f, 1.0f, 1.0f));
 		pointLight->SetConstant(1.f);
 		pointLight->SetLinear(0.09f);
 		pointLight->SetQuadratic(0.032f);
@@ -126,14 +130,15 @@ namespace GameXD
 		spotLight->Init();
 		spotLight->SetPos(spotCubeLight->GetPos());
 		spotLight->SetDirection(glm::vec3(0.0f, -1.0f, 0.0f));
-		spotLight->color.SetColor(255, 0, 0);
-		spotLight->SetAmbient(glm::vec3(0.2f, 0.2f, 0.2f));
-		spotLight->SetDiffuse(glm::vec3(0.5f, 0.5f, 0.5f));
-		spotLight->SetSpecular(glm::vec3(0.25f, 0.25f, 0.25f));
-		spotLight->SetConstant(0.5f);
-		spotLight->SetLinear(0.045f);
-		spotLight->SetQuadratic(0.0075f);
-		spotLight->SetCutOff(25.f);
+		spotLight->color = spotCubeLight->color;
+		spotLight->SetAmbient(glm::vec3(0.0f, 0.0f, 0.0f));
+		spotLight->SetDiffuse(glm::vec3(1.0f, 1.0f, 1.0f));
+		spotLight->SetSpecular(glm::vec3(1.0f, 1.0f, 1.0f));
+		spotLight->SetConstant(1.f);
+		spotLight->SetLinear(0.09f);
+		spotLight->SetQuadratic(0.032f);
+		spotLight->SetCutOff(12.5f);
+		spotLight->SetOuterCutOff(15.f);
 		//spotLight->SetEnabled(false);
 	}
 
@@ -153,7 +158,6 @@ namespace GameXD
 
 		mainCamera->UseCamera();
 
-		globalLight->UseLight();
 		directionalLight->UseLight();
 		pointLight->UseLight();
 		spotLight->UseLight();

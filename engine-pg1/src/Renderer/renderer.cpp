@@ -148,9 +148,14 @@ namespace GL
 		glUniform1f(uniformTexture, (GLfloat)textureId);
 	}
 
-	void Render::UpdateFloatValue(uint uniform, float value)
+	void Render::UpdateFloatValue(uint uniformFloat, float value)
 	{
-		glUniform1f(uniform, value);
+		glUniform1f(uniformFloat, value);
+	}
+
+	void Render::UpdateIntValue(uint uniformInt, int value)
+	{
+		glUniform1i(uniformInt, value);
 	}
 
 	void Render::SetView(glm::mat4 view)

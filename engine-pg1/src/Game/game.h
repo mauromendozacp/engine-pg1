@@ -34,7 +34,7 @@ namespace GameXD
 		Shape* spotCubeLight;
 		Sprite* tnt;
 
-		Light* globalLight;
+		Material* defaultMaterial;
 		DirectionalLight* directionalLight;
 		PointLight* pointLight;
 		SpotLight* spotLight;
