@@ -100,7 +100,7 @@ namespace GameXD
 		defaultMaterial = new Material(render);
 		defaultMaterial->Init();
 		defaultMaterial->SetShininess(32.f);
-		defaultMaterial->SetAmbient(glm::vec3(0.05f, 0.05f, 0.05f));
+		defaultMaterial->SetAmbient(glm::vec3(0.5f, 0.5f, 0.5f));
 		defaultMaterial->SetDiffuse(glm::vec3(0.4f, 0.4f, 0.4f));
 		defaultMaterial->SetSpecular(glm::vec3(0.5f, 0.5f, 0.5f));
 		defaultMaterial->UpdateShader();
@@ -131,13 +131,13 @@ namespace GameXD
 		spotLight->SetPos(spotCubeLight->GetPos());
 		spotLight->SetDirection(glm::vec3(0.0f, -1.0f, 0.0f));
 		spotLight->color = spotCubeLight->color;
-		spotLight->SetAmbient(glm::vec3(0.0f, 0.0f, 0.0f));
-		spotLight->SetDiffuse(glm::vec3(1.0f, 1.0f, 1.0f));
-		spotLight->SetSpecular(glm::vec3(1.0f, 1.0f, 1.0f));
+		spotLight->SetAmbient(glm::vec3(1.f, 1.f, 1.f));
+		spotLight->SetDiffuse(glm::vec3(1.f, 1.f, 1.f));
+		spotLight->SetSpecular(glm::vec3(1.f, 1.f, 1.f));
 		spotLight->SetConstant(1.f);
-		spotLight->SetLinear(0.09f);
+		spotLight->SetLinear(0.1f);
 		spotLight->SetQuadratic(0.032f);
-		spotLight->SetCutOff(12.5f);
+		spotLight->SetCutOff(25.f);
 		spotLight->SetOuterCutOff(15.f);
 		//spotLight->SetEnabled(false);
 	}
