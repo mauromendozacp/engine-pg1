@@ -35,9 +35,6 @@ namespace GameXD
 		Sprite* tnt;
 
 		Material* defaultMaterial;
-		DirectionalLight* directionalLight;
-		PointLight* pointLight;
-		SpotLight* spotLight;
 	};
 }
 

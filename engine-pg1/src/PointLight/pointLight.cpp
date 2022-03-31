@@ -17,9 +17,10 @@ namespace GL
 	{
 	}
 
-	void PointLight::Init()
+	void PointLight::Init(int index)
 	{
-		render->SetUniform(uniformColor, "pointLight.color");
+		std::string indexSTR = std::to_string(index).c_str();
+		render->SetUniform(uniformColor, ("pointLight[" + indexSTR + "].color").c_str());
 		render->SetUniform(uniformPosition, "pointLight.position");
 		render->SetUniform(uniformAmbient, "pointLight.ambient");
 		render->SetUniform(uniformDiffuse, "pointLight.diffuse");

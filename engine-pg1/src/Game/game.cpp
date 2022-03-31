@@ -10,9 +10,6 @@ namespace GameXD
 		spotCubeLight = nullptr;
 		tnt = nullptr;
 		defaultMaterial = nullptr;
-		directionalLight = nullptr;
-		pointLight = nullptr;
-		spotLight = nullptr;
 	}
 
 	Game::~Game()
@@ -46,21 +43,6 @@ namespace GameXD
 		{
 			delete tnt;
 			tnt = nullptr;
-		}
-		if (directionalLight != nullptr)
-		{
-			delete directionalLight;
-			directionalLight = nullptr;
-		}
-		if (pointLight != nullptr)
-		{
-			delete pointLight;
-			pointLight = nullptr;
-		}
-		if (spotLight != nullptr)
-		{
-			delete spotLight;
-			spotLight = nullptr;
 		}
 	}
 
@@ -105,16 +87,16 @@ namespace GameXD
 		defaultMaterial->SetSpecular(glm::vec3(0.5f, 0.5f, 0.5f));
 		defaultMaterial->UpdateShader();
 
-		directionalLight = new DirectionalLight(render);
+		DirectionalLight* directionalLight = lightManager->GetDirectionalLight();
 		directionalLight->Init();
 		directionalLight->color.SetColor(240, 240, 240);
 		directionalLight->SetDirection(glm::vec3(-0.2f, -1.0f, -0.3f));
 		directionalLight->SetAmbient(glm::vec3(0.5f, 0.5f, 0.5f));
 		directionalLight->SetDiffuse(glm::vec3(0.4f, 0.4f, 0.4f));
 		directionalLight->SetSpecular(glm::vec3(0.5f, 0.5f, 0.5f));
-		//directionalLight->SetEnabled(false);
+		directionalLight->SetEnabled(true);
 
-		pointLight = new PointLight(render);
+		PointLight* pointLight = lightManager->GetPointLight(0);
 		pointLight->Init();
 		pointLight->SetPos(cubeLight->GetPos() + glm::vec3(0.f, 2.5f, 0.f));
 		pointLight->color = cubeLight->color;
@@ -124,9 +106,9 @@ namespace GameXD
 		pointLight->SetConstant(1.f);
 		pointLight->SetLinear(0.09f);
 		pointLight->SetQuadratic(0.032f);
-		//pointLight->SetEnabled(false);
+		pointLight->SetEnabled(true);
 
-		spotLight = new SpotLight(render);
+		SpotLight* spotLight = lightManager->GetSpotLight(0);
 		spotLight->Init();
 		spotLight->SetPos(spotCubeLight->GetPos());
 		spotLight->SetDirection(glm::vec3(0.0f, -1.0f, 0.0f));
@@ -139,7 +121,7 @@ namespace GameXD
 		spotLight->SetQuadratic(0.032f);
 		spotLight->SetCutOff(25.f);
 		spotLight->SetOuterCutOff(15.f);
-		//spotLight->SetEnabled(false);
+		spotLight->SetEnabled(true);
 	}
 
 	void Game::Update()
@@ -157,10 +139,6 @@ namespace GameXD
 		player->Draw();
 
 		mainCamera->UseCamera();
-
-		directionalLight->UseLight();
-		pointLight->UseLight();
-		spotLight->UseLight();
 	}
 
 	void Game::DeInit()

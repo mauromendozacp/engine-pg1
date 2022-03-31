@@ -159,6 +159,7 @@
     <ClCompile Include="..\src\Entity\entity.cpp" />
     <ClCompile Include="..\src\Frame\frame.cpp" />
     <ClCompile Include="..\src\Input\input.cpp" />
+    <ClCompile Include="..\src\LightManager\lightManager.cpp" />
     <ClCompile Include="..\src\Light\light.cpp" />
     <ClCompile Include="..\src\Material\material.cpp" />
     <ClCompile Include="..\src\PointLight\pointLight.cpp" />
@@ -189,6 +190,7 @@
     <ClInclude Include="..\src\Frame\frame.h" />
     <ClInclude Include="..\src\Input\input.h" />
     <ClInclude Include="..\src\keycodes.h" />
+    <ClInclude Include="..\src\LightManager\lightManager.h" />
     <ClInclude Include="..\src\Light\light.h" />
     <ClInclude Include="..\src\Material\material.h" />
     <ClInclude Include="..\src\PointLight\pointLight.h" />

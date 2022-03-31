@@ -28,6 +28,12 @@ namespace GL
 			delete mainCamera;
 			mainCamera = nullptr;
 		}
+
+		if (lightManager != nullptr)
+		{
+			delete lightManager;
+			lightManager = nullptr;
+		}
 	}
 
 	void BaseGame::Play()
@@ -62,9 +68,11 @@ namespace GL
 
 		render = new Render();
 		mainCamera = new Camera(render);
+		lightManager = new LightManager();
 
 		render->Init();
 		mainCamera->Init(45.f, window->GetWidth(), window->GetHeight(), 0.1f, 100.f);
+		lightManager->Init(render);
 		Input::Init(window, mainCamera);
 
 		Init();
@@ -80,6 +88,7 @@ namespace GL
 			Update();
 			Draw();
 
+			lightManager->UseLights();
 			render->PostRender(window);
 		}
 	}

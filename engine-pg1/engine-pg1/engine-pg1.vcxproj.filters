@@ -76,6 +76,9 @@
     <ClCompile Include="..\src\Material\material.cpp">
       <Filter>Material</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\LightManager\lightManager.cpp">
+      <Filter>LightManager</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Window">
@@ -155,6 +158,9 @@
     </Filter>
     <Filter Include="Material">
       <UniqueIdentifier>{5de5e3b5-1309-4b19-9251-12a6dec8017a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="LightManager">
+      <UniqueIdentifier>{28b67f7a-c2ed-48b7-a753-db01103a3300}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -239,6 +245,9 @@
       <Filter>Material</Filter>
     </ClInclude>
     <ClInclude Include="..\src\vertexs.h" />
+    <ClInclude Include="..\src\LightManager\lightManager.h">
+      <Filter>LightManager</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\src\ShadersCode\fragment.shader">

@@ -6,6 +6,7 @@
 #include "Camera/camera.h"
 #include "Input/input.h"
 #include "Timer/timer.h"
+#include "LightManager/lightManager.h"
 #include "Collision/collision.h"
 
 namespace GL
@@ -21,6 +22,7 @@ namespace GL
 		Window* window;
 		Render* render;
 		Camera* mainCamera;
+		LightManager* lightManager;
 		std::string title;
 
 		void InitEngine();

@@ -2,6 +2,7 @@
 #define POINT_LIGHT_H
 
 #include "exports.h"
+#include <string>
 #include "Light/light.h"
 
 namespace GL
@@ -12,7 +13,7 @@ namespace GL
 		PointLight(Render* render);
 		~PointLight();
 
-		virtual void Init() override;
+		virtual void Init(int index) override;
 		virtual void UseLight() override;
 
 		void SetConstant(float constant);

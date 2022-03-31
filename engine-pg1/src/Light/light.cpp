@@ -8,7 +8,7 @@ namespace GL
 		ambient = glm::vec3(0.f);
 		diffuse = glm::vec3(0.f);
 		specular = glm::vec3(0.f);
-		enabled = true;
+		enabled = false;
 
 		uniformColor = 0;
 		uniformPosition = 0;
@@ -20,20 +20,6 @@ namespace GL
 
 	Light::~Light()
 	{
-	}
-
-	void Light::Init()
-	{
-		render->SetUniform(uniformColor, "baselight.color");
-		render->SetUniform(uniformEnabled, "baselight.enabled");
-	}
-
-	void Light::UseLight()
-	{
-		render->UseShader();
-		render->UpdateLight(uniformColor, color.GetColorRGB());
-		render->UpdateStatus(uniformEnabled, enabled);
-		render->CleanShader();
 	}
 
 	void Light::SetAmbient(glm::vec3 ambient)

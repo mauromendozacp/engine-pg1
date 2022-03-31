@@ -55,9 +55,10 @@ struct Material
 uniform vec3 color;
 uniform float a;
 
+#define LIGHTS_MAX 3
 uniform DirectionalLight directionalLight;
-uniform PointLight pointLight;
-uniform SpotLight spotLight;
+uniform PointLight pointLight[LIGHTS_MAX];
+uniform SpotLight spotLight[LIGHTS_MAX];
 
 uniform sampler2D ourTexture;
 uniform bool useTexture;
@@ -82,13 +83,16 @@ void main()
 		{
 			resultColor += CalculateDirLight(norm, viewDir);
 		}
-		if (pointLight.enabled == true)
+		for (int i = 0; i < LIGHTS_MAX; i++)
 		{
-			resultColor += CalculatePointLight(pointLight, norm, FragPos, viewDir);
-		}
-		if (spotLight.enabled == true)
-		{
-			resultColor += CalculateSpotLight(spotLight, norm, FragPos, viewDir);
+			if (pointLight[i].enabled == true)
+			{
+				resultColor += CalculatePointLight(pointLight[i], norm, FragPos, viewDir);
+			}
+			if (spotLight[i].enabled == true)
+			{
+				resultColor += CalculateSpotLight(spotLight[i], norm, FragPos, viewDir);
+			}
 		}
 	}
 
