@@ -7,6 +7,8 @@ namespace GL
 		window = nullptr;
 		render = nullptr;
 		mainCamera = nullptr;
+		lightManager = nullptr;
+		terminateEngine = false;
 	}
 
 	BaseGame::~BaseGame()
@@ -79,7 +81,7 @@ namespace GL
 
 	void BaseGame::UpdateEngine()
 	{
-		while (!glfwWindowShouldClose(window->GetWindow()))
+		while (!glfwWindowShouldClose(window->GetWindow()) && !terminateEngine)
 		{
 			render->ClearScreen();
 			Timer::Update(glfwGetTime());
@@ -96,5 +98,10 @@ namespace GL
 	{
 		window->DestroyWindow();
 		glfwTerminate();
+	}
+
+	void BaseGame::CloseEngine()
+	{
+		terminateEngine = true;
 	}
 }

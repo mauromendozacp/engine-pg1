@@ -24,10 +24,12 @@ namespace GL
 		Camera* mainCamera;
 		LightManager* lightManager;
 		std::string title;
+		bool terminateEngine;
 
 		void InitEngine();
 		void UpdateEngine();
 		void DeInitEngine();
+		void CloseEngine();
 
 		virtual void Init() = 0;
 		virtual void Update() = 0;
