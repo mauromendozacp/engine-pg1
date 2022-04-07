@@ -22,13 +22,9 @@ namespace GL
 		void Init(float fov, float width, float height, float near, float far);
 		void Update();
 
-		void SetData(Entity* target, float sensitivity, float offset);
-		void SetCameraType(CAMERA_TYPE cameraType);
-		void SetTarget(Entity* target);
 		void UseCamera();
 		void Rotate();
 		void Reset();
-		void UpdateDirection();
 
 		glm::vec3 GetFront();
 		glm::vec3 GetUp();
@@ -48,17 +44,11 @@ namespace GL
 		void SetPitch(float pitch);
 		float GetPitch();
 
-	private:
-		Render* render;
-
+	protected:
 		glm::mat4 view;
 		glm::mat4 projection;
 
 		uint uniformViewPosition;
-
-		CAMERA_TYPE cameraType;
-		Entity* target;
-		float offset;
 
 		glm::vec3 front;
 		glm::vec3 up;
@@ -73,7 +63,8 @@ namespace GL
 
 		float sensitivity;
 
-		void UpdateView();
+		virtual void UpdateDirection() = 0;
+		virtual void UpdateView() = 0;
 		void UpdateProjection();
 	};
 }

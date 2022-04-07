@@ -13,7 +13,8 @@ namespace GL
 		~FirstPersonCamera();
 
 	private:
-
+		void UpdateDirection() override;
+		void UpdateView() override;
 	};
 }
 

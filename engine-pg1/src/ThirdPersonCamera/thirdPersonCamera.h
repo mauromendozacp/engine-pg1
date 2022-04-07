@@ -18,6 +18,9 @@ namespace GL
 	private:
 		Entity* target;
 		float offset;
+
+		void UpdateDirection() override;
+		void UpdateView() override;
 	};
 }
 

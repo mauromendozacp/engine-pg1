@@ -4,6 +4,8 @@
 #include "BaseGame/baseGame.h"
 #include "Player/player.h"
 #include "Camera/camera.h"
+#include "FirstPersonCamera/firstPersonCamera.h"
+#include "ThirdPersonCamera/thirdPersonCamera.h"
 #include "Shape/shape.h"
 #include "Light/light.h"
 #include "DirectionalLight/directionalLight.h"

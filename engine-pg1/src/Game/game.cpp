@@ -53,8 +53,14 @@ namespace GameXD
 		player = new Player(mainCamera);
 		player->Init(render, 5.f, 75.f, "../res/Textures/player.png");
 
-		mainCamera->SetData(player->GetSprite(), 0.25f, 10.f);
-		mainCamera->SetCameraType(GL::CAMERA_TYPE::TPS);
+		mainCamera = new ThirdPersonCamera(render);
+		ThirdPersonCamera* tps = static_cast<ThirdPersonCamera*>(mainCamera);
+		tps->Init(45.f, window->GetWidth(), window->GetHeight(), 0.1f, 100.f);
+		tps->SetTarget(player->GetSprite());
+		tps->SetOffset(10.f);
+		tps->SetSensitivity(0.25f);
+		tps->Update();
+		Input::SetCamera(tps);
 
 		floor = new Sprite(render);
 		floor->Init(SPRITE_TYPE::QUAD);

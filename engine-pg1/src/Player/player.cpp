@@ -118,11 +118,11 @@ namespace GameXD
 
 		if (GL::Input::IsKeyPressed(KEY_Z))
 		{
-			camera->SetCameraType(GL::CAMERA_TYPE::FPS);
+			//camera->SetCameraType(GL::CAMERA_TYPE::FPS);
 		}
 		else if (GL::Input::IsKeyPressed(KEY_C))
 		{
-			camera->SetCameraType(GL::CAMERA_TYPE::TPS);
+			//camera->SetCameraType(GL::CAMERA_TYPE::TPS);
 		}
 
 		if (GL::Input::IsKeyPressed(KEY_R))
@@ -145,7 +145,6 @@ namespace GameXD
 	void Player::SetPosition(glm::vec3 pos)
 	{
 		sprite->SetPos(pos);
-		camera->UpdateDirection();
 	}
 
 	glm::vec3 Player::GetPosition()

@@ -2,17 +2,12 @@
 
 namespace GL
 {
-	Camera::Camera(Render* render)
+	Camera::Camera(Render* render) : Entity(render)
 	{
-		this->render = render;
-
 		view = glm::mat4(1.0f);
 		projection = glm::mat4(1.0f);
 
 		uniformViewPosition = 0;
-
-		cameraType = CAMERA_TYPE::FPS;
-		offset = 0.f;
 
 		front = glm::vec3(0.0f);
 		up = glm::vec3(0.0f);
@@ -41,39 +36,13 @@ namespace GL
 		this->near = near;
 		this->far = far;
 
-		UpdateView();
-		UpdateProjection();
-
 		render->SetUniform(uniformViewPosition, "viewPosition");
 	}
 
 	void Camera::Update()
 	{
-		transform.position = target->GetPos();
-		UpdateDirection();
-	}
-
-	void Camera::SetData(Entity* target, float sensitivity, float offset)
-	{
-		this->target = target;
-		this->sensitivity = sensitivity;
-		this->offset = offset;
-
-		UpdateDirection();
-	}
-
-	void Camera::SetCameraType(CAMERA_TYPE cameraType)
-	{
-		this->cameraType = cameraType;
-
-		UpdateDirection();
-	}
-
-	void Camera::SetTarget(Entity* target)
-	{
-		this->target = target;
-
-		UpdateDirection();
+		UpdateView();
+		UpdateProjection();
 	}
 
 	void Camera::UseCamera()
@@ -158,41 +127,6 @@ namespace GL
 	{
 		transform.position = glm::vec3(0.f);
 		UpdateView();
-	}
-
-	void Camera::UpdateDirection()
-	{
-		glm::vec3 direction;
-		direction.x = cos(glm::radians(yaw)) * cos(glm::radians(pitch));
-		direction.y = sin(glm::radians(pitch));
-		direction.z = sin(glm::radians(yaw)) * cos(glm::radians(pitch));
-		front = glm::normalize(direction);
-
-		if (cameraType == CAMERA_TYPE::TPS)
-		{
-			transform.position = target->GetPos() - front * offset;
-		}
-
-		UpdateView();
-	}
-
-	void Camera::UpdateView()
-	{
-		switch (cameraType)
-		{
-		case GL::CAMERA_TYPE::FPS:
-			view = glm::lookAt(transform.position, transform.position + front, up);
-			break;
-		case GL::CAMERA_TYPE::TPS:
-			view = glm::lookAt(transform.position, target->GetPos(), up);
-			break;
-		case GL::CAMERA_TYPE::TOP_DOWN:
-			break;
-		default:
-			break;
-		}
-
-		render->SetView(view);
 	}
 
 	void Camera::UpdateProjection()
