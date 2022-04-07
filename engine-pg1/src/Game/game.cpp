@@ -98,7 +98,7 @@ namespace GameXD
 
 		lightManager->AddLight(LIGHT_TYPE::POINTLIGHT);
 		PointLight* pointLight = lightManager->GetLasPointLightCreated();
-		pointLight->SetPos(cubeLight->GetPos() + glm::vec3(0.f, 2.5f, 0.f));
+		pointLight->SetPos(cubeLight->GetPos());
 		pointLight->color = cubeLight->color;
 		pointLight->SetAmbient(glm::vec3(0.05f, 0.05f, 0.05f));
 		pointLight->SetDiffuse(glm::vec3(0.8f, 0.8f, 0.8f));
@@ -116,16 +116,21 @@ namespace GameXD
 		spotLight->SetDiffuse(glm::vec3(1.f, 1.f, 1.f));
 		spotLight->SetSpecular(glm::vec3(1.f, 1.f, 1.f));
 		spotLight->SetConstant(1.f);
-		spotLight->SetLinear(0.1f);
-		spotLight->SetQuadratic(0.032f);
-		spotLight->SetCutOff(25.f);
-		spotLight->SetOuterCutOff(15.f);
+		spotLight->SetLinear(0.07f);
+		spotLight->SetQuadratic(0.0075f);
+		spotLight->SetCutOff(12.5f);
+		spotLight->SetOuterCutOff(17.5f);
 	}
 
 	void Game::Update()
 	{
 		player->Update();
 		mainCamera->Update();
+
+		if (Input::IsKeyDown(KEY_ESCAPE))
+		{
+			CloseEngine();
+		}
 	}
 
 	void Game::Draw()
