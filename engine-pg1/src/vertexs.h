@@ -43,12 +43,10 @@ namespace GL
 	#pragma region CUBE_VERTEX
 
 	const int cubeVertTam = 48;
-	const int cubeIndexTam = 42;
+	const int cubeIndexTam = 36;
 	static unsigned int cubeIndexes[cubeIndexTam] = {
 		0, 1, 2,
 		2, 3, 0,
-		3, 2, 0,
-		2, 1, 0,
 		1, 5, 6,
 		6, 2, 1,
 		7, 6, 5,
