@@ -79,11 +79,11 @@
     <ClCompile Include="..\src\LightManager\lightManager.cpp">
       <Filter>LightManager</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\FirstPersonCamera\firstPersonCamera.cpp">
-      <Filter>FirstPersonCamera</Filter>
+    <ClCompile Include="..\src\Camera\FirstPersonCamera\firstPersonCamera.cpp">
+      <Filter>Camera\FirstPersonCamera</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\ThirdPersonCamera\thirdPersonCamera.cpp">
-      <Filter>ThirdPersonCamera</Filter>
+    <ClCompile Include="..\src\Camera\ThirdPersonCamera\thirdPersonCamera.cpp">
+      <Filter>Camera\ThirdPersonCamera</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -168,10 +168,10 @@
     <Filter Include="LightManager">
       <UniqueIdentifier>{28b67f7a-c2ed-48b7-a753-db01103a3300}</UniqueIdentifier>
     </Filter>
-    <Filter Include="FirstPersonCamera">
+    <Filter Include="Camera\FirstPersonCamera">
       <UniqueIdentifier>{c761efa7-734d-45ca-bfc4-8f6c772fd553}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ThirdPersonCamera">
+    <Filter Include="Camera\ThirdPersonCamera">
       <UniqueIdentifier>{8bce14f8-2831-45bc-9b75-0cb443fdb3cc}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -260,11 +260,11 @@
     <ClInclude Include="..\src\LightManager\lightManager.h">
       <Filter>LightManager</Filter>
     </ClInclude>
-    <ClInclude Include="..\src\FirstPersonCamera\firstPersonCamera.h">
-      <Filter>FirstPersonCamera</Filter>
+    <ClInclude Include="..\src\Camera\FirstPersonCamera\firstPersonCamera.h">
+      <Filter>Camera\FirstPersonCamera</Filter>
     </ClInclude>
-    <ClInclude Include="..\src\ThirdPersonCamera\thirdPersonCamera.h">
-      <Filter>ThirdPersonCamera</Filter>
+    <ClInclude Include="..\src\Camera\ThirdPersonCamera\thirdPersonCamera.h">
+      <Filter>Camera\ThirdPersonCamera</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

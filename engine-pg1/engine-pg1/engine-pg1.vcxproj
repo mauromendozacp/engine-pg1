@@ -152,12 +152,13 @@
     <ClCompile Include="..\src\Animation\animation.cpp" />
     <ClCompile Include="..\src\BaseGame\baseGame.cpp" />
     <ClCompile Include="..\src\Camera\camera.cpp" />
+    <ClCompile Include="..\src\Camera\FirstPersonCamera\firstPersonCamera.cpp" />
+    <ClCompile Include="..\src\Camera\ThirdPersonCamera\thirdPersonCamera.cpp" />
     <ClCompile Include="..\src\Collision\collision.cpp" />
     <ClCompile Include="..\src\Color\color.cpp" />
     <ClCompile Include="..\src\DirectionalLight\directionalLight.cpp" />
     <ClCompile Include="..\src\Entity2D\entity2D.cpp" />
     <ClCompile Include="..\src\Entity\entity.cpp" />
-    <ClCompile Include="..\src\FirstPersonCamera\firstPersonCamera.cpp" />
     <ClCompile Include="..\src\Frame\frame.cpp" />
     <ClCompile Include="..\src\Input\input.cpp" />
     <ClCompile Include="..\src\LightManager\lightManager.cpp" />
@@ -171,7 +172,6 @@
     <ClCompile Include="..\src\Sprite\sprite.cpp" />
     <ClCompile Include="..\src\StbImage\stb_image.cpp" />
     <ClCompile Include="..\src\TextureImporter\textureImporter.cpp" />
-    <ClCompile Include="..\src\ThirdPersonCamera\thirdPersonCamera.cpp" />
     <ClCompile Include="..\src\Tilemap\tilemap.cpp" />
     <ClCompile Include="..\src\Tile\tile.cpp" />
     <ClCompile Include="..\src\Timer\timer.cpp" />
@@ -183,13 +183,14 @@
     <ClInclude Include="..\src\Animation\atlasConfig.h" />
     <ClInclude Include="..\src\BaseGame\baseGame.h" />
     <ClInclude Include="..\src\Camera\camera.h" />
+    <ClInclude Include="..\src\Camera\FirstPersonCamera\firstPersonCamera.h" />
+    <ClInclude Include="..\src\Camera\ThirdPersonCamera\thirdPersonCamera.h" />
     <ClInclude Include="..\src\Collision\collision.h" />
     <ClInclude Include="..\src\Color\color.h" />
     <ClInclude Include="..\src\DirectionalLight\directionalLight.h" />
     <ClInclude Include="..\src\Entity2D\entity2D.h" />
     <ClInclude Include="..\src\Entity\entity.h" />
     <ClInclude Include="..\src\exports.h" />
-    <ClInclude Include="..\src\FirstPersonCamera\firstPersonCamera.h" />
     <ClInclude Include="..\src\Frame\frame.h" />
     <ClInclude Include="..\src\Input\input.h" />
     <ClInclude Include="..\src\keycodes.h" />
@@ -204,7 +205,6 @@
     <ClInclude Include="..\src\Sprite\sprite.h" />
     <ClInclude Include="..\src\StbImage\stb_image.h" />
     <ClInclude Include="..\src\TextureImporter\textureImporter.h" />
-    <ClInclude Include="..\src\ThirdPersonCamera\thirdPersonCamera.h" />
     <ClInclude Include="..\src\Tilemap\tilemap.h" />
     <ClInclude Include="..\src\Tile\tile.h" />
     <ClInclude Include="..\src\Timer\timer.h" />
