@@ -2,9 +2,9 @@
 #define LIGHT_MANAGER_H
 
 #include "exports.h"
-#include "DirectionalLight/directionalLight.h"
-#include "PointLight/pointLight.h"
-#include "SpotLight/spotLight.h"
+#include "Light/DirectionalLight/directionalLight.h"
+#include "Light/PointLight/pointLight.h"
+#include "Light/SpotLight/spotLight.h"
 
 namespace GL
 {

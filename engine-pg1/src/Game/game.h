@@ -8,9 +8,9 @@
 #include "Camera/ThirdPersonCamera/thirdPersonCamera.h"
 #include "Shape/shape.h"
 #include "Light/light.h"
-#include "DirectionalLight/directionalLight.h"
-#include "PointLight/pointLight.h"
-#include "SpotLight/spotLight.h"
+#include "Light/DirectionalLight/directionalLight.h"
+#include "Light/PointLight/pointLight.h"
+#include "Light/SpotLight/spotLight.h"
 #include <iostream>
 
 using namespace GL;

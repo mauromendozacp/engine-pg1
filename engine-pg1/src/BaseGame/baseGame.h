@@ -6,7 +6,7 @@
 #include "Camera/camera.h"
 #include "Input/input.h"
 #include "Timer/timer.h"
-#include "LightManager/lightManager.h"
+#include "Light/LightManager/lightManager.h"
 #include "Collision/collision.h"
 
 namespace GL

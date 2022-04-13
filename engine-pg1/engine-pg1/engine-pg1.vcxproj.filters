@@ -61,29 +61,29 @@
     <ClCompile Include="..\src\Light\light.cpp">
       <Filter>Light</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\DirectionalLight\directionalLight.cpp">
-      <Filter>DirectionalLight</Filter>
-    </ClCompile>
     <ClCompile Include="..\src\Color\color.cpp">
       <Filter>Color</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\PointLight\pointLight.cpp">
-      <Filter>PointLight</Filter>
-    </ClCompile>
-    <ClCompile Include="..\src\SpotLight\spotLight.cpp">
-      <Filter>SpotLight</Filter>
-    </ClCompile>
     <ClCompile Include="..\src\Material\material.cpp">
       <Filter>Material</Filter>
-    </ClCompile>
-    <ClCompile Include="..\src\LightManager\lightManager.cpp">
-      <Filter>LightManager</Filter>
     </ClCompile>
     <ClCompile Include="..\src\Camera\FirstPersonCamera\firstPersonCamera.cpp">
       <Filter>Camera\FirstPersonCamera</Filter>
     </ClCompile>
     <ClCompile Include="..\src\Camera\ThirdPersonCamera\thirdPersonCamera.cpp">
       <Filter>Camera\ThirdPersonCamera</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Light\DirectionalLight\directionalLight.cpp">
+      <Filter>Light\DirectionalLight</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Light\LightManager\lightManager.cpp">
+      <Filter>Light\LightManager</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Light\PointLight\pointLight.cpp">
+      <Filter>Light\PointLight</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Light\SpotLight\spotLight.cpp">
+      <Filter>Light\SpotLight</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -150,29 +150,29 @@
     <Filter Include="Light">
       <UniqueIdentifier>{7a60f1e0-da31-40e4-ac6b-b8d04eb774a6}</UniqueIdentifier>
     </Filter>
-    <Filter Include="DirectionalLight">
-      <UniqueIdentifier>{05bc88f8-1c3c-4db0-8c69-395968d64dcb}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Color">
       <UniqueIdentifier>{074d293d-5383-4303-a065-d7e4df881554}</UniqueIdentifier>
     </Filter>
-    <Filter Include="PointLight">
-      <UniqueIdentifier>{b2700d8e-f5b0-4886-b794-fcd62941c811}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="SpotLight">
-      <UniqueIdentifier>{755463ae-a5f4-4917-98f4-945023dd6221}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Material">
       <UniqueIdentifier>{5de5e3b5-1309-4b19-9251-12a6dec8017a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="LightManager">
-      <UniqueIdentifier>{28b67f7a-c2ed-48b7-a753-db01103a3300}</UniqueIdentifier>
     </Filter>
     <Filter Include="Camera\FirstPersonCamera">
       <UniqueIdentifier>{c761efa7-734d-45ca-bfc4-8f6c772fd553}</UniqueIdentifier>
     </Filter>
     <Filter Include="Camera\ThirdPersonCamera">
       <UniqueIdentifier>{8bce14f8-2831-45bc-9b75-0cb443fdb3cc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Light\DirectionalLight">
+      <UniqueIdentifier>{05bc88f8-1c3c-4db0-8c69-395968d64dcb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Light\PointLight">
+      <UniqueIdentifier>{b2700d8e-f5b0-4886-b794-fcd62941c811}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Light\SpotLight">
+      <UniqueIdentifier>{755463ae-a5f4-4917-98f4-945023dd6221}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Light\LightManager">
+      <UniqueIdentifier>{28b67f7a-c2ed-48b7-a753-db01103a3300}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -241,30 +241,30 @@
     <ClInclude Include="..\src\Light\light.h">
       <Filter>Light</Filter>
     </ClInclude>
-    <ClInclude Include="..\src\DirectionalLight\directionalLight.h">
-      <Filter>DirectionalLight</Filter>
-    </ClInclude>
     <ClInclude Include="..\src\Color\color.h">
       <Filter>Color</Filter>
-    </ClInclude>
-    <ClInclude Include="..\src\PointLight\pointLight.h">
-      <Filter>PointLight</Filter>
-    </ClInclude>
-    <ClInclude Include="..\src\SpotLight\spotLight.h">
-      <Filter>SpotLight</Filter>
     </ClInclude>
     <ClInclude Include="..\src\Material\material.h">
       <Filter>Material</Filter>
     </ClInclude>
     <ClInclude Include="..\src\vertexs.h" />
-    <ClInclude Include="..\src\LightManager\lightManager.h">
-      <Filter>LightManager</Filter>
-    </ClInclude>
     <ClInclude Include="..\src\Camera\FirstPersonCamera\firstPersonCamera.h">
       <Filter>Camera\FirstPersonCamera</Filter>
     </ClInclude>
     <ClInclude Include="..\src\Camera\ThirdPersonCamera\thirdPersonCamera.h">
       <Filter>Camera\ThirdPersonCamera</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Light\DirectionalLight\directionalLight.h">
+      <Filter>Light\DirectionalLight</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Light\LightManager\lightManager.h">
+      <Filter>Light\LightManager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Light\PointLight\pointLight.h">
+      <Filter>Light\PointLight</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Light\SpotLight\spotLight.h">
+      <Filter>Light\SpotLight</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
