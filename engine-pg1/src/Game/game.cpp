@@ -54,13 +54,19 @@ namespace GameXD
 		player->Init(render, 5.f, 75.f, "../res/Textures/player.png");
 
 		mainCamera = new ThirdPersonCamera(render);
-		ThirdPersonCamera* tps = static_cast<ThirdPersonCamera*>(mainCamera);
-		tps->Init(45.f, window->GetWidth(), window->GetHeight(), 0.1f, 100.f);
-		tps->SetTarget(player->GetSprite());
-		tps->SetOffset(10.f);
-		tps->SetSensitivity(0.25f);
-		tps->Update();
-		Input::SetCamera(tps);
+		ThirdPersonCamera* cam = static_cast<ThirdPersonCamera*>(mainCamera);
+		cam->SetTarget(player->GetSprite());
+		cam->SetOffset(10.f);
+
+		/*mainCamera = new FirstPersonCamera(render);
+		FirstPersonCamera* cam = static_cast<FirstPersonCamera*>(mainCamera);
+		cam->SetSpeed(5.f);*/
+
+		cam->Init(45.f, window->GetWidth(), window->GetHeight(), 0.1f, 100.f);
+		cam->SetSensitivity(0.25f);
+
+		Input::SetCamera(cam);
+		player->SetCamera(cam);
 
 		floor = new Sprite(render);
 		floor->Init(SPRITE_TYPE::QUAD);
@@ -141,13 +147,13 @@ namespace GameXD
 
 	void Game::Draw()
 	{
+		mainCamera->UseCamera();
+
 		floor->Draw();
 		cubeLight->Draw();
 		spotCubeLight->Draw();
 		tnt->Draw();
 		player->Draw();
-
-		mainCamera->UseCamera();
 	}
 
 	void Game::DeInit()

@@ -12,6 +12,8 @@ namespace GL
 		ThirdPersonCamera(Render* render);
 		~ThirdPersonCamera();
 
+		void Update() override;
+
 		void SetTarget(Entity* target);
 		void SetOffset(float offset);
 

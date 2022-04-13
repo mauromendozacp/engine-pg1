@@ -75,6 +75,11 @@ namespace GameXD
 	{
 	}
 
+	void Player::SetCamera(Camera* camera)
+	{
+		this->camera = camera;
+	}
+
 	GL::Sprite* Player::GetSprite()
 	{
 		return sprite;

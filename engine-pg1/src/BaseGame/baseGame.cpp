@@ -69,11 +69,9 @@ namespace GL
 			std::cout << "ERROR" << std::endl;
 
 		render = new Render();
-		//mainCamera = new Camera(render);
 		lightManager = new LightManager(render);
 
 		render->Init();
-		//mainCamera->Init(45.f, window->GetWidth(), window->GetHeight(), 0.1f, 100.f);
 		Input::Init(window, mainCamera);
 
 		Init();

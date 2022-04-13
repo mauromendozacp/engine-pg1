@@ -20,7 +20,7 @@ namespace GL
 		~Camera();
 
 		void Init(float fov, float width, float height, float near, float far);
-		void Update();
+		virtual void Update() = 0;
 
 		void UseCamera();
 		void Rotate();

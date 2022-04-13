@@ -12,6 +12,12 @@ namespace GL
 	{
 	}
 
+	void ThirdPersonCamera::Update()
+	{
+		UpdateDirection();
+		UpdateProjection();
+	}
+
 	void ThirdPersonCamera::SetTarget(Entity* target)
 	{
 		this->target = target;

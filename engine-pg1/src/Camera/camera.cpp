@@ -41,7 +41,7 @@ namespace GL
 
 	void Camera::Update()
 	{
-		UpdateView();
+		UpdateDirection();
 		UpdateProjection();
 	}
 

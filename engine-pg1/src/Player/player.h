@@ -30,6 +30,7 @@ namespace GameXD
 		void Draw();
 		void DeInit();
 
+		void SetCamera(Camera* camera);
 		Sprite* GetSprite();
 		
 		void SetPosition(glm::vec3 pos);
