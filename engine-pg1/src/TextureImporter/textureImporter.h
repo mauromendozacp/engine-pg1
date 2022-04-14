@@ -11,6 +11,7 @@ namespace GL
 		unsigned int id;
 		float width;
 		float height;
+		std::string type;
 	};
 
 	class GRAPHICSENGINE_API TextureImporter

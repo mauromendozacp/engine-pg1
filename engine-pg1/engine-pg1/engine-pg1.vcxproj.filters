@@ -85,6 +85,9 @@
     <ClCompile Include="..\src\Light\SpotLight\spotLight.cpp">
       <Filter>Light\SpotLight</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\Mesh\mesh.cpp">
+      <Filter>Mesh</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Window">
@@ -173,6 +176,9 @@
     </Filter>
     <Filter Include="Light\LightManager">
       <UniqueIdentifier>{28b67f7a-c2ed-48b7-a753-db01103a3300}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Mesh">
+      <UniqueIdentifier>{00133434-bac7-4c75-b3eb-ddd4bb68e16a}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -265,6 +271,9 @@
     </ClInclude>
     <ClInclude Include="..\src\Light\SpotLight\spotLight.h">
       <Filter>Light\SpotLight</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Mesh\mesh.h">
+      <Filter>Mesh</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
