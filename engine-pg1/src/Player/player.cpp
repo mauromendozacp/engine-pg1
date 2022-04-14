@@ -24,17 +24,17 @@ namespace GameXD
 	{
 		if (sprite != nullptr)
 		{
-			sprite->DeInit();
 			delete sprite;
 			sprite = nullptr;
 		}
 	}
 
-	void Player::Init(GL::Render* render, float moveSpeed, float rotSpeed, const char* textureUrl)
+	void Player::Init(GL::Render* render, Material* material, float moveSpeed, float rotSpeed, const char* textureUrl)
 	{
 		sprite = new GL::Sprite(render);
 		sprite->Init(SPRITE_TYPE::QUAD);
 		sprite->LoadTexture(textureUrl, false);
+		sprite->material = material;
 		sprite->SetPos(0.f, 0.f, 0.f);
 		sprite->SetScale(1.f, 1.f, 1.f);
 		sprite->SetMoveable(true);
@@ -73,6 +73,7 @@ namespace GameXD
 
 	void Player::DeInit()
 	{
+		sprite->DeInit();
 	}
 
 	void Player::SetCamera(Camera* camera)

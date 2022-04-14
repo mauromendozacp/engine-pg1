@@ -25,7 +25,7 @@ namespace GameXD
 		Player(Camera* camera);
 		~Player();
 
-		void Init(Render* render, float moveSpeed, float rotSpeed, const char* textureUrl);
+		void Init(Render* render, Material* material, float moveSpeed, float rotSpeed, const char* textureUrl);
 		void Update();
 		void Draw();
 		void DeInit();

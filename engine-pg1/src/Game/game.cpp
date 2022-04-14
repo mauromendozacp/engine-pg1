@@ -9,7 +9,6 @@ namespace GameXD
 		cubeLight = nullptr;
 		spotCubeLight = nullptr;
 		tnt = nullptr;
-		defaultMaterial = nullptr;
 	}
 
 	Game::~Game()
@@ -34,11 +33,6 @@ namespace GameXD
 			delete spotCubeLight;
 			spotCubeLight = nullptr;
 		}
-		if (defaultMaterial != nullptr)
-		{
-			delete defaultMaterial;
-			defaultMaterial = nullptr;
-		}
 		if (tnt != nullptr)
 		{
 			delete tnt;
@@ -50,8 +44,16 @@ namespace GameXD
 	{
 		render->SetDepth();
 
+		Material* defaultMaterial = new Material(render);
+		defaultMaterial->Init();
+		defaultMaterial->SetShininess(32.f);
+		defaultMaterial->SetAmbient(glm::vec3(0.5f, 0.5f, 0.5f));
+		defaultMaterial->SetDiffuse(glm::vec3(0.4f, 0.4f, 0.4f));
+		defaultMaterial->SetSpecular(glm::vec3(0.5f, 0.5f, 0.5f));
+		defaultMaterial->UpdateShader();
+
 		player = new Player(mainCamera);
-		player->Init(render, 5.f, 75.f, "../res/Textures/player.png");
+		player->Init(render, defaultMaterial, 5.f, 75.f, "../res/Textures/player.png");
 
 		mainCamera = new ThirdPersonCamera(render);
 		ThirdPersonCamera* cam = static_cast<ThirdPersonCamera*>(mainCamera);
@@ -71,33 +73,29 @@ namespace GameXD
 		floor = new Sprite(render);
 		floor->Init(SPRITE_TYPE::QUAD);
 		floor->LoadTexture("../res/Textures/floor.jpg", false);
+		floor->material = defaultMaterial;
 		floor->SetPos(glm::vec3(0.f, -.5f, 0.f));
 		floor->SetRotX(90.f);
 		floor->SetScale(50.f, 50, 1.f);
 
 		cubeLight = new Shape(render);
 		cubeLight->Init(SHAPE_TYPE::CUBE);
+		cubeLight->material = defaultMaterial;
 		cubeLight->SetPos(glm::vec3(15.f, 2.5f, 0.f));
 		cubeLight->color.SetColor(0, 255, 0);
 		
 		spotCubeLight = new Shape(render);
 		spotCubeLight->Init(SHAPE_TYPE::CUBE);
+		spotCubeLight->material = defaultMaterial;
 		spotCubeLight->SetPos(glm::vec3(0.f, 5.f, 0.f));
 		spotCubeLight->color.SetColor(255, 0, 0);
 		spotCubeLight->SetScale(0.75f);
 
 		tnt = new Sprite(render);
 		tnt->Init(SPRITE_TYPE::CUBE);
+		tnt->material = defaultMaterial;
 		tnt->LoadTexture("../res/Textures/tnt.png", true);
 		tnt->SetPos(glm::vec3(10.f, .5f, 10.f));
-
-		defaultMaterial = new Material(render);
-		defaultMaterial->Init();
-		defaultMaterial->SetShininess(32.f);
-		defaultMaterial->SetAmbient(glm::vec3(0.5f, 0.5f, 0.5f));
-		defaultMaterial->SetDiffuse(glm::vec3(0.4f, 0.4f, 0.4f));
-		defaultMaterial->SetSpecular(glm::vec3(0.5f, 0.5f, 0.5f));
-		defaultMaterial->UpdateShader();
 
 		lightManager->AddLight(LIGHT_TYPE::DIRECTIONAL);
 		DirectionalLight* directionalLight = lightManager->GetDirectionalLight();

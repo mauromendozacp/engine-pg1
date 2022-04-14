@@ -35,8 +35,6 @@ namespace GameXD
 		Shape* cubeLight;
 		Shape* spotCubeLight;
 		Sprite* tnt;
-
-		Material* defaultMaterial;
 	};
 }
 
