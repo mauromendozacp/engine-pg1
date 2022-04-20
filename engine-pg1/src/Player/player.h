@@ -4,6 +4,8 @@
 #include "exports.h"
 #include "Input/input.h"
 #include "Sprite/sprite.h"
+#include "Camera/FirstPersonCamera/firstPersonCamera.h"
+#include "Camera/ThirdPersonCamera/thirdPersonCamera.h"
 
 using namespace GL;
 
@@ -30,7 +32,7 @@ namespace GameXD
 		void Draw();
 		void DeInit();
 
-		void SetCamera(Camera* camera);
+		void SetCamera(Render* render, Window* window, CAMERA_TYPE cameraType);
 		Sprite* GetSprite();
 		
 		void SetPosition(glm::vec3 pos);

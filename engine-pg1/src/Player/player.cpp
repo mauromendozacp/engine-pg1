@@ -29,9 +29,9 @@ namespace GameXD
 		}
 	}
 
-	void Player::Init(GL::Render* render, Material* material, float moveSpeed, float rotSpeed, const char* textureUrl)
+	void Player::Init(Render* render, Material* material, float moveSpeed, float rotSpeed, const char* textureUrl)
 	{
-		sprite = new GL::Sprite(render);
+		sprite = new Sprite(render);
 		sprite->Init(SPRITE_TYPE::QUAD);
 		sprite->LoadTexture(textureUrl, false);
 		sprite->material = material;
@@ -41,19 +41,19 @@ namespace GameXD
 		sprite->SetCollider(true);
 		sprite->SetTransparent(true);
 
-		GL::AtlasConfig atlas = GL::AtlasConfig(6, 11, 0, 0, 1, 18);
+		AtlasConfig atlas = AtlasConfig(6, 11, 0, 0, 1, 18);
 		sprite->AddAnimation(atlas, 10.f);
 
-		atlas = GL::AtlasConfig(6, 11, 0, 7, 1, 12);
+		atlas = AtlasConfig(6, 11, 0, 7, 1, 12);
 		sprite->AddAnimation(atlas, 10.f);
 
-		atlas = GL::AtlasConfig(6, 11, 0, 3, 1, 12);
+		atlas = AtlasConfig(6, 11, 0, 3, 1, 12);
 		sprite->AddAnimation(atlas, 10.f);
 
-		atlas = GL::AtlasConfig(6, 11, 0, 9, 1, 12);
+		atlas = AtlasConfig(6, 11, 0, 9, 1, 12);
 		sprite->AddAnimation(atlas, 10.f);
 
-		atlas = GL::AtlasConfig(6, 11, 0, 5, 1, 12);
+		atlas = AtlasConfig(6, 11, 0, 5, 1, 12);
 		sprite->AddAnimation(atlas, 10.f);
 
 		this->moveSpeed = moveSpeed;
@@ -76,9 +76,37 @@ namespace GameXD
 		sprite->DeInit();
 	}
 
-	void Player::SetCamera(Camera* camera)
+	void Player::SetCamera(Render* render, Window* window, CAMERA_TYPE cameraType)
 	{
-		this->camera = camera;
+		switch (cameraType)
+		{
+		case CAMERA_TYPE::FPS:
+
+			camera = new FirstPersonCamera(render);
+			FirstPersonCamera* camFPS = static_cast<FirstPersonCamera*>(camera);
+			camFPS->SetSpeed(5.f);
+			camera = camFPS;
+
+			break;
+		case CAMERA_TYPE::TPS:
+
+			camera = new ThirdPersonCamera(render);
+			ThirdPersonCamera* camTPS = static_cast<ThirdPersonCamera*>(camera);
+			camTPS->SetTarget(sprite);
+			camTPS->SetOffset(10.f);
+			camera = camTPS;
+
+			break;
+		case CAMERA_TYPE::TOP_DOWN:
+			break;
+		default:
+			break;
+		}
+
+		camera->Init(45.f, window->GetWidth(), window->GetHeight(), 0.1f, 100.f);
+		camera->SetSensitivity(0.25f);
+
+		Input::SetCamera(camera);
 	}
 
 	GL::Sprite* Player::GetSprite()

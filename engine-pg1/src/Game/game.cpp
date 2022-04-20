@@ -56,7 +56,7 @@ namespace GameXD
 
 		Material* defaultMaterial = new Material(render);
 		defaultMaterial->Init();
-		defaultMaterial->SetShininess(32.f);
+		defaultMaterial->SetShininess(64.f);
 		defaultMaterial->SetAmbient(glm::vec3(0.5f, 0.5f, 0.5f));
 		defaultMaterial->SetDiffuse(glm::vec3(0.4f, 0.4f, 0.4f));
 		defaultMaterial->SetSpecular(glm::vec3(0.5f, 0.5f, 0.5f));
@@ -64,21 +64,7 @@ namespace GameXD
 
 		player = new Player(mainCamera);
 		player->Init(render, defaultMaterial, 5.f, 75.f, "../res/Textures/player.png");
-
-		mainCamera = new ThirdPersonCamera(render);
-		ThirdPersonCamera* cam = static_cast<ThirdPersonCamera*>(mainCamera);
-		cam->SetTarget(player->GetSprite());
-		cam->SetOffset(10.f);
-
-		/*mainCamera = new FirstPersonCamera(render);
-		FirstPersonCamera* cam = static_cast<FirstPersonCamera*>(mainCamera);
-		cam->SetSpeed(5.f);*/
-
-		cam->Init(45.f, window->GetWidth(), window->GetHeight(), 0.1f, 100.f);
-		cam->SetSensitivity(0.25f);
-
-		Input::SetCamera(cam);
-		player->SetCamera(cam);
+		player->SetCamera(render, window, CAMERA_TYPE::TPS);
 
 		floor = new Sprite(render);
 		floor->Init(SPRITE_TYPE::QUAD);
