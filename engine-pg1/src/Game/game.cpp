@@ -6,7 +6,12 @@ namespace GameXD
 	{
 		player = nullptr;
 		floor = nullptr;
-		cubeLight = nullptr;
+		
+		for (int i = 0; i < cubesLenght; i++)
+		{
+			cubeLight[i] = nullptr;
+		}
+
 		spotCubeLight = nullptr;
 		tnt = nullptr;
 	}
@@ -23,11 +28,16 @@ namespace GameXD
 			delete floor;
 			floor = nullptr;
 		}
-		if (cubeLight != nullptr)
+
+		for (int i = 0; i < cubesLenght; i++)
 		{
-			delete cubeLight;
-			cubeLight = nullptr;
+			if (cubeLight[i] != nullptr)
+			{
+				delete cubeLight[i];
+				cubeLight[i] = nullptr;
+			}
 		}
+		
 		if (spotCubeLight != nullptr)
 		{
 			delete spotCubeLight;
@@ -78,11 +88,14 @@ namespace GameXD
 		floor->SetRotX(90.f);
 		floor->SetScale(50.f, 50, 1.f);
 
-		cubeLight = new Shape(render);
-		cubeLight->Init(SHAPE_TYPE::CUBE);
-		cubeLight->material = defaultMaterial;
-		cubeLight->SetPos(glm::vec3(15.f, 2.5f, 0.f));
-		cubeLight->color.SetColor(0, 255, 0);
+		for (int i = 0; i < cubesLenght; i++)
+		{
+			cubeLight[i] = new Shape(render);
+			cubeLight[i]->Init(SHAPE_TYPE::CUBE);
+			cubeLight[i]->material = defaultMaterial;
+			cubeLight[i]->SetPos(glm::vec3(15.f, 2.5f, 0.f));
+			cubeLight[i]->color.SetColor(0, 255, 0);
+		}
 		
 		spotCubeLight = new Shape(render);
 		spotCubeLight->Init(SHAPE_TYPE::CUBE);
@@ -108,8 +121,8 @@ namespace GameXD
 
 		lightManager->AddLight(LIGHT_TYPE::POINTLIGHT);
 		PointLight* pointLight = lightManager->GetLasPointLightCreated();
-		pointLight->SetPos(cubeLight->GetPos());
-		pointLight->color = cubeLight->color;
+		pointLight->SetPos(player->GetSprite()->GetPos() + glm::vec3(0.f, .5f, 0.f));
+		pointLight->color = player->GetSprite()->color;
 		pointLight->SetAmbient(glm::vec3(0.05f, 0.05f, 0.05f));
 		pointLight->SetDiffuse(glm::vec3(0.8f, 0.8f, 0.8f));
 		pointLight->SetSpecular(glm::vec3(1.0f, 1.0f, 1.0f));
@@ -136,6 +149,7 @@ namespace GameXD
 	{
 		player->Update();
 		mainCamera->Update();
+		lightManager->GetLasPointLightCreated()->SetPos(player->GetSprite()->GetPos() + glm::vec3(0.f, .5f, 0.f));
 
 		if (Input::IsKeyDown(KEY_ESCAPE))
 		{
@@ -147,8 +161,12 @@ namespace GameXD
 	{
 		mainCamera->UseCamera();
 
+		for (int i = 0; i < cubesLenght; i++)
+		{
+			cubeLight[i]->Draw();
+		}
+
 		floor->Draw();
-		cubeLight->Draw();
 		spotCubeLight->Draw();
 		tnt->Draw();
 		player->Draw();
@@ -158,8 +176,12 @@ namespace GameXD
 	{
 		player->DeInit();
 		floor->DeInit();
-		cubeLight->DeInit();
 		spotCubeLight->DeInit();
 		tnt->DeInit();
+
+		for (int i = 0; i < cubesLenght; i++)
+		{
+			cubeLight[i]->DeInit();
+		}
 	}
 }

@@ -17,6 +17,8 @@ using namespace GL;
 
 namespace GameXD
 {
+	int const cubesLenght = 10;
+
 	class GRAPHICSENGINE_API Game : public BaseGame
 	{
 	public:
@@ -32,7 +34,7 @@ namespace GameXD
 	private:
 		Player* player;
 		Sprite* floor;
-		Shape* cubeLight;
+		Shape* cubeLight[cubesLenght];
 		Shape* spotCubeLight;
 		Sprite* tnt;
 	};
