@@ -93,8 +93,8 @@ namespace GameXD
 			cubeLight[i] = new Shape(render);
 			cubeLight[i]->Init(SHAPE_TYPE::CUBE);
 			cubeLight[i]->material = defaultMaterial;
-			cubeLight[i]->SetPos(glm::vec3(15.f, 2.5f, 0.f));
-			cubeLight[i]->color.SetColor(0, 255, 0);
+			cubeLight[i]->SetPos(glm::vec3(10.f - 2.5f * i, 2.5f, 10.f));
+			cubeLight[i]->color = Color::GetRandomColor();
 		}
 		
 		spotCubeLight = new Shape(render);
@@ -108,7 +108,7 @@ namespace GameXD
 		tnt->Init(SPRITE_TYPE::CUBE);
 		tnt->material = defaultMaterial;
 		tnt->LoadTexture("../res/Textures/tnt.png", true);
-		tnt->SetPos(glm::vec3(10.f, .5f, 10.f));
+		tnt->SetPos(glm::vec3(2.5f, 0.f, 2.5f));
 
 		lightManager->AddLight(LIGHT_TYPE::DIRECTIONAL);
 		DirectionalLight* directionalLight = lightManager->GetDirectionalLight();

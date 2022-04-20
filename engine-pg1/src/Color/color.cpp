@@ -12,6 +12,12 @@ namespace GL
 		a = 1.f;
 	}
 
+	Color::Color(int r, int g, int b)
+	{
+		SetColor(r, g, b);
+		a = 1.f;
+	}
+
 	Color::~Color()
 	{
 	}
@@ -50,5 +56,14 @@ namespace GL
 	glm::vec3 Color::GetColorRGB()
 	{
 		return glm::vec3(r, g, b);
+	}
+
+	Color Color::GetRandomColor()
+	{
+		int r = rand() % (static_cast<int>(colorValue) + 1);
+		int g = rand() % (static_cast<int>(colorValue) + 1);
+		int b = rand() % (static_cast<int>(colorValue) + 1);
+
+		return Color(r, g, b);
 	}
 }

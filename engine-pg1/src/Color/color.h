@@ -10,6 +10,7 @@ namespace GL
 	{
 	public:
 		Color();
+		Color(int r, int g, int b);
 		~Color();
 
 		void SetColor(int r, int g, int b);
@@ -19,6 +20,8 @@ namespace GL
 
 		glm::vec4 GetColor();
 		glm::vec3 GetColorRGB();
+
+		static Color GetRandomColor();
 
 	private:
 		float r, g, b, a;
