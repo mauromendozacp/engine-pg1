@@ -74,6 +74,8 @@ namespace GL
 		render->Init();
 		Input::Init(window, mainCamera);
 
+		srand(time(NULL));
+
 		Init();
 	}
 

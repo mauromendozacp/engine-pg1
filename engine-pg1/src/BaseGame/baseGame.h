@@ -2,6 +2,10 @@
 #define BASEGAME_H
 
 #include "exports.h"
+
+#include <stdlib.h>
+#include <time.h>
+
 #include "Renderer/renderer.h"
 #include "Camera/camera.h"
 #include "Input/input.h"
