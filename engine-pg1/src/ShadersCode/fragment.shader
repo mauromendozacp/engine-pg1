@@ -132,7 +132,7 @@ vec3 CalculatePointLight(PointLight pLight, vec3 norm, vec3 fPos, vec3 viewDir)
 	float spec = pow(max(dot(viewDir, reflectDir), 0.0f), material.shininess);
 
 	float distance = length(pLight.position - fPos);
-	float attenuation = 1.0 / (pLight.constant + pLight.linear * distance + pLight.quadratic * (distance * distance));
+	float attenuation = 1.0f / (pLight.constant + pLight.linear * distance + pLight.quadratic * (distance * distance));
 
 	vec3 ambient = pLight.ambient * material.ambient * pLight.color;
 	vec3 diffuse = pLight.diffuse * diff * material.diffuse * pLight.color;

@@ -73,7 +73,7 @@ namespace GameXD
 		floor->material = defaultMaterial;
 		floor->SetPos(glm::vec3(0.f, -.5f, 0.f));
 		floor->SetRotX(90.f);
-		floor->SetScale(50.f, 50, 1.f);
+		floor->SetScale(50.f, 50.f, 1.f);
 
 		for (int i = 0; i < cubesLenght; i++)
 		{
