@@ -76,31 +76,27 @@ namespace GameXD
 		sprite->DeInit();
 	}
 
+	Camera* Player::GetCamera()
+	{
+		return camera;
+	}
+
 	void Player::SetCamera(Render* render, Window* window, CAMERA_TYPE cameraType)
 	{
-		switch (cameraType)
+		if (cameraType == CAMERA_TYPE::FPS)
 		{
-		case CAMERA_TYPE::FPS:
-
 			camera = new FirstPersonCamera(render);
 			FirstPersonCamera* camFPS = static_cast<FirstPersonCamera*>(camera);
 			camFPS->SetSpeed(5.f);
 			camera = camFPS;
-
-			break;
-		case CAMERA_TYPE::TPS:
-
+		}
+		else if (cameraType == CAMERA_TYPE::TPS)
+		{
 			camera = new ThirdPersonCamera(render);
 			ThirdPersonCamera* camTPS = static_cast<ThirdPersonCamera*>(camera);
 			camTPS->SetTarget(sprite);
 			camTPS->SetOffset(10.f);
 			camera = camTPS;
-
-			break;
-		case CAMERA_TYPE::TOP_DOWN:
-			break;
-		default:
-			break;
 		}
 
 		camera->Init(45.f, window->GetWidth(), window->GetHeight(), 0.1f, 100.f);

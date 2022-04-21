@@ -32,6 +32,7 @@ namespace GameXD
 		void Draw();
 		void DeInit();
 
+		Camera* GetCamera();
 		void SetCamera(Render* render, Window* window, CAMERA_TYPE cameraType);
 		Sprite* GetSprite();
 		

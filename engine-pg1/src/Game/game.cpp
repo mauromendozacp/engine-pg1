@@ -65,6 +65,7 @@ namespace GameXD
 		player = new Player(mainCamera);
 		player->Init(render, defaultMaterial, 5.f, 75.f, "../res/Textures/player.png");
 		player->SetCamera(render, window, CAMERA_TYPE::TPS);
+		mainCamera = player->GetCamera();
 
 		floor = new Sprite(render);
 		floor->Init(SPRITE_TYPE::QUAD);
