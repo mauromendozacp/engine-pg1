@@ -171,37 +171,49 @@ namespace GL
 
 			break;
 		case GL::SPRITE_TYPE::CUBE:
-			float cubeCoords[48] =
+			float cubeCoords[72] =
 			{
 				quadCoords[0], quadCoords[1],
 				quadCoords[2], quadCoords[3],
 				quadCoords[4], quadCoords[5],
+				quadCoords[4], quadCoords[5],
 				quadCoords[6], quadCoords[7],
+				quadCoords[0], quadCoords[1],
 
 				quadCoords[0], quadCoords[1],
 				quadCoords[2], quadCoords[3],
 				quadCoords[4], quadCoords[5],
+				quadCoords[4], quadCoords[5],
 				quadCoords[6], quadCoords[7],
+				quadCoords[0], quadCoords[1],
 
 				quadCoords[0], quadCoords[1],
 				quadCoords[2], quadCoords[3],
 				quadCoords[4], quadCoords[5],
+				quadCoords[4], quadCoords[5],
 				quadCoords[6], quadCoords[7],
+				quadCoords[0], quadCoords[1],
 
 				quadCoords[0], quadCoords[1],
 				quadCoords[2], quadCoords[3],
 				quadCoords[4], quadCoords[5],
+				quadCoords[4], quadCoords[5],
 				quadCoords[6], quadCoords[7],
+				quadCoords[0], quadCoords[1],
 
 				quadCoords[0], quadCoords[1],
 				quadCoords[2], quadCoords[3],
 				quadCoords[4], quadCoords[5],
+				quadCoords[4], quadCoords[5],
 				quadCoords[6], quadCoords[7],
+				quadCoords[0], quadCoords[1],
 
 				quadCoords[0], quadCoords[1],
 				quadCoords[2], quadCoords[3],
 				quadCoords[4], quadCoords[5],
-				quadCoords[6], quadCoords[7]
+				quadCoords[4], quadCoords[5],
+				quadCoords[6], quadCoords[7],
+				quadCoords[0], quadCoords[1]
 			};
 
 			render->BindUV(UVB, sizeof(cubeCoords), cubeCoords);
