@@ -10,7 +10,6 @@ namespace GL
 		uniformColor = 0;
 		uniformAlpha = 0;
 		uniformUseTexture = 0;
-		uniformUseMaterial = 0;
 		uniformAffectedLight = 0;
 
 		VAO = 0;
@@ -24,7 +23,6 @@ namespace GL
 		moveable = false;
 
 		useTexture = false;
-		useMaterial = false;
 		affectedLight = true;
 	}
 
@@ -36,7 +34,6 @@ namespace GL
 		uniformColor = 0;
 		uniformAlpha = 0;
 		uniformUseTexture = 0;
-		uniformUseMaterial = 0;
 		uniformAffectedLight = 0;
 
 		VAO = 0;
@@ -50,7 +47,6 @@ namespace GL
 		moveable = false;
 
 		useTexture = false;
-		useMaterial = true;
 		affectedLight = true;
 	}
 
@@ -64,7 +60,6 @@ namespace GL
 		render->UpdateColor(uniformColor, uniformAlpha, color.GetColor());
 		render->UpdateStatus(uniformAffectedLight, affectedLight);
 		render->UpdateStatus(uniformUseTexture, useTexture);
-		render->UpdateStatus(uniformUseMaterial, useMaterial);
 	}
 
 	void Entity2D::Draw()
@@ -118,7 +113,6 @@ namespace GL
 		render->SetUniform(uniformColor, "color");
 		render->SetUniform(uniformAlpha, "a");
 		render->SetUniform(uniformUseTexture, "useTexture");
-		render->SetUniform(uniformUseMaterial, "useMaterial");
 		render->SetUniform(uniformAffectedLight, "affectedLight");
 	}
 }

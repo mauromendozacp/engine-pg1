@@ -105,7 +105,15 @@ namespace GL
 
 	void Render::SetBaseAttribs(uint location, int size, int stride, int offset)
 	{
-		glVertexAttribPointer(location, size, GL_FLOAT, GL_FALSE, stride * sizeof(float), (void*)(offset * sizeof(float)));
+		if (offset == 0)
+		{
+			glVertexAttribPointer(location, size, GL_FLOAT, GL_FALSE, stride * sizeof(float), (void*)offset);
+		}
+		else
+		{
+			glVertexAttribPointer(location, size, GL_FLOAT, GL_FALSE, stride * sizeof(float), (void*)(offset * sizeof(float)));
+		}
+
 		glEnableVertexAttribArray(location);
 	}
 

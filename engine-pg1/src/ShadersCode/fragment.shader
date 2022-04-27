@@ -62,7 +62,6 @@ uniform SpotLight spotLight[LIGHTS_MAX];
 
 uniform sampler2D ourTexture;
 uniform bool useTexture;
-uniform bool useMaterial;
 uniform bool affectedLight;
 uniform Material material;
 uniform vec3 viewPosition;
