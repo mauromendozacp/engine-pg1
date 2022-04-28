@@ -219,10 +219,10 @@
     <ClInclude Include="..\src\Window\window.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\src\ShadersCode\fragment.shader" />
+    <None Include="..\src\ShadersCode\solidFragment.shader" />
+    <None Include="..\src\ShadersCode\solidVertex.shader" />
     <None Include="..\src\ShadersCode\textureFragment.shader" />
     <None Include="..\src\ShadersCode\textureVertex.shader" />
-    <None Include="..\src\ShadersCode\vertex.shader" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -11,12 +11,6 @@ namespace GL
 {
 	class GRAPHICSENGINE_API Render
 	{
-	private:
-		Shader* shader;
-
-		glm::mat4 view;
-		glm::mat4 projection;
-
 	public:
 		Render();
 		~Render();
@@ -24,8 +18,10 @@ namespace GL
 		void Init();
 		void SetDepth();
 
-		void UseShader();
-		uint GetShaderId();
+		void UseSolidShader();
+		void UseTextureShader();
+		uint GetSolidShaderId();
+		uint GetTextureShaderId();
 		void CleanShader();
 
 		void GenBuffers(uint& VAO, uint& VBO, uint& EBO);
@@ -36,8 +32,8 @@ namespace GL
 		void UnBind(uint& VAO, uint& VBO, uint& EBO);
 		void UnBind(uint& VAO, uint& VBO, uint& EBO, uint& UVB);
 
-		void SetLocation(uint& location, const char* loc);
-		void SetUniform(uint& uniform, const char* loc);
+		void SetLocation(uint shaderId, uint& location, const char* loc);
+		void SetUniform(uint shaderId, uint& uniform, const char* loc);
 		void SetBaseAttribs(uint location, int size, int stride, int offset);
 		void SetTextureAttribs(uint location, int size, int stride, int offset);
 
@@ -62,6 +58,13 @@ namespace GL
 		void TextureDelete(uint uniformTexture, uint& textureId);
 		void BlendEnable();
 		void BlendDisable();
+
+	private:
+		Shader* solidShader;
+		Shader* textureShader;
+
+		glm::mat4 view;
+		glm::mat4 projection;
 	};
 }
 

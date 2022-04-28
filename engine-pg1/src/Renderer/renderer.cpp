@@ -5,7 +5,8 @@ namespace GL
 {
 	Render::Render()
 	{
-		this->shader = nullptr;
+		this->solidShader = nullptr;
+		this->textureShader = nullptr;
 
 		view = glm::mat4(0.f);
 		projection = glm::mat4(0.f);
@@ -13,27 +14,45 @@ namespace GL
 
 	Render::~Render()
 	{
-		if (shader != nullptr)
+		if (solidShader != nullptr)
 		{
-			delete shader;
-			shader = nullptr;
+			delete solidShader;
+			solidShader = nullptr;
+		}
+		if (textureShader != nullptr)
+		{
+			delete textureShader;
+			textureShader = nullptr;
 		}
 	}
 
 	void Render::Init()
 	{
-		shader = new Shader();
-		shader->CreateShader("../src/ShadersCode/vertex.shader", "../src/ShadersCode/fragment.shader");
+		solidShader = new Shader();
+		textureShader = new Shader();
+
+		solidShader->CreateShader("../src/ShadersCode/solidVertex.shader", "../src/ShadersCode/solidFragment.shader");
+		textureShader->CreateShader("../src/ShadersCode/textureVertex.shader", "../src/ShadersCode/textureFragment.shader");
 	}
 
-	void Render::UseShader()
+	void Render::UseSolidShader()
 	{
-		glUseProgram(GetShaderId());
+		glUseProgram(GetSolidShaderId());
 	}
 
-	uint Render::GetShaderId()
+	void Render::UseTextureShader()
 	{
-		return shader->GetShaderId();
+		glUseProgram(GetTextureShaderId());
+	}
+
+	uint Render::GetSolidShaderId()
+	{
+		return solidShader->GetShaderId();
+	}
+
+	uint Render::GetTextureShaderId()
+	{
+		return textureShader->GetShaderId();
 	}
 
 	void Render::CleanShader()
@@ -93,14 +112,14 @@ namespace GL
 		glDeleteBuffers(1, &UVB);
 	}
 
-	void Render::SetLocation(uint& location, const char* loc)
+	void Render::SetLocation(uint shaderId, uint& location, const char* loc)
 	{
-		location = glGetAttribLocation(GetShaderId(), loc);
+		location = glGetAttribLocation(shaderId, loc);
 	}
 
-	void Render::SetUniform(uint& uniform, const char* loc)
+	void Render::SetUniform(uint shaderId, uint& uniform, const char* loc)
 	{
-		uniform = glGetUniformLocation(GetShaderId(), loc);
+		uniform = glGetUniformLocation(shaderId, loc);
 	}
 
 	void Render::SetBaseAttribs(uint location, int size, int stride, int offset)
