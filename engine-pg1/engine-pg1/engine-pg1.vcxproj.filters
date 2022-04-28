@@ -88,6 +88,12 @@
     <ClCompile Include="..\src\Mesh\mesh.cpp">
       <Filter>Mesh</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\Material\TextureMaterial\textureMaterial.cpp">
+      <Filter>Material\TextureMaterial</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Material\SolidMaterial\solidMaterial.cpp">
+      <Filter>Material\SolidMaterial</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Window">
@@ -179,6 +185,12 @@
     </Filter>
     <Filter Include="Mesh">
       <UniqueIdentifier>{00133434-bac7-4c75-b3eb-ddd4bb68e16a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Material\TextureMaterial">
+      <UniqueIdentifier>{ee477a67-be45-4c1e-acf1-84cc0f766db1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Material\SolidMaterial">
+      <UniqueIdentifier>{d30f1834-38ed-4689-affb-f76330fe8e9e}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -275,12 +287,24 @@
     <ClInclude Include="..\src\Mesh\mesh.h">
       <Filter>Mesh</Filter>
     </ClInclude>
+    <ClInclude Include="..\src\Material\TextureMaterial\textureMaterial.h">
+      <Filter>Material\TextureMaterial</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Material\SolidMaterial\solidMaterial.h">
+      <Filter>Material\SolidMaterial</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\src\ShadersCode\fragment.shader">
       <Filter>ShaderCode</Filter>
     </None>
     <None Include="..\src\ShadersCode\vertex.shader">
+      <Filter>ShaderCode</Filter>
+    </None>
+    <None Include="..\src\ShadersCode\textureFragment.shader">
+      <Filter>ShaderCode</Filter>
+    </None>
+    <None Include="..\src\ShadersCode\textureVertex.shader">
       <Filter>ShaderCode</Filter>
     </None>
   </ItemGroup>

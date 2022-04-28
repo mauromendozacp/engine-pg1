@@ -166,6 +166,8 @@
     <ClCompile Include="..\src\Light\PointLight\pointLight.cpp" />
     <ClCompile Include="..\src\Light\SpotLight\spotLight.cpp" />
     <ClCompile Include="..\src\Material\material.cpp" />
+    <ClCompile Include="..\src\Material\SolidMaterial\solidMaterial.cpp" />
+    <ClCompile Include="..\src\Material\TextureMaterial\textureMaterial.cpp" />
     <ClCompile Include="..\src\Mesh\mesh.cpp" />
     <ClCompile Include="..\src\Renderer\renderer.cpp" />
     <ClCompile Include="..\src\Shader\shader.cpp" />
@@ -200,6 +202,8 @@
     <ClInclude Include="..\src\Light\PointLight\pointLight.h" />
     <ClInclude Include="..\src\Light\SpotLight\spotLight.h" />
     <ClInclude Include="..\src\Material\material.h" />
+    <ClInclude Include="..\src\Material\SolidMaterial\solidMaterial.h" />
+    <ClInclude Include="..\src\Material\TextureMaterial\textureMaterial.h" />
     <ClInclude Include="..\src\Mesh\mesh.h" />
     <ClInclude Include="..\src\Renderer\renderer.h" />
     <ClInclude Include="..\src\Shader\shader.h" />
@@ -216,6 +220,8 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="..\src\ShadersCode\fragment.shader" />
+    <None Include="..\src\ShadersCode\textureFragment.shader" />
+    <None Include="..\src\ShadersCode\textureVertex.shader" />
     <None Include="..\src\ShadersCode\vertex.shader" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
