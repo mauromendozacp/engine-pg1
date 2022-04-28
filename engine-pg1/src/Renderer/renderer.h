@@ -18,8 +18,7 @@ namespace GL
 		void Init();
 		void SetDepth();
 
-		void UseSolidShader();
-		void UseTextureShader();
+		void UseShader(uint shaderId);
 		uint GetSolidShaderId();
 		uint GetTextureShaderId();
 		void CleanShader();
@@ -53,7 +52,8 @@ namespace GL
 		void SetClearColor(float r, float g, float b, float a);
 		void ClearScreen();
 		void PostRender(Window* window);
-		void TextureEnable(uint textureId);
+		void BindDiffuseMap(uint textureId);
+		void BindSpecularMap(uint textureId);
 		void TextureDisable();
 		void TextureDelete(uint uniformTexture, uint& textureId);
 		void BlendEnable();

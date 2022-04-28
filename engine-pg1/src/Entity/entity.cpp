@@ -214,15 +214,15 @@ namespace GL
 		return transform.scale.z;
 	}
 
-	void Entity::SetUniforms()
+	void Entity::SetUniforms(uint shaderId)
 	{
-		render->SetUniform(uniformModel, "model");
-		render->SetUniform(uniformView, "view");
-		render->SetUniform(uniformProjection, "projection");
+		render->SetUniform(shaderId, uniformModel, "model");
+		render->SetUniform(shaderId, uniformView, "view");
+		render->SetUniform(shaderId, uniformProjection, "projection");
 
-		render->SetLocation(locationPosition, "aPos");
-		render->SetLocation(locationTexCoord, "aTex");
-		render->SetLocation(locationNormal, "aNor");
+		render->SetLocation(shaderId, locationPosition, "aPos");
+		render->SetLocation(shaderId, locationNormal, "aNor");
+		render->SetLocation(shaderId, locationTexCoord, "aTex");
 	}
 
 	glm::quat Entity::EulerToQuat(glm::vec3 euler)

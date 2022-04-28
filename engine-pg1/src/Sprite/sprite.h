@@ -39,7 +39,9 @@ namespace GL
 
 	private:
 		SPRITE_TYPE type;
+
 		TextureData* textureData;
+
 		uint uniformTexture;
 		uint UVB;
 
@@ -48,7 +50,7 @@ namespace GL
 		Frame currFrame;
 		bool transparent;
 
-		void SetUniforms();
+		void SetUniforms(uint shaderId);
 	};
 }
 

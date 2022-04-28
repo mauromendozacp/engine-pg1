@@ -35,14 +35,9 @@ namespace GL
 		textureShader->CreateShader("../src/ShadersCode/textureVertex.shader", "../src/ShadersCode/textureFragment.shader");
 	}
 
-	void Render::UseSolidShader()
+	void Render::UseShader(uint shaderId)
 	{
-		glUseProgram(GetSolidShaderId());
-	}
-
-	void Render::UseTextureShader()
-	{
-		glUseProgram(GetTextureShaderId());
+		glUseProgram(shaderId);
 	}
 
 	uint Render::GetSolidShaderId()
@@ -229,9 +224,15 @@ namespace GL
 		glfwPollEvents();
 	}
 
-	void Render::TextureEnable(uint textureId)
+	void Render::BindDiffuseMap(uint textureId)
 	{
 		glActiveTexture(GL_TEXTURE0);
+		glBindTexture(GL_TEXTURE_2D, textureId);
+	}
+
+	void Render::BindSpecularMap(uint textureId)
+	{
+		glActiveTexture(GL_TEXTURE1);
 		glBindTexture(GL_TEXTURE_2D, textureId);
 	}
 

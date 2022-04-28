@@ -31,9 +31,10 @@ namespace GL
 		Material* material;
 
 	protected:
+		uint shaderId;
+
 		uint uniformColor;
 		uint uniformAlpha;
-		uint uniformUseTexture;
 		uint uniformAffectedLight;
 
 		uint VAO, VBO, EBO, tam, vertices;
@@ -41,10 +42,9 @@ namespace GL
 		bool hasCollider;
 		bool moveable;
 
-		bool useTexture;
 		bool affectedLight;
 
-		void SetUniforms();
+		virtual void SetUniforms(uint shaderId);
 	};
 }
 

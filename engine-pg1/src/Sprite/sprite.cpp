@@ -32,7 +32,9 @@ namespace GL
 	void Sprite::Init(SPRITE_TYPE type)
 	{
 		this->type = type;
-		SetUniforms();
+
+		shaderId = render->GetTextureShaderId();
+		SetUniforms(shaderId);
 
 		uint* indexes = 0;
 
@@ -82,10 +84,11 @@ namespace GL
 	void Sprite::Draw()
 	{
 		render->BlendEnable();
-		render->UseShader();
+		render->UseShader(shaderId);
 		UpdateShader();
 		render->UpdateTexture(uniformTexture, textureData->id);
-		render->TextureEnable(textureData->id);
+		render->BindDiffuseMap(textureData->id);
+		render->BindSpecularMap(textureData->id);
 		Entity2D::Draw();
 		render->TextureDisable();
 		render->CleanShader();
@@ -118,7 +121,6 @@ namespace GL
 	{
 		textureData = new TextureData(TextureImporter::LoadTexture(path, invertImage));
 		animIndex = 0;
-		useTexture = true;
 	}
 
 	void Sprite::AddAnimation(AtlasConfig atlas, float speed)
@@ -231,9 +233,9 @@ namespace GL
 		return transparent;
 	}
 
-	void Sprite::SetUniforms()
+	void Sprite::SetUniforms(uint shaderId)
 	{
-		Entity2D::SetUniforms();
-		render->SetUniform(uniformTexture, "ourTexture");
+		Entity2D::SetUniforms(shaderId);
+		render->SetUniform(shaderId, uniformTexture, "ourTexture");
 	}
 }

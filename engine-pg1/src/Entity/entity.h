@@ -84,7 +84,7 @@ namespace GL
 		uint locationNormal;
 		uint locationTexCoord;
 
-		virtual void SetUniforms();
+		virtual void SetUniforms(uint shaderId);
 
 		glm::quat EulerToQuat(glm::vec3 euler);
 		glm::vec3 QuatToVec(glm::quat quat, glm::vec3 euler);

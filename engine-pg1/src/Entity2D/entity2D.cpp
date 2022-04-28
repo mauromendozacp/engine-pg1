@@ -7,9 +7,10 @@ namespace GL
 		color = Color();
 		material = nullptr;
 
+		shaderId = 0;
+
 		uniformColor = 0;
 		uniformAlpha = 0;
-		uniformUseTexture = 0;
 		uniformAffectedLight = 0;
 
 		VAO = 0;
@@ -22,7 +23,6 @@ namespace GL
 		hasCollider = false;
 		moveable = false;
 
-		useTexture = false;
 		affectedLight = true;
 	}
 
@@ -31,9 +31,10 @@ namespace GL
 		color = Color();
 		material = nullptr;
 
+		shaderId = 0;
+
 		uniformColor = 0;
 		uniformAlpha = 0;
-		uniformUseTexture = 0;
 		uniformAffectedLight = 0;
 
 		VAO = 0;
@@ -46,7 +47,6 @@ namespace GL
 		hasCollider = false;
 		moveable = false;
 
-		useTexture = false;
 		affectedLight = true;
 	}
 
@@ -59,7 +59,6 @@ namespace GL
 		render->UpdateMVP(uniformModel, uniformView, uniformProjection, matrix.model);
 		render->UpdateColor(uniformColor, uniformAlpha, color.GetColor());
 		render->UpdateStatus(uniformAffectedLight, affectedLight);
-		render->UpdateStatus(uniformUseTexture, useTexture);
 	}
 
 	void Entity2D::Draw()
@@ -107,12 +106,11 @@ namespace GL
 		return affectedLight;
 	}
 
-	void Entity2D::SetUniforms()
+	void Entity2D::SetUniforms(uint shaderId)
 	{
-		Entity::SetUniforms();
-		render->SetUniform(uniformColor, "color");
-		render->SetUniform(uniformAlpha, "a");
-		render->SetUniform(uniformUseTexture, "useTexture");
-		render->SetUniform(uniformAffectedLight, "affectedLight");
+		Entity::SetUniforms(shaderId);
+		render->SetUniform(shaderId, uniformColor, "color");
+		render->SetUniform(shaderId, uniformAlpha, "a");
+		render->SetUniform(shaderId, uniformAffectedLight, "affectedLight");
 	}
 }
