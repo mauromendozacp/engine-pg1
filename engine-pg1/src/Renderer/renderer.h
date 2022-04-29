@@ -44,6 +44,11 @@ namespace GL
 		void UpdateTexture(uint uniformTexture, uint textureId);
 		void UpdateFloatValue(uint uniformFloat, float value);
 		void UpdateIntValue(uint uniformInt, int value);
+		void UpdateCameraView(uint shaderId, glm::vec3 position, const char* loc);
+		void UpdateLightVec3(uint shaderId, glm::vec3 light, const char* loc);
+		void UpdateLightFloat(uint shaderId, float value, const char* loc);
+		void UpdateLightStatus(uint shaderId, bool status, const char* loc);
+		uint GetUniform(uint shaderId, const char* loc);
 
 		void SetView(glm::mat4 view);
 		void SetProjection(glm::mat4 projection);

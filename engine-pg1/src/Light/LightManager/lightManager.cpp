@@ -45,13 +45,11 @@ namespace GL
 		{
 		case LIGHT_TYPE::DIRECTIONAL:
 			directionalLight = new DirectionalLight(render);
-			directionalLight->Init();
 			break;
 		case LIGHT_TYPE::POINTLIGHT:
 			if (pointLightsCreated < lightMax)
 			{
 				pointLights[pointLightsCreated] = new PointLight(render);
-				pointLights[pointLightsCreated]->Init(pointLightsCreated);
 				pointLightsCreated++;
 			}
 			break;
@@ -59,7 +57,6 @@ namespace GL
 			if (spotLightsCreated < lightMax)
 			{
 				spotLights[spotLightsCreated] = new SpotLight(render);
-				spotLights[spotLightsCreated]->Init(spotLightsCreated);
 				spotLightsCreated++;
 			}
 			break;
@@ -68,13 +65,13 @@ namespace GL
 		}
 	}
 
-	void LightManager::UseLights()
+	void LightManager::UseLights(uint shaderId)
 	{
 		if (directionalLight != nullptr)
 		{
 			if (directionalLight->IsEnabled())
 			{
-				directionalLight->UseLight();
+				directionalLight->UseLight(shaderId);
 			}
 		}
 
@@ -84,14 +81,14 @@ namespace GL
 			{
 				if (pointLights[i]->IsEnabled())
 				{
-					pointLights[i]->UseLight();
+					pointLights[i]->UseLight(shaderId, i);
 				}
 			}
 			if (spotLights[i] != nullptr)
 			{
 				if (spotLights[i]->IsEnabled())
 				{
-					spotLights[i]->UseLight();
+					spotLights[i]->UseLight(shaderId, i);
 				}
 			}
 		}

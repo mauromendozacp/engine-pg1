@@ -11,8 +11,8 @@ namespace GL
 		TextureMaterial(Render* render);
 		~TextureMaterial();
 
-		void Init();
-		void UpdateShader();
+		void Init(uint shaderId);
+		virtual void UpdateShader();
 
 		void SetDiffuse(uint diffuse);
 		void SetSpecular(uint specular);

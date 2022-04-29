@@ -13,8 +13,8 @@ namespace GL
 		Material(Render* render);
 		~Material();
 
-		void Init();
-		void UpdateShader();
+		void Init(uint shaderId);
+		virtual void UpdateShader();
 
 		void SetShininess(float shininess);
 		float GetShininess();

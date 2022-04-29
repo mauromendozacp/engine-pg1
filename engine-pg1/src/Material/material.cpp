@@ -17,11 +17,11 @@ namespace GL
 	{
 	}
 
-	void Material::Init()
+	void Material::Init(uint shaderId)
 	{
-		render->SetUniform(uniformDiffuse, "material.diffuse");
-		render->SetUniform(uniformSpecular, "material.specular");
-		render->SetUniform(uniformShininess, "material.shininess");
+		render->SetUniform(shaderId, uniformDiffuse, "material.diffuse");
+		render->SetUniform(shaderId, uniformSpecular, "material.specular");
+		render->SetUniform(shaderId, uniformShininess, "material.shininess");
 	}
 
 	void Material::UpdateShader()

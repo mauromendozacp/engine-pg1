@@ -16,8 +16,6 @@ namespace GL
 
 		Color color;
 
-		virtual void UseLight() = 0;
-
 		void SetAmbient(glm::vec3 ambient);
 		void SetDiffuse(glm::vec3 diffuse);
 		void SetSpecular(glm::vec3 specular);
@@ -33,13 +31,6 @@ namespace GL
 		glm::vec3 diffuse;
 		glm::vec3 specular;
 		bool enabled;
-
-		uint uniformColor;
-		uint uniformPosition;
-		uint uniformAmbient;
-		uint uniformDiffuse;
-		uint uniformSpecular;
-		uint uniformEnabled;
 	};
 }
 

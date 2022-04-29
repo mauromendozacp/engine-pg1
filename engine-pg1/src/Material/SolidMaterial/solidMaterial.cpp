@@ -15,10 +15,10 @@ namespace GL
 	{
 	}
 
-	void SolidMaterial::Init()
+	void SolidMaterial::Init(uint shaderId)
 	{
-		render->SetUniform(uniformAmbient, "material.ambient");
-		Material::Init();
+		render->SetUniform(shaderId, uniformAmbient, "material.ambient");
+		Material::Init(shaderId);
 	}
 
 	void SolidMaterial::UpdateShader()

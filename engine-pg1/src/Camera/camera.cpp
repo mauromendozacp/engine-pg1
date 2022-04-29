@@ -35,8 +35,6 @@ namespace GL
 		this->fov = fov;
 		this->near = near;
 		this->far = far;
-
-		render->SetUniform(uniformViewPosition, "viewPosition");
 	}
 
 	void Camera::Update()
@@ -47,8 +45,14 @@ namespace GL
 
 	void Camera::UseCamera()
 	{
-		render->UseShader();
-		render->UpdateVec3(uniformViewPosition, transform.position);
+		uint shaderId = render->GetSolidShaderId();
+		render->UseShader(shaderId);
+		render->UpdateCameraView(shaderId, transform.position, "viewPosition");
+		render->CleanShader();
+
+		shaderId = render->GetTextureShaderId();
+		render->UseShader(shaderId);
+		render->UpdateCameraView(shaderId, transform.position, "viewPosition");
 		render->CleanShader();
 	}
 

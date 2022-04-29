@@ -12,9 +12,9 @@ namespace GL
 	{
 	}
 
-	void TextureMaterial::Init()
+	void TextureMaterial::Init(uint shaderId)
 	{
-		Material::Init();
+		Material::Init(shaderId);
 	}
 
 	void TextureMaterial::UpdateShader()

@@ -59,15 +59,15 @@ namespace GL
 		render->UpdateMVP(uniformModel, uniformView, uniformProjection, matrix.model);
 		render->UpdateColor(uniformColor, uniformAlpha, color.GetColor());
 		render->UpdateStatus(uniformAffectedLight, affectedLight);
-	}
 
-	void Entity2D::Draw()
-	{
 		if (material != nullptr)
 		{
 			material->UpdateShader();
 		}
+	}
 
+	void Entity2D::Draw()
+	{
 		render->Draw(VAO, VBO, EBO, vertices, tam, vertexs);
 	}
 

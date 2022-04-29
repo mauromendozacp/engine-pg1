@@ -87,9 +87,10 @@ namespace GL
 			Timer::Update(glfwGetTime());
 
 			Update();
+			lightManager->UseLights(render->GetSolidShaderId());
+			lightManager->UseLights(render->GetTextureShaderId());
 			Draw();
 
-			lightManager->UseLights();
 			render->PostRender(window);
 		}
 	}

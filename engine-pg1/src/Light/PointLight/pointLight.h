@@ -13,8 +13,7 @@ namespace GL
 		PointLight(Render* render);
 		~PointLight();
 
-		virtual void Init(int index);
-		virtual void UseLight() override;
+		virtual void UseLight(uint shaderId, int index);
 
 		void SetConstant(float constant);
 		void SetLinear(float linear);
@@ -28,10 +27,6 @@ namespace GL
 		float constant;
 		float linear;
 		float quadratic;
-
-		uint uniformConstant;
-		uint uniformLinear;
-		uint uniformQuadratic;
 	};
 }
 

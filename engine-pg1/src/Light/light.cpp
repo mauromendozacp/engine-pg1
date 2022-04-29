@@ -9,13 +9,6 @@ namespace GL
 		diffuse = glm::vec3(0.f);
 		specular = glm::vec3(0.f);
 		enabled = true;
-
-		uniformColor = 0;
-		uniformPosition = 0;
-		uniformAmbient = 0;
-		uniformDiffuse = 0;
-		uniformSpecular = 0;
-		uniformEnabled = 0;
 	}
 
 	Light::~Light()

@@ -180,6 +180,31 @@ namespace GL
 		glUniform1i(uniformInt, value);
 	}
 
+	void Render::UpdateCameraView(uint shaderId, glm::vec3 position, const char* loc)
+	{
+		glUniform3f(GetUniform(shaderId, loc), position.x, position.y, position.z);
+	}
+
+	void Render::UpdateLightVec3(uint shaderId, glm::vec3 light, const char* loc)
+	{
+		glUniform3f(GetUniform(shaderId, loc), light.x, light.y, light.z);
+	}
+
+	void Render::UpdateLightFloat(uint shaderId, float value, const char* loc)
+	{
+		glUniform1f(GetUniform(shaderId, loc), value);
+	}
+
+	void Render::UpdateLightStatus(uint shaderId, bool status, const char* loc)
+	{
+		glUniform1i(GetUniform(shaderId, loc), status);
+	}
+
+	uint Render::GetUniform(uint shaderId, const char* loc)
+	{
+		return glGetUniformLocation(shaderId, loc);
+	}
+
 	void Render::SetView(glm::mat4 view)
 	{
 		this->view = view;

@@ -9,6 +9,8 @@
 #include "Light/DirectionalLight/directionalLight.h"
 #include "Light/PointLight/pointLight.h"
 #include "Light/SpotLight/spotLight.h"
+#include "Material/SolidMaterial/solidMaterial.h"
+#include "Material/TextureMaterial/textureMaterial.h"
 #include <iostream>
 
 using namespace GL;

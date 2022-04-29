@@ -54,23 +54,28 @@ namespace GameXD
 	{
 		render->SetDepth();
 
-		Material* defaultMaterial = new Material(render);
-		defaultMaterial->Init();
-		defaultMaterial->SetShininess(64.f);
-		defaultMaterial->SetAmbient(glm::vec3(0.5f, 0.5f, 0.5f));
-		defaultMaterial->SetDiffuse(glm::vec3(0.4f, 0.4f, 0.4f));
-		defaultMaterial->SetSpecular(glm::vec3(0.5f, 0.5f, 0.5f));
-		defaultMaterial->UpdateShader();
+		SolidMaterial* defaultSolidMaterial = new SolidMaterial(render);
+		defaultSolidMaterial->Init(render->GetSolidShaderId());
+		defaultSolidMaterial->SetAmbient(glm::vec3(0.5f, 0.5f, 0.5f));
+		defaultSolidMaterial->SetDiffuse(glm::vec3(0.4f, 0.4f, 0.4f));
+		defaultSolidMaterial->SetSpecular(glm::vec3(0.5f, 0.5f, 0.5f));
+		defaultSolidMaterial->SetShininess(64.f);
+
+		TextureMaterial* defaultTextureMaterial = new TextureMaterial(render);
+		defaultTextureMaterial->Init(render->GetTextureShaderId());
+		defaultTextureMaterial->SetDiffuse(0);
+		defaultTextureMaterial->SetSpecular(1);
+		defaultTextureMaterial->SetShininess(64.f);
 
 		player = new Player(mainCamera);
-		player->Init(render, defaultMaterial, 5.f, 75.f, "../res/Textures/player.png");
+		player->Init(render, defaultTextureMaterial, 5.f, 75.f, "../res/Textures/player.png");
 		player->SetCamera(render, window, CAMERA_TYPE::TPS);
 		mainCamera = player->GetCamera();
 
 		floor = new Sprite(render);
 		floor->Init(SPRITE_TYPE::QUAD);
 		floor->LoadTexture("../res/Textures/floor.jpg", false);
-		floor->material = defaultMaterial;
+		floor->material = defaultTextureMaterial;
 		floor->SetPos(glm::vec3(0.f, -.5f, 0.f));
 		floor->SetRotX(90.f);
 		floor->SetScale(50.f, 50.f, 1.f);
@@ -79,27 +84,26 @@ namespace GameXD
 		{
 			cubeLight[i] = new Shape(render);
 			cubeLight[i]->Init(SHAPE_TYPE::CUBE);
-			cubeLight[i]->material = defaultMaterial;
+			cubeLight[i]->material = defaultSolidMaterial;
 			cubeLight[i]->SetPos(glm::vec3(10.f - 2.5f * i, 2.5f, 10.f));
 			cubeLight[i]->color = Color::GetRandomColor();
 		}
 		
 		spotCubeLight = new Shape(render);
 		spotCubeLight->Init(SHAPE_TYPE::CUBE);
-		spotCubeLight->material = defaultMaterial;
+		spotCubeLight->material = defaultSolidMaterial;
 		spotCubeLight->SetPos(glm::vec3(0.f, 5.f, 0.f));
 		spotCubeLight->color.SetColor(255, 0, 0);
 		spotCubeLight->SetScale(0.75f);
 
 		tnt = new Sprite(render);
 		tnt->Init(SPRITE_TYPE::CUBE);
-		tnt->material = defaultMaterial;
+		tnt->material = defaultTextureMaterial;
 		tnt->LoadTexture("../res/Textures/tnt.png", true);
 		tnt->SetPos(glm::vec3(2.5f, 0.f, 2.5f));
 
 		lightManager->AddLight(LIGHT_TYPE::DIRECTIONAL);
 		DirectionalLight* directionalLight = lightManager->GetDirectionalLight();
-		directionalLight->Init();
 		directionalLight->color.SetColor(240, 240, 240);
 		directionalLight->SetDirection(glm::vec3(-0.2f, -1.0f, -0.3f));
 		directionalLight->SetAmbient(glm::vec3(0.5f, 0.5f, 0.5f));

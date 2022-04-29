@@ -12,8 +12,7 @@ namespace GL
 		SpotLight(Render* render);
 		~SpotLight();
 
-		virtual void Init(int index);
-		void UseLight() override;
+		void UseLight(uint shaderId, int index) override;
 
 		void SetDirection(glm::vec3 direction);
 		void SetCutOff(float cutOff);
@@ -27,10 +26,6 @@ namespace GL
 		glm::vec3 direction;
 		float cutOff;
 		float outerCutOff;
-
-		uint uniformDirection;
-		uint uniformCutOff;
-		uint uniformOuterCutOff;
 	};
 }
 

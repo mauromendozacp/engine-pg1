@@ -11,8 +11,8 @@ namespace GL
 		SolidMaterial(Render* render);
 		~SolidMaterial();
 
-		void Init();
-		void UpdateShader();
+		void Init(uint shaderId);
+		void UpdateShader() override;
 
 		void SetAmbient(glm::vec3 ambient);
 		void SetDiffuse(glm::vec3 diffuse);

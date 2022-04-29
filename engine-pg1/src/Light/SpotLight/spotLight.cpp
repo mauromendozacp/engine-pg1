@@ -7,48 +7,28 @@ namespace GL
 		direction = glm::vec3(0.f);
 		cutOff = 0.f;
 		outerCutOff = 0.f;
-
-		uniformDirection = 0;
-		uniformCutOff = 0;
-		uniformOuterCutOff = 0;
 	}
 
 	SpotLight::~SpotLight()
 	{
 	}
 
-	void SpotLight::Init(int index)
+	void SpotLight::UseLight(uint shaderId, int index)
 	{
 		std::string indexSTR = std::to_string(index).c_str();
-		render->SetUniform(uniformColor, ("spotLight[" + indexSTR + "].pointLight.color").c_str());
-		render->SetUniform(uniformPosition, ("spotLight[" + indexSTR + "].pointLight.position").c_str());
-		render->SetUniform(uniformAmbient, ("spotLight[" + indexSTR + "].pointLight.ambient").c_str());
-		render->SetUniform(uniformDiffuse, ("spotLight[" + indexSTR + "].pointLight.diffuse").c_str());
-		render->SetUniform(uniformSpecular, ("spotLight[" + indexSTR + "].pointLight.specular").c_str());
-		render->SetUniform(uniformConstant, ("spotLight[" + indexSTR + "].pointLight.constant").c_str());
-		render->SetUniform(uniformLinear, ("spotLight[" + indexSTR + "].pointLight.linear").c_str());
-		render->SetUniform(uniformQuadratic, ("spotLight[" + indexSTR + "].pointLight.quadratic").c_str());
-		render->SetUniform(uniformDirection, ("spotLight[" + indexSTR + "].direction").c_str());
-		render->SetUniform(uniformCutOff, ("spotLight[" + indexSTR + "].cutOff").c_str());
-		render->SetUniform(uniformOuterCutOff, ("spotLight[" + indexSTR + "].outerCutOff").c_str());
-		render->SetUniform(uniformEnabled, ("spotLight[" + indexSTR + "].enabled").c_str());
-	}
-
-	void SpotLight::UseLight()
-	{
-		render->UseShader();
-		render->UpdateLight(uniformColor, color.GetColorRGB());
-		render->UpdateLight(uniformDirection, direction);
-		render->UpdateLight(uniformPosition, transform.position);
-		render->UpdateLight(uniformAmbient, ambient);
-		render->UpdateLight(uniformDiffuse, diffuse);
-		render->UpdateLight(uniformSpecular, specular);
-		render->UpdateFloatValue(uniformConstant, constant);
-		render->UpdateFloatValue(uniformLinear, linear);
-		render->UpdateFloatValue(uniformQuadratic, quadratic);
-		render->UpdateFloatValue(uniformCutOff, cutOff);
-		render->UpdateFloatValue(uniformOuterCutOff, outerCutOff);
-		render->UpdateStatus(uniformEnabled, enabled);
+		render->UseShader(shaderId);
+		render->UpdateLightVec3(shaderId, color.GetColorRGB(), ("spotLight[" + indexSTR + "].pointLight.color").c_str());
+		render->UpdateLightVec3(shaderId, direction, ("spotLight[" + indexSTR + "].direction").c_str());
+		render->UpdateLightVec3(shaderId, transform.position, ("spotLight[" + indexSTR + "].pointLight.position").c_str());
+		render->UpdateLightVec3(shaderId, ambient, ("spotLight[" + indexSTR + "].pointLight.ambient").c_str());
+		render->UpdateLightVec3(shaderId, diffuse, ("spotLight[" + indexSTR + "].pointLight.diffuse").c_str());
+		render->UpdateLightVec3(shaderId, specular, ("spotLight[" + indexSTR + "].pointLight.specular").c_str());
+		render->UpdateLightFloat(shaderId, constant, ("spotLight[" + indexSTR + "].pointLight.constant").c_str());
+		render->UpdateLightFloat(shaderId, linear, ("spotLight[" + indexSTR + "].pointLight.linear").c_str());
+		render->UpdateLightFloat(shaderId, quadratic, ("spotLight[" + indexSTR + "].pointLight.quadratic").c_str());
+		render->UpdateLightFloat(shaderId, cutOff, ("spotLight[" + indexSTR + "].cutOff").c_str());
+		render->UpdateLightFloat(shaderId, outerCutOff, ("spotLight[" + indexSTR + "].outerCutOff").c_str());
+		render->UpdateLightStatus(shaderId, enabled, ("spotLight[" + indexSTR + "].enabled").c_str());
 		render->CleanShader();
 	}
 
