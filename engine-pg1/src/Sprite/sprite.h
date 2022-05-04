@@ -27,7 +27,7 @@ namespace GL
 		void Draw();
 		void DeInit();
 
-		void SetTexture(TextureData* texture);
+		void SetTexture(Texture* texture);
 		void LoadTexture(const char* path, bool invertImage);
 		void AddAnimation(AtlasConfig atlas, float speed);
 		void AddAnimation(int rows, int cols, float duration);
@@ -40,7 +40,7 @@ namespace GL
 	private:
 		SPRITE_TYPE type;
 
-		TextureData* textureData;
+		Texture* textureData;
 
 		uint uniformTexture;
 		uint UVB;

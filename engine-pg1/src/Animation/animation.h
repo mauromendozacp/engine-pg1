@@ -17,7 +17,7 @@ namespace GL
 		~Animation();
 
 		bool Update();
-		void SetAnimation(TextureData* textureData, float speed);
+		void SetAnimation(Texture* textureData, float speed);
 		void AddFrame(float frameX, float frameY, float frameWidth, float frameHeight, int frameCount);
 		void AddFrames(AtlasConfig atlas);
 		int GetCurrentFrame();
@@ -27,7 +27,7 @@ namespace GL
 		float currentTime;
 		int currentFrame;
 		float speed;
-		TextureData* textureData;
+		Texture* textureData;
 		std::vector<Frame> frames;
 	};
 }

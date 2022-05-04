@@ -25,7 +25,7 @@ namespace GL
 
 		void GenBuffers(uint& VAO, uint& VBO, uint& EBO);
 		void GenBuffers(uint& VAO, uint& VBO, uint& EBO, uint& UVB);
-		void BindBuffer(uint VAO, uint VBO, int tam, float* vertices);
+		void BindBuffer(uint VAO, uint VBO, int tam, const void* vertices);
 		void BindIndexs(uint EBO, int tam, uint* indexs);
 		void BindUV(uint UVB, int tam, float* vertices);
 		void UnBind(uint& VAO, uint& VBO, uint& EBO);
@@ -33,8 +33,9 @@ namespace GL
 
 		void SetLocation(uint shaderId, uint& location, const char* loc);
 		void SetUniform(uint shaderId, uint& uniform, const char* loc);
-		void SetBaseAttribs(uint location, int size, int stride, int offset);
+		void SetBaseAttribs(uint location, int size, GLsizei stride, const void* offset);
 		void SetTextureAttribs(uint location, int size, int stride, int offset);
+		void ClearVertexArray();
 
 		void UpdateMVP(uint uniformModel, uint uniformView, uint uniformProjection, glm::mat4 model);
 		void UpdateVec3(uint uniformVec3, glm::vec3 vec3Value);
@@ -48,12 +49,15 @@ namespace GL
 		void UpdateLightVec3(uint shaderId, glm::vec3 light, const char* loc);
 		void UpdateLightFloat(uint shaderId, float value, const char* loc);
 		void UpdateLightStatus(uint shaderId, bool status, const char* loc);
+		void UpdateMaterialValue(uint shaderId, uint value, const char* loc);
 		uint GetUniform(uint shaderId, const char* loc);
 
 		void SetView(glm::mat4 view);
 		void SetProjection(glm::mat4 projection);
 
 		void Draw(uint VAO, uint VBO, uint& EBO, uint vertices, uint tamVerts, float* vertexs);
+		void DrawMesh(uint VAO, uint vertices);
+
 		void SetClearColor(float r, float g, float b, float a);
 		void ClearScreen();
 		void PostRender(Window* window);
@@ -63,6 +67,8 @@ namespace GL
 		void TextureDelete(uint uniformTexture, uint& textureId);
 		void BlendEnable();
 		void BlendDisable();
+		void ActiveTexture(int i);
+		void BindTexture(uint id);
 
 	private:
 		Shader* solidShader;

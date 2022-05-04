@@ -55,8 +55,8 @@ namespace GL
 		render->BindBuffer(VAO, VBO, tam, vertexs);
 		render->BindIndexs(EBO, sizeof(indexes) * vertices, indexes);
 
-		render->SetBaseAttribs(locationPosition, 3, 6, 0);
-		render->SetBaseAttribs(locationNormal, 3, 6, 3);
+		render->SetBaseAttribs(locationPosition, 3, 6 * sizeof(float), (void*)0);
+		render->SetBaseAttribs(locationNormal, 3, 6 * sizeof(float), (void*)(3 * sizeof(float)));
 	}
 
 	void Shape::Draw()

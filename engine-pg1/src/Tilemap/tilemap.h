@@ -41,7 +41,7 @@ namespace GL
 		float tileWidth;
 		float tileHeight;
 
-		TextureData texture;
+		Texture texture;
 
 		float imageWidth;
 		float imageHeight;

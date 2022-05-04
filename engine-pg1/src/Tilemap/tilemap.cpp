@@ -13,7 +13,7 @@ namespace GL
 		tileWidth = 0.0f;
 		tileHeight = 0.0f;
 
-		texture = TextureData();
+		texture = Texture();
 
 		imageWidth = 0.0f;
 		imageHeight = 0.0f;
@@ -32,7 +32,7 @@ namespace GL
 		tileWidth = 0.0f;
 		tileHeight = 0.0f;
 
-		texture = TextureData();
+		texture = Texture();
 
 		imageWidth = 0.0f;
 		imageHeight = 0.0f;

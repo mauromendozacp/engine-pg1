@@ -74,7 +74,7 @@ namespace GL
 		glGenBuffers(1, &UVB);
 	}
 
-	void Render::BindBuffer(uint VAO, uint VBO, int tam, float* vertices)
+	void Render::BindBuffer(uint VAO, uint VBO, int tam, const void* vertices)
 	{
 		glBindVertexArray(VAO);
 
@@ -117,17 +117,9 @@ namespace GL
 		uniform = glGetUniformLocation(shaderId, loc);
 	}
 
-	void Render::SetBaseAttribs(uint location, int size, int stride, int offset)
+	void Render::SetBaseAttribs(uint location, int size, GLsizei stride, const void* offset)
 	{
-		if (offset == 0)
-		{
-			glVertexAttribPointer(location, size, GL_FLOAT, GL_FALSE, stride * sizeof(float), (void*)offset);
-		}
-		else
-		{
-			glVertexAttribPointer(location, size, GL_FLOAT, GL_FALSE, stride * sizeof(float), (void*)(offset * sizeof(float)));
-		}
-
+		glVertexAttribPointer(location, size, GL_FLOAT, GL_FALSE, stride, offset);
 		glEnableVertexAttribArray(location);
 	}
 
@@ -135,6 +127,11 @@ namespace GL
 	{
 		glVertexAttribPointer(location, size, GL_FLOAT, GL_FALSE, stride * sizeof(float), (void*)offset);
 		glEnableVertexAttribArray(location);
+	}
+
+	void Render::ClearVertexArray()
+	{
+		glBindVertexArray(0);
 	}
 
 	void Render::UpdateMVP(uint uniformModel, uint uniformView, uint uniformProjection, glm::mat4 model)
@@ -200,6 +197,11 @@ namespace GL
 		glUniform1i(GetUniform(shaderId, loc), status);
 	}
 
+	void Render::UpdateMaterialValue(uint shaderId, uint value, const char* loc)
+	{
+		glUniform1f(GetUniform(shaderId, loc), value);
+	}
+
 	uint Render::GetUniform(uint shaderId, const char* loc)
 	{
 		return glGetUniformLocation(shaderId, loc);
@@ -227,9 +229,16 @@ namespace GL
 		else
 			glDrawElements(GL_TRIANGLES, vertices, GL_UNSIGNED_INT, 0);
 
-		glBindVertexArray(0);
+		ClearVertexArray();
 		glBindBuffer(GL_ARRAY_BUFFER, 0);
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+	}
+
+	void Render::DrawMesh(uint VAO, uint vertices)
+	{
+		glBindVertexArray(VAO);
+		glDrawElements(GL_TRIANGLES, vertices, GL_UNSIGNED_INT, 0);
+		ClearVertexArray();
 	}
 
 	void Render::SetClearColor(float r, float g, float b, float a)
@@ -280,5 +289,15 @@ namespace GL
 	void Render::BlendDisable()
 	{
 		glDisable(GL_BLEND);
+	}
+
+	void Render::ActiveTexture(int i)
+	{
+		glActiveTexture(GL_TEXTURE0 + i);
+	}
+
+	void Render::BindTexture(uint id)
+	{
+		glBindTexture(GL_TEXTURE_2D, id);
 	}
 }

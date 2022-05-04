@@ -33,7 +33,7 @@ namespace GL
 		return false;
 	}
 
-	void Animation::SetAnimation(TextureData* textureData, float speed)
+	void Animation::SetAnimation(Texture* textureData, float speed)
 	{
 		this->textureData = textureData;
 		this->speed = speed;

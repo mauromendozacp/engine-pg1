@@ -62,8 +62,8 @@ namespace GL
 		render->BindBuffer(VAO, VBO, tam, vertexs);
 		render->BindIndexs(EBO, sizeof(indexes) * vertices, indexes);
 		
-		render->SetBaseAttribs(locationPosition, 3, 6, 0);
-		render->SetBaseAttribs(locationNormal, 3, 6, 3);
+		render->SetBaseAttribs(locationPosition, 3, 6 * sizeof(float), (void*)0);
+		render->SetBaseAttribs(locationNormal, 3, 6 * sizeof(float), (void*)(3 * sizeof(float)));
 
 		SetTextureCoordinates(currFrame);
 		render->SetTextureAttribs(locationTexCoord, 2, 2, 0);
@@ -112,14 +112,14 @@ namespace GL
 		}
 	}
 
-	void Sprite::SetTexture(TextureData* texture)
+	void Sprite::SetTexture(Texture* texture)
 	{
 		textureData = texture;
 	}
 
 	void Sprite::LoadTexture(const char* path, bool invertImage)
 	{
-		textureData = new TextureData(TextureImporter::LoadTexture(path, invertImage));
+		textureData = new Texture(TextureImporter::LoadTexture(path, invertImage));
 		animIndex = 0;
 	}
 

@@ -192,6 +192,9 @@
     <Filter Include="Material\SolidMaterial">
       <UniqueIdentifier>{d30f1834-38ed-4689-affb-f76330fe8e9e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Texture">
+      <UniqueIdentifier>{83a02a50-dc2c-4490-b114-e53de1caa0f9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\Window\window.h">
@@ -292,6 +295,9 @@
     </ClInclude>
     <ClInclude Include="..\src\Material\SolidMaterial\solidMaterial.h">
       <Filter>Material\SolidMaterial</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Texture\texture.h">
+      <Filter>Texture</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

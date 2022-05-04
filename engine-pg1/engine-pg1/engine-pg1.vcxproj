@@ -211,6 +211,7 @@
     <ClInclude Include="..\src\Sprite\sprite.h" />
     <ClInclude Include="..\src\StbImage\stb_image.h" />
     <ClInclude Include="..\src\TextureImporter\textureImporter.h" />
+    <ClInclude Include="..\src\Texture\texture.h" />
     <ClInclude Include="..\src\Tilemap\tilemap.h" />
     <ClInclude Include="..\src\Tile\tile.h" />
     <ClInclude Include="..\src\Timer\timer.h" />

@@ -6,6 +6,7 @@
 #include "TextureImporter/textureImporter.h"
 #include "../glm/ext/matrix_transform.hpp"
 #include <vector>
+#include <string>
 
 namespace GL
 {
@@ -19,7 +20,7 @@ namespace GL
 	class GRAPHICSENGINE_API Mesh
 	{
 	public:
-		Mesh(Render* render, std::vector<Vertex> vertexs, std::vector<uint> indexes, std::vector<TextureData> textures);
+		Mesh(Render* render, std::vector<Vertex> vertexs, std::vector<uint> indexes, std::vector<Texture> textures);
 		~Mesh();
 
 		void Init();
@@ -29,7 +30,9 @@ namespace GL
 		Render* render;
 		std::vector<Vertex> vertexs;
 		std::vector<uint> indexes;
-		std::vector<TextureData> textures;
+		std::vector<Texture> textures;
+
+		unsigned int VAO, VBO, EBO;
 	};
 
 	

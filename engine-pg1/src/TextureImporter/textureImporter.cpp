@@ -11,7 +11,7 @@ namespace GL
 	{
 	}
 
-	TextureData TextureImporter::LoadTexture(const char* path, bool invertImage)
+	Texture TextureImporter::LoadTexture(const char* path, bool invertImage)
 	{
 		unsigned int textureId;
 		int textureWidth;
@@ -57,6 +57,6 @@ namespace GL
 		{
 			std::cout << "Failed to load texture" << std::endl;
 		}
-		return TextureData{ textureId, (float)textureWidth, (float)textureHeight };
+		return Texture{ textureId, (float)textureWidth, (float)textureHeight };
 	}
 }
