@@ -6,8 +6,8 @@ namespace GL
 	Sprite::Sprite() : Entity2D()
 	{
 		type = SPRITE_TYPE::QUAD;
-		textureData = nullptr;
-		uniformTexture = 0;
+		baseTexture = nullptr;
+		uniformBaseTexture = 0;
 		animIndex = 0;
 		anim = std::vector<Animation*>();
 		currFrame = Frame();
@@ -17,8 +17,8 @@ namespace GL
 	Sprite::Sprite(Render* render) : Entity2D(render)
 	{
 		type = SPRITE_TYPE::QUAD;
-		textureData = nullptr;
-		uniformTexture = 0;
+		baseTexture = nullptr;
+		uniformBaseTexture = 0;
 		animIndex = 0;
 		anim = std::vector<Animation*>();
 		currFrame = Frame();
@@ -86,9 +86,9 @@ namespace GL
 		render->BlendEnable();
 		render->UseShader(shaderId);
 		UpdateShader();
-		render->UpdateTexture(uniformTexture, textureData->id);
-		render->BindDiffuseMap(textureData->id);
-		render->BindSpecularMap(textureData->id);
+		render->UpdateTexture(uniformBaseTexture, baseTexture->id);
+		render->BindDiffuseMap(baseTexture->id);
+		render->BindSpecularMap(baseTexture->id);
 		Entity2D::Draw();
 		render->TextureDisable();
 		render->CleanShader();
@@ -98,12 +98,12 @@ namespace GL
 	void Sprite::DeInit()
 	{
 		render->UnBind(VAO, VBO, EBO, UVB);
-		render->TextureDelete(uniformTexture, textureData->id);
+		render->TextureDelete(uniformBaseTexture, baseTexture->id);
 
-		if (textureData != nullptr)
+		if (baseTexture != nullptr)
 		{
-			delete textureData;
-			textureData = nullptr;
+			delete baseTexture;
+			baseTexture = nullptr;
 		}
 
 		for (int i = 0; i < anim.size(); i++)
@@ -112,21 +112,41 @@ namespace GL
 		}
 	}
 
-	void Sprite::SetTexture(Texture* texture)
+	void Sprite::SetTexture(Texture* texture, TEXTURE_TYPE type)
 	{
-		textureData = texture;
+		switch (type)
+		{
+		case GL::TEXTURE_TYPE::BASE:
+			baseTexture = texture;
+			break;
+		case GL::TEXTURE_TYPE::DIFFUSE:
+			if (material != nullptr)
+			{
+				((TextureMaterial*)material)->SetDiffuse(texture->id);
+			}
+			break;
+		case GL::TEXTURE_TYPE::SPECULAR:
+			if (material != nullptr)
+			{
+				((TextureMaterial*)material)->SetSpecular(texture->id);
+			}
+			break;
+		default:
+			baseTexture = nullptr;
+			break;
+		}
 	}
 
-	void Sprite::LoadTexture(const char* path, bool invertImage)
+	void Sprite::LoadTexture(const char* path, bool invertImage, TEXTURE_TYPE type)
 	{
-		textureData = new Texture(TextureImporter::LoadTexture(path, invertImage));
+		SetTexture(new Texture(TextureImporter::LoadTexture(path, invertImage)), type);
 		animIndex = 0;
 	}
 
 	void Sprite::AddAnimation(AtlasConfig atlas, float speed)
 	{
 		Animation* a = new Animation();
-		a->SetAnimation(textureData, speed);
+		a->SetAnimation(baseTexture, speed);
 		a->AddFrames(atlas);
 		anim.push_back(a);
 
@@ -137,12 +157,12 @@ namespace GL
 	void Sprite::AddAnimation(int rows, int cols, float speed)
 	{
 		Animation* a = new Animation();
-		a->SetAnimation(textureData, speed);
+		a->SetAnimation(baseTexture, speed);
 		for (int i = 0; i < rows; i++)
 		{
 			for (int j = 0; j < cols; j++)
 			{
-				a->AddFrame(i, j, textureData->width / cols, textureData->height / rows, rows * cols);
+				a->AddFrame(i, j, baseTexture->width / cols, baseTexture->height / rows, rows * cols);
 			}
 		}
 		anim.push_back(a);
@@ -236,6 +256,6 @@ namespace GL
 	void Sprite::SetUniforms(uint shaderId)
 	{
 		Entity2D::SetUniforms(shaderId);
-		render->SetUniform(shaderId, uniformTexture, "ourTexture");
+		render->SetUniform(shaderId, uniformBaseTexture, "ourTexture");
 	}
 }

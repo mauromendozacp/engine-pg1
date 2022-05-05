@@ -74,7 +74,7 @@ namespace GameXD
 
 		floor = new Sprite(render);
 		floor->Init(SPRITE_TYPE::QUAD);
-		floor->LoadTexture("../res/Textures/floor.jpg", false);
+		floor->LoadTexture("../res/Textures/floor.jpg", false, TEXTURE_TYPE::BASE);
 		floor->material = defaultTextureMaterial;
 		floor->SetPos(glm::vec3(0.f, -.5f, 0.f));
 		floor->SetRotX(90.f);
@@ -99,7 +99,7 @@ namespace GameXD
 		tnt = new Sprite(render);
 		tnt->Init(SPRITE_TYPE::CUBE);
 		tnt->material = defaultTextureMaterial;
-		tnt->LoadTexture("../res/Textures/tnt.png", true);
+		tnt->LoadTexture("../res/Textures/tnt.png", true, TEXTURE_TYPE::BASE);
 		tnt->SetPos(glm::vec3(2.5f, 0.f, 2.5f));
 
 		lightManager->AddLight(LIGHT_TYPE::DIRECTIONAL);

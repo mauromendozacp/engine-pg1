@@ -5,6 +5,13 @@
 
 namespace GL
 {
+	enum class TEXTURE_TYPE
+	{
+		BASE,
+		DIFFUSE,
+		SPECULAR
+	};
+
 	struct Texture
 	{
 		unsigned int id;

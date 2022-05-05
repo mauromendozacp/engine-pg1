@@ -5,6 +5,7 @@
 #include "Animation/animation.h"
 #include "TextureImporter/textureImporter.h"
 #include "Animation/atlasConfig.h"
+#include "Material/TextureMaterial/textureMaterial.h"
 #include <vector>
 
 namespace GL
@@ -27,8 +28,9 @@ namespace GL
 		void Draw();
 		void DeInit();
 
-		void SetTexture(Texture* texture);
-		void LoadTexture(const char* path, bool invertImage);
+		void LoadTexture(const char* path, bool invertImage, TEXTURE_TYPE type);
+		void SetTexture(Texture* texture, TEXTURE_TYPE type);
+
 		void AddAnimation(AtlasConfig atlas, float speed);
 		void AddAnimation(int rows, int cols, float duration);
 		void ChangeAnimation(int index);
@@ -39,11 +41,11 @@ namespace GL
 
 	private:
 		SPRITE_TYPE type;
-
-		Texture* textureData;
-
-		uint uniformTexture;
 		uint UVB;
+
+		Texture* baseTexture;
+
+		uint uniformBaseTexture;
 
 		int animIndex = 0;
 		std::vector<Animation*> anim;

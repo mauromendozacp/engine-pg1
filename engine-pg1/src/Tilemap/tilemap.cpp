@@ -110,7 +110,7 @@ namespace GL
 				newTile.Init(SPRITE_TYPE::QUAD);
 				newTile.SetId(_id);
 				newTile.SetRender(render);
-				newTile.LoadTexture(imagePath.c_str(), false);
+				newTile.LoadTexture(imagePath.c_str(), false, TEXTURE_TYPE::BASE);
 				newTile.SetScale(tileWidth, tileHeight, 1.f);
 
 				Frame frame;

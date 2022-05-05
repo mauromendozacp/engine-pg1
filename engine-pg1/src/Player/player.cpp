@@ -33,7 +33,7 @@ namespace GameXD
 	{
 		sprite = new Sprite(render);
 		sprite->Init(SPRITE_TYPE::QUAD);
-		sprite->LoadTexture(textureUrl, false);
+		sprite->LoadTexture(textureUrl, false, TEXTURE_TYPE::BASE);
 		sprite->material = material;
 		sprite->SetPos(0.f, 0.f, 0.f);
 		sprite->SetScale(1.f, 1.f, 1.f);
