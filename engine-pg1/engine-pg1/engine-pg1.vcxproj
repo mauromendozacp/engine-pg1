@@ -169,6 +169,7 @@
     <ClCompile Include="..\src\Material\SolidMaterial\solidMaterial.cpp" />
     <ClCompile Include="..\src\Material\TextureMaterial\textureMaterial.cpp" />
     <ClCompile Include="..\src\Mesh\mesh.cpp" />
+    <ClCompile Include="..\src\Model\model.cpp" />
     <ClCompile Include="..\src\Renderer\renderer.cpp" />
     <ClCompile Include="..\src\Shader\shader.cpp" />
     <ClCompile Include="..\src\Shape\shape.cpp" />
@@ -205,6 +206,7 @@
     <ClInclude Include="..\src\Material\SolidMaterial\solidMaterial.h" />
     <ClInclude Include="..\src\Material\TextureMaterial\textureMaterial.h" />
     <ClInclude Include="..\src\Mesh\mesh.h" />
+    <ClInclude Include="..\src\Model\model.h" />
     <ClInclude Include="..\src\Renderer\renderer.h" />
     <ClInclude Include="..\src\Shader\shader.h" />
     <ClInclude Include="..\src\Shape\shape.h" />
