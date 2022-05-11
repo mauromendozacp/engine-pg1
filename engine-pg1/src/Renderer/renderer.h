@@ -3,9 +3,9 @@
 
 #include "Window/window.h"
 #include "Shader/shader.h"
-#include "glm.hpp"
-#include "../glm/ext/matrix_transform.hpp"
-#include "../glm/gtc/type_ptr.hpp"
+#include "GLM/glm.hpp"
+#include "GLM/ext/matrix_transform.hpp"
+#include "GLM/gtc/type_ptr.hpp"
 
 namespace GL
 {

@@ -3,6 +3,7 @@
 
 #include "exports.h"
 #include "Entity/entity.h"
+#include "GLM/glm.hpp"
 
 namespace GL
 {

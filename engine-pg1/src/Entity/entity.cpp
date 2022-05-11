@@ -98,7 +98,7 @@ namespace GL
 	{
 		transform.scale = scale;
 		transform.localScale = scale;
-		matrix.scale = glm::scale(glm::mat4(1.f), transform.scale);
+		matrix.scale = glm::scale4(glm::mat4(1.f), transform.scale);
 		
 		UpdateMatrix();
 		UpdateTransform();

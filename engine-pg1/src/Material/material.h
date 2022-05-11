@@ -3,7 +3,7 @@
 
 #include "exports.h"
 #include "Renderer/renderer.h"
-#include "../glm/ext/matrix_transform.hpp"
+#include "GLM/ext/matrix_transform.hpp"
 
 namespace GL
 {

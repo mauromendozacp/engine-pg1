@@ -4,7 +4,7 @@
 #include "exports.h"
 #include "Entity/entity.h"
 #include "Color/color.h"
-#include "../glm/ext/matrix_transform.hpp"
+#include "GLM/ext/matrix_transform.hpp"
 
 namespace GL
 {

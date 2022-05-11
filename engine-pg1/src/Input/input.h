@@ -3,7 +3,7 @@
 
 #include "Window/window.h"
 #include "Camera/camera.h"
-#include "../glm/ext/matrix_transform.hpp"
+#include "GLM/ext/matrix_transform.hpp"
 #include "keycodes.h"
 #include <list>
 

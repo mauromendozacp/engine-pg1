@@ -4,7 +4,7 @@
 #include "exports.h"
 #include "Renderer/renderer.h"
 #include "TextureImporter/textureImporter.h"
-#include "../glm/ext/matrix_transform.hpp"
+#include "GLM/ext/matrix_transform.hpp"
 #include <vector>
 #include <string>
 
