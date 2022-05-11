@@ -1,5 +1,4 @@
 #include "sprite.h"
-#include "StbImage/stb_image.h"
 
 namespace GL
 {
@@ -116,16 +115,16 @@ namespace GL
 	{
 		switch (type)
 		{
-		case GL::TEXTURE_TYPE::BASE:
+		case TEXTURE_TYPE::BASE:
 			baseTexture = texture;
 			break;
-		case GL::TEXTURE_TYPE::DIFFUSE:
+		case TEXTURE_TYPE::DIFFUSE:
 			if (material != nullptr)
 			{
 				((TextureMaterial*)material)->SetDiffuse(texture->id);
 			}
 			break;
-		case GL::TEXTURE_TYPE::SPECULAR:
+		case TEXTURE_TYPE::SPECULAR:
 			if (material != nullptr)
 			{
 				((TextureMaterial*)material)->SetSpecular(texture->id);

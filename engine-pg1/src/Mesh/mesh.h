@@ -8,6 +8,8 @@
 #include <vector>
 #include <string>
 
+#define MAX_BONE_INFLUENCE 4
+
 namespace GL
 {
 	struct Vertex
@@ -15,6 +17,10 @@ namespace GL
 		glm::vec3 Position;
 		glm::vec3 Normal;
 		glm::vec2 TexCoords;
+		glm::vec3 Tangent;
+		glm::vec3 Bitangent;
+		int m_BoneIDs[MAX_BONE_INFLUENCE];
+		float m_Weights[MAX_BONE_INFLUENCE];
 	};
 
 	class GRAPHICSENGINE_API Mesh
@@ -34,8 +40,6 @@ namespace GL
 
 		unsigned int VAO, VBO, EBO;
 	};
-
-	
 }
 
 #endif // !MESH_H

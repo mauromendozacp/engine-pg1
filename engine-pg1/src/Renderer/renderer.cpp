@@ -119,14 +119,14 @@ namespace GL
 
 	void Render::SetBaseAttribs(uint location, int size, GLsizei stride, const void* offset)
 	{
-		glVertexAttribPointer(location, size, GL_FLOAT, GL_FALSE, stride, offset);
 		glEnableVertexAttribArray(location);
+		glVertexAttribPointer(location, size, GL_FLOAT, GL_FALSE, stride, offset);
 	}
 
 	void Render::SetTextureAttribs(uint location, int size, int stride, int offset)
 	{
-		glVertexAttribPointer(location, size, GL_FLOAT, GL_FALSE, stride * sizeof(float), (void*)offset);
 		glEnableVertexAttribArray(location);
+		glVertexAttribPointer(location, size, GL_FLOAT, GL_FALSE, stride * sizeof(float), (void*)offset);
 	}
 
 	void Render::ClearVertexArray()

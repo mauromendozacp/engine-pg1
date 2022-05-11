@@ -11,6 +11,7 @@
 #include "Light/SpotLight/spotLight.h"
 #include "Material/SolidMaterial/solidMaterial.h"
 #include "Material/TextureMaterial/textureMaterial.h"
+#include "Texture/texture.h"
 #include <iostream>
 
 using namespace GL;

@@ -57,6 +57,6 @@ namespace GL
 		{
 			std::cout << "Failed to load texture" << std::endl;
 		}
-		return Texture{ textureId, (float)textureWidth, (float)textureHeight };
+		return Texture{ textureId, (float)textureWidth, (float)textureHeight, "", "" };
 	}
 }

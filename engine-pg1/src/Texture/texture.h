@@ -18,6 +18,7 @@ namespace GL
 		float width;
 		float height;
 		std::string type;
+		std::string path;
 	};
 }
 

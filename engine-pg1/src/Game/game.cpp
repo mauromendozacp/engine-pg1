@@ -99,7 +99,7 @@ namespace GameXD
 		tnt = new Sprite(render);
 		tnt->Init(SPRITE_TYPE::CUBE);
 		tnt->material = defaultTextureMaterial;
-		tnt->LoadTexture("../res/Textures/tnt.png", true, TEXTURE_TYPE::BASE);
+		tnt->LoadTexture("../res/Textures/tnt.png", true, GL::TEXTURE_TYPE::BASE);
 		tnt->SetPos(glm::vec3(2.5f, 0.f, 2.5f));
 
 		lightManager->AddLight(LIGHT_TYPE::DIRECTIONAL);
