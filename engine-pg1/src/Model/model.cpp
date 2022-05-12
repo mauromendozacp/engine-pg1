@@ -2,7 +2,7 @@
 
 namespace GL
 {
-	Model::Model(Render* render)
+	/*Model::Model(Render* render)
 	{
 		this->render = render;
 	}
@@ -164,5 +164,5 @@ namespace GL
 			}
 		}
 		return textures;
-	}
+	}*/
 }
