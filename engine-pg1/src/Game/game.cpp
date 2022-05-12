@@ -14,6 +14,7 @@ namespace GameXD
 
 		spotCubeLight = nullptr;
 		tnt = nullptr;
+		guitarBackpack = nullptr;
 	}
 
 	Game::~Game()
@@ -48,6 +49,11 @@ namespace GameXD
 			delete tnt;
 			tnt = nullptr;
 		}
+		if (guitarBackpack != nullptr)
+		{
+			delete guitarBackpack;
+			guitarBackpack = nullptr;
+		}
 	}
 
 	void Game::Init()
@@ -66,6 +72,9 @@ namespace GameXD
 		defaultTextureMaterial->SetDiffuse(0);
 		defaultTextureMaterial->SetSpecular(1);
 		defaultTextureMaterial->SetShininess(64.f);
+
+		guitarBackpack = new Model(render);
+		guitarBackpack->LoadModel("../res/Models/survival-guitar-backpack/backpack.obj");
 
 		player = new Player(mainCamera);
 		player->Init(render, defaultTextureMaterial, 5.f, 75.f, "../res/Textures/player.png");
@@ -161,6 +170,8 @@ namespace GameXD
 		spotCubeLight->Draw();
 		tnt->Draw();
 		player->Draw();
+
+		guitarBackpack->Draw();
 	}
 
 	void Game::DeInit()

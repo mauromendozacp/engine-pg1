@@ -2,7 +2,7 @@
 
 namespace GL
 {
-	/*Model::Model(Render* render)
+	Model::Model(Render* render)
 	{
 		this->render = render;
 	}
@@ -156,7 +156,8 @@ namespace GL
 			if (!skip)
 			{   
                 // if texture hasn't been loaded already, load it
-				Texture texture = TextureImporter::LoadTexture(str.C_Str(), false);
+                std::string path = directory + '/' + str.C_Str();
+				Texture texture = TextureImporter::LoadTexture(path.c_str(), false);
 				texture.type = typeName;
 				texture.path = str.C_Str();
 				textures.push_back(texture);
@@ -164,5 +165,5 @@ namespace GL
 			}
 		}
 		return textures;
-	}*/
+	}
 }
