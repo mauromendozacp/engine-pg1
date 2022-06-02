@@ -97,6 +97,9 @@
     <ClCompile Include="..\src\Model\model.cpp">
       <Filter>Model</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\Entity3D\entity3D.cpp">
+      <Filter>Entity3D</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Window">
@@ -200,6 +203,9 @@
     </Filter>
     <Filter Include="Model">
       <UniqueIdentifier>{ad623a07-0a63-4718-82be-ced6c4112671}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Entity3D">
+      <UniqueIdentifier>{ca8e5439-263a-420b-8ad5-03ad487d604d}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -307,6 +313,9 @@
     </ClInclude>
     <ClInclude Include="..\src\Model\model.h">
       <Filter>Model</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Entity3D\entity3D.h">
+      <Filter>Entity3D</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

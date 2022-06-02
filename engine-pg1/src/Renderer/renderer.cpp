@@ -199,7 +199,8 @@ namespace GL
 
 	void Render::UpdateMaterialValue(uint shaderId, uint value, const char* loc)
 	{
-		glUniform1f(GetUniform(shaderId, loc), value);
+		uint uniform = GetUniform(shaderId, loc);
+		glUniform1f(uniform, value);
 	}
 
 	uint Render::GetUniform(uint shaderId, const char* loc)

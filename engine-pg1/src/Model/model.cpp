@@ -13,7 +13,8 @@ namespace GL
 
 	void Model::LoadModel(std::string const& path)
 	{
-		// read file via ASSIMP
+        stbi_set_flip_vertically_on_load(true);
+
 		Assimp::Importer importer;
 		const aiScene* scene = importer.ReadFile(path, aiProcess_Triangulate | aiProcess_GenSmoothNormals | aiProcess_FlipUVs | aiProcess_CalcTangentSpace);
 		// check for errors
@@ -36,6 +37,7 @@ namespace GL
 			meshes[i].Draw();
 		}
 	}
+
 	void Model::ProcessNode(aiNode* node, const aiScene* scene)
 	{
 		for (uint i = 0; i < node->mNumMeshes; i++)
@@ -138,7 +140,9 @@ namespace GL
 	std::vector<Texture> Model::LoadMaterialTextures(aiMaterial* mat, aiTextureType type, std::string typeName)
 	{
 		std::vector<Texture> textures;
-		for (uint i = 0; i < mat->GetTextureCount(type); i++)
+        uint texturesCount = mat->GetTextureCount(type);
+
+		for (uint i = 0; i < texturesCount; i++)
 		{
 			aiString str;
 			mat->GetTexture(type, i, &str);

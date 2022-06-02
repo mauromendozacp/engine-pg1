@@ -166,6 +166,7 @@
     <ClCompile Include="..\src\Collision\collision.cpp" />
     <ClCompile Include="..\src\Color\color.cpp" />
     <ClCompile Include="..\src\Entity2D\entity2D.cpp" />
+    <ClCompile Include="..\src\Entity3D\entity3D.cpp" />
     <ClCompile Include="..\src\Entity\entity.cpp" />
     <ClCompile Include="..\src\Frame\frame.cpp" />
     <ClCompile Include="..\src\Input\input.cpp" />
@@ -201,6 +202,7 @@
     <ClInclude Include="..\src\Collision\collision.h" />
     <ClInclude Include="..\src\Color\color.h" />
     <ClInclude Include="..\src\Entity2D\entity2D.h" />
+    <ClInclude Include="..\src\Entity3D\entity3D.h" />
     <ClInclude Include="..\src\Entity\entity.h" />
     <ClInclude Include="..\src\exports.h" />
     <ClInclude Include="..\src\Frame\frame.h" />

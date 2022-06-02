@@ -46,21 +46,27 @@ namespace GL
 
             std::string number;
             std::string name = textures[i].type;
-            if (name == "diffuse")
+            if (name == "texture_diffuse")
+            {
+                name = "diffuse";
                 number = std::to_string(diffuseNr++);
-            else if (name == "specular")
+            }
+            if (name == "texture_specular")
+            {
+                name = "specular";
                 number = std::to_string(specularNr++);
-            else if (name == "normal")
+            }
+            /*else if (name == "normal")
                 number = std::to_string(normalNr++);
             else if (name == "height")
-                number = std::to_string(heightNr++);
+                number = std::to_string(heightNr++);*/
 
             std::string loc = "material." + name + number;
             render->UpdateMaterialValue(render->GetTextureShaderId(), i, loc.c_str());
             render->BindTexture(textures[i].id);
         }
 
-        render->DrawMesh(VAO, indexes.size());
         render->ActiveTexture(0);
+        render->DrawMesh(VAO, indexes.size());
 	}
 }
