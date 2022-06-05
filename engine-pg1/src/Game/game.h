@@ -12,7 +12,7 @@
 #include "Material/SolidMaterial/solidMaterial.h"
 #include "Material/TextureMaterial/textureMaterial.h"
 #include "Texture/texture.h"
-#include "Model/model.h"
+#include "Entity3D/entity3D.h"
 #include <iostream>
 
 using namespace GL;
@@ -39,7 +39,7 @@ namespace GameXD
 		Shape* cubeLight[cubesLenght];
 		Shape* spotCubeLight;
 		Sprite* tnt;
-		Model* guitarBackpack;
+		Entity3D* guitarBackpack;
 	};
 }
 

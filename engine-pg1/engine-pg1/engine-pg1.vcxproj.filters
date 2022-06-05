@@ -100,6 +100,9 @@
     <ClCompile Include="..\src\Entity3D\entity3D.cpp">
       <Filter>Entity3D</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\Importer\ModelImporter\modelImporter.cpp">
+      <Filter>Importer\ModelImporter</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Window">
@@ -206,6 +209,12 @@
     </Filter>
     <Filter Include="Entity3D">
       <UniqueIdentifier>{ca8e5439-263a-420b-8ad5-03ad487d604d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Importer">
+      <UniqueIdentifier>{7651d69f-26d2-4efe-ae5c-b877db6c77af}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Importer\ModelImporter">
+      <UniqueIdentifier>{aea23e92-f123-4d77-bf9e-cbdc2239262b}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -316,6 +325,9 @@
     </ClInclude>
     <ClInclude Include="..\src\Entity3D\entity3D.h">
       <Filter>Entity3D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Importer\ModelImporter\modelImporter.h">
+      <Filter>Importer\ModelImporter</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

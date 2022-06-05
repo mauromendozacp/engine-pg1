@@ -2,14 +2,15 @@
 #define ENTITY3D_H
 
 #include "exports.h"
-#include "Renderer/renderer.h"
+#include "Entity/entity.h"
 #include "Mesh/mesh.h"
+#include "Importer/ModelImporter/modelImporter.h"
 #include <vector>
 #include <string>
 
 namespace GL
 {
-	class Entity3D
+	class GRAPHICSENGINE_API Entity3D : public Entity
 	{
 	public:
 		Entity3D(Render* render);

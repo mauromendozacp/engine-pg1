@@ -38,7 +38,7 @@ namespace GL
 		std::vector<uint> indexes;
 		std::vector<Texture> textures;
 
-		unsigned int VAO, VBO, EBO;
+		uint VAO, VBO, EBO;
 	};
 }
 

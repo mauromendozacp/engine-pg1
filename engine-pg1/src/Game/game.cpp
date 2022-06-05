@@ -73,8 +73,10 @@ namespace GameXD
 		defaultTextureMaterial->SetSpecular(1);
 		defaultTextureMaterial->SetShininess(64.f);
 
-		guitarBackpack = new Model(render);
-		guitarBackpack->LoadModel("../res/Models/survival-guitar-backpack/backpack.obj");
+		guitarBackpack = new Entity3D(render);
+		guitarBackpack->Init("../res/Models/survival-guitar-backpack/backpack.obj");
+		guitarBackpack->SetPos(glm::vec3(0, 0, 0));
+		guitarBackpack->SetScale(5);
 
 		player = new Player(mainCamera);
 		player->Init(render, defaultTextureMaterial, 5.f, 75.f, "../res/Textures/player.png");

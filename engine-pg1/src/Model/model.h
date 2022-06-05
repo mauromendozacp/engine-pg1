@@ -23,6 +23,8 @@ namespace GL
 		void LoadModel(std::string const& path);
 		void Draw();
 
+		std::vector<Mesh> GetMeshes();
+
 	private:
 		Render* render;
 		std::vector<Mesh> meshes;

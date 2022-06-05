@@ -13,8 +13,6 @@ namespace GL
 
 	void Model::LoadModel(std::string const& path)
 	{
-        stbi_set_flip_vertically_on_load(true);
-
 		Assimp::Importer importer;
 		const aiScene* scene = importer.ReadFile(path, aiProcess_Triangulate | aiProcess_GenSmoothNormals | aiProcess_FlipUVs | aiProcess_CalcTangentSpace);
 		// check for errors
@@ -37,6 +35,11 @@ namespace GL
 			meshes[i].Draw();
 		}
 	}
+
+    std::vector<Mesh> Model::GetMeshes()
+    {
+        return meshes;
+    }
 
 	void Model::ProcessNode(aiNode* node, const aiScene* scene)
 	{
@@ -161,7 +164,7 @@ namespace GL
 			{   
                 // if texture hasn't been loaded already, load it
                 std::string path = directory + '/' + str.C_Str();
-				Texture texture = TextureImporter::LoadTexture(path.c_str(), false);
+				Texture texture = TextureImporter::LoadTexture(path.c_str(), true);
 				texture.type = typeName;
 				texture.path = str.C_Str();
 				textures.push_back(texture);

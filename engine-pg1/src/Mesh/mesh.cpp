@@ -25,20 +25,12 @@ namespace GL
         render->SetBaseAttribs(0, 3, sizeof(Vertex), (void*)0);
         render->SetBaseAttribs(1, 3, sizeof(Vertex), (void*)offsetof(Vertex, Normal));
         render->SetBaseAttribs(2, 2, sizeof(Vertex), (void*)offsetof(Vertex, TexCoords));
-        render->SetBaseAttribs(3, 3, sizeof(Vertex), (void*)offsetof(Vertex, Tangent));
-        render->SetBaseAttribs(4, 3, sizeof(Vertex), (void*)offsetof(Vertex, Bitangent));
-        render->SetBaseAttribs(5, 4, sizeof(Vertex), (void*)offsetof(Vertex, m_BoneIDs));
-        render->SetBaseAttribs(6, 4, sizeof(Vertex), (void*)offsetof(Vertex, m_Weights));
-
-        render->ClearVertexArray();
 	}
 
 	void Mesh::Draw()
 	{
         uint diffuseNr = 1;
         uint specularNr = 1;
-        uint normalNr = 1;
-        uint heightNr = 1;
 
         for (uint i = 0; i < textures.size(); i++)
         {
@@ -56,17 +48,13 @@ namespace GL
                 name = "specular";
                 number = std::to_string(specularNr++);
             }
-            /*else if (name == "normal")
-                number = std::to_string(normalNr++);
-            else if (name == "height")
-                number = std::to_string(heightNr++);*/
 
             std::string loc = "material." + name + number;
             render->UpdateMaterialValue(render->GetTextureShaderId(), i, loc.c_str());
             render->BindTexture(textures[i].id);
         }
 
-        render->ActiveTexture(0);
         render->DrawMesh(VAO, indexes.size());
+        render->ActiveTexture(0);
 	}
 }

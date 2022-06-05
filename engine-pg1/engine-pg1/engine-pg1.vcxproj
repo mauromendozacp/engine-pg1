@@ -169,6 +169,7 @@
     <ClCompile Include="..\src\Entity3D\entity3D.cpp" />
     <ClCompile Include="..\src\Entity\entity.cpp" />
     <ClCompile Include="..\src\Frame\frame.cpp" />
+    <ClCompile Include="..\src\Importer\ModelImporter\modelImporter.cpp" />
     <ClCompile Include="..\src\Input\input.cpp" />
     <ClCompile Include="..\src\Light\DirectionalLight\directionalLight.cpp" />
     <ClCompile Include="..\src\Light\light.cpp" />
@@ -206,6 +207,7 @@
     <ClInclude Include="..\src\Entity\entity.h" />
     <ClInclude Include="..\src\exports.h" />
     <ClInclude Include="..\src\Frame\frame.h" />
+    <ClInclude Include="..\src\Importer\ModelImporter\modelImporter.h" />
     <ClInclude Include="..\src\Input\input.h" />
     <ClInclude Include="..\src\keycodes.h" />
     <ClInclude Include="..\src\Light\DirectionalLight\directionalLight.h" />
