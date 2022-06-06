@@ -75,8 +75,9 @@ namespace GameXD
 
 		guitarBackpack = new Entity3D(render);
 		guitarBackpack->Init("../res/Models/survival-guitar-backpack/backpack.obj");
-		guitarBackpack->SetPos(glm::vec3(0, 0, 0));
-		guitarBackpack->SetScale(5);
+		guitarBackpack->SetPos(glm::vec3(0, 1.0f, -15.f));
+		guitarBackpack->SetScale(1.0f);
+		guitarBackpack->material = defaultTextureMaterial;
 
 		player = new Player(mainCamera);
 		player->Init(render, defaultTextureMaterial, 5.f, 75.f, "../res/Textures/player.png");
@@ -171,9 +172,9 @@ namespace GameXD
 		floor->Draw();
 		spotCubeLight->Draw();
 		tnt->Draw();
-		player->Draw();
-
 		guitarBackpack->Draw();
+
+		player->Draw();
 	}
 
 	void Game::DeInit()

@@ -3,10 +3,9 @@
 
 #include "exports.h"
 #include "Entity/entity.h"
-#include "Mesh/mesh.h"
+#include <Material/material.h>
 #include "Importer/ModelImporter/modelImporter.h"
 #include <vector>
-#include <string>
 
 namespace GL
 {
@@ -19,8 +18,17 @@ namespace GL
 		void Init(std::string path);
 		void Draw();
 
+		Material* material;
+
 	private:
 		std::vector<Mesh> meshes;
+
+		uint uniformAffectedLight;
+
+		bool affectedLight;
+
+		void SetUniforms(uint shaderId);
+		void UpdateShader();
 	};
 }
 
