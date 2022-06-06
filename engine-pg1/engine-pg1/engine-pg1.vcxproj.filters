@@ -49,9 +49,6 @@
     <ClCompile Include="..\src\Tile\tile.cpp">
       <Filter>Tile</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\TextureImporter\textureImporter.cpp">
-      <Filter>TextureImporter</Filter>
-    </ClCompile>
     <ClCompile Include="..\src\Tinyxml2\tinyxml2.cpp">
       <Filter>Tinyxml2</Filter>
     </ClCompile>
@@ -102,6 +99,9 @@
     </ClCompile>
     <ClCompile Include="..\src\Importer\ModelImporter\modelImporter.cpp">
       <Filter>Importer\ModelImporter</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Importer\TextureImporter\textureImporter.cpp">
+      <Filter>Importer\TextureImporter</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -155,9 +155,6 @@
     </Filter>
     <Filter Include="Tile">
       <UniqueIdentifier>{ec769838-63c6-4995-a830-ea89aa08b8a5}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="TextureImporter">
-      <UniqueIdentifier>{7a1f3920-d9c2-4338-b7f9-dada9bbc43aa}</UniqueIdentifier>
     </Filter>
     <Filter Include="Tinyxml2">
       <UniqueIdentifier>{d0cdb81a-ee03-4247-8eb9-a660d290974b}</UniqueIdentifier>
@@ -216,6 +213,9 @@
     <Filter Include="Importer\ModelImporter">
       <UniqueIdentifier>{aea23e92-f123-4d77-bf9e-cbdc2239262b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Importer\TextureImporter">
+      <UniqueIdentifier>{7a1f3920-d9c2-4338-b7f9-dada9bbc43aa}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\Window\window.h">
@@ -267,9 +267,6 @@
     </ClInclude>
     <ClInclude Include="..\src\Tile\tile.h">
       <Filter>Tile</Filter>
-    </ClInclude>
-    <ClInclude Include="..\src\TextureImporter\textureImporter.h">
-      <Filter>TextureImporter</Filter>
     </ClInclude>
     <ClInclude Include="..\src\Animation\atlasConfig.h">
       <Filter>Animation</Filter>
@@ -328,6 +325,9 @@
     </ClInclude>
     <ClInclude Include="..\src\Importer\ModelImporter\modelImporter.h">
       <Filter>Importer\ModelImporter</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Importer\TextureImporter\textureImporter.h">
+      <Filter>Importer\TextureImporter</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

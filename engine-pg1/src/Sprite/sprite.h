@@ -3,7 +3,7 @@
 
 #include "Entity2D/entity2D.h"
 #include "Animation/animation.h"
-#include "TextureImporter/textureImporter.h"
+#include "Importer/TextureImporter/textureImporter.h"
 #include "Animation/atlasConfig.h"
 #include "Material/TextureMaterial/textureMaterial.h"
 #include <vector>

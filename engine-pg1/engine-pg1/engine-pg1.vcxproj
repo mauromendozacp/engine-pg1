@@ -170,6 +170,7 @@
     <ClCompile Include="..\src\Entity\entity.cpp" />
     <ClCompile Include="..\src\Frame\frame.cpp" />
     <ClCompile Include="..\src\Importer\ModelImporter\modelImporter.cpp" />
+    <ClCompile Include="..\src\Importer\TextureImporter\textureImporter.cpp" />
     <ClCompile Include="..\src\Input\input.cpp" />
     <ClCompile Include="..\src\Light\DirectionalLight\directionalLight.cpp" />
     <ClCompile Include="..\src\Light\light.cpp" />
@@ -186,7 +187,6 @@
     <ClCompile Include="..\src\Shape\shape.cpp" />
     <ClCompile Include="..\src\Sprite\sprite.cpp" />
     <ClCompile Include="..\src\StbImage\stb_image.cpp" />
-    <ClCompile Include="..\src\TextureImporter\textureImporter.cpp" />
     <ClCompile Include="..\src\Tilemap\tilemap.cpp" />
     <ClCompile Include="..\src\Tile\tile.cpp" />
     <ClCompile Include="..\src\Timer\timer.cpp" />
@@ -208,6 +208,7 @@
     <ClInclude Include="..\src\exports.h" />
     <ClInclude Include="..\src\Frame\frame.h" />
     <ClInclude Include="..\src\Importer\ModelImporter\modelImporter.h" />
+    <ClInclude Include="..\src\Importer\TextureImporter\textureImporter.h" />
     <ClInclude Include="..\src\Input\input.h" />
     <ClInclude Include="..\src\keycodes.h" />
     <ClInclude Include="..\src\Light\DirectionalLight\directionalLight.h" />
@@ -225,7 +226,6 @@
     <ClInclude Include="..\src\Shape\shape.h" />
     <ClInclude Include="..\src\Sprite\sprite.h" />
     <ClInclude Include="..\src\StbImage\stb_image.h" />
-    <ClInclude Include="..\src\TextureImporter\textureImporter.h" />
     <ClInclude Include="..\src\Texture\texture.h" />
     <ClInclude Include="..\src\Tilemap\tilemap.h" />
     <ClInclude Include="..\src\Tile\tile.h" />
