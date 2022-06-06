@@ -17,6 +17,7 @@ namespace GL
 
 		void Init(std::string path);
 		void Draw();
+		void DeInit();
 
 		Material* material;
 

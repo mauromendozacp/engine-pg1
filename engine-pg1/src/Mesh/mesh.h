@@ -31,6 +31,7 @@ namespace GL
 
 		void Init();
 		void Draw();
+		void DeInit();
 
 	private:
 		Render* render;

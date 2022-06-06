@@ -46,4 +46,12 @@ namespace GL
         render->DrawMesh(VAO, indexes.size());
         render->ActiveTexture(0);
 	}
+
+    void Mesh::DeInit()
+    {
+        vertexs.clear();
+        indexes.clear();
+        textures.clear();
+        render->UnBind(VAO, VBO, EBO);
+    }
 }

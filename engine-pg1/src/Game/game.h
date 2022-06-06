@@ -40,6 +40,13 @@ namespace GameXD
 		Shape* spotCubeLight;
 		Sprite* tnt;
 		Entity3D* guitarBackpack;
+
+		SolidMaterial* defaultSolidMaterial;
+		TextureMaterial* defaultTextureMaterial;
+
+		void InitMaterial();
+		void InitEntities();
+		void InitLights();
 	};
 }
 

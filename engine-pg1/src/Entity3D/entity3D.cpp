@@ -37,6 +37,14 @@ namespace GL
 		render->CleanShader();
 		render->BlendDisable();
 	}
+
+	void Entity3D::DeInit()
+	{
+		for (int i = 0; i < meshes.size(); i++)
+		{
+			meshes[i].DeInit();
+		}
+	}
 	
 	void Entity3D::SetUniforms(uint shaderId)
 	{
