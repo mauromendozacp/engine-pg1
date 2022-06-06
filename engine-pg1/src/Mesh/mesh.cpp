@@ -25,31 +25,20 @@ namespace GL
         render->SetBaseAttribs(0, 3, sizeof(Vertex), (void*)0);
         render->SetBaseAttribs(1, 3, sizeof(Vertex), (void*)offsetof(Vertex, Normal));
         render->SetBaseAttribs(2, 2, sizeof(Vertex), (void*)offsetof(Vertex, TexCoords));
+
+        for (int i = 0; i < textures.size(); i++)
+        {
+            textures[i].type.erase(0, 7);
+        }
 	}
 
 	void Mesh::Draw()
 	{
-        uint diffuseNr = 1;
-        uint specularNr = 1;
-
         for (uint i = 0; i < textures.size(); i++)
         {
             render->ActiveTexture(i);
 
-            std::string number;
-            std::string name = textures[i].type;
-            if (name == "texture_diffuse")
-            {
-                name = "diffuse";
-                number = std::to_string(diffuseNr++);
-            }
-            if (name == "texture_specular")
-            {
-                name = "specular";
-                number = std::to_string(specularNr++);
-            }
-
-            std::string loc = "material." + name + number;
+            std::string loc = "material." + textures[i].type;
             render->UpdateMaterialValue(render->GetTextureShaderId(), i, loc.c_str());
             render->BindTexture(textures[i].id);
         }
