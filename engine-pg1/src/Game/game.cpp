@@ -80,12 +80,8 @@ namespace GameXD
 	{
 		player->Update();
 		mainCamera->Update();
-		lightManager->GetLasPointLightCreated()->SetPos(player->GetSprite()->GetPos() + glm::vec3(0.f, .5f, 0.f));
-
-		if (Input::IsKeyDown(KEY_ESCAPE))
-		{
-			CloseEngine();
-		}
+		
+		UpdateInputs();
 	}
 
 	void Game::Draw()
@@ -213,5 +209,48 @@ namespace GameXD
 		spotLight->SetQuadratic(0.0075f);
 		spotLight->SetCutOff(12.5f);
 		spotLight->SetOuterCutOff(17.5f);
+	}
+
+	void Game::UpdateInputs()
+	{
+		lightManager->GetLasPointLightCreated()->SetPos(player->GetSprite()->GetPos() + glm::vec3(0.f, .5f, 0.f));
+
+		if (Input::IsKeyDown(KEY_1))
+		{
+			SpotLight* spotLight = lightManager->GetLasSpotLightCreated();
+			spotLight->SetEnabled(!spotLight->IsEnabled());
+		}
+		if (Input::IsKeyDown(KEY_2))
+		{
+			PointLight* pointLight = lightManager->GetLasPointLightCreated();
+			pointLight->SetEnabled(!pointLight->IsEnabled());
+		}
+		if (Input::IsKeyDown(KEY_3))
+		{
+			DirectionalLight* directionalLight = lightManager->GetDirectionalLight();
+			directionalLight->SetEnabled(!directionalLight->IsEnabled());
+		}
+		if (Input::IsKeyDown(KEY_4))
+		{
+			PointLight* pointLight = lightManager->GetLasPointLightCreated();
+			pointLight->color = Color::GetRandomColor();
+		}
+		if (Input::IsKeyPressed(KEY_5))
+		{
+			glm::vec3 guitarScale = guitarBackpack->GetScale();
+			guitarScale += glm::vec3(1) * Timer::GetDeltaTime();
+			guitarBackpack->SetScale(guitarScale);
+		}
+		if (Input::IsKeyPressed(KEY_6))
+		{
+			glm::vec3 guitarScale = guitarBackpack->GetScale();
+			guitarScale -= glm::vec3(1) * Timer::GetDeltaTime();
+			guitarBackpack->SetScale(guitarScale);
+		}
+
+		if (Input::IsKeyDown(KEY_ESCAPE))
+		{
+			CloseEngine();
+		}
 	}
 }

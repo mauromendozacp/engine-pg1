@@ -47,6 +47,7 @@ namespace GameXD
 		void InitMaterial();
 		void InitEntities();
 		void InitLights();
+		void UpdateInputs();
 	};
 }
 
