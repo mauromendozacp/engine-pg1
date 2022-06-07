@@ -69,27 +69,18 @@ namespace GL
 	{
 		if (directionalLight != nullptr)
 		{
-			if (directionalLight->IsEnabled())
-			{
-				directionalLight->UseLight(shaderId);
-			}
+			directionalLight->UseLight(shaderId);
 		}
 
 		for (int i = 0; i < lightMax; i++)
 		{
 			if (pointLights[i] != nullptr)
 			{
-				if (pointLights[i]->IsEnabled())
-				{
-					pointLights[i]->UseLight(shaderId, i);
-				}
+				pointLights[i]->UseLight(shaderId, i);
 			}
 			if (spotLights[i] != nullptr)
 			{
-				if (spotLights[i]->IsEnabled())
-				{
-					spotLights[i]->UseLight(shaderId, i);
-				}
+				spotLights[i]->UseLight(shaderId, i);
 			}
 		}
 	}
