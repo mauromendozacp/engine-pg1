@@ -4,7 +4,8 @@ namespace GameXD
 {
 	Game::Game()
 	{
-		guitarBackpack = nullptr;
+		guitarBackpack1 = nullptr;
+		guitarBackpack2 = nullptr;
 		spotCubeLight = nullptr;
 		player = nullptr;
 		floor = nullptr;
@@ -51,10 +52,15 @@ namespace GameXD
 			delete tnt;
 			tnt = nullptr;
 		}
-		if (guitarBackpack != nullptr)
+		if (guitarBackpack1 != nullptr)
 		{
-			delete guitarBackpack;
-			guitarBackpack = nullptr;
+			delete guitarBackpack1;
+			guitarBackpack1 = nullptr;
+		}
+		if (guitarBackpack2 != nullptr)
+		{
+			delete guitarBackpack2;
+			guitarBackpack2 = nullptr;
 		}
 
 		for (int i = 0; i < cubesLenght; i++)
@@ -80,6 +86,7 @@ namespace GameXD
 	{
 		player->Update();
 		mainCamera->Update();
+		lightManager->GetLasPointLightCreated()->SetPos(player->GetSprite()->GetPos() + glm::vec3(0.f, .5f, 0.f));
 		
 		UpdateInputs();
 	}
@@ -96,7 +103,8 @@ namespace GameXD
 		floor->Draw();
 		spotCubeLight->Draw();
 		tnt->Draw();
-		guitarBackpack->Draw();
+		guitarBackpack1->Draw();
+		guitarBackpack2->Draw();
 
 		player->Draw();
 	}
@@ -107,7 +115,8 @@ namespace GameXD
 		floor->DeInit();
 		spotCubeLight->DeInit();
 		tnt->DeInit();
-		guitarBackpack->DeInit();
+		guitarBackpack1->DeInit();
+		guitarBackpack2->DeInit();
 
 		for (int i = 0; i < cubesLenght; i++)
 		{
@@ -133,11 +142,17 @@ namespace GameXD
 
 	void Game::InitEntities()
 	{
-		guitarBackpack = new Entity3D(render);
-		guitarBackpack->Init("../res/Models/survival-guitar-backpack/backpack.obj");
-		guitarBackpack->SetPos(glm::vec3(0, 1.0f, -15.f));
-		guitarBackpack->SetScale(1.0f);
-		guitarBackpack->material = defaultTextureMaterial;
+		guitarBackpack1 = new Entity3D(render);
+		guitarBackpack1->Init("../res/Models/survival-guitar-backpack/backpack.obj");
+		guitarBackpack1->SetPos(glm::vec3(-5.f, 1.0f, -15.f));
+		guitarBackpack1->SetScale(1.0f);
+		guitarBackpack1->material = defaultTextureMaterial;
+
+		guitarBackpack2 = new Entity3D(render);
+		guitarBackpack2->Init("../res/Models/survival-guitar-backpack/backpack.obj");
+		guitarBackpack2->SetPos(glm::vec3(5.f, 1.0f, -15.f));
+		guitarBackpack2->SetScale(1.0f);
+		guitarBackpack2->material = defaultTextureMaterial;
 
 		player = new Player(mainCamera);
 		player->Init(render, defaultTextureMaterial, 5.f, 75.f, "../res/Textures/player.png");
@@ -213,8 +228,6 @@ namespace GameXD
 
 	void Game::UpdateInputs()
 	{
-		lightManager->GetLasPointLightCreated()->SetPos(player->GetSprite()->GetPos() + glm::vec3(0.f, .5f, 0.f));
-
 		if (Input::IsKeyDown(KEY_1))
 		{
 			SpotLight* spotLight = lightManager->GetLasSpotLightCreated();
@@ -237,15 +250,39 @@ namespace GameXD
 		}
 		if (Input::IsKeyPressed(KEY_5))
 		{
-			glm::vec3 guitarScale = guitarBackpack->GetScale();
+			glm::vec3 guitarScale = guitarBackpack1->GetScale();
 			guitarScale += glm::vec3(1) * Timer::GetDeltaTime();
-			guitarBackpack->SetScale(guitarScale);
+			guitarBackpack1->SetScale(guitarScale);
 		}
 		if (Input::IsKeyPressed(KEY_6))
 		{
-			glm::vec3 guitarScale = guitarBackpack->GetScale();
+			glm::vec3 guitarScale = guitarBackpack1->GetScale();
 			guitarScale -= glm::vec3(1) * Timer::GetDeltaTime();
-			guitarBackpack->SetScale(guitarScale);
+			guitarBackpack1->SetScale(guitarScale);
+		}
+		if (Input::IsKeyPressed(KEY_7))
+		{
+			float guitarRotX = guitarBackpack1->GetRotX();
+			guitarRotX -= 15.f * Timer::GetDeltaTime();
+			guitarBackpack1->SetRotX(guitarRotX);
+		}
+		if (Input::IsKeyPressed(KEY_8))
+		{
+			float guitarRotX = guitarBackpack1->GetRotX();
+			guitarRotX += 15.f * Timer::GetDeltaTime();
+			guitarBackpack1->SetRotX(guitarRotX);
+		}
+		if (Input::IsKeyPressed(KEY_9))
+		{
+			glm::vec3 guitarPos = guitarBackpack1->GetPos();
+			guitarPos -= glm::vec3(1) * Timer::GetDeltaTime();
+			guitarBackpack1->SetPos(guitarPos);
+		}
+		if (Input::IsKeyPressed(KEY_0))
+		{
+			glm::vec3 guitarPos = guitarBackpack1->GetPos();
+			guitarPos += glm::vec3(1) * Timer::GetDeltaTime();
+			guitarBackpack1->SetPos(guitarPos);
 		}
 
 		if (Input::IsKeyDown(KEY_ESCAPE))

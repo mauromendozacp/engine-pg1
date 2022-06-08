@@ -39,7 +39,8 @@ namespace GameXD
 		Shape* cubeLight[cubesLenght];
 		Shape* spotCubeLight;
 		Sprite* tnt;
-		Entity3D* guitarBackpack;
+		Entity3D* guitarBackpack1;
+		Entity3D* guitarBackpack2;
 
 		SolidMaterial* defaultSolidMaterial;
 		TextureMaterial* defaultTextureMaterial;

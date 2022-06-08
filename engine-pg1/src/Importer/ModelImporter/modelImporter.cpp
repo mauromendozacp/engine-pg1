@@ -12,9 +12,9 @@ namespace GL
 
 	std::vector<Mesh> ModelImporter::LoadModel(Render* render, std::string path)
 	{
-		Model* model = new Model(render);
-		model->LoadModel(path);
+		Model model = Model(render);
+		model.LoadModel(path);
 
-		return model->GetMeshes();
+		return model.GetMeshes();
 	}
 }
