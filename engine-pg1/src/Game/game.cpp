@@ -5,7 +5,6 @@ namespace GameXD
 	Game::Game()
 	{
 		guitarBackpack1 = nullptr;
-		guitarBackpack2 = nullptr;
 		spotCubeLight = nullptr;
 		player = nullptr;
 		floor = nullptr;
@@ -57,11 +56,6 @@ namespace GameXD
 			delete guitarBackpack1;
 			guitarBackpack1 = nullptr;
 		}
-		if (guitarBackpack2 != nullptr)
-		{
-			delete guitarBackpack2;
-			guitarBackpack2 = nullptr;
-		}
 
 		for (int i = 0; i < cubesLenght; i++)
 		{
@@ -104,7 +98,6 @@ namespace GameXD
 		spotCubeLight->Draw();
 		tnt->Draw();
 		guitarBackpack1->Draw();
-		guitarBackpack2->Draw();
 
 		player->Draw();
 	}
@@ -116,7 +109,6 @@ namespace GameXD
 		spotCubeLight->DeInit();
 		tnt->DeInit();
 		guitarBackpack1->DeInit();
-		guitarBackpack2->DeInit();
 
 		for (int i = 0; i < cubesLenght; i++)
 		{
@@ -147,12 +139,6 @@ namespace GameXD
 		guitarBackpack1->SetPos(glm::vec3(-5.f, 1.0f, -15.f));
 		guitarBackpack1->SetScale(1.0f);
 		guitarBackpack1->material = defaultTextureMaterial;
-
-		guitarBackpack2 = new Entity3D(render);
-		guitarBackpack2->Init("../res/Models/survival-guitar-backpack/backpack.obj");
-		guitarBackpack2->SetPos(glm::vec3(5.f, 1.0f, -15.f));
-		guitarBackpack2->SetScale(1.0f);
-		guitarBackpack2->material = defaultTextureMaterial;
 
 		player = new Player(mainCamera);
 		player->Init(render, defaultTextureMaterial, 5.f, 75.f, "../res/Textures/player.png");
