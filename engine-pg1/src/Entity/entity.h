@@ -46,6 +46,14 @@ namespace GL
 		Entity(Render* render);
 		~Entity();
 
+		void SetName(std::string name);
+
+		void SetParent(Entity* parent);
+		void AddNode(Entity* node);
+		void RemoveNode(Entity* node);
+		void RemoveNode(std::string nodeName);
+		void RemoveNode(int nodeIndex);
+
 		void SetPos(glm::vec3 pos);
 		void SetRot(glm::vec3 rot);
 		void SetScale(glm::vec3 scale);
@@ -57,6 +65,13 @@ namespace GL
 		void SetRotZ(float z);
 		void SetScale(float x, float y, float z);
 		void SetScale(float size);
+
+		std::string GetName();
+
+		Entity* GetParent();
+		std::list<Entity*> GetNodes();
+		Entity* GetNode(std::string nodeName);
+		Entity* GetNode(int nodeIndex);
 
 		glm::vec3 GetPos();
 		glm::vec3 GetRot();
@@ -77,10 +92,13 @@ namespace GL
 	protected:
 		Render* render;
 
-		Transform parent;
+		std::string name;
 		Transform transform;
+
+		Entity* parent;
+		std::list<Entity*> nodes;
+
 		Matrix matrix;
-		std::list<Entity> nodes;
 
 		uint uniformModel;
 		uint uniformView;

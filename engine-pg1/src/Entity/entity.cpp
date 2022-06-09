@@ -8,6 +8,10 @@ namespace GL
 	{
 		render = nullptr;
 
+		name = "";
+		parent = nullptr;
+		nodes = std::list<Entity*>();
+
 		transform.position = glm::vec3(0.f);
 		transform.eulerAngles = glm::vec3(0.f);
 		transform.scale = glm::vec3(1.f);
@@ -40,6 +44,10 @@ namespace GL
 	{
 		this->render = render;
 
+		name = "";
+		parent = nullptr;
+		nodes = std::list<Entity*>();
+
 		transform.position = glm::vec3(0.f);
 		transform.eulerAngles = glm::vec3(0.f);
 		transform.scale = glm::vec3(1.f);
@@ -70,6 +78,49 @@ namespace GL
 
 	Entity::~Entity()
 	{
+		nodes.clear();
+	}
+
+	void Entity::SetName(std::string name)
+	{
+		this->name = name;
+	}
+
+	void Entity::SetParent(Entity* parent)
+	{
+		this->parent = parent;
+	}
+
+	void Entity::AddNode(Entity* node)
+	{
+		nodes.push_back(node);
+	}
+
+	void Entity::RemoveNode(Entity* node)
+	{
+		nodes.remove(node);
+	}
+
+	void Entity::RemoveNode(std::string nodeName)
+	{
+		for (std::list<Entity*>::iterator it = nodes.begin(); it != nodes.end(); ++it)
+		{
+			if ((*it)->GetName() == nodeName)
+			{
+				nodes.remove((*it));
+				return;
+			}
+		}
+	}
+
+	void Entity::RemoveNode(int nodeIndex)
+	{
+		if (nodeIndex > 0 && nodeIndex < nodes.size())
+		{
+			std::list<Entity*>::iterator it = nodes.begin();
+			std::advance(it, nodeIndex);
+			nodes.remove((*it));
+		}
 	}
 
 	void Entity::SetPos(glm::vec3 pos)
@@ -152,6 +203,47 @@ namespace GL
 	void Entity::SetScale(float size)
 	{
 		SetScale({ size, size, size });
+	}
+
+	std::string Entity::GetName()
+	{
+		return name;
+	}
+
+	Entity* Entity::GetParent()
+	{
+		return parent;
+	}
+
+	std::list<Entity*> Entity::GetNodes()
+	{
+		return nodes;
+	}
+
+	Entity* Entity::GetNode(std::string nodeName)
+	{
+		for (std::list<Entity*>::iterator it = nodes.begin(); it != nodes.end(); ++it)
+		{
+			if ((*it)->GetName() == nodeName)
+			{
+				return (*it);
+			}
+		}
+
+		return nullptr;
+	}
+
+	Entity* Entity::GetNode(int nodeIndex)
+	{
+		if (nodeIndex > 0 && nodeIndex < nodes.size())
+		{
+			std::list<Entity*>::iterator it = nodes.begin();
+			std::advance(it, nodeIndex);
+			
+			return (*it);
+		}
+
+		return nullptr;
 	}
 
 	glm::vec3 Entity::GetPos()
