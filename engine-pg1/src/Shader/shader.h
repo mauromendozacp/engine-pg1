@@ -2,6 +2,7 @@
 #define SHADER_H
 
 #include "exports.h"
+
 #include <iostream>
 #include <fstream>
 #include <sstream>

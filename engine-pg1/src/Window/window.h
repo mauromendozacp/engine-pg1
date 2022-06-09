@@ -2,6 +2,7 @@
 #define WINDOW_H
 
 #include "exports.h"
+
 #include <iostream>
 
 namespace GL

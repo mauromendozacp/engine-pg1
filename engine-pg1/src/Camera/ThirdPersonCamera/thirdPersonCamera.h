@@ -1,7 +1,6 @@
 #ifndef THIRD_PERSON_CAMERA_H
 #define THIRD_PERSON_CAMERA_H
 
-#include "exports.h"
 #include "Camera/camera.h"
 
 namespace GL

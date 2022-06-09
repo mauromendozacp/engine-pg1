@@ -1,6 +1,9 @@
+#ifndef VERTEXS_H
+#define VERTEXS_H
+
 namespace GL
 {
-	#pragma region TRIANGULE_VERTEX
+#pragma region TRIANGULE_VERTEX
 
 	const int triangVertTam = 18;
 	const int triangIndexTam = 3;
@@ -17,9 +20,9 @@ namespace GL
 		 0.0f,  0.5f, 0.0f,  1.0f, 1.0f, 1.0f    // top 
 	};
 
-	#pragma endregion
+#pragma endregion
 
-	#pragma region QUAD_VERTEX
+#pragma region QUAD_VERTEX
 
 	const int quadVertTam = 24;
 	const int quadIndexTam = 6;
@@ -38,9 +41,9 @@ namespace GL
 		-0.5f,  0.5f, 0.0f,	  0.0f, 1.0f, -1.0f,	// top left
 	};
 
-	#pragma endregion
+#pragma endregion
 
-	#pragma region CUBE_VERTEX
+#pragma region CUBE_VERTEX
 
 	const int cubeVertTam = 216;
 	const int cubeIndexTam = 42;
@@ -103,8 +106,10 @@ namespace GL
 		 0.5f,  0.5f,  0.5f,  0.0f,  1.0f,  0.0f,
 		 0.5f,  0.5f,  0.5f,  0.0f,  1.0f,  0.0f,
 		-0.5f,  0.5f,  0.5f,  0.0f,  1.0f,  0.0f,
-		-0.5f,  0.5f, -0.5f,  0.0f,  1.0f,  0.0f 
+		-0.5f,  0.5f, -0.5f,  0.0f,  1.0f,  0.0f
 	};
 
-	#pragma endregion
+#pragma endregion
 }
+
+#endif // !VERTEXS_H

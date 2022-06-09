@@ -1,5 +1,4 @@
 #include "textureImporter.h"
-#include "StbImage/stb_image.h"
 
 namespace GL
 {

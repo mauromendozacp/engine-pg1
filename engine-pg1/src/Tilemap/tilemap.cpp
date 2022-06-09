@@ -296,7 +296,7 @@ namespace GL
 				{
 					if (!grid[k][j][i].IsWalkeable())
 					{
-						Collision::CollisionUpdate(&grid[k][j][i], entity);
+						Collision2D::CollisionUpdate(&grid[k][j][i], entity);
 					}
 				}
 			}

@@ -1,5 +1,4 @@
 #include "animation.h"
-#include <iostream>
 
 namespace GL
 {

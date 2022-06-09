@@ -1,19 +1,18 @@
-#include "collision.h"
-#include <math.h>
+#include "collision2D.h"
 
 namespace GL
 {
 	const float overlapSpeed = 0.35f;
 
-	Collision::Collision()
+	Collision2D::Collision2D()
 	{
 	}
 
-	Collision::~Collision()
+	Collision2D::~Collision2D()
 	{
 	}
 
-	void Collision::CollisionUpdate(Entity2D* entity1, Entity2D* entity2)
+	void Collision2D::CollisionUpdate(Entity2D* entity1, Entity2D* entity2)
 	{
 		if (CheckCollisionRecRec(entity1, entity2))
 		{
@@ -23,7 +22,7 @@ namespace GL
 		}
 	}
 
-	bool Collision::CheckCollisionRecRec(Entity2D* entity1, Entity2D* entity2)
+	bool Collision2D::CheckCollisionRecRec(Entity2D* entity1, Entity2D* entity2)
 	{
 		if (entity2->HasCollider())
 		{
@@ -40,7 +39,7 @@ namespace GL
 		return false;
 	}
 
-	void Collision::Overlap(Entity2D* entity1, Entity2D* entity2) //Separa ambos objetos en el caso de existir overlap
+	void Collision2D::Overlap(Entity2D* entity1, Entity2D* entity2) //Separa ambos objetos en el caso de existir overlap
 	{
 		if (entity2->IsMoveable())
 		{

@@ -2,10 +2,12 @@
 #define PLAYER_H
 
 #include "exports.h"
-#include "Input/input.h"
-#include "Sprite/sprite.h"
+
+#include "Entity/Entity2D/Sprite/sprite.h"
 #include "Camera/FirstPersonCamera/firstPersonCamera.h"
 #include "Camera/ThirdPersonCamera/thirdPersonCamera.h"
+
+#include "Input/input.h"
 
 using namespace GL;
 

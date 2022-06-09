@@ -2,9 +2,10 @@
 #define ENTITY2D_H
 
 #include "Entity/entity.h"
+#include "vertexs.h"
+
 #include "Color/color.h"
 #include "Material/material.h"
-#include "vertexs.h"
 
 namespace GL
 {

@@ -1,9 +1,9 @@
 #ifndef LIGHT_H
 #define LIGHT_H
 
-#include "exports.h"
 #include "Entity/entity.h"
 #include "Color/color.h"
+
 #include "GLM/ext/matrix_transform.hpp"
 
 namespace GL

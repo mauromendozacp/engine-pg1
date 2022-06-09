@@ -2,17 +2,19 @@
 #define GAME_H
 
 #include "BaseGame/baseGame.h"
+
 #include "Player/player.h"
 #include "Camera/camera.h"
-#include "Shape/shape.h"
-#include "Light/light.h"
+#include "Entity/Entity2D/Shape/shape.h"
+#include "Entity/Entity3D/entity3D.h"
+
 #include "Light/DirectionalLight/directionalLight.h"
 #include "Light/PointLight/pointLight.h"
 #include "Light/SpotLight/spotLight.h"
+
 #include "Material/SolidMaterial/solidMaterial.h"
 #include "Material/TextureMaterial/textureMaterial.h"
-#include "Texture/texture.h"
-#include "Entity3D/entity3D.h"
+
 #include <iostream>
 
 using namespace GL;

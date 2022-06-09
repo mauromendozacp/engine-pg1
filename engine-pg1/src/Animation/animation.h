@@ -2,11 +2,14 @@
 #define ANIMATION_H
 
 #include "exports.h"
+
 #include "Frame/frame.h"
 #include "Timer/timer.h"
 #include "Importer/TextureImporter/textureImporter.h"
 #include "atlasConfig.h"
+
 #include <vector>
+#include <iostream>
 
 namespace GL
 {

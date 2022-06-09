@@ -2,9 +2,12 @@
 #define MODEL_H
 
 #include "exports.h"
+
 #include "Renderer/renderer.h"
 #include "Mesh/mesh.h"
+
 #include "StbImage/stb_image.h"
+
 #include <vector>
 #include <string>
 

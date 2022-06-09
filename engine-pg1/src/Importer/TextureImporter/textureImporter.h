@@ -2,7 +2,11 @@
 #define TEXTURE_IMPORTER_H
 
 #include "exports.h"
+
 #include "Texture/texture.h"
+
+#include "StbImage/stb_image.h"
+
 #include <iostream>
 
 namespace GL

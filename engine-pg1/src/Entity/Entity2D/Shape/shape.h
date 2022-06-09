@@ -1,7 +1,7 @@
 #ifndef SHAPE_H
 #define SHAPE_H
 
-#include "Entity2D/entity2D.h"
+#include "Entity/Entity2D/entity2D.h"
 
 namespace GL
 {

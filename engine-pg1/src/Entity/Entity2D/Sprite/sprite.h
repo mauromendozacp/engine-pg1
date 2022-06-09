@@ -1,7 +1,7 @@
 #ifndef SPRITE_H
 #define SPRITE_H
 
-#include "Entity2D/entity2D.h"
+#include "Entity/Entity2D/entity2D.h"
 #include "Animation/animation.h"
 #include "Importer/TextureImporter/textureImporter.h"
 #include "Animation/atlasConfig.h"

@@ -159,16 +159,19 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\src\Animation\animation.cpp" />
+    <ClCompile Include="..\src\Animation\Frame\frame.cpp" />
     <ClCompile Include="..\src\BaseGame\baseGame.cpp" />
     <ClCompile Include="..\src\Camera\camera.cpp" />
     <ClCompile Include="..\src\Camera\FirstPersonCamera\firstPersonCamera.cpp" />
     <ClCompile Include="..\src\Camera\ThirdPersonCamera\thirdPersonCamera.cpp" />
-    <ClCompile Include="..\src\Collision\collision.cpp" />
+    <ClCompile Include="..\src\Collision\Collision2D\collision2D.cpp" />
     <ClCompile Include="..\src\Color\color.cpp" />
-    <ClCompile Include="..\src\Entity2D\entity2D.cpp" />
-    <ClCompile Include="..\src\Entity3D\entity3D.cpp" />
     <ClCompile Include="..\src\Entity\entity.cpp" />
-    <ClCompile Include="..\src\Frame\frame.cpp" />
+    <ClCompile Include="..\src\Entity\Entity2D\entity2D.cpp" />
+    <ClCompile Include="..\src\Entity\Entity2D\Shape\shape.cpp" />
+    <ClCompile Include="..\src\Entity\Entity2D\Sprite\sprite.cpp" />
+    <ClCompile Include="..\src\Entity\Entity2D\Sprite\Tile\tile.cpp" />
+    <ClCompile Include="..\src\Entity\Entity3D\entity3D.cpp" />
     <ClCompile Include="..\src\Importer\ModelImporter\modelImporter.cpp" />
     <ClCompile Include="..\src\Importer\TextureImporter\textureImporter.cpp" />
     <ClCompile Include="..\src\Input\input.cpp" />
@@ -184,11 +187,8 @@
     <ClCompile Include="..\src\Model\model.cpp" />
     <ClCompile Include="..\src\Renderer\renderer.cpp" />
     <ClCompile Include="..\src\Shader\shader.cpp" />
-    <ClCompile Include="..\src\Shape\shape.cpp" />
-    <ClCompile Include="..\src\Sprite\sprite.cpp" />
     <ClCompile Include="..\src\StbImage\stb_image.cpp" />
     <ClCompile Include="..\src\Tilemap\tilemap.cpp" />
-    <ClCompile Include="..\src\Tile\tile.cpp" />
     <ClCompile Include="..\src\Timer\timer.cpp" />
     <ClCompile Include="..\src\Tinyxml2\tinyxml2.cpp" />
     <ClCompile Include="..\src\Window\window.cpp" />
@@ -196,17 +196,20 @@
   <ItemGroup>
     <ClInclude Include="..\src\Animation\animation.h" />
     <ClInclude Include="..\src\Animation\atlasConfig.h" />
+    <ClInclude Include="..\src\Animation\Frame\frame.h" />
     <ClInclude Include="..\src\BaseGame\baseGame.h" />
     <ClInclude Include="..\src\Camera\camera.h" />
     <ClInclude Include="..\src\Camera\FirstPersonCamera\firstPersonCamera.h" />
     <ClInclude Include="..\src\Camera\ThirdPersonCamera\thirdPersonCamera.h" />
-    <ClInclude Include="..\src\Collision\collision.h" />
+    <ClInclude Include="..\src\Collision\Collision2D\collision2D.h" />
     <ClInclude Include="..\src\Color\color.h" />
-    <ClInclude Include="..\src\Entity2D\entity2D.h" />
-    <ClInclude Include="..\src\Entity3D\entity3D.h" />
     <ClInclude Include="..\src\Entity\entity.h" />
+    <ClInclude Include="..\src\Entity\Entity2D\entity2D.h" />
+    <ClInclude Include="..\src\Entity\Entity2D\Shape\shape.h" />
+    <ClInclude Include="..\src\Entity\Entity2D\Sprite\sprite.h" />
+    <ClInclude Include="..\src\Entity\Entity2D\Sprite\Tile\tile.h" />
+    <ClInclude Include="..\src\Entity\Entity3D\entity3D.h" />
     <ClInclude Include="..\src\exports.h" />
-    <ClInclude Include="..\src\Frame\frame.h" />
     <ClInclude Include="..\src\Importer\ModelImporter\modelImporter.h" />
     <ClInclude Include="..\src\Importer\TextureImporter\textureImporter.h" />
     <ClInclude Include="..\src\Input\input.h" />
@@ -223,12 +226,9 @@
     <ClInclude Include="..\src\Model\model.h" />
     <ClInclude Include="..\src\Renderer\renderer.h" />
     <ClInclude Include="..\src\Shader\shader.h" />
-    <ClInclude Include="..\src\Shape\shape.h" />
-    <ClInclude Include="..\src\Sprite\sprite.h" />
     <ClInclude Include="..\src\StbImage\stb_image.h" />
     <ClInclude Include="..\src\Texture\texture.h" />
     <ClInclude Include="..\src\Tilemap\tilemap.h" />
-    <ClInclude Include="..\src\Tile\tile.h" />
     <ClInclude Include="..\src\Timer\timer.h" />
     <ClInclude Include="..\src\Tinyxml2\tinyxml2.h" />
     <ClInclude Include="..\src\vertexs.h" />

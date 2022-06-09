@@ -1,7 +1,6 @@
 #ifndef SPOT_LIGHT_H
 #define SPOT_LIGHT_H
 
-#include "exports.h"
 #include "Light/PointLight/pointLight.h"
 
 namespace GL

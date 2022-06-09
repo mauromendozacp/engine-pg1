@@ -2,7 +2,9 @@
 #define MATERIAL_H
 
 #include "exports.h"
+
 #include "Renderer/renderer.h"
+
 #include "GLM/ext/matrix_transform.hpp"
 
 namespace GL

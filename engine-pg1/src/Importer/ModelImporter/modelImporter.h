@@ -2,8 +2,10 @@
 #define MODEL_IMPORTER_H
 
 #include "exports.h"
+
 #include "Model/model.h"
 #include "Mesh/mesh.h"
+
 #include <vector>
 
 namespace GL

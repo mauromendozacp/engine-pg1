@@ -2,7 +2,7 @@
 #define TILE_H
 
 #include "exports.h"
-#include "Sprite/sprite.h"
+#include "../sprite.h"
 
 namespace GL
 {

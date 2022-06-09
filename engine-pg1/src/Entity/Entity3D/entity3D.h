@@ -1,10 +1,11 @@
 #ifndef ENTITY3D_H
 #define ENTITY3D_H
 
-#include "exports.h"
 #include "Entity/entity.h"
+
 #include <Material/material.h>
 #include "Importer/ModelImporter/modelImporter.h"
+
 #include <vector>
 
 namespace GL

@@ -3,15 +3,16 @@
 
 #include "exports.h"
 
-#include <stdlib.h>
-#include <time.h>
-
 #include "Renderer/renderer.h"
 #include "Camera/camera.h"
 #include "Input/input.h"
 #include "Timer/timer.h"
+
 #include "Light/LightManager/lightManager.h"
-#include "Collision/collision.h"
+#include "Collision/Collision2D/collision2D.h"
+
+#include <stdlib.h>
+#include <time.h>
 
 namespace GL
 {

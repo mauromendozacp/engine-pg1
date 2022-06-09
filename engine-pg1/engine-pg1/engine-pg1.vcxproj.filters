@@ -13,20 +13,11 @@
     <ClCompile Include="..\src\Entity\entity.cpp">
       <Filter>Entity</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\Entity2D\entity2D.cpp">
-      <Filter>Entity2D</Filter>
-    </ClCompile>
-    <ClCompile Include="..\src\Shape\shape.cpp">
-      <Filter>Shape</Filter>
-    </ClCompile>
     <ClCompile Include="..\src\Input\input.cpp">
       <Filter>Input</Filter>
     </ClCompile>
     <ClCompile Include="..\src\Shader\shader.cpp">
       <Filter>Shader</Filter>
-    </ClCompile>
-    <ClCompile Include="..\src\Sprite\sprite.cpp">
-      <Filter>Sprite</Filter>
     </ClCompile>
     <ClCompile Include="..\src\StbImage\stb_image.cpp">
       <Filter>StbImage</Filter>
@@ -34,20 +25,11 @@
     <ClCompile Include="..\src\Animation\animation.cpp">
       <Filter>Animation</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\Frame\frame.cpp">
-      <Filter>Frame</Filter>
-    </ClCompile>
     <ClCompile Include="..\src\Timer\timer.cpp">
       <Filter>Timer</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\Collision\collision.cpp">
-      <Filter>Collision</Filter>
-    </ClCompile>
     <ClCompile Include="..\src\Tilemap\tilemap.cpp">
       <Filter>Tilemap</Filter>
-    </ClCompile>
-    <ClCompile Include="..\src\Tile\tile.cpp">
-      <Filter>Tile</Filter>
     </ClCompile>
     <ClCompile Include="..\src\Tinyxml2\tinyxml2.cpp">
       <Filter>Tinyxml2</Filter>
@@ -94,14 +76,32 @@
     <ClCompile Include="..\src\Model\model.cpp">
       <Filter>Model</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\Entity3D\entity3D.cpp">
-      <Filter>Entity3D</Filter>
-    </ClCompile>
     <ClCompile Include="..\src\Importer\ModelImporter\modelImporter.cpp">
       <Filter>Importer\ModelImporter</Filter>
     </ClCompile>
     <ClCompile Include="..\src\Importer\TextureImporter\textureImporter.cpp">
       <Filter>Importer\TextureImporter</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Entity\Entity2D\entity2D.cpp">
+      <Filter>Entity\Entity2D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Entity\Entity3D\entity3D.cpp">
+      <Filter>Entity\Entity3D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Collision\Collision2D\collision2D.cpp">
+      <Filter>Collision\Collision2D</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Animation\Frame\frame.cpp">
+      <Filter>Animation\Frame</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Entity\Entity2D\Shape\shape.cpp">
+      <Filter>Entity\Entity2D\Shape</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Entity\Entity2D\Sprite\sprite.cpp">
+      <Filter>Entity\Entity2D\Sprite</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Entity\Entity2D\Sprite\Tile\tile.cpp">
+      <Filter>Entity\Entity2D\Sprite\Tile</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -117,12 +117,6 @@
     <Filter Include="Entity">
       <UniqueIdentifier>{248283fe-5f18-472a-a68f-bbd7c228960c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Entity2D">
-      <UniqueIdentifier>{f8467625-1a4a-4fed-a3ee-84128d16f364}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Shape">
-      <UniqueIdentifier>{108e0dc6-8401-4679-9e41-9edad1f71a0d}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Input">
       <UniqueIdentifier>{13a2f417-aa4b-465c-b1c7-b7c7a2f57fa5}</UniqueIdentifier>
     </Filter>
@@ -132,17 +126,11 @@
     <Filter Include="ShaderCode">
       <UniqueIdentifier>{83991cc7-c5ac-4427-b259-d17a2481e5ae}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Sprite">
-      <UniqueIdentifier>{06bc9182-16b1-4666-a694-fa563e7a4b4e}</UniqueIdentifier>
-    </Filter>
     <Filter Include="StbImage">
       <UniqueIdentifier>{27155381-1118-4f6f-9cf2-b6a452984693}</UniqueIdentifier>
     </Filter>
     <Filter Include="Animation">
       <UniqueIdentifier>{6ea739f6-011a-4a16-bf1c-d9a6a428c6d3}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Frame">
-      <UniqueIdentifier>{ef26ce1c-90b9-43b4-b078-0ca3b6d8bc74}</UniqueIdentifier>
     </Filter>
     <Filter Include="Timer">
       <UniqueIdentifier>{fe142bac-2035-44dc-9242-4a8840f8d5ae}</UniqueIdentifier>
@@ -152,9 +140,6 @@
     </Filter>
     <Filter Include="Tilemap">
       <UniqueIdentifier>{3b266780-3918-412e-b08e-d7dc62709a6c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Tile">
-      <UniqueIdentifier>{ec769838-63c6-4995-a830-ea89aa08b8a5}</UniqueIdentifier>
     </Filter>
     <Filter Include="Tinyxml2">
       <UniqueIdentifier>{d0cdb81a-ee03-4247-8eb9-a660d290974b}</UniqueIdentifier>
@@ -204,9 +189,6 @@
     <Filter Include="Model">
       <UniqueIdentifier>{ad623a07-0a63-4718-82be-ced6c4112671}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Entity3D">
-      <UniqueIdentifier>{ca8e5439-263a-420b-8ad5-03ad487d604d}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Importer">
       <UniqueIdentifier>{7651d69f-26d2-4efe-ae5c-b877db6c77af}</UniqueIdentifier>
     </Filter>
@@ -215,6 +197,27 @@
     </Filter>
     <Filter Include="Importer\TextureImporter">
       <UniqueIdentifier>{7a1f3920-d9c2-4338-b7f9-dada9bbc43aa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Entity\Entity2D">
+      <UniqueIdentifier>{f8467625-1a4a-4fed-a3ee-84128d16f364}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Entity\Entity3D">
+      <UniqueIdentifier>{ca8e5439-263a-420b-8ad5-03ad487d604d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Collision\Collision2D">
+      <UniqueIdentifier>{b4431ff9-e628-460b-b84c-11409c48215d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Animation\Frame">
+      <UniqueIdentifier>{ef26ce1c-90b9-43b4-b078-0ca3b6d8bc74}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Entity\Entity2D\Sprite">
+      <UniqueIdentifier>{06bc9182-16b1-4666-a694-fa563e7a4b4e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Entity\Entity2D\Shape">
+      <UniqueIdentifier>{108e0dc6-8401-4679-9e41-9edad1f71a0d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Entity\Entity2D\Sprite\Tile">
+      <UniqueIdentifier>{ec769838-63c6-4995-a830-ea89aa08b8a5}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -228,12 +231,6 @@
     <ClInclude Include="..\src\Entity\entity.h">
       <Filter>Entity</Filter>
     </ClInclude>
-    <ClInclude Include="..\src\Entity2D\entity2D.h">
-      <Filter>Entity2D</Filter>
-    </ClInclude>
-    <ClInclude Include="..\src\Shape\shape.h">
-      <Filter>Shape</Filter>
-    </ClInclude>
     <ClInclude Include="..\src\Input\input.h">
       <Filter>Input</Filter>
     </ClInclude>
@@ -244,29 +241,17 @@
       <Filter>Renderer</Filter>
     </ClInclude>
     <ClInclude Include="..\src\keycodes.h" />
-    <ClInclude Include="..\src\Sprite\sprite.h">
-      <Filter>Sprite</Filter>
-    </ClInclude>
     <ClInclude Include="..\src\StbImage\stb_image.h">
       <Filter>StbImage</Filter>
     </ClInclude>
     <ClInclude Include="..\src\Animation\animation.h">
       <Filter>Animation</Filter>
     </ClInclude>
-    <ClInclude Include="..\src\Frame\frame.h">
-      <Filter>Frame</Filter>
-    </ClInclude>
     <ClInclude Include="..\src\Timer\timer.h">
       <Filter>Timer</Filter>
     </ClInclude>
-    <ClInclude Include="..\src\Collision\collision.h">
-      <Filter>Collision</Filter>
-    </ClInclude>
     <ClInclude Include="..\src\Tilemap\tilemap.h">
       <Filter>Tilemap</Filter>
-    </ClInclude>
-    <ClInclude Include="..\src\Tile\tile.h">
-      <Filter>Tile</Filter>
     </ClInclude>
     <ClInclude Include="..\src\Animation\atlasConfig.h">
       <Filter>Animation</Filter>
@@ -320,14 +305,32 @@
     <ClInclude Include="..\src\Model\model.h">
       <Filter>Model</Filter>
     </ClInclude>
-    <ClInclude Include="..\src\Entity3D\entity3D.h">
-      <Filter>Entity3D</Filter>
-    </ClInclude>
     <ClInclude Include="..\src\Importer\ModelImporter\modelImporter.h">
       <Filter>Importer\ModelImporter</Filter>
     </ClInclude>
     <ClInclude Include="..\src\Importer\TextureImporter\textureImporter.h">
       <Filter>Importer\TextureImporter</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Entity\Entity2D\entity2D.h">
+      <Filter>Entity\Entity2D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Entity\Entity3D\entity3D.h">
+      <Filter>Entity\Entity3D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Collision\Collision2D\collision2D.h">
+      <Filter>Collision\Collision2D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Animation\Frame\frame.h">
+      <Filter>Animation\Frame</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Entity\Entity2D\Shape\shape.h">
+      <Filter>Entity\Entity2D\Shape</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Entity\Entity2D\Sprite\sprite.h">
+      <Filter>Entity\Entity2D\Sprite</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Entity\Entity2D\Sprite\Tile\tile.h">
+      <Filter>Entity\Entity2D\Sprite\Tile</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

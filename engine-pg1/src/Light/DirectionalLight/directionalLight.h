@@ -1,7 +1,6 @@
 #ifndef DIRECTIONAL_LIGHT_H
 #define DIRECTIONAL_LIGHT_H
 
-#include "exports.h"
 #include "Light/light.h"
 
 namespace GL

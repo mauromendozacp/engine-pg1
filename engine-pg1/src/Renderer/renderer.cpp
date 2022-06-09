@@ -1,5 +1,4 @@
 #include "Renderer/renderer.h"
-#include "GLEW/glew.h"
 
 namespace GL
 {

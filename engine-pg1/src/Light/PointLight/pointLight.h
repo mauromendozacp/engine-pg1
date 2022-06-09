@@ -1,9 +1,9 @@
 #ifndef POINT_LIGHT_H
 #define POINT_LIGHT_H
 
-#include "exports.h"
-#include <string>
 #include "Light/light.h"
+
+#include <string>
 
 namespace GL
 {

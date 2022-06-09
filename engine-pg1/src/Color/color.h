@@ -2,6 +2,7 @@
 #define COLOR_H
 
 #include "exports.h"
+
 #include "GLM/ext/matrix_transform.hpp"
 
 namespace GL

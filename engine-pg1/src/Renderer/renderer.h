@@ -1,11 +1,15 @@
 #ifndef RENDER_H
 #define RENDER_H
 
+#include "exports.h"
+
 #include "Window/window.h"
 #include "Shader/shader.h"
+
 #include "GLM/glm.hpp"
 #include "GLM/ext/matrix_transform.hpp"
 #include "GLM/gtc/type_ptr.hpp"
+#include "GLEW/glew.h"
 
 namespace GL
 {

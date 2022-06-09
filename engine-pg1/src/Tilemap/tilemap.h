@@ -2,10 +2,13 @@
 #define TILEMAP_H
 
 #include "exports.h"
-#include <vector>
-#include "Tile/tile.h"
+
+#include "Entity/Entity2D/Sprite/Tile/tile.h"
+#include "Collision/Collision2D/collision2D.h"
+
 #include "Tinyxml2/tinyxml2.h"
-#include "Collision/collision.h"
+
+#include <vector>
 
 namespace GL
 {

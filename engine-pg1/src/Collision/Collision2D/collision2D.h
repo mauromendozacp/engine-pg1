@@ -2,25 +2,22 @@
 #define COLLISION_H
 
 #include "exports.h"
-#include "Entity2D/entity2d.h"
+
+#include "Entity/Entity2D/entity2d.h"
 
 namespace GL
 {
+	const float collisionMoveSpeed = 0.001f;
 
-	const float collisionMover = 0.001f;
-
-	class GRAPHICSENGINE_API Collision
+	class GRAPHICSENGINE_API Collision2D
 	{
 	public:
-		Collision();
-		~Collision();
+		Collision2D();
+		~Collision2D();
 
 		static void CollisionUpdate(Entity2D* entity1, Entity2D* entity2);
 		static bool CheckCollisionRecRec(Entity2D* entity1, Entity2D* entity2);
 		static void Overlap(Entity2D* entity1, Entity2D* entity2);
-
-	private:
-		
 	};
 }
 

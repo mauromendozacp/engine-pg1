@@ -3,9 +3,12 @@
 
 #include "exports.h"
 #include "Renderer/renderer.h"
+
 #include "GLM/glm.hpp"
 #include "GLM/ext/matrix_transform.hpp"
 #include "GLM/gtc/type_ptr.hpp"
+
+#include <list>
 
 namespace GL
 {
@@ -74,8 +77,10 @@ namespace GL
 	protected:
 		Render* render;
 
+		Transform parent;
 		Transform transform;
 		Matrix matrix;
+		std::list<Entity> nodes;
 
 		uint uniformModel;
 		uint uniformView;

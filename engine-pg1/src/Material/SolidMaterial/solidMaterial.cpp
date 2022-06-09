@@ -1,4 +1,4 @@
-#include  "solidMaterial.h"
+#include "solidMaterial.h"
 
 namespace GL
 {

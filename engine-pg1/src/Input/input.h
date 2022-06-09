@@ -1,10 +1,14 @@
 #ifndef INPUT_H
 #define INPUT_H
 
+#include "exports.h"
+#include "keycodes.h"
+
 #include "Window/window.h"
 #include "Camera/camera.h"
+
 #include "GLM/ext/matrix_transform.hpp"
-#include "keycodes.h"
+
 #include <list>
 
 namespace GL
