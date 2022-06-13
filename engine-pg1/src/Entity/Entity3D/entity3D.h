@@ -5,6 +5,7 @@
 
 #include <Material/material.h>
 #include "Importer/ModelImporter/modelImporter.h"
+#include "Mesh/mesh.h"
 
 #include <vector>
 
@@ -23,14 +24,29 @@ namespace GL
 		Material* material;
 
 	private:
-		std::vector<Mesh> meshes;
+		std::vector<Vertex> vertexs;
+		std::vector<uint> indexes;
+		std::vector<Texture> textures;
+
+		uint VAO, VBO, EBO;
 
 		uint uniformAffectedLight;
 
 		bool affectedLight;
 
 		void SetUniforms(uint shaderId);
-		void UpdateShader();
+
+		void SetMeshData(Mesh* mesh, Entity3D* parent);
+		void NodeDraw();
+		void NodeDeInit();
+
+		std::vector<Vertex> GetVertexs();
+		std::vector<uint> GetIndexes();
+		std::vector<Texture> GetTextures();
+
+		uint GetVAO();
+		uint GetVBO();
+		uint GetEBO();
 	};
 }
 

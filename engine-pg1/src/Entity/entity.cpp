@@ -125,21 +125,48 @@ namespace GL
 
 	void Entity::SetPos(glm::vec3 pos)
 	{
-		transform.position = pos;
 		transform.localPosition = pos;
+
+		if (parent != nullptr)
+		{
+			transform.position = parent->GetPos() + transform.localPosition;
+		}
+		else
+		{
+			transform.position = transform.localPosition;
+		}
+
 		matrix.translate = glm::translate(glm::mat4(1.0f), transform.position);
 
+		for (std::list<Entity*>::iterator it = nodes.begin(); it != nodes.end(); ++it)
+		{
+			(*it)->UpdateNodesPos();
+		}
+
 		UpdateMatrix();
-		UpdateTransform();
 	}
 
 	void Entity::SetRot(glm::vec3 rot)
 	{
-		transform.rotation = rot;
-		transform.localRotation = rot;
+		transform.localEulerAngles = rot;
+
+		if (parent != nullptr)
+		{
+			transform.eulerAngles = parent->GetRot() + transform.localEulerAngles;
+		}
+		else
+		{
+			transform.eulerAngles = transform.localEulerAngles;
+		}
+
 		matrix.rotationX = glm::rotate(glm::mat4(1.f), glm::radians(rot.x), glm::vec3(1.f, 0.f, 0.f));
 		matrix.rotationY = glm::rotate(glm::mat4(1.f), glm::radians(rot.y), glm::vec3(0.f, 1.f, 0.f));
 		matrix.rotationZ = glm::rotate(glm::mat4(1.f), glm::radians(rot.z), glm::vec3(0.f, 0.f, 1.f));
+
+		for (std::list<Entity*>::iterator it = nodes.begin(); it != nodes.end(); ++it)
+		{
+			(*it)->UpdateNodesRot();
+		}
 
 		UpdateMatrix();
 		UpdateTransform();
@@ -152,7 +179,6 @@ namespace GL
 		matrix.scale = glm::scale4(glm::mat4(1.f), transform.scale);
 		
 		UpdateMatrix();
-		UpdateTransform();
 	}
 
 	void Entity::SetPos(float x, float y, float z)
@@ -369,5 +395,48 @@ namespace GL
 		transform.forward = QuatToVec(transform.rotation, glm::vec3(0.f, 0.f, 1.f));
 		transform.up = QuatToVec(transform.rotation, glm::vec3(0.f, 1.f, 0.f));
 		transform.right = QuatToVec(transform.rotation, glm::vec3(1.f, 0.f, 0.f));
+	}
+
+	void Entity::UpdateNodesPos()
+	{
+		transform.position = parent->GetPos() + transform.localPosition;
+		matrix.translate = glm::translate(glm::mat4(1.0f), transform.position);
+
+		for (std::list<Entity*>::iterator it = nodes.begin(); it != nodes.end(); ++it)
+		{
+			(*it)->UpdateNodesPos();
+		}
+
+		UpdateMatrix();
+	}
+
+	void Entity::UpdateNodesRot()
+	{
+		transform.eulerAngles = parent->GetRot() + transform.localEulerAngles;
+
+		matrix.rotationX = glm::rotate(glm::mat4(1.f), glm::radians(transform.localEulerAngles.x), glm::vec3(1.f, 0.f, 0.f));
+		matrix.rotationY = glm::rotate(glm::mat4(1.f), glm::radians(transform.localEulerAngles.y), glm::vec3(0.f, 1.f, 0.f));
+		matrix.rotationZ = glm::rotate(glm::mat4(1.f), glm::radians(transform.localEulerAngles.z), glm::vec3(0.f, 0.f, 1.f));		
+
+		for (std::list<Entity*>::iterator it = nodes.begin(); it != nodes.end(); ++it)
+		{
+			(*it)->UpdateNodesRot();
+		}
+
+		UpdateMatrix();
+		UpdateTransform();
+	}
+
+	void Entity::UpdateNodesScale()
+	{
+		transform.scale = parent->GetScale() + transform.localScale;
+		matrix.scale = glm::scale4(glm::mat4(1.f), transform.scale);
+
+		for (std::list<Entity*>::iterator it = nodes.begin(); it != nodes.end(); ++it)
+		{
+			(*it)->UpdateNodesPos();
+		}
+
+		UpdateMatrix();
 	}
 }

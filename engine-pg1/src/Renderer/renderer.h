@@ -39,7 +39,6 @@ namespace GL
 		void SetUniform(uint shaderId, uint& uniform, const char* loc);
 		void SetBaseAttribs(uint location, int size, GLsizei stride, const void* offset);
 		void SetTextureAttribs(uint location, int size, int stride, int offset);
-		void ClearVertexArray();
 
 		void UpdateMVP(uint uniformModel, uint uniformView, uint uniformProjection, glm::mat4 model);
 		void UpdateVec3(uint uniformVec3, glm::vec3 vec3Value);
@@ -67,12 +66,12 @@ namespace GL
 		void PostRender(Window* window);
 		void BindDiffuseMap(uint textureId);
 		void BindSpecularMap(uint textureId);
+		void TextureEnable();
 		void TextureDisable();
 		void TextureDelete(uint uniformTexture, uint& textureId);
 		void BlendEnable();
 		void BlendDisable();
-		void ActiveTexture(int i);
-		void BindTexture(uint id);
+		void UseTexture(int number, uint id);
 
 	private:
 		Shader* solidShader;

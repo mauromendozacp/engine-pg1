@@ -73,9 +73,6 @@
     <ClCompile Include="..\src\Material\SolidMaterial\solidMaterial.cpp">
       <Filter>Material\SolidMaterial</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\Model\model.cpp">
-      <Filter>Model</Filter>
-    </ClCompile>
     <ClCompile Include="..\src\Importer\ModelImporter\modelImporter.cpp">
       <Filter>Importer\ModelImporter</Filter>
     </ClCompile>
@@ -185,9 +182,6 @@
     </Filter>
     <Filter Include="Texture">
       <UniqueIdentifier>{83a02a50-dc2c-4490-b114-e53de1caa0f9}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Model">
-      <UniqueIdentifier>{ad623a07-0a63-4718-82be-ced6c4112671}</UniqueIdentifier>
     </Filter>
     <Filter Include="Importer">
       <UniqueIdentifier>{7651d69f-26d2-4efe-ae5c-b877db6c77af}</UniqueIdentifier>
@@ -301,9 +295,6 @@
     </ClInclude>
     <ClInclude Include="..\src\Texture\texture.h">
       <Filter>Texture</Filter>
-    </ClInclude>
-    <ClInclude Include="..\src\Model\model.h">
-      <Filter>Model</Filter>
     </ClInclude>
     <ClInclude Include="..\src\Importer\ModelImporter\modelImporter.h">
       <Filter>Importer\ModelImporter</Filter>

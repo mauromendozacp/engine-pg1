@@ -3,8 +3,12 @@
 
 #include "exports.h"
 
-#include "Model/model.h"
 #include "Mesh/mesh.h"
+#include "StbImage/stb_image.h"
+
+#include <assimp/Importer.hpp>
+#include <assimp/scene.h>
+#include <assimp/postprocess.h>
 
 #include <vector>
 
@@ -16,7 +20,22 @@ namespace GL
 		ModelImporter();
 		~ModelImporter();
 
-		static std::vector<Mesh> LoadModel(Render* render, std::string path);
+		void LoadModel(Render* render, std::string path);
+		Mesh* GetMeshBase();
+
+	private:
+		Render* render;
+		std::vector<Mesh*> meshList;
+		std::vector<Mesh*> meshListParent;
+		Mesh* meshBase;
+		uint shaderId;
+
+		std::vector<Texture> textures_loaded;
+		std::string directory;
+
+		void ProcessNode(aiNode* node, const aiScene* scene);
+		Mesh* ProcessMesh(aiMesh* mesh, const aiScene* scene);
+		std::vector<Texture> LoadMaterialTextures(aiMaterial* mat, aiTextureType type, std::string typeName);
 	};
 }
 

@@ -109,11 +109,16 @@ namespace GL
 
 		virtual void SetUniforms(uint shaderId);
 
+	private:
 		glm::quat EulerToQuat(glm::vec3 euler);
 		glm::vec3 QuatToVec(glm::quat quat, glm::vec3 euler);
 
 		void UpdateMatrix();
 		void UpdateTransform();
+
+		void UpdateNodesPos();
+		void UpdateNodesRot();
+		void UpdateNodesScale();
 	};
 }
 

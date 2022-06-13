@@ -128,11 +128,6 @@ namespace GL
 		glVertexAttribPointer(location, size, GL_FLOAT, GL_FALSE, stride * sizeof(float), (void*)offset);
 	}
 
-	void Render::ClearVertexArray()
-	{
-		glBindVertexArray(0);
-	}
-
 	void Render::UpdateMVP(uint uniformModel, uint uniformView, uint uniformProjection, glm::mat4 model)
 	{
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
@@ -229,7 +224,7 @@ namespace GL
 		else
 			glDrawElements(GL_TRIANGLES, vertices, GL_UNSIGNED_INT, 0);
 
-		ClearVertexArray();
+		glBindVertexArray(0);
 		glBindBuffer(GL_ARRAY_BUFFER, 0);
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 	}
@@ -238,7 +233,7 @@ namespace GL
 	{
 		glBindVertexArray(VAO);
 		glDrawElements(GL_TRIANGLES, vertices, GL_UNSIGNED_INT, 0);
-		ClearVertexArray();
+		glBindVertexArray(0);
 	}
 
 	void Render::SetClearColor(float r, float g, float b, float a)
@@ -270,6 +265,11 @@ namespace GL
 		glBindTexture(GL_TEXTURE_2D, textureId);
 	}
 
+	void Render::TextureEnable()
+	{
+		glEnable(GL_TEXTURE_2D);
+	}
+
 	void Render::TextureDisable()
 	{
 		glDisable(GL_TEXTURE_2D);
@@ -291,13 +291,9 @@ namespace GL
 		glDisable(GL_BLEND);
 	}
 
-	void Render::ActiveTexture(int i)
+	void Render::UseTexture(int number, uint id)
 	{
-		glActiveTexture(GL_TEXTURE0 + i);
-	}
-
-	void Render::BindTexture(uint id)
-	{
+		glActiveTexture(GL_TEXTURE0 + number);
 		glBindTexture(GL_TEXTURE_2D, id);
 	}
 }
