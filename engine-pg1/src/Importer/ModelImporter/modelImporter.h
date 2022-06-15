@@ -3,7 +3,8 @@
 
 #include "exports.h"
 
-#include "Mesh/mesh.h"
+#include "Entity/Entity3D/entity3D.h"
+
 #include "StbImage/stb_image.h"
 
 #include <assimp/Importer.hpp>
@@ -14,28 +15,29 @@
 
 namespace GL
 {
+	struct Mesh
+	{
+		std::vector<Vertex> vertexs;
+		std::vector<uint> indexes;
+		std::vector<Texture> textures;
+	};
+
 	class GRAPHICSENGINE_API ModelImporter
 	{
 	public:
 		ModelImporter();
 		~ModelImporter();
 
-		void LoadModel(Render* render, std::string path);
-		Mesh* GetMeshBase();
+		static Entity3D* LoadModel(Render* rend, std::string path);
 
 	private:
-		Render* render;
-		std::vector<Mesh*> meshList;
-		std::vector<Mesh*> meshListParent;
-		Mesh* meshBase;
-		uint shaderId;
+		static Render* render;
+		static std::string directory;
+		static std::vector<Texture> textures_loaded;
 
-		std::vector<Texture> textures_loaded;
-		std::string directory;
-
-		void ProcessNode(aiNode* node, const aiScene* scene);
-		Mesh* ProcessMesh(aiMesh* mesh, const aiScene* scene);
-		std::vector<Texture> LoadMaterialTextures(aiMaterial* mat, aiTextureType type, std::string typeName);
+		static void ProcessNode(Entity3D* parent, aiNode* node, const aiScene* scene);
+		static Mesh ProcessMesh(aiMesh* mesh, const aiScene* scene);
+		static std::vector<Texture> LoadMaterialTextures(aiMaterial* mat, aiTextureType type, std::string typeName);
 	};
 }
 

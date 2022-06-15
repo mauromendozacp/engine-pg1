@@ -4,7 +4,7 @@ namespace GameXD
 {
 	Game::Game()
 	{
-		guitarBackpack1 = nullptr;
+		guitarBackpack = nullptr;
 		spotCubeLight = nullptr;
 		player = nullptr;
 		floor = nullptr;
@@ -51,10 +51,10 @@ namespace GameXD
 			delete tnt;
 			tnt = nullptr;
 		}
-		if (guitarBackpack1 != nullptr)
+		if (guitarBackpack != nullptr)
 		{
-			delete guitarBackpack1;
-			guitarBackpack1 = nullptr;
+			delete guitarBackpack;
+			guitarBackpack = nullptr;
 		}
 
 		for (int i = 0; i < cubesLenght; i++)
@@ -97,7 +97,7 @@ namespace GameXD
 		floor->Draw();
 		spotCubeLight->Draw();
 		tnt->Draw();
-		guitarBackpack1->Draw();
+		guitarBackpack->Draw();
 
 		player->Draw();
 	}
@@ -108,7 +108,7 @@ namespace GameXD
 		floor->DeInit();
 		spotCubeLight->DeInit();
 		tnt->DeInit();
-		guitarBackpack1->DeInit();
+		guitarBackpack->DeInit();
 
 		for (int i = 0; i < cubesLenght; i++)
 		{
@@ -134,11 +134,10 @@ namespace GameXD
 
 	void Game::InitEntities()
 	{
-		guitarBackpack1 = new Entity3D(render);
-		guitarBackpack1->Init("../res/Models/survival-guitar-backpack/backpack.obj");
-		guitarBackpack1->SetPos(glm::vec3(-5.f, 1.0f, -15.f));
-		guitarBackpack1->SetScale(1.0f);
-		guitarBackpack1->material = defaultTextureMaterial;
+		guitarBackpack = ModelImporter::LoadModel(render, "../res/Models/survival-guitar-backpack/backpack.obj");
+		guitarBackpack->SetPos(glm::vec3(-5.f, 2.5f, -15.f));
+		guitarBackpack->SetScale(1.0f);
+		guitarBackpack->material = defaultTextureMaterial;
 
 		player = new Player(mainCamera);
 		player->Init(render, defaultTextureMaterial, 5.f, 75.f, "../res/Textures/player.png");
@@ -236,39 +235,37 @@ namespace GameXD
 		}
 		if (Input::IsKeyPressed(KEY_5))
 		{
-			glm::vec3 guitarScale = guitarBackpack1->GetScale();
+			glm::vec3 guitarScale = guitarBackpack->GetScale();
 			guitarScale += glm::vec3(1) * Timer::GetDeltaTime();
-			guitarBackpack1->SetScale(guitarScale);
+			guitarBackpack->SetScale(guitarScale);
 		}
 		if (Input::IsKeyPressed(KEY_6))
 		{
-			glm::vec3 guitarScale = guitarBackpack1->GetScale();
+			glm::vec3 guitarScale = guitarBackpack->GetScale();
 			guitarScale -= glm::vec3(1) * Timer::GetDeltaTime();
-			guitarBackpack1->SetScale(guitarScale);
+			guitarBackpack->SetScale(guitarScale);
 		}
 		if (Input::IsKeyPressed(KEY_7))
 		{
-			float guitarRotX = guitarBackpack1->GetRotX();
+			float guitarRotX = guitarBackpack->GetRotX();
 			guitarRotX -= 15.f * Timer::GetDeltaTime();
-			guitarBackpack1->SetRotX(guitarRotX);
+			guitarBackpack->SetRotX(guitarRotX);
 		}
 		if (Input::IsKeyPressed(KEY_8))
 		{
-			float guitarRotX = guitarBackpack1->GetRotX();
+			float guitarRotX = guitarBackpack->GetRotX();
 			guitarRotX += 15.f * Timer::GetDeltaTime();
-			guitarBackpack1->SetRotX(guitarRotX);
+			guitarBackpack->SetRotX(guitarRotX);
 		}
 		if (Input::IsKeyPressed(KEY_9))
 		{
-			glm::vec3 guitarPos = guitarBackpack1->GetPos();
-			guitarPos -= glm::vec3(1) * Timer::GetDeltaTime();
-			guitarBackpack1->SetPos(guitarPos);
+			Entity* guitarNode1 = guitarBackpack->GetNode("Sphere.025__0");
+			guitarNode1->SetPos(guitarNode1->GetLocalPosition() - glm::vec3(0.5f, 0.f, 0.f));
 		}
 		if (Input::IsKeyPressed(KEY_0))
 		{
-			glm::vec3 guitarPos = guitarBackpack1->GetPos();
-			guitarPos += glm::vec3(1) * Timer::GetDeltaTime();
-			guitarBackpack1->SetPos(guitarPos);
+			Entity* guitarNode1 = guitarBackpack->GetNode("Sphere.025__0");
+			guitarNode1->SetPos(guitarNode1->GetLocalPosition() + glm::vec3(0.5f, 0.f, 0.f));
 		}
 
 		if (Input::IsKeyDown(KEY_ESCAPE))

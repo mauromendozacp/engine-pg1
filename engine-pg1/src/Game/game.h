@@ -12,6 +12,7 @@
 #include "Light/PointLight/pointLight.h"
 #include "Light/SpotLight/spotLight.h"
 
+#include "Importer/ModelImporter/modelImporter.h"
 #include "Material/SolidMaterial/solidMaterial.h"
 #include "Material/TextureMaterial/textureMaterial.h"
 
@@ -41,7 +42,8 @@ namespace GameXD
 		Shape* cubeLight[cubesLenght];
 		Shape* spotCubeLight;
 		Sprite* tnt;
-		Entity3D* guitarBackpack1;
+
+		Entity3D* guitarBackpack;
 
 		SolidMaterial* defaultSolidMaterial;
 		TextureMaterial* defaultTextureMaterial;

@@ -4,20 +4,26 @@
 #include "Entity/entity.h"
 
 #include <Material/material.h>
-#include "Importer/ModelImporter/modelImporter.h"
-#include "Mesh/mesh.h"
+#include "Importer/TextureImporter/textureImporter.h"
 
 #include <vector>
 
 namespace GL
 {
+	struct Vertex
+	{
+		glm::vec3 Position;
+		glm::vec3 Normal;
+		glm::vec2 TexCoords;
+	};
+
 	class GRAPHICSENGINE_API Entity3D : public Entity
 	{
 	public:
 		Entity3D(Render* render);
 		~Entity3D();
 
-		void Init(std::string path);
+		void Init(std::vector<Vertex> vertexs, std::vector<uint> indexes, std::vector<Texture> textures);
 		void Draw();
 		void DeInit();
 
@@ -31,22 +37,12 @@ namespace GL
 		uint VAO, VBO, EBO;
 
 		uint uniformAffectedLight;
+		std::vector<uint> uniformsTexture;
 
 		bool affectedLight;
 
 		void SetUniforms(uint shaderId);
-
-		void SetMeshData(Mesh* mesh, Entity3D* parent);
 		void NodeDraw();
-		void NodeDeInit();
-
-		std::vector<Vertex> GetVertexs();
-		std::vector<uint> GetIndexes();
-		std::vector<Texture> GetTextures();
-
-		uint GetVAO();
-		uint GetVBO();
-		uint GetEBO();
 	};
 }
 

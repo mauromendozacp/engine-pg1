@@ -77,6 +77,10 @@ namespace GL
 		glm::vec3 GetRot();
 		glm::vec3 GetScale();
 
+		glm::vec3 GetLocalPosition();
+		glm::vec3 GetLocalRotation();
+		glm::vec3 GetLocalScale();
+
 		float GetPosX();
 		float GetPosY();
 		float GetPosZ();
