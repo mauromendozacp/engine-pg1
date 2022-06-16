@@ -59,10 +59,15 @@ namespace GL
 		void SetScale(glm::vec3 scale);
 
 		void SetPos(float x, float y, float z);
+		void SetPosX(float x);
+		void SetPosY(float y);
+		void SetPosZ(float z);
+
 		void SetRot(float x, float y, float z);
 		void SetRotX(float x);
 		void SetRotY(float y);
 		void SetRotZ(float z);
+
 		void SetScale(float x, float y, float z);
 		void SetScale(float size);
 

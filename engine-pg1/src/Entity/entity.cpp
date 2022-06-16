@@ -200,9 +200,24 @@ namespace GL
 		SetPos({ x, y, z });
 	}
 
+	void Entity::SetPosX(float x)
+	{
+		SetPos(glm::vec3(x, GetPosY(), GetPosZ()));
+	}
+
+	void Entity::SetPosY(float y)
+	{
+		SetPos(glm::vec3(GetPosX(), y, GetPosZ()));
+	}
+
+	void Entity::SetPosZ(float z)
+	{
+		SetPos(glm::vec3(GetPosX(), GetPosY(), z));
+	}
+
 	void Entity::SetRot(float x, float y, float z)
 	{
-		SetRot({ x, y, z });
+		SetRot(glm::vec3(x, y, z ));
 	}
 
 	void Entity::SetRotX(float x) 
@@ -222,12 +237,12 @@ namespace GL
 
 	void Entity::SetScale(float x, float y, float z)
 	{
-		SetScale({ x, y, z });
+		SetScale(glm::vec3(x, y, z));
 	}
 
 	void Entity::SetScale(float size)
 	{
-		SetScale({ size, size, size });
+		SetScale(glm::vec3(size, size, size));
 	}
 
 	std::string Entity::GetName()
