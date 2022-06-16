@@ -110,7 +110,7 @@ namespace GL
 			render->UseTexture(i, textures[i].id);
 		}
 
-		render->DrawMesh(VAO, indexes.size());
+		render->Draw(VAO, indexes.size());
 		for (std::list<Entity*>::iterator it = nodes.begin(); it != nodes.end(); ++it)
 		{
 			Entity3D* node3d = static_cast<Entity3D*>((*it));

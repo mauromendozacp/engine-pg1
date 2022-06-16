@@ -68,7 +68,7 @@ namespace GL
 
 	void Entity2D::Draw()
 	{
-		render->Draw(VAO, VBO, EBO, vertices, tam, vertexs);
+		render->Draw(VAO, vertices);
 	}
 
 	void Entity2D::DeInit()

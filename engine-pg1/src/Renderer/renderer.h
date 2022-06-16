@@ -58,8 +58,7 @@ namespace GL
 		void SetView(glm::mat4 view);
 		void SetProjection(glm::mat4 projection);
 
-		void Draw(uint VAO, uint VBO, uint& EBO, uint vertices, uint tamVerts, float* vertexs);
-		void DrawMesh(uint VAO, uint vertices);
+		void Draw(uint VAO, uint vertices);
 
 		void SetClearColor(float r, float g, float b, float a);
 		void ClearScreen();

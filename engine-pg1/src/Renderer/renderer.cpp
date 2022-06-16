@@ -212,27 +212,15 @@ namespace GL
 		this->projection = projection;
 	}
 
-	void Render::Draw(uint VAO, uint VBO, uint& EBO, uint vertices, uint tamVerts, float *vertexs)
+	void Render::Draw(uint VAO, uint vertices)
 	{
 		glBindVertexArray(VAO);
-		glBindBuffer(GL_ARRAY_BUFFER, VBO);
-		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
-		glBufferData(GL_ARRAY_BUFFER, tamVerts, vertexs, GL_STATIC_DRAW);
 
 		if (vertices == 3)
 			glDrawArrays(GL_TRIANGLES, 0, vertices);
 		else
 			glDrawElements(GL_TRIANGLES, vertices, GL_UNSIGNED_INT, 0);
 
-		glBindVertexArray(0);
-		glBindBuffer(GL_ARRAY_BUFFER, 0);
-		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
-	}
-
-	void Render::DrawMesh(uint VAO, uint vertices)
-	{
-		glBindVertexArray(VAO);
-		glDrawElements(GL_TRIANGLES, vertices, GL_UNSIGNED_INT, 0);
 		glBindVertexArray(0);
 	}
 
