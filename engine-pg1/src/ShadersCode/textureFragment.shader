@@ -59,7 +59,7 @@ uniform DirectionalLight directionalLight;
 uniform PointLight pointLight[LIGHTS_MAX];
 uniform SpotLight spotLight[LIGHTS_MAX];
 
-uniform sampler2D ourTexture;
+uniform sampler2D baseTexture;
 uniform bool affectedLight;
 uniform Material material;
 uniform vec3 viewPosition;
@@ -93,7 +93,7 @@ void main()
 		}
 	}
 
-	FragColor = texture(ourTexture, TexCoord) * vec4(resultColor, a);
+	FragColor = texture(baseTexture, TexCoord) * vec4(resultColor, a);
 }
 
 vec3 CalculateDirLight(vec3 norm, vec3 viewDir)

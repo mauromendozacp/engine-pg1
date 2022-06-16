@@ -38,6 +38,7 @@ namespace GL
 		uint VAO, VBO, EBO;
 
 		uint uniformAffectedLight;
+		uint uniformBaseTexture;
 		std::vector<uint> uniformsTexture;
 
 		bool affectedLight;

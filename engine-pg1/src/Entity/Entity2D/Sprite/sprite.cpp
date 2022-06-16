@@ -255,6 +255,6 @@ namespace GL
 	void Sprite::SetUniforms(uint shaderId)
 	{
 		Entity2D::SetUniforms(shaderId);
-		render->SetUniform(shaderId, uniformBaseTexture, "ourTexture");
+		render->SetUniform(shaderId, uniformBaseTexture, "baseTexture");
 	}
 }

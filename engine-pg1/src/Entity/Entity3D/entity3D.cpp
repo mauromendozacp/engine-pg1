@@ -13,6 +13,7 @@ namespace GL
 		EBO = 0;
 
 		uniformAffectedLight = 0;
+		uniformBaseTexture = 0;
 		uniformsTexture = std::vector<uint>();
 
 		affectedLight = true;
@@ -87,12 +88,18 @@ namespace GL
 	{
 		Entity::SetUniforms(shaderId);
 		render->SetUniform(shaderId, uniformAffectedLight, "affectedLight");
+		render->SetUniform(shaderId, uniformBaseTexture, "baseTexture");
 	}
 
 	void Entity3D::NodeDraw()
 	{
 		render->UpdateMVP(uniformModel, uniformView, uniformProjection, matrix.model);
 		render->UpdateStatus(uniformAffectedLight, affectedLight);
+		
+		if (mesh.textures.size() > 0)
+		{
+			render->UpdateTexture(uniformBaseTexture, mesh.textures[0].id);
+		}
 
 		if (material != nullptr)
 		{
