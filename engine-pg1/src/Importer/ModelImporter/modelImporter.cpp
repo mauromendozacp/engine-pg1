@@ -20,7 +20,7 @@ namespace GL
 
 		Assimp::Importer importer;
 		const aiScene* scene = importer.ReadFile(path, aiProcess_Triangulate | aiProcess_GenSmoothNormals | aiProcess_FlipUVs | aiProcess_CalcTangentSpace);
-		if (!scene || scene->mFlags & AI_SCENE_FLAGS_INCOMPLETE || !scene->mRootNode) // if is Not Zero
+		if (!scene || scene->mFlags & AI_SCENE_FLAGS_INCOMPLETE || !scene->mRootNode)
 		{
 			std::cout << "ERROR::ASSIMP:: " << importer.GetErrorString() << std::endl;
 			return nullptr;
@@ -29,7 +29,7 @@ namespace GL
         textures_loaded.clear();
 
         Entity3D* model = new Entity3D(render);
-        model->Init(std::vector<Vertex>(), std::vector<uint>(), std::vector<Texture>());
+        model->Init();
         model->SetName(scene->mRootNode->mName.C_Str());
 
         ProcessNode(model, scene->mRootNode, scene);
@@ -45,7 +45,8 @@ namespace GL
             Mesh mesh = ProcessMesh(aiMesh, scene);
 
             Entity3D* modelNode = new Entity3D(render);
-            modelNode->Init(mesh.vertexs, mesh.indexes, mesh.textures);
+            modelNode->SetMesh(mesh);
+            modelNode->Init();
             modelNode->SetName(node->mName.C_Str());
             modelNode->SetParent(parent);
 
@@ -113,6 +114,11 @@ namespace GL
         textures.insert(textures.end(), normalMaps.begin(), normalMaps.end());
         std::vector<Texture> heightMaps = LoadMaterialTextures(material, aiTextureType_AMBIENT, "texture_height");
         textures.insert(textures.end(), heightMaps.begin(), heightMaps.end());
+
+        for (int i = 0; i < textures.size(); i++)
+        {
+            textures[i].type.erase(0, 7);
+        }
 
         return Mesh{ vertices, indices, textures };
     }

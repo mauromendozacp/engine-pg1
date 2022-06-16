@@ -15,13 +15,6 @@
 
 namespace GL
 {
-	struct Mesh
-	{
-		std::vector<Vertex> vertexs;
-		std::vector<uint> indexes;
-		std::vector<Texture> textures;
-	};
-
 	class GRAPHICSENGINE_API ModelImporter
 	{
 	public:

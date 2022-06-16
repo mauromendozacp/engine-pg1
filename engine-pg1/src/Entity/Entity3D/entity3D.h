@@ -2,6 +2,7 @@
 #define ENTITY3D_H
 
 #include "Entity/entity.h"
+#include "vertexs.h"
 
 #include <Material/material.h>
 #include "Importer/TextureImporter/textureImporter.h"
@@ -10,11 +11,11 @@
 
 namespace GL
 {
-	struct Vertex
+	struct Mesh
 	{
-		glm::vec3 Position;
-		glm::vec3 Normal;
-		glm::vec2 TexCoords;
+		std::vector<Vertex> vertexs;
+		std::vector<uint> indexes;
+		std::vector<Texture> textures;
 	};
 
 	class GRAPHICSENGINE_API Entity3D : public Entity
@@ -23,16 +24,16 @@ namespace GL
 		Entity3D(Render* render);
 		~Entity3D();
 
-		void Init(std::vector<Vertex> vertexs, std::vector<uint> indexes, std::vector<Texture> textures);
+		void Init();
 		void Draw();
 		void DeInit();
+
+		void SetMesh(Mesh mesh);
 
 		Material* material;
 
 	private:
-		std::vector<Vertex> vertexs;
-		std::vector<uint> indexes;
-		std::vector<Texture> textures;
+		Mesh mesh;
 
 		uint VAO, VBO, EBO;
 

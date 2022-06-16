@@ -3,6 +3,13 @@
 
 namespace GL
 {
+	struct Vertex
+	{
+		glm::vec3 Position;
+		glm::vec3 Normal;
+		glm::vec2 TexCoords;
+	};
+
 #pragma region TRIANGULE_VERTEX
 
 	const int triangVertTam = 18;
