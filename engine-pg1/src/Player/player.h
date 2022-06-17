@@ -1,9 +1,8 @@
 #ifndef PLAYER_H
 #define PLAYER_H
 
-#include "exports.h"
+#include "Entity/Entity3D/entity3D.h"
 
-#include "Entity/Entity2D/Sprite/sprite.h"
 #include "Camera/FirstPersonCamera/firstPersonCamera.h"
 #include "Camera/ThirdPersonCamera/thirdPersonCamera.h"
 
@@ -13,44 +12,26 @@ using namespace GL;
 
 namespace GameXD
 {
-	enum class STATUS
-	{
-		IDLE,
-		LEFT,
-		RIGHT,
-		UP,
-		DOWN
-	};
-
-	class GRAPHICSENGINE_API Player
+	class GRAPHICSENGINE_API Player : public Entity3D
 	{
 	public:
 		Player();
-		Player(Camera* camera);
+		Player(Render* render);
 		~Player();
 
-		void Init(Render* render, Material* material, float moveSpeed, float rotSpeed, const char* textureUrl);
+		void Init(float moveSpeed, float rotSpeed);
 		void Update();
-		void Draw();
-		void DeInit();
 
 		Camera* GetCamera();
-		void SetCamera(Render* render, Window* window, CAMERA_TYPE cameraType);
-		Sprite* GetSprite();
-		
-		void SetPosition(glm::vec3 pos);
-		glm::vec3 GetPosition();
+		void SetCamera(Window* window, CAMERA_TYPE cameraType);
 
 	private:
-		Sprite* sprite;
 		Camera* camera;
 
-		STATUS status;
 		float moveSpeed;
 		float rotSpeed;
 
 		void Inputs();
-		void ChangeStatus(STATUS status);
 		float GetSpeedDelta();
 	};
 }

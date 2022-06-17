@@ -2,9 +2,10 @@
 
 namespace GL
 {
-	Entity3D::Entity3D(Render* render) : Entity(render)
+	Entity3D::Entity3D() : Entity()
 	{
 		material = nullptr;
+		color = Color();
 
 		mesh = Mesh();
 
@@ -12,10 +13,31 @@ namespace GL
 		VBO = 0;
 		EBO = 0;
 
+		uniformColor = 0;
+		uniformAlpha = 0;
 		uniformAffectedLight = 0;
 		uniformUseTexture = 0;
 		uniformBaseTexture = 0;
-		uniformsTexture = std::vector<uint>();
+
+		affectedLight = true;
+	}
+
+	Entity3D::Entity3D(Render* render) : Entity(render)
+	{
+		material = nullptr;
+		color = Color();
+
+		mesh = Mesh();
+
+		VAO = 0;
+		VBO = 0;
+		EBO = 0;
+
+		uniformColor = 0;
+		uniformAlpha = 0;
+		uniformAffectedLight = 0;
+		uniformUseTexture = 0;
+		uniformBaseTexture = 0;
 
 		affectedLight = true;
 	}
@@ -69,6 +91,11 @@ namespace GL
 	{
 		render->UnBind(VAO, VBO, EBO);
 
+		if (mesh.textures.size() > 0)
+		{
+			//render->TextureDelete(uniformBaseTexture, mesh.textures[0].id);
+		}
+
 		mesh.vertexs.clear();
 		mesh.indexes.clear();
 		mesh.textures.clear();
@@ -88,6 +115,8 @@ namespace GL
 	void Entity3D::SetUniforms()
 	{
 		Entity::SetUniforms();
+		render->SetUniform(uniformColor, "color");
+		render->SetUniform(uniformAlpha, "a");
 		render->SetUniform(uniformAffectedLight, "affectedLight");
 		render->SetUniform(uniformBaseTexture, "baseTexture");
 		render->SetUniform(uniformUseTexture, "useTexture");
@@ -95,9 +124,7 @@ namespace GL
 
 	void Entity3D::NodeDraw()
 	{
-		render->UpdateMVP(uniformModel, uniformView, uniformProjection, matrix.model);
-		render->UpdateStatus(uniformAffectedLight, affectedLight);
-		render->UpdateStatus(uniformUseTexture, true);
+		UpdateShader();
 		
 		if (mesh.textures.size() > 0)
 		{
@@ -120,5 +147,13 @@ namespace GL
 			Entity3D* node3d = static_cast<Entity3D*>((*it));
 			node3d->NodeDraw();
 		}
+	}
+
+	void Entity3D::UpdateShader()
+	{
+		Entity::UpdateShader();
+		render->UpdateColor(uniformColor, uniformAlpha, color.GetColor());
+		render->UpdateStatus(uniformAffectedLight, affectedLight);
+		render->UpdateStatus(uniformUseTexture, true);
 	}
 }

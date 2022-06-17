@@ -4,7 +4,8 @@
 #include "Entity/entity.h"
 #include "vertexs.h"
 
-#include <Material/material.h>
+#include "Material/material.h"
+#include "Color/color.h"
 #include "Importer/TextureImporter/textureImporter.h"
 
 #include <vector>
@@ -21,6 +22,7 @@ namespace GL
 	class GRAPHICSENGINE_API Entity3D : public Entity
 	{
 	public:
+		Entity3D();
 		Entity3D(Render* render);
 		~Entity3D();
 
@@ -31,20 +33,23 @@ namespace GL
 		void SetMesh(Mesh mesh);
 
 		Material* material;
+		Color color;
 
 	protected:
 		Mesh mesh;
 
 		uint VAO, VBO, EBO;
 
+		uint uniformColor;
+		uint uniformAlpha;
 		uint uniformAffectedLight;
 		uint uniformUseTexture;
 		uint uniformBaseTexture;
-		std::vector<uint> uniformsTexture;
 
 		bool affectedLight;
 
 		virtual void SetUniforms() override;
+		virtual void UpdateShader() override;
 		void NodeDraw();
 	};
 }

@@ -6,6 +6,7 @@
 #include "Player/player.h"
 #include "Camera/camera.h"
 #include "Entity/Entity2D/Shape/shape.h"
+#include "Entity/Entity2D/Sprite/sprite.h"
 #include "Entity/Entity3D/entity3D.h"
 
 #include "Light/DirectionalLight/directionalLight.h"

@@ -21,6 +21,11 @@ namespace GameXD
 
 	Game::~Game()
 	{
+		if (guitarBackpack != nullptr)
+		{
+			delete guitarBackpack;
+			guitarBackpack = nullptr;
+		}
 		if (player != nullptr)
 		{
 			delete player;
@@ -51,11 +56,6 @@ namespace GameXD
 			delete tnt;
 			tnt = nullptr;
 		}
-		if (guitarBackpack != nullptr)
-		{
-			delete guitarBackpack;
-			guitarBackpack = nullptr;
-		}
 
 		for (int i = 0; i < cubesLenght; i++)
 		{
@@ -80,7 +80,7 @@ namespace GameXD
 	{
 		player->Update();
 		mainCamera->Update();
-		lightManager->GetLasPointLightCreated()->SetPos(player->GetSprite()->GetPos() + glm::vec3(0.f, .5f, 0.f));
+		lightManager->GetLasPointLightCreated()->SetPos(player->GetPos() + glm::vec3(0.f, .5f, 0.f));
 		
 		UpdateInputs();
 	}
@@ -139,9 +139,13 @@ namespace GameXD
 		guitarBackpack->SetScale(1.0f);
 		guitarBackpack->material = defaultTextureMaterial;
 
-		player = new Player(mainCamera);
-		player->Init(render, defaultTextureMaterial, 5.f, 75.f, "../res/Textures/player.png");
-		player->SetCamera(render, window, CAMERA_TYPE::TPS);
+		//player = static_cast<Player*>(ModelImporter::LoadModel(render, "../res/Models/survival-guitar-backpack/backpack.obj"));
+		player = new Player(render);
+		player->Init(5.f, 75.f);
+		player->material = defaultTextureMaterial;
+		player->color = Color(255, 255, 255);
+		player->SetScale(1.0f);
+		player->SetCamera(window, CAMERA_TYPE::TPS);
 		mainCamera = player->GetCamera();
 
 		floor = new Sprite(render);
@@ -188,8 +192,8 @@ namespace GameXD
 
 		lightManager->AddLight(LIGHT_TYPE::POINTLIGHT);
 		PointLight* pointLight = lightManager->GetLasPointLightCreated();
-		pointLight->SetPos(player->GetSprite()->GetPos() + glm::vec3(0.f, .5f, 0.f));
-		pointLight->color = player->GetSprite()->color;
+		pointLight->SetPos(player->GetPos() + glm::vec3(0.f, .5f, 0.f));
+		pointLight->color = player->color;
 		pointLight->SetAmbient(glm::vec3(0.05f, 0.05f, 0.05f));
 		pointLight->SetDiffuse(glm::vec3(0.8f, 0.8f, 0.8f));
 		pointLight->SetSpecular(glm::vec3(1.0f, 1.0f, 1.0f));
@@ -260,12 +264,12 @@ namespace GameXD
 		}
 		if (Input::IsKeyPressed(KEY_9))
 		{
-			Entity* guitarNode1 = guitarBackpack->GetNode("Sphere.025__0");
+			Entity* guitarNode1 = guitarBackpack->GetNode("Cylinder.030__0");
 			guitarNode1->SetPos(guitarNode1->GetLocalPosition() - glm::vec3(0.5f, 0.f, 0.f));
 		}
 		if (Input::IsKeyPressed(KEY_0))
 		{
-			Entity* guitarNode1 = guitarBackpack->GetNode("Sphere.025__0");
+			Entity* guitarNode1 = guitarBackpack->GetNode("Cylinder.030__0");
 			guitarNode1->SetPos(guitarNode1->GetLocalPosition() + glm::vec3(0.5f, 0.f, 0.f));
 		}
 
