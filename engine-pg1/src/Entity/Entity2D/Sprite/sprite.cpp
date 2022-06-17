@@ -86,8 +86,7 @@ namespace GL
 		render->UseShader();
 		UpdateShader();
 		render->UpdateTexture(uniformBaseTexture, baseTexture->id);
-		render->BindDiffuseMap(baseTexture->id);
-		render->BindSpecularMap(baseTexture->id);
+		render->UseTexture(0, baseTexture->id);
 		Entity2D::Draw();
 		render->TextureDisable();
 		render->CleanShader();

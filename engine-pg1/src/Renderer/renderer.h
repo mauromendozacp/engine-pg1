@@ -40,17 +40,12 @@ namespace GL
 		void SetTextureAttribs(uint location, int size, int stride, int offset);
 
 		void UpdateMVP(uint uniformModel, uint uniformView, uint uniformProjection, glm::mat4 model);
-		void UpdateVec3(uint uniformVec3, glm::vec3 vec3Value);
+		void UpdateVec3Value(uint uniformVec3, glm::vec3 vec3Value);
 		void UpdateColor(uint uniformBaseColor, uint uniformAlpha, glm::vec4 baseColor);
 		void UpdateStatus(uint uniformStatus, bool status);
-		void UpdateLight(uint uniformLight, glm::vec3 light);
 		void UpdateTexture(uint uniformTexture, uint textureId);
 		void UpdateFloatValue(uint uniformFloat, float value);
 		void UpdateIntValue(uint uniformInt, int value);
-		void UpdateCameraView(uint uniformView, glm::vec3 position);
-		void UpdateLightVec3(uint uniformLightVec3, glm::vec3 light);
-		void UpdateLightFloat(uint uniformLightFloat, float value);
-		void UpdateLightStatus(uint uniformLightStatus, bool status);
 		uint GetUniform(uint shaderId, const char* loc);
 
 		void SetView(glm::mat4 view);
@@ -61,14 +56,13 @@ namespace GL
 		void SetClearColor(float r, float g, float b, float a);
 		void ClearScreen();
 		void PostRender(Window* window);
-		void BindDiffuseMap(uint textureId);
-		void BindSpecularMap(uint textureId);
+
+		void UseTexture(int number, uint id);
 		void TextureEnable();
 		void TextureDisable();
 		void TextureDelete(uint uniformTexture, uint& textureId);
 		void BlendEnable();
 		void BlendDisable();
-		void UseTexture(int number, uint id);
 
 	private:
 		Shader* shader;

@@ -25,9 +25,9 @@ namespace GL
 
 	void SolidMaterial::UpdateShader()
 	{
-		render->UpdateVec3(uniformAmbient, ambient);
-		render->UpdateVec3(uniformDiffuse, diffuse);
-		render->UpdateVec3(uniformSpecular, specular);
+		render->UpdateVec3Value(uniformAmbient, ambient);
+		render->UpdateVec3Value(uniformDiffuse, diffuse);
+		render->UpdateVec3Value(uniformSpecular, specular);
 		Material::UpdateShader();
 	}
 

@@ -122,7 +122,7 @@ namespace GL
 		glUniformMatrix4fv(uniformProjection, 1, GL_FALSE, glm::value_ptr(projection));
 	}
 
-	void Render::UpdateVec3(uint uniformVec3, glm::vec3 vec3Value)
+	void Render::UpdateVec3Value(uint uniformVec3, glm::vec3 vec3Value)
 	{
 		glUniform3f(uniformVec3, vec3Value.x, vec3Value.y, vec3Value.z);
 	}
@@ -138,11 +138,6 @@ namespace GL
 		glUniform1i(uniformStatus, status);
 	}
 
-	void Render::UpdateLight(uint uniformLight, glm::vec3 light)
-	{
-		glUniform3fv(uniformLight, 1, glm::value_ptr(light));
-	}
-
 	void Render::UpdateTexture(uint uniformTexture, uint textureId)
 	{
 		glUniform1f(uniformTexture, (GLfloat)textureId);
@@ -156,26 +151,6 @@ namespace GL
 	void Render::UpdateIntValue(uint uniformInt, int value)
 	{
 		glUniform1i(uniformInt, value);
-	}
-
-	void Render::UpdateCameraView(uint uniformView, glm::vec3 position)
-	{
-		glUniform3f(uniformView, position.x, position.y, position.z);
-	}
-
-	void Render::UpdateLightVec3(uint uniformLightVec3, glm::vec3 light)
-	{
-		glUniform3f(uniformLightVec3, light.x, light.y, light.z);
-	}
-
-	void Render::UpdateLightFloat(uint uniformLightFloat, float value)
-	{
-		glUniform1f(uniformLightFloat, value);
-	}
-
-	void Render::UpdateLightStatus(uint uniformLightStatus, bool status)
-	{
-		glUniform1i(uniformLightStatus, status);
 	}
 
 	uint Render::GetUniform(uint shaderId, const char* loc)
@@ -220,18 +195,6 @@ namespace GL
 	{
 		glfwSwapBuffers(window->GetWindow());
 		glfwPollEvents();
-	}
-
-	void Render::BindDiffuseMap(uint textureId)
-	{
-		glActiveTexture(GL_TEXTURE0);
-		glBindTexture(GL_TEXTURE_2D, textureId);
-	}
-
-	void Render::BindSpecularMap(uint textureId)
-	{
-		glActiveTexture(GL_TEXTURE1);
-		glBindTexture(GL_TEXTURE_2D, textureId);
 	}
 
 	void Render::TextureEnable()

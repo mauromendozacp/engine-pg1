@@ -16,7 +16,7 @@ namespace GL
 	void DirectionalLight::UseLight()
 	{
 		Light::UseLight();
-		render->UpdateLightVec3(uniformDirection, direction);
+		render->UpdateVec3Value(uniformDirection, direction);
 	}
 
 	void DirectionalLight::SetDirection(glm::vec3 direction)

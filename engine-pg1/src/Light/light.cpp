@@ -25,11 +25,11 @@ namespace GL
 	void Light::UseLight()
 	{
 		render->UpdateMVP(uniformModel, uniformView, uniformProjection, matrix.model);
-		render->UpdateLightVec3(uniformColor, color.GetColorRGB());
-		render->UpdateLightVec3(uniformAmbient, ambient);
-		render->UpdateLightVec3(uniformDiffuse, diffuse);
-		render->UpdateLightVec3(uniformSpecular, specular);
-		render->UpdateLightStatus(uniformEnabled, enabled);
+		render->UpdateVec3Value(uniformColor, color.GetColorRGB());
+		render->UpdateVec3Value(uniformAmbient, ambient);
+		render->UpdateVec3Value(uniformDiffuse, diffuse);
+		render->UpdateVec3Value(uniformSpecular, specular);
+		render->UpdateStatus(uniformEnabled, enabled);
 	}
 
 	void Light::SetAmbient(glm::vec3 ambient)

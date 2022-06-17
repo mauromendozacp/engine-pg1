@@ -20,10 +20,10 @@ namespace GL
 	void PointLight::UseLight()
 	{
 		Light::UseLight();
-		render->UpdateLightVec3(uniformPosition, transform.position);
-		render->UpdateLightFloat(uniformConstant, constant);
-		render->UpdateLightFloat(uniformLinear, linear);
-		render->UpdateLightFloat(uniformQuadratic, quadratic);
+		render->UpdateVec3Value(uniformPosition, transform.position);
+		render->UpdateFloatValue(uniformConstant, constant);
+		render->UpdateFloatValue(uniformLinear, linear);
+		render->UpdateFloatValue(uniformQuadratic, quadratic);
 	}
 
 	void PointLight::SetConstant(float constant)

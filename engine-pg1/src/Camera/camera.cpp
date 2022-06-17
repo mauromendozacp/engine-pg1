@@ -49,7 +49,7 @@ namespace GL
 	{
 		render->UseShader();
 		render->UpdateMVP(uniformModel, uniformView, uniformProjection, matrix.model);
-		render->UpdateCameraView(uniformViewPosition, transform.position);
+		render->UpdateVec3Value(uniformViewPosition, transform.position);
 		render->CleanShader();
 	}
 

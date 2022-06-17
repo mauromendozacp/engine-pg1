@@ -20,9 +20,9 @@ namespace GL
 	void SpotLight::UseLight()
 	{
 		PointLight::UseLight();
-		render->UpdateLightVec3(uniformDirection, direction);
-		render->UpdateLightFloat(uniformCutOff, cutOff);
-		render->UpdateLightFloat(uniformOuterCutOff, outerCutOff);
+		render->UpdateVec3Value(uniformDirection, direction);
+		render->UpdateFloatValue(uniformCutOff, cutOff);
+		render->UpdateFloatValue(uniformOuterCutOff, outerCutOff);
 	}
 
 	void SpotLight::SetDirection(glm::vec3 direction)
