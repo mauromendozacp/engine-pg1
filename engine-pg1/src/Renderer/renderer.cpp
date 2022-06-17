@@ -4,8 +4,7 @@ namespace GL
 {
 	Render::Render()
 	{
-		this->solidShader = nullptr;
-		this->textureShader = nullptr;
+		this->shader = nullptr;
 
 		view = glm::mat4(0.f);
 		projection = glm::mat4(0.f);
@@ -13,40 +12,28 @@ namespace GL
 
 	Render::~Render()
 	{
-		if (solidShader != nullptr)
+		if (shader != nullptr)
 		{
-			delete solidShader;
-			solidShader = nullptr;
-		}
-		if (textureShader != nullptr)
-		{
-			delete textureShader;
-			textureShader = nullptr;
+			delete shader;
+			shader = nullptr;
 		}
 	}
 
 	void Render::Init()
 	{
-		solidShader = new Shader();
-		textureShader = new Shader();
+		shader = new Shader();
 
-		solidShader->CreateShader("../src/ShadersCode/solidVertex.shader", "../src/ShadersCode/solidFragment.shader");
-		textureShader->CreateShader("../src/ShadersCode/textureVertex.shader", "../src/ShadersCode/textureFragment.shader");
+		shader->CreateShader("../src/ShadersCode/vertex.shader", "../src/ShadersCode/fragment.shader");
 	}
 
-	void Render::UseShader(uint shaderId)
+	void Render::UseShader()
 	{
-		glUseProgram(shaderId);
+		glUseProgram(GetShaderId());
 	}
 
-	uint Render::GetSolidShaderId()
+	uint Render::GetShaderId()
 	{
-		return solidShader->GetShaderId();
-	}
-
-	uint Render::GetTextureShaderId()
-	{
-		return textureShader->GetShaderId();
+		return shader->GetShaderId();
 	}
 
 	void Render::CleanShader()
@@ -106,14 +93,14 @@ namespace GL
 		glDeleteBuffers(1, &UVB);
 	}
 
-	void Render::SetLocation(uint shaderId, uint& location, const char* loc)
+	void Render::SetLocation(uint& location, const char* loc)
 	{
-		location = glGetAttribLocation(shaderId, loc);
+		location = glGetAttribLocation(GetShaderId(), loc);
 	}
 
-	void Render::SetUniform(uint shaderId, uint& uniform, const char* loc)
+	void Render::SetUniform(uint& uniform, const char* loc)
 	{
-		uniform = glGetUniformLocation(shaderId, loc);
+		uniform = glGetUniformLocation(GetShaderId(), loc);
 	}
 
 	void Render::SetBaseAttribs(uint location, int size, GLsizei stride, const void* offset)
@@ -171,30 +158,24 @@ namespace GL
 		glUniform1i(uniformInt, value);
 	}
 
-	void Render::UpdateCameraView(uint shaderId, glm::vec3 position, const char* loc)
+	void Render::UpdateCameraView(uint uniformView, glm::vec3 position)
 	{
-		glUniform3f(GetUniform(shaderId, loc), position.x, position.y, position.z);
+		glUniform3f(uniformView, position.x, position.y, position.z);
 	}
 
-	void Render::UpdateLightVec3(uint shaderId, glm::vec3 light, const char* loc)
+	void Render::UpdateLightVec3(uint uniformLightVec3, glm::vec3 light)
 	{
-		glUniform3f(GetUniform(shaderId, loc), light.x, light.y, light.z);
+		glUniform3f(uniformLightVec3, light.x, light.y, light.z);
 	}
 
-	void Render::UpdateLightFloat(uint shaderId, float value, const char* loc)
+	void Render::UpdateLightFloat(uint uniformLightFloat, float value)
 	{
-		glUniform1f(GetUniform(shaderId, loc), value);
+		glUniform1f(uniformLightFloat, value);
 	}
 
-	void Render::UpdateLightStatus(uint shaderId, bool status, const char* loc)
+	void Render::UpdateLightStatus(uint uniformLightStatus, bool status)
 	{
-		glUniform1i(GetUniform(shaderId, loc), status);
-	}
-
-	void Render::UpdateMaterialValue(uint shaderId, uint value, const char* loc)
-	{
-		uint uniform = GetUniform(shaderId, loc);
-		glUniform1f(uniform, value);
+		glUniform1i(uniformLightStatus, status);
 	}
 
 	uint Render::GetUniform(uint shaderId, const char* loc)

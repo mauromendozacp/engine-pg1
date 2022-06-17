@@ -119,14 +119,14 @@ namespace GameXD
 	void Game::InitMaterial()
 	{
 		defaultSolidMaterial = new SolidMaterial(render);
-		defaultSolidMaterial->Init(render->GetSolidShaderId());
+		defaultSolidMaterial->Init();
 		defaultSolidMaterial->SetAmbient(glm::vec3(0.5f, 0.5f, 0.5f));
 		defaultSolidMaterial->SetDiffuse(glm::vec3(0.4f, 0.4f, 0.4f));
 		defaultSolidMaterial->SetSpecular(glm::vec3(0.5f, 0.5f, 0.5f));
 		defaultSolidMaterial->SetShininess(64.f);
 
 		defaultTextureMaterial = new TextureMaterial(render);
-		defaultTextureMaterial->Init(render->GetTextureShaderId());
+		defaultTextureMaterial->Init();
 		defaultTextureMaterial->SetDiffuse(0);
 		defaultTextureMaterial->SetSpecular(1);
 		defaultTextureMaterial->SetShininess(64.f);
@@ -148,6 +148,7 @@ namespace GameXD
 		floor->Init(SPRITE_TYPE::QUAD);
 		floor->LoadTexture("../res/Textures/floor.jpg", false, TEXTURE_TYPE::BASE);
 		floor->material = defaultTextureMaterial;
+		floor->color = Color(255, 255, 255);
 		floor->SetPos(glm::vec3(0.f, -.5f, 0.f));
 		floor->SetRotX(90.f);
 		floor->SetScale(50.f, 50.f, 1.f);

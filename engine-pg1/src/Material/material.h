@@ -15,7 +15,7 @@ namespace GL
 		Material(Render* render);
 		~Material();
 
-		void Init(uint shaderId);
+		virtual void Init() = 0;
 		virtual void UpdateShader();
 
 		void SetShininess(float shininess);

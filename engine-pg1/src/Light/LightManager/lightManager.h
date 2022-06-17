@@ -25,7 +25,7 @@ namespace GL
 		~LightManager();
 
 		void AddLight(LIGHT_TYPE type);
-		void UseLights(uint shaderId);
+		void UseLights();
 
 		DirectionalLight* GetDirectionalLight();
 		PointLight* GetPointLight(int index);

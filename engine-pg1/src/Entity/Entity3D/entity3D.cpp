@@ -13,6 +13,7 @@ namespace GL
 		EBO = 0;
 
 		uniformAffectedLight = 0;
+		uniformUseTexture = 0;
 		uniformBaseTexture = 0;
 		uniformsTexture = std::vector<uint>();
 
@@ -25,7 +26,7 @@ namespace GL
 
 	void Entity3D::Init()
 	{
-		SetUniforms(render->GetTextureShaderId());
+		SetUniforms();
 
 		render->GenBuffers(VAO, VBO, EBO);
 		if (mesh.vertexs.size() == 0)
@@ -53,7 +54,7 @@ namespace GL
 
 	void Entity3D::Draw()
 	{
-		render->UseShader(render->GetTextureShaderId());
+		render->UseShader();
 		render->BlendEnable();
 		render->TextureEnable();
 		
@@ -84,17 +85,19 @@ namespace GL
 		this->mesh = mesh;
 	}
 	
-	void Entity3D::SetUniforms(uint shaderId)
+	void Entity3D::SetUniforms()
 	{
-		Entity::SetUniforms(shaderId);
-		render->SetUniform(shaderId, uniformAffectedLight, "affectedLight");
-		render->SetUniform(shaderId, uniformBaseTexture, "baseTexture");
+		Entity::SetUniforms();
+		render->SetUniform(uniformAffectedLight, "affectedLight");
+		render->SetUniform(uniformBaseTexture, "baseTexture");
+		render->SetUniform(uniformUseTexture, "useTexture");
 	}
 
 	void Entity3D::NodeDraw()
 	{
 		render->UpdateMVP(uniformModel, uniformView, uniformProjection, matrix.model);
 		render->UpdateStatus(uniformAffectedLight, affectedLight);
+		render->UpdateStatus(uniformUseTexture, true);
 		
 		if (mesh.textures.size() > 0)
 		{

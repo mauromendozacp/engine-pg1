@@ -7,11 +7,10 @@ namespace GL
 		color = Color();
 		material = nullptr;
 
-		shaderId = 0;
-
 		uniformColor = 0;
 		uniformAlpha = 0;
 		uniformAffectedLight = 0;
+		uniformUseTexture = 0;
 
 		VAO = 0;
 		VBO = 0;
@@ -24,6 +23,7 @@ namespace GL
 		moveable = false;
 
 		affectedLight = true;
+		useTexture = false;
 	}
 
 	Entity2D::Entity2D(Render* render) : Entity(render)
@@ -31,11 +31,10 @@ namespace GL
 		color = Color();
 		material = nullptr;
 
-		shaderId = 0;
-
 		uniformColor = 0;
 		uniformAlpha = 0;
 		uniformAffectedLight = 0;
+		uniformUseTexture = 0;
 
 		VAO = 0;
 		VBO = 0;
@@ -48,6 +47,7 @@ namespace GL
 		moveable = false;
 
 		affectedLight = true;
+		useTexture = false;
 	}
 
 	Entity2D::~Entity2D()
@@ -59,6 +59,7 @@ namespace GL
 		render->UpdateMVP(uniformModel, uniformView, uniformProjection, matrix.model);
 		render->UpdateColor(uniformColor, uniformAlpha, color.GetColor());
 		render->UpdateStatus(uniformAffectedLight, affectedLight);
+		render->UpdateStatus(uniformUseTexture, useTexture);
 
 		if (material != nullptr)
 		{
@@ -106,11 +107,12 @@ namespace GL
 		return affectedLight;
 	}
 
-	void Entity2D::SetUniforms(uint shaderId)
+	void Entity2D::SetUniforms()
 	{
-		Entity::SetUniforms(shaderId);
-		render->SetUniform(shaderId, uniformColor, "color");
-		render->SetUniform(shaderId, uniformAlpha, "a");
-		render->SetUniform(shaderId, uniformAffectedLight, "affectedLight");
+		Entity::SetUniforms();
+		render->SetUniform(uniformColor, "color");
+		render->SetUniform(uniformAlpha, "a");
+		render->SetUniform(uniformAffectedLight, "affectedLight");
+		render->SetUniform(uniformUseTexture, "useTexture");
 	}
 }

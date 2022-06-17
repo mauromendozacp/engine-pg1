@@ -32,11 +32,10 @@ namespace GL
 		Material* material;
 
 	protected:
-		uint shaderId;
-
 		uint uniformColor;
 		uint uniformAlpha;
 		uint uniformAffectedLight;
+		uint uniformUseTexture;
 
 		uint VAO, VBO, EBO, tam, vertices;
 		float* vertexs;
@@ -44,8 +43,9 @@ namespace GL
 		bool moveable;
 
 		bool affectedLight;
+		bool useTexture;
 
-		virtual void SetUniforms(uint shaderId);
+		virtual void SetUniforms() override;
 	};
 }
 

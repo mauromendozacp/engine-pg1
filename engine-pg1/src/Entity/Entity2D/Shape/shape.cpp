@@ -16,8 +16,8 @@ namespace GL
 
 	void Shape::Init(SHAPE_TYPE shapeType)
 	{
-		shaderId = render->GetSolidShaderId();
-		SetUniforms(shaderId);
+		useTexture = false;
+		SetUniforms();
 
 		uint* indexes;
 
@@ -61,7 +61,7 @@ namespace GL
 
 	void Shape::Draw()
 	{
-		render->UseShader(shaderId);
+		render->UseShader();
 		UpdateShader();
 		Entity2D::Draw();
 		render->CleanShader();

@@ -46,6 +46,11 @@ namespace GL
 		float GetPitch();
 
 	protected:
+		virtual void SetUniforms() override;
+		virtual void UpdateDirection() = 0;
+		virtual void UpdateView() = 0;
+		void UpdateProjection();
+
 		glm::mat4 view;
 		glm::mat4 projection;
 
@@ -63,10 +68,6 @@ namespace GL
 		float far;
 
 		float sensitivity;
-
-		virtual void UpdateDirection() = 0;
-		virtual void UpdateView() = 0;
-		void UpdateProjection();
 	};
 }
 

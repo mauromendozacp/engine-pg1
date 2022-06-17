@@ -35,6 +35,8 @@ namespace GL
 		this->fov = fov;
 		this->near = near;
 		this->far = far;
+
+		SetUniforms();
 	}
 
 	void Camera::Update()
@@ -45,14 +47,9 @@ namespace GL
 
 	void Camera::UseCamera()
 	{
-		uint shaderId = render->GetSolidShaderId();
-		render->UseShader(shaderId);
-		render->UpdateCameraView(shaderId, transform.position, "viewPosition");
-		render->CleanShader();
-
-		shaderId = render->GetTextureShaderId();
-		render->UseShader(shaderId);
-		render->UpdateCameraView(shaderId, transform.position, "viewPosition");
+		render->UseShader();
+		render->UpdateMVP(uniformModel, uniformView, uniformProjection, matrix.model);
+		render->UpdateCameraView(uniformViewPosition, transform.position);
 		render->CleanShader();
 	}
 
@@ -115,6 +112,12 @@ namespace GL
 	float Camera::GetPitch()
 	{
 		return pitch;
+	}
+
+	void Camera::SetUniforms()
+	{
+		Entity::SetUniforms();
+		render->SetUniform(uniformViewPosition, "viewPosition");
 	}
 
 	void Camera::Rotate()

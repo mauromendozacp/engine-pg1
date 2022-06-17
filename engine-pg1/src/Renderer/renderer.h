@@ -22,9 +22,8 @@ namespace GL
 		void Init();
 		void SetDepth();
 
-		void UseShader(uint shaderId);
-		uint GetSolidShaderId();
-		uint GetTextureShaderId();
+		void UseShader();
+		uint GetShaderId();
 		void CleanShader();
 
 		void GenBuffers(uint& VAO, uint& VBO, uint& EBO);
@@ -35,8 +34,8 @@ namespace GL
 		void UnBind(uint& VAO, uint& VBO, uint& EBO);
 		void UnBind(uint& VAO, uint& VBO, uint& EBO, uint& UVB);
 
-		void SetLocation(uint shaderId, uint& location, const char* loc);
-		void SetUniform(uint shaderId, uint& uniform, const char* loc);
+		void SetLocation(uint& location, const char* loc);
+		void SetUniform(uint& uniform, const char* loc);
 		void SetBaseAttribs(uint location, int size, GLsizei stride, const void* offset);
 		void SetTextureAttribs(uint location, int size, int stride, int offset);
 
@@ -48,11 +47,10 @@ namespace GL
 		void UpdateTexture(uint uniformTexture, uint textureId);
 		void UpdateFloatValue(uint uniformFloat, float value);
 		void UpdateIntValue(uint uniformInt, int value);
-		void UpdateCameraView(uint shaderId, glm::vec3 position, const char* loc);
-		void UpdateLightVec3(uint shaderId, glm::vec3 light, const char* loc);
-		void UpdateLightFloat(uint shaderId, float value, const char* loc);
-		void UpdateLightStatus(uint shaderId, bool status, const char* loc);
-		void UpdateMaterialValue(uint shaderId, uint value, const char* loc);
+		void UpdateCameraView(uint uniformView, glm::vec3 position);
+		void UpdateLightVec3(uint uniformLightVec3, glm::vec3 light);
+		void UpdateLightFloat(uint uniformLightFloat, float value);
+		void UpdateLightStatus(uint uniformLightStatus, bool status);
 		uint GetUniform(uint shaderId, const char* loc);
 
 		void SetView(glm::mat4 view);
@@ -73,8 +71,7 @@ namespace GL
 		void UseTexture(int number, uint id);
 
 	private:
-		Shader* solidShader;
-		Shader* textureShader;
+		Shader* shader;
 
 		glm::mat4 view;
 		glm::mat4 projection;

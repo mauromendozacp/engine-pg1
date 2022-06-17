@@ -316,16 +316,10 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\src\ShadersCode\textureFragment.shader">
+    <None Include="..\src\ShadersCode\fragment.shader">
       <Filter>ShaderCode</Filter>
     </None>
-    <None Include="..\src\ShadersCode\textureVertex.shader">
-      <Filter>ShaderCode</Filter>
-    </None>
-    <None Include="..\src\ShadersCode\solidFragment.shader">
-      <Filter>ShaderCode</Filter>
-    </None>
-    <None Include="..\src\ShadersCode\solidVertex.shader">
+    <None Include="..\src\ShadersCode\vertex.shader">
       <Filter>ShaderCode</Filter>
     </None>
   </ItemGroup>

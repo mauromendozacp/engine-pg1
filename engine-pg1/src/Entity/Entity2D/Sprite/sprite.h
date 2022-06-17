@@ -52,7 +52,7 @@ namespace GL
 		Frame currFrame;
 		bool transparent;
 
-		void SetUniforms(uint shaderId);
+		void SetUniforms() override;
 	};
 }
 

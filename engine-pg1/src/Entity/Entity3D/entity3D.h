@@ -32,18 +32,19 @@ namespace GL
 
 		Material* material;
 
-	private:
+	protected:
 		Mesh mesh;
 
 		uint VAO, VBO, EBO;
 
 		uint uniformAffectedLight;
+		uint uniformUseTexture;
 		uint uniformBaseTexture;
 		std::vector<uint> uniformsTexture;
 
 		bool affectedLight;
 
-		void SetUniforms(uint shaderId);
+		virtual void SetUniforms() override;
 		void NodeDraw();
 	};
 }

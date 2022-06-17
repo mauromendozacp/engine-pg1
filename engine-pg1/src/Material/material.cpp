@@ -17,13 +17,6 @@ namespace GL
 	{
 	}
 
-	void Material::Init(uint shaderId)
-	{
-		render->SetUniform(shaderId, uniformDiffuse, "material.diffuse");
-		render->SetUniform(shaderId, uniformSpecular, "material.specular");
-		render->SetUniform(shaderId, uniformShininess, "material.shininess");
-	}
-
 	void Material::UpdateShader()
 	{
 		render->UpdateFloatValue(uniformShininess, shininess);

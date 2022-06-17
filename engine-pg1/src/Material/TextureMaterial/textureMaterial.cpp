@@ -12,9 +12,11 @@ namespace GL
 	{
 	}
 
-	void TextureMaterial::Init(uint shaderId)
+	void TextureMaterial::Init()
 	{
-		Material::Init(shaderId);
+		render->SetUniform(uniformDiffuse, "textureMaterial.diffuse");
+		render->SetUniform(uniformSpecular, "textureMaterial.specular");
+		render->SetUniform(uniformShininess, "textureMaterial.shininess");
 	}
 
 	void TextureMaterial::UpdateShader()

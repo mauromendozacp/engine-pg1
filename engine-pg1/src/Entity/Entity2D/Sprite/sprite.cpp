@@ -31,9 +31,9 @@ namespace GL
 	void Sprite::Init(SPRITE_TYPE type)
 	{
 		this->type = type;
+		useTexture = true;
 
-		shaderId = render->GetTextureShaderId();
-		SetUniforms(shaderId);
+		SetUniforms();
 
 		uint* indexes = 0;
 
@@ -83,7 +83,7 @@ namespace GL
 	void Sprite::Draw()
 	{
 		render->BlendEnable();
-		render->UseShader(shaderId);
+		render->UseShader();
 		UpdateShader();
 		render->UpdateTexture(uniformBaseTexture, baseTexture->id);
 		render->BindDiffuseMap(baseTexture->id);
@@ -252,9 +252,9 @@ namespace GL
 		return transparent;
 	}
 
-	void Sprite::SetUniforms(uint shaderId)
+	void Sprite::SetUniforms()
 	{
-		Entity2D::SetUniforms(shaderId);
-		render->SetUniform(shaderId, uniformBaseTexture, "baseTexture");
+		Entity2D::SetUniforms();
+		render->SetUniform(uniformBaseTexture, "baseTexture");
 	}
 }

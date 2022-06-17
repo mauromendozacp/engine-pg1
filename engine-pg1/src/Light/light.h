@@ -14,7 +14,7 @@ namespace GL
 		Light(Render* render);
 		~Light();
 
-		Color color;
+		virtual void UseLight();
 
 		void SetAmbient(glm::vec3 ambient);
 		void SetDiffuse(glm::vec3 diffuse);
@@ -26,11 +26,19 @@ namespace GL
 		glm::vec3 GetSpecular();
 		bool IsEnabled();
 
+		Color color;
+
 	protected:
 		glm::vec3 ambient;
 		glm::vec3 diffuse;
 		glm::vec3 specular;
 		bool enabled;
+
+		uint uniformColor;
+		uint uniformAmbient;
+		uint uniformDiffuse;
+		uint uniformSpecular;
+		uint uniformEnabled;
 	};
 }
 
