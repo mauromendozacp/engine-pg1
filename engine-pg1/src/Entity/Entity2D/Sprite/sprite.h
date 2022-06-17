@@ -53,6 +53,7 @@ namespace GL
 		bool transparent;
 
 		void SetUniforms() override;
+		void UpdateShader() override;
 	};
 }
 

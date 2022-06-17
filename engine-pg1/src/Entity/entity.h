@@ -117,6 +117,7 @@ namespace GL
 		uint locationTexCoord;
 
 		virtual void SetUniforms();
+		virtual void UpdateShader();
 
 	private:
 		glm::quat EulerToQuat(glm::vec3 euler);

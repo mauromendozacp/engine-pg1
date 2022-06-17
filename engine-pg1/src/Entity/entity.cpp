@@ -372,6 +372,11 @@ namespace GL
 		render->SetLocation(locationTexCoord, "aTex");
 	}
 
+	void Entity::UpdateShader()
+	{
+		render->UpdateMVP(uniformModel, uniformView, uniformProjection, matrix.model);
+	}
+
 	glm::quat Entity::EulerToQuat(glm::vec3 euler)
 	{
 		euler *= deg2rad;

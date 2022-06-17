@@ -17,9 +17,9 @@ namespace GL
 	{
 	}
 
-	void SpotLight::UseLight()
+	void SpotLight::UpdateShader()
 	{
-		PointLight::UseLight();
+		PointLight::UpdateShader();
 		render->UpdateVec3Value(uniformDirection, direction);
 		render->UpdateFloatValue(uniformCutOff, cutOff);
 		render->UpdateFloatValue(uniformOuterCutOff, outerCutOff);

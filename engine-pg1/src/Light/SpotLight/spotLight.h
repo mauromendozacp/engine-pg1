@@ -11,7 +11,7 @@ namespace GL
 		SpotLight(Render* render);
 		~SpotLight();
 
-		void UseLight() override;
+		void UpdateShader() override;
 		void SetUniforms(int index) override;
 
 		void SetDirection(glm::vec3 direction);

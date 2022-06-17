@@ -22,9 +22,9 @@ namespace GL
 	{
 	}
 
-	void Light::UseLight()
+	void Light::UpdateShader()
 	{
-		render->UpdateMVP(uniformModel, uniformView, uniformProjection, matrix.model);
+		Entity::UpdateShader();
 		render->UpdateVec3Value(uniformColor, color.GetColorRGB());
 		render->UpdateVec3Value(uniformAmbient, ambient);
 		render->UpdateVec3Value(uniformDiffuse, diffuse);

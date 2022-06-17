@@ -84,10 +84,10 @@ namespace GL
 	{
 		render->BlendEnable();
 		render->UseShader();
+
 		UpdateShader();
-		render->UpdateTexture(uniformBaseTexture, baseTexture->id);
-		render->UseTexture(0, baseTexture->id);
 		Entity2D::Draw();
+
 		render->TextureDisable();
 		render->CleanShader();
 		render->BlendDisable();
@@ -255,5 +255,12 @@ namespace GL
 	{
 		Entity2D::SetUniforms();
 		render->SetUniform(uniformBaseTexture, "baseTexture");
+	}
+
+	void Sprite::UpdateShader()
+	{
+		Entity2D::UpdateShader();
+		render->UpdateTexture(uniformBaseTexture, baseTexture->id);
+		render->UseTexture(0, baseTexture->id);
 	}
 }

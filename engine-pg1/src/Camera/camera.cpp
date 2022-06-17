@@ -48,7 +48,7 @@ namespace GL
 	void Camera::UseCamera()
 	{
 		render->UseShader();
-		render->UpdateMVP(uniformModel, uniformView, uniformProjection, matrix.model);
+		Entity::UpdateShader();
 		render->UpdateVec3Value(uniformViewPosition, transform.position);
 		render->CleanShader();
 	}

@@ -15,8 +15,7 @@ namespace GL
 		Entity2D();
 		Entity2D(Render* render);
 		~Entity2D();
-
-		void UpdateShader();
+		
 		void Draw();
 		void DeInit();
 
@@ -46,6 +45,7 @@ namespace GL
 		bool useTexture;
 
 		virtual void SetUniforms() override;
+		virtual void UpdateShader() override;
 	};
 }
 

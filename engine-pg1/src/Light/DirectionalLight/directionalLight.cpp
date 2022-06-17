@@ -13,9 +13,9 @@ namespace GL
 	{
 	}
 
-	void DirectionalLight::UseLight()
+	void DirectionalLight::UpdateShader()
 	{
-		Light::UseLight();
+		Light::UpdateShader();
 		render->UpdateVec3Value(uniformDirection, direction);
 	}
 

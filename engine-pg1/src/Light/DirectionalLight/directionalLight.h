@@ -11,7 +11,7 @@ namespace GL
 		DirectionalLight(Render* render);
 		~DirectionalLight();
 		
-		void UseLight() override;
+		void UpdateShader() override;
 		void SetUniforms();
 
 		void SetDirection(glm::vec3 direction);

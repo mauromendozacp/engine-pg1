@@ -8,6 +8,7 @@ namespace GL
 		linear = 0.f;
 		quadratic = 0.f;
 
+		uniformPosition = 0;
 		uniformConstant = 0;
 		uniformLinear = 0;
 		uniformQuadratic = 0;
@@ -17,9 +18,9 @@ namespace GL
 	{
 	}
 
-	void PointLight::UseLight()
+	void PointLight::UpdateShader()
 	{
-		Light::UseLight();
+		Light::UpdateShader();
 		render->UpdateVec3Value(uniformPosition, transform.position);
 		render->UpdateFloatValue(uniformConstant, constant);
 		render->UpdateFloatValue(uniformLinear, linear);

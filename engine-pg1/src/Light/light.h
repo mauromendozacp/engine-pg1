@@ -14,7 +14,7 @@ namespace GL
 		Light(Render* render);
 		~Light();
 
-		virtual void UseLight();
+		virtual void UpdateShader() override;
 
 		void SetAmbient(glm::vec3 ambient);
 		void SetDiffuse(glm::vec3 diffuse);

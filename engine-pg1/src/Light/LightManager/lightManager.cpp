@@ -74,18 +74,18 @@ namespace GL
 
 		if (directionalLight != nullptr)
 		{
-			directionalLight->UseLight();
+			directionalLight->UpdateShader();
 		}
 
 		for (int i = 0; i < lightMax; i++)
 		{
 			if (pointLights[i] != nullptr)
 			{
-				pointLights[i]->UseLight();
+				pointLights[i]->UpdateShader();
 			}
 			if (spotLights[i] != nullptr)
 			{
-				spotLights[i]->UseLight();
+				spotLights[i]->UpdateShader();
 			}
 		}
 
