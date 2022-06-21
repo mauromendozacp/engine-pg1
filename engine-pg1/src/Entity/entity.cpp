@@ -8,10 +8,6 @@ namespace GL
 	{
 		render = nullptr;
 
-		name = "";
-		parent = nullptr;
-		nodes = std::list<Entity*>();
-
 		transform.position = glm::vec3(0.f);
 		transform.eulerAngles = glm::vec3(0.f);
 		transform.scale = glm::vec3(1.f);
@@ -22,9 +18,9 @@ namespace GL
 		transform.localScale = glm::vec3(1.f);
 		transform.localRotation = glm::quat(0.f, 0.f, 0.f, 1.f);
 
-		transform.forward = glm::vec3(0.f);
-		transform.up = glm::vec3(0.f);
-		transform.right = glm::vec3(0.f);
+		transform.forward = glm::vec3(0.f, 0.f, 1.f);
+		transform.up = glm::vec3(0.f, 1.f, 0.f);
+		transform.right = glm::vec3(1.f, 0.f, 0.f);
 
 		matrix.model = glm::mat4(1.f);
 		matrix.translate = glm::mat4(1.f);
@@ -32,6 +28,12 @@ namespace GL
 		matrix.rotationY = glm::mat4(1.f);
 		matrix.rotationZ = glm::mat4(1.f);
 		matrix.scale = glm::mat4(1.f);
+
+		name = "";
+		canDraw = true;
+
+		parent = nullptr;
+		nodes = std::list<Entity*>();
 
 		uniformModel = 0;
 		uniformView = 0;
@@ -44,10 +46,6 @@ namespace GL
 	{
 		this->render = render;
 
-		name = "";
-		parent = nullptr;
-		nodes = std::list<Entity*>();
-
 		transform.position = glm::vec3(0.f);
 		transform.eulerAngles = glm::vec3(0.f);
 		transform.scale = glm::vec3(1.f);
@@ -58,9 +56,9 @@ namespace GL
 		transform.localScale = glm::vec3(1.f);
 		transform.localRotation = glm::quat(0.f, 0.f, 0.f, 1.f);
 
-		transform.forward = glm::vec3(0.f);
-		transform.up = glm::vec3(0.f);
-		transform.right = glm::vec3(0.f);
+		transform.forward = glm::vec3(0.f, 0.f, 1.f);
+		transform.up = glm::vec3(0.f, 1.f, 0.f);
+		transform.right = glm::vec3(1.f, 0.f, 0.f);
 
 		matrix.model = glm::mat4(1.f);
 		matrix.translate = glm::mat4(1.f);
@@ -68,6 +66,12 @@ namespace GL
 		matrix.rotationY = glm::mat4(1.f);
 		matrix.rotationZ = glm::mat4(1.f);
 		matrix.scale = glm::mat4(1.f);
+
+		name = "";
+		canDraw = true;
+
+		parent = nullptr;
+		nodes = std::list<Entity*>();
 
 		uniformModel = 0;
 		uniformView = 0;
@@ -84,6 +88,11 @@ namespace GL
 	void Entity::SetName(std::string name)
 	{
 		this->name = name;
+	}
+
+	void Entity::SetCanDraw(bool canDraw)
+	{
+		this->canDraw = canDraw;
 	}
 
 	void Entity::SetParent(Entity* parent)
@@ -215,6 +224,8 @@ namespace GL
 		SetPos(glm::vec3(GetPosX(), GetPosY(), z));
 	}
 
+	
+
 	void Entity::SetRot(float x, float y, float z)
 	{
 		SetRot(glm::vec3(x, y, z ));
@@ -248,6 +259,11 @@ namespace GL
 	std::string Entity::GetName()
 	{
 		return name;
+	}
+
+	bool Entity::IsCanDraw()
+	{
+		return canDraw;
 	}
 
 	Entity* Entity::GetParent()
@@ -284,6 +300,21 @@ namespace GL
 		}
 
 		return nullptr;
+	}
+
+	glm::vec3 Entity::GetForward()
+	{
+		return transform.forward;
+	}
+
+	glm::vec3 Entity::GetUp()
+	{
+		return transform.up;
+	}
+
+	glm::vec3 Entity::GetRight()
+	{
+		return transform.right;
 	}
 
 	glm::vec3 Entity::GetPos()

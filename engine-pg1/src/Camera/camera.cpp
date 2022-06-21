@@ -9,9 +9,6 @@ namespace GL
 
 		uniformViewPosition = 0;
 
-		front = glm::vec3(0.0f);
-		up = glm::vec3(0.0f);
-
 		yaw = -90.f;
 		pitch = 0.f;
 
@@ -29,14 +26,13 @@ namespace GL
 
 	void Camera::Init(float fov, float width, float height, float near, float far)
 	{
-		front = glm::vec3(0.f, 0.f, -1.f);
-		up = glm::vec3(0.f, 1.f, 0.f);
 		aspect = width / height;
 		this->fov = fov;
 		this->near = near;
 		this->far = far;
 
 		SetUniforms();
+		UpdateProjection();
 	}
 
 	void Camera::Update()
@@ -51,16 +47,6 @@ namespace GL
 		Entity::UpdateShader();
 		render->UpdateVec3Value(uniformViewPosition, transform.position);
 		render->CleanShader();
-	}
-
-	glm::vec3 Camera::GetFront()
-	{
-		return front;
-	}
-
-	glm::vec3 Camera::GetUp()
-	{
-		return up;
 	}
 
 	glm::mat4 Camera::GetView()
@@ -112,6 +98,21 @@ namespace GL
 	float Camera::GetPitch()
 	{
 		return pitch;
+	}
+
+	float Camera::GetNear()
+	{
+		return near;
+	}
+
+	float Camera::GetFar()
+	{
+		return far;
+	}
+
+	float Camera::GetAspect()
+	{
+		return aspect;
 	}
 
 	void Camera::SetUniforms()

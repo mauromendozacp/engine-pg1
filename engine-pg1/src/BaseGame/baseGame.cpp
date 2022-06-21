@@ -8,6 +8,7 @@ namespace GL
 		render = nullptr;
 		mainCamera = nullptr;
 		lightManager = nullptr;
+		occlusionCulling = nullptr;
 		terminateEngine = false;
 	}
 
@@ -36,6 +37,12 @@ namespace GL
 			delete lightManager;
 			lightManager = nullptr;
 		}
+
+		if (occlusionCulling != nullptr)
+		{
+			delete occlusionCulling;
+			occlusionCulling = nullptr;
+		}
 	}
 
 	void BaseGame::Play()
@@ -52,10 +59,6 @@ namespace GL
 
 		glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
 
-		window = new Window(1280.0f, 720.0f, "ENGINARDOOOOUUU");
-		if (!window->OpenWindow())
-			return;
-
 		InitEngine();
 		UpdateEngine();
 		DeInitEngine();
@@ -63,16 +66,28 @@ namespace GL
 
 	void BaseGame::InitEngine()
 	{
+		window = new Window(1280.0f, 720.0f, "ENGINARDOOOOUUU");
+		if (!window->OpenWindow())
+			return;
+
 		window->Init();
 
 		if (glewInit() != GLEW_OK)
 			std::cout << "ERROR" << std::endl;
 
 		render = new Render();
+		render->Init();
+
 		lightManager = new LightManager(render);
 
-		render->Init();
+		mainCamera = new ThirdPersonCamera(render);
+		mainCamera->Init(45.f, window->GetWidth(), window->GetHeight(), 0.1f, 100.f);
+		mainCamera->SetSensitivity(0.25f);
+
 		Input::Init(window, mainCamera);
+
+		occlusionCulling = new OcclusionCulling();
+		occlusionCulling->Init(mainCamera);		
 
 		srand(time(NULL));
 
@@ -87,6 +102,7 @@ namespace GL
 			Timer::Update(glfwGetTime());
 
 			Update();
+			occlusionCulling->Update();
 			lightManager->UseLights();
 			Draw();
 

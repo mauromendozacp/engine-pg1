@@ -141,7 +141,11 @@ namespace GL
 			render->UseTexture(i, mesh.textures[i].id);
 		}
 
-		render->Draw(VAO, mesh.indexes.size());
+		if (canDraw)
+		{
+			render->Draw(VAO, mesh.indexes.size());
+		}
+
 		for (std::list<Entity*>::iterator it = nodes.begin(); it != nodes.end(); ++it)
 		{
 			Entity3D* node3d = static_cast<Entity3D*>((*it));

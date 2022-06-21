@@ -47,6 +47,7 @@ namespace GL
 		~Entity();
 
 		void SetName(std::string name);
+		void SetCanDraw(bool canDraw);
 
 		void SetParent(Entity* parent);
 		void AddNode(Entity* node);
@@ -72,11 +73,16 @@ namespace GL
 		void SetScale(float size);
 
 		std::string GetName();
+		bool IsCanDraw();
 
 		Entity* GetParent();
 		std::list<Entity*> GetNodes();
 		Entity* GetNode(std::string nodeName);
 		Entity* GetNode(int nodeIndex);
+
+		glm::vec3 GetForward();
+		glm::vec3 GetUp();
+		glm::vec3 GetRight();
 
 		glm::vec3 GetPos();
 		glm::vec3 GetRot();
@@ -101,13 +107,13 @@ namespace GL
 	protected:
 		Render* render;
 
-		std::string name;
+		Matrix matrix;
 		Transform transform;
+		std::string name;
+		bool canDraw;
 
 		Entity* parent;
 		std::list<Entity*> nodes;
-
-		Matrix matrix;
 
 		uint uniformModel;
 		uint uniformView;

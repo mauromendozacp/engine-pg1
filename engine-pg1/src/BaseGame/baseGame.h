@@ -10,6 +10,8 @@
 
 #include "Light/LightManager/lightManager.h"
 #include "Collision/Collision2D/collision2D.h"
+#include "Camera/ThirdPersonCamera/thirdPersonCamera.h"
+#include "OcclusionCulling/occlusionCulling.h"
 
 #include <stdlib.h>
 #include <time.h>
@@ -28,6 +30,7 @@ namespace GL
 		Render* render;
 		Camera* mainCamera;
 		LightManager* lightManager;
+		OcclusionCulling* occlusionCulling;
 		std::string title;
 		bool terminateEngine;
 

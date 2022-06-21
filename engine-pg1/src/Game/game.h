@@ -38,13 +38,14 @@ namespace GameXD
 		void DeInit() override;
 
 	private:
-		Player* player;
 		Sprite* floor;
 		Shape* cubeLight[cubesLenght];
 		Shape* spotCubeLight;
 		Sprite* tnt;
 
+		Player* player;
 		Entity3D* guitarBackpack;
+		Entity3D* character;
 
 		SolidMaterial* defaultSolidMaterial;
 		TextureMaterial* defaultTextureMaterial;

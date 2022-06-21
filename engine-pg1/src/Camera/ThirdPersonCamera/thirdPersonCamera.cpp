@@ -34,16 +34,18 @@ namespace GL
 		direction.x = cos(glm::radians(yaw)) * cos(glm::radians(pitch));
 		direction.y = sin(glm::radians(pitch));
 		direction.z = sin(glm::radians(yaw)) * cos(glm::radians(pitch));
-		front = glm::normalize(direction);
-
-		transform.position = target->GetPos() - front * offset;
+		
+		transform.forward = glm::normalize(direction);
+		transform.right = glm::normalize(glm::cross(transform.forward, glm::vec3(0.f, 1.f, 0.f)));
+		transform.up = glm::normalize(glm::cross(transform.right, transform.forward));
+		transform.position = target->GetPos() - transform.forward * offset;
 
 		UpdateView();
 	}
 
 	void ThirdPersonCamera::UpdateView()
 	{
-		view = glm::lookAt(transform.position, target->GetPos(), up);
+		view = glm::lookAt(transform.position, target->GetPos(), transform.up);
 
 		render->SetView(view);
 	}

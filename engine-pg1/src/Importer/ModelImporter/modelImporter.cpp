@@ -106,6 +106,8 @@ namespace GL
 
         aiMaterial* material = scene->mMaterials[mesh->mMaterialIndex];
 
+        std::vector<Texture> baseColorMaps = LoadMaterialTextures(material, aiTextureType_BASE_COLOR, "texture_base_color");
+        textures.insert(textures.end(), baseColorMaps.begin(), baseColorMaps.end());
         std::vector<Texture> diffuseMaps = LoadMaterialTextures(material, aiTextureType_DIFFUSE, "texture_diffuse");
         textures.insert(textures.end(), diffuseMaps.begin(), diffuseMaps.end());
         std::vector<Texture> specularMaps = LoadMaterialTextures(material, aiTextureType_SPECULAR, "texture_specular");
@@ -114,6 +116,12 @@ namespace GL
         textures.insert(textures.end(), normalMaps.begin(), normalMaps.end());
         std::vector<Texture> heightMaps = LoadMaterialTextures(material, aiTextureType_AMBIENT, "texture_height");
         textures.insert(textures.end(), heightMaps.begin(), heightMaps.end());
+        std::vector<Texture> metalnessMaps = LoadMaterialTextures(material, aiTextureType_METALNESS, "texture_metalness");
+        textures.insert(textures.end(), metalnessMaps.begin(), metalnessMaps.end());
+        std::vector<Texture> diffuseRoughnessMaps = LoadMaterialTextures(material, aiTextureType_DIFFUSE_ROUGHNESS, "texture_diffuse_roughness");
+        textures.insert(textures.end(), diffuseRoughnessMaps.begin(), diffuseRoughnessMaps.end());
+        std::vector<Texture> ambientOcclusionMaps = LoadMaterialTextures(material, aiTextureType_AMBIENT_OCCLUSION, "texture_ambient_occlusion");
+        textures.insert(textures.end(), ambientOcclusionMaps.begin(), ambientOcclusionMaps.end());
 
         for (int i = 0; i < textures.size(); i++)
         {

@@ -97,6 +97,12 @@
     <ClCompile Include="..\src\Entity\Entity2D\Sprite\Tile\tile.cpp">
       <Filter>Entity\Entity2D\Sprite\Tile</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\Plane\plane.cpp">
+      <Filter>Plane</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\OcclusionCulling\occlusionCulling.cpp">
+      <Filter>OcclusionCulling</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Window">
@@ -207,6 +213,12 @@
     <Filter Include="Entity\Entity2D\Sprite\Tile">
       <UniqueIdentifier>{ec769838-63c6-4995-a830-ea89aa08b8a5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Plane">
+      <UniqueIdentifier>{d949c5c5-1215-4887-adfc-3be4c8532e89}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="OcclusionCulling">
+      <UniqueIdentifier>{7e735ee4-949e-4435-b48c-c5822ba5e48c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\Window\window.h">
@@ -313,6 +325,12 @@
     </ClInclude>
     <ClInclude Include="..\src\Entity\Entity2D\Sprite\Tile\tile.h">
       <Filter>Entity\Entity2D\Sprite\Tile</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Plane\plane.h">
+      <Filter>Plane</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\OcclusionCulling\occlusionCulling.h">
+      <Filter>OcclusionCulling</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -69,7 +69,10 @@ namespace GL
 
 	void Entity2D::Draw()
 	{
-		render->Draw(VAO, vertices);
+		if (canDraw)
+		{
+			render->Draw(VAO, vertices);
+		}
 	}
 
 	void Entity2D::DeInit()

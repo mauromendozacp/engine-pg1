@@ -183,6 +183,8 @@
     <ClCompile Include="..\src\Material\material.cpp" />
     <ClCompile Include="..\src\Material\SolidMaterial\solidMaterial.cpp" />
     <ClCompile Include="..\src\Material\TextureMaterial\textureMaterial.cpp" />
+    <ClCompile Include="..\src\OcclusionCulling\occlusionCulling.cpp" />
+    <ClCompile Include="..\src\Plane\plane.cpp" />
     <ClCompile Include="..\src\Renderer\renderer.cpp" />
     <ClCompile Include="..\src\Shader\shader.cpp" />
     <ClCompile Include="..\src\StbImage\stb_image.cpp" />
@@ -220,6 +222,8 @@
     <ClInclude Include="..\src\Material\material.h" />
     <ClInclude Include="..\src\Material\SolidMaterial\solidMaterial.h" />
     <ClInclude Include="..\src\Material\TextureMaterial\textureMaterial.h" />
+    <ClInclude Include="..\src\OcclusionCulling\occlusionCulling.h" />
+    <ClInclude Include="..\src\Plane\plane.h" />
     <ClInclude Include="..\src\Renderer\renderer.h" />
     <ClInclude Include="..\src\Shader\shader.h" />
     <ClInclude Include="..\src\StbImage\stb_image.h" />

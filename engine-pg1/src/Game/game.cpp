@@ -4,11 +4,13 @@ namespace GameXD
 {
 	Game::Game()
 	{
-		guitarBackpack = nullptr;
 		spotCubeLight = nullptr;
-		player = nullptr;
 		floor = nullptr;
 		tnt = nullptr;
+
+		guitarBackpack = nullptr;
+		character = nullptr;
+		player = nullptr;
 
 		defaultSolidMaterial = nullptr;
 		defaultTextureMaterial = nullptr;
@@ -21,15 +23,20 @@ namespace GameXD
 
 	Game::~Game()
 	{
+		if (player != nullptr)
+		{
+			delete player;
+			player = nullptr;
+		}
 		if (guitarBackpack != nullptr)
 		{
 			delete guitarBackpack;
 			guitarBackpack = nullptr;
 		}
-		if (player != nullptr)
+		if (character != nullptr)
 		{
-			delete player;
-			player = nullptr;
+			delete character;
+			character = nullptr;
 		}
 		if (floor != nullptr)
 		{
@@ -134,6 +141,7 @@ namespace GameXD
 
 	void Game::InitEntities()
 	{
+		guitarBackpack = new Entity3D(render);
 		guitarBackpack = ModelImporter::LoadModel(render, "../res/Models/survival-guitar-backpack/backpack.obj");
 		guitarBackpack->SetPos(glm::vec3(-5.f, 2.5f, -15.f));
 		guitarBackpack->SetScale(1.0f);
@@ -141,12 +149,11 @@ namespace GameXD
 
 		//player = static_cast<Player*>(ModelImporter::LoadModel(render, "../res/Models/survival-guitar-backpack/backpack.obj"));
 		player = new Player(render);
-		player->Init(5.f, 75.f);
+		player->Init(mainCamera, 5.f, 75.f);
 		player->material = defaultTextureMaterial;
 		player->color = Color(255, 255, 255);
 		player->SetScale(1.0f);
-		player->SetCamera(window, CAMERA_TYPE::TPS);
-		mainCamera = player->GetCamera();
+		player->SetCamera(CAMERA_TYPE::TPS);
 
 		floor = new Sprite(render);
 		floor->Init(SPRITE_TYPE::QUAD);
@@ -178,6 +185,9 @@ namespace GameXD
 		tnt->material = defaultTextureMaterial;
 		tnt->LoadTexture("../res/Textures/tnt.png", true, GL::TEXTURE_TYPE::BASE);
 		tnt->SetPos(glm::vec3(2.5f, 0.f, 2.5f));
+
+		occlusionCulling->AddEntity(tnt);
+		occlusionCulling->AddEntity(guitarBackpack);
 	}
 
 	void Game::InitLights()

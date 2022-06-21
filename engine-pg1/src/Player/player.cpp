@@ -20,8 +20,9 @@ namespace GameXD
 	{
 	}
 
-	void Player::Init(float moveSpeed, float rotSpeed)
+	void Player::Init(Camera* camera, float moveSpeed, float rotSpeed)
 	{
+		this->camera = camera;
 		this->moveSpeed = moveSpeed;
 		this->rotSpeed = rotSpeed;
 	}
@@ -36,47 +37,38 @@ namespace GameXD
 		return camera;
 	}
 
-	void Player::SetCamera(Window* window, CAMERA_TYPE cameraType)
+	void Player::SetCamera(CAMERA_TYPE cameraType)
 	{
 		if (cameraType == CAMERA_TYPE::FPS)
 		{
-			camera = new FirstPersonCamera(render);
 			FirstPersonCamera* camFPS = static_cast<FirstPersonCamera*>(camera);
 			camFPS->SetSpeed(5.f);
-			camera = camFPS;
 		}
 		else if (cameraType == CAMERA_TYPE::TPS)
 		{
-			camera = new ThirdPersonCamera(render);
 			ThirdPersonCamera* camTPS = static_cast<ThirdPersonCamera*>(camera);
 			camTPS->SetTarget(this);
 			camTPS->SetOffset(10.f);
-			camera = camTPS;
 		}
-
-		camera->Init(45.f, window->GetWidth(), window->GetHeight(), 0.1f, 100.f);
-		camera->SetSensitivity(0.25f);
-
-		Input::SetCamera(camera);
 	}
 
 	void Player::Inputs()
 	{
 		if (GL::Input::IsKeyPressed(KEY_A) || GL::Input::IsKeyPressed(KEY_LEFT))
 		{
-			SetPos(GetPos() - glm::normalize(glm::cross(camera->GetFront(), camera->GetUp())) * GetSpeedDelta());
+			SetPos(GetPos() - glm::normalize(glm::cross(camera->GetForward(), camera->GetUp())) * GetSpeedDelta());
 		}
 		else if (GL::Input::IsKeyPressed(KEY_D) || GL::Input::IsKeyPressed(KEY_RIGHT))
 		{
-			SetPos(GetPos() + glm::normalize(glm::cross(camera->GetFront(), camera->GetUp())) * GetSpeedDelta());
+			SetPos(GetPos() + glm::normalize(glm::cross(camera->GetForward(), camera->GetUp())) * GetSpeedDelta());
 		}
 		else if (GL::Input::IsKeyPressed(KEY_W) || GL::Input::IsKeyPressed(KEY_UP))
 		{
-			SetPos(GetPos() + GetSpeedDelta() * camera->GetFront());
+			SetPos(GetPos() + GetSpeedDelta() * camera->GetForward());
 		}
 		else if (GL::Input::IsKeyPressed(KEY_S) || GL::Input::IsKeyPressed(KEY_DOWN))
 		{
-			SetPos(GetPos() - GetSpeedDelta() * camera->GetFront());
+			SetPos(GetPos() - GetSpeedDelta() * camera->GetForward());
 		}
 
 		if (GL::Input::IsKeyPressed(KEY_Q))

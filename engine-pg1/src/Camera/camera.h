@@ -27,9 +27,6 @@ namespace GL
 		void Rotate();
 		void Reset();
 
-		glm::vec3 GetFront();
-		glm::vec3 GetUp();
-
 		glm::mat4 GetView();
 		glm::mat4 GetProjection();
 
@@ -45,6 +42,10 @@ namespace GL
 		void SetPitch(float pitch);
 		float GetPitch();
 
+		float GetNear();
+		float GetFar();
+		float GetAspect();
+
 	protected:
 		virtual void SetUniforms() override;
 		virtual void UpdateDirection() = 0;
@@ -55,9 +56,6 @@ namespace GL
 		glm::mat4 projection;
 
 		uint uniformViewPosition;
-
-		glm::vec3 front;
-		glm::vec3 up;
 
 		float yaw;
 		float pitch;
