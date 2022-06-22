@@ -23,6 +23,8 @@ namespace GL
 		void SetMoveable(bool moveable);
 		void SetAffectedLight(bool affectedLight);
 
+		std::vector<Vertex> GetVertexs() override;
+
 		bool IsMoveable();
 		bool HasCollider();
 		bool IsAffectedLight();

@@ -31,6 +31,7 @@ namespace GL
 		void DeInit();
 
 		void SetMesh(Mesh mesh);
+		std::vector<Vertex> GetVertexs() override;
 
 		Material* material;
 		Color color;

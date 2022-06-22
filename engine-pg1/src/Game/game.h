@@ -44,7 +44,7 @@ namespace GameXD
 		Sprite* tnt;
 
 		Player* player;
-		Entity3D* guitarBackpack;
+		Entity3D* model;
 		Entity3D* character;
 
 		SolidMaterial* defaultSolidMaterial;

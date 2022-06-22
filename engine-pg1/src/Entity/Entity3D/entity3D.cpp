@@ -111,6 +111,11 @@ namespace GL
 	{
 		this->mesh = mesh;
 	}
+
+	std::vector<Vertex> Entity3D::GetVertexs()
+	{
+		return mesh.vertexs;
+	}
 	
 	void Entity3D::SetUniforms()
 	{

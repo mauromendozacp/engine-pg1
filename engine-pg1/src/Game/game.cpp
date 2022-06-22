@@ -8,7 +8,7 @@ namespace GameXD
 		floor = nullptr;
 		tnt = nullptr;
 
-		guitarBackpack = nullptr;
+		model = nullptr;
 		character = nullptr;
 		player = nullptr;
 
@@ -28,10 +28,10 @@ namespace GameXD
 			delete player;
 			player = nullptr;
 		}
-		if (guitarBackpack != nullptr)
+		if (model != nullptr)
 		{
-			delete guitarBackpack;
-			guitarBackpack = nullptr;
+			delete model;
+			model = nullptr;
 		}
 		if (character != nullptr)
 		{
@@ -104,7 +104,7 @@ namespace GameXD
 		spotCubeLight->Draw();
 		floor->Draw();
 		tnt->Draw();
-		guitarBackpack->Draw();
+		model->Draw();
 
 		player->Draw();
 	}
@@ -115,7 +115,7 @@ namespace GameXD
 		floor->DeInit();
 		spotCubeLight->DeInit();
 		tnt->DeInit();
-		guitarBackpack->DeInit();
+		model->DeInit();
 
 		for (int i = 0; i < cubesLenght; i++)
 		{
@@ -141,11 +141,11 @@ namespace GameXD
 
 	void Game::InitEntities()
 	{
-		guitarBackpack = new Entity3D(render);
-		guitarBackpack = ModelImporter::LoadModel(render, "../res/Models/elshaman/asdfasdf.obj");
-		guitarBackpack->SetPos(glm::vec3(0.f, -.5f, -15.f));
-		guitarBackpack->SetScale(0.05f);
-		guitarBackpack->material = defaultTextureMaterial;
+		model = new Entity3D(render);
+		model = ModelImporter::LoadModel(render, "../res/Models/elshaman/Mauri.obj");
+		model->SetPos(glm::vec3(0.f, -.5f, -15.f));
+		model->SetScale(0.05f);
+		model->material = defaultTextureMaterial;
 
 		//player = static_cast<Player*>(ModelImporter::LoadModel(render, "../res/Models/survival-guitar-backpack/backpack.obj"));
 		player = new Player(render);
@@ -249,36 +249,36 @@ namespace GameXD
 		}
 		if (Input::IsKeyPressed(KEY_5))
 		{
-			glm::vec3 guitarScale = guitarBackpack->GetScale();
+			glm::vec3 guitarScale = model->GetScale();
 			guitarScale += glm::vec3(1) * Timer::GetDeltaTime();
-			guitarBackpack->SetScale(guitarScale);
+			model->SetScale(guitarScale);
 		}
 		if (Input::IsKeyPressed(KEY_6))
 		{
-			glm::vec3 guitarScale = guitarBackpack->GetScale();
+			glm::vec3 guitarScale = model->GetScale();
 			guitarScale -= glm::vec3(1) * Timer::GetDeltaTime();
-			guitarBackpack->SetScale(guitarScale);
+			model->SetScale(guitarScale);
 		}
 		if (Input::IsKeyPressed(KEY_7))
 		{
-			float guitarRotX = guitarBackpack->GetRotX();
+			float guitarRotX = model->GetRotX();
 			guitarRotX -= 15.f * Timer::GetDeltaTime();
-			guitarBackpack->SetRotX(guitarRotX);
+			model->SetRotX(guitarRotX);
 		}
 		if (Input::IsKeyPressed(KEY_8))
 		{
-			float guitarRotX = guitarBackpack->GetRotX();
+			float guitarRotX = model->GetRotX();
 			guitarRotX += 15.f * Timer::GetDeltaTime();
-			guitarBackpack->SetRotX(guitarRotX);
+			model->SetRotX(guitarRotX);
 		}
 		if (Input::IsKeyPressed(KEY_9))
 		{
-			Entity* guitarNode1 = guitarBackpack->GetNode("Cylinder.030__0");
+			Entity* guitarNode1 = model->GetNode("Cylinder.030__0");
 			guitarNode1->SetPos(guitarNode1->GetLocalPosition() - glm::vec3(0.5f, 0.f, 0.f));
 		}
 		if (Input::IsKeyPressed(KEY_0))
 		{
-			Entity* guitarNode1 = guitarBackpack->GetNode("Cylinder.030__0");
+			Entity* guitarNode1 = model->GetNode("Cylinder.030__0");
 			guitarNode1->SetPos(guitarNode1->GetLocalPosition() + glm::vec3(0.5f, 0.f, 0.f));
 		}
 

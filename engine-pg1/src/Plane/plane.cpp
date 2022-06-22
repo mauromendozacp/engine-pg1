@@ -81,7 +81,7 @@ namespace GL
 
 	float Plane::GetDistanceToPoint(glm::vec3 point)
 	{
-		return glm::dot(normal, point) + distance;
+		return glm::dot(normal, point) - distance;
 	}
 
 	bool Plane::GetSide(glm::vec3 point)

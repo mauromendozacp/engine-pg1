@@ -3,12 +3,14 @@
 
 #include "exports.h"
 #include "Renderer/renderer.h"
+#include "vertexs.h"
 
 #include "GLM/glm.hpp"
 #include "GLM/ext/matrix_transform.hpp"
 #include "GLM/gtc/type_ptr.hpp"
 
 #include <list>
+#include <vector>
 
 namespace GL
 {
@@ -73,6 +75,7 @@ namespace GL
 		void SetScale(float size);
 
 		std::string GetName();
+		virtual std::vector<Vertex> GetVertexs() = 0;
 		bool IsCanDraw();
 
 		Entity* GetParent();
@@ -104,11 +107,12 @@ namespace GL
 		float GetScaleY();
 		float GetScaleZ();
 
+		Matrix matrix;
+		Transform transform;
+
 	protected:
 		Render* render;
 
-		Matrix matrix;
-		Transform transform;
 		std::string name;
 		bool canDraw;
 

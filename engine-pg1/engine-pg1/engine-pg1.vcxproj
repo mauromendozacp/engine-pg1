@@ -191,6 +191,7 @@
     <ClCompile Include="..\src\Tilemap\tilemap.cpp" />
     <ClCompile Include="..\src\Timer\timer.cpp" />
     <ClCompile Include="..\src\Tinyxml2\tinyxml2.cpp" />
+    <ClCompile Include="..\src\Volume\VolumeAABB\volumeAABB.cpp" />
     <ClCompile Include="..\src\Window\window.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -232,6 +233,8 @@
     <ClInclude Include="..\src\Timer\timer.h" />
     <ClInclude Include="..\src\Tinyxml2\tinyxml2.h" />
     <ClInclude Include="..\src\vertexs.h" />
+    <ClInclude Include="..\src\Volume\volume.h" />
+    <ClInclude Include="..\src\Volume\VolumeAABB\volumeAABB.h" />
     <ClInclude Include="..\src\Window\window.h" />
   </ItemGroup>
   <ItemGroup>
