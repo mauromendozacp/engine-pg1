@@ -142,7 +142,7 @@ namespace GameXD
 	void Game::InitEntities()
 	{
 		guitarBackpack = new Entity3D(render);
-		guitarBackpack = ModelImporter::LoadModel(render, "../res/Models/elshaman/Mauri.obj");
+		guitarBackpack = ModelImporter::LoadModel(render, "../res/Models/elshaman/asdfasdf.obj");
 		guitarBackpack->SetPos(glm::vec3(0.f, -.5f, -15.f));
 		guitarBackpack->SetScale(0.05f);
 		guitarBackpack->material = defaultTextureMaterial;
