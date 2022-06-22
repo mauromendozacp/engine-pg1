@@ -187,7 +187,7 @@ namespace GL
 
 		if (parent != nullptr)
 		{
-			transform.scale = parent->GetScale() + transform.localScale;
+			transform.scale = parent->GetScale() * transform.localScale;
 		}
 		else
 		{
@@ -494,7 +494,7 @@ namespace GL
 
 	void Entity::UpdateNodesScale()
 	{
-		transform.scale = parent->GetScale() + transform.localScale;
+		transform.scale = parent->GetScale() * transform.localScale;
 		matrix.scale = glm::scale4(glm::mat4(1.f), transform.scale);
 
 		for (std::list<Entity*>::iterator it = nodes.begin(); it != nodes.end(); ++it)

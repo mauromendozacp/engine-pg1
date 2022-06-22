@@ -58,6 +58,7 @@ namespace GL
 		void PostRender(Window* window);
 
 		void UseTexture(int number, uint id);
+		void CleanTexture();
 		void TextureEnable();
 		void TextureDisable();
 		void TextureDelete(uint uniformTexture, uint& textureId);

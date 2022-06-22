@@ -84,10 +84,12 @@ namespace GL
 	{
 		render->BlendEnable();
 		render->UseShader();
+		render->UseTexture(0, baseTexture->id);
 
 		UpdateShader();
 		Entity2D::Draw();
 
+		render->CleanTexture();
 		render->TextureDisable();
 		render->CleanShader();
 		render->BlendDisable();
@@ -261,6 +263,5 @@ namespace GL
 	{
 		Entity2D::UpdateShader();
 		render->UpdateTexture(uniformBaseTexture, baseTexture->id);
-		render->UseTexture(0, baseTexture->id);
 	}
 }

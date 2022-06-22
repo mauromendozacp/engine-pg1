@@ -101,8 +101,8 @@ namespace GameXD
 			cubeLight[i]->Draw();
 		}
 
-		floor->Draw();
 		spotCubeLight->Draw();
+		floor->Draw();
 		tnt->Draw();
 		guitarBackpack->Draw();
 
@@ -142,9 +142,9 @@ namespace GameXD
 	void Game::InitEntities()
 	{
 		guitarBackpack = new Entity3D(render);
-		guitarBackpack = ModelImporter::LoadModel(render, "../res/Models/survival-guitar-backpack/backpack.obj");
-		guitarBackpack->SetPos(glm::vec3(-5.f, 2.5f, -15.f));
-		guitarBackpack->SetScale(1.0f);
+		guitarBackpack = ModelImporter::LoadModel(render, "../res/Models/elshaman/Mauri.obj");
+		guitarBackpack->SetPos(glm::vec3(0.f, -.5f, -15.f));
+		guitarBackpack->SetScale(0.05f);
 		guitarBackpack->material = defaultTextureMaterial;
 
 		//player = static_cast<Player*>(ModelImporter::LoadModel(render, "../res/Models/survival-guitar-backpack/backpack.obj"));
@@ -187,7 +187,6 @@ namespace GameXD
 		tnt->SetPos(glm::vec3(2.5f, 0.f, 2.5f));
 
 		occlusionCulling->AddEntity(tnt);
-		occlusionCulling->AddEntity(guitarBackpack);
 	}
 
 	void Game::InitLights()

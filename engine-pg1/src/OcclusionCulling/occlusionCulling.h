@@ -23,6 +23,13 @@ namespace GL
 		void SetCamera(Camera* camera);
 		void AddEntity(Entity* entity);
 
+	private:
+		void UpdatePlanes();
+		void UpdateEntitiesDraw(Entity* entity);
+
+		std::list<Entity*> entities;
+		Camera* camera;
+
 		Plane up;
 		Plane down;
 		Plane left;
@@ -36,13 +43,6 @@ namespace GL
 		glm::vec3 pointTopRight;
 		glm::vec3 pointBottomLeft;
 		glm::vec3 pointBottomRight;
-
-	private:
-		void UpdatePlanes();
-		void UpdateEntitiesDraw(Entity* entity);
-
-		std::list<Entity*> entities;
-		Camera* camera;
 	};
 }
 

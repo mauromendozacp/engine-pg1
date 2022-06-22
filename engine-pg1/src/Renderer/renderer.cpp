@@ -228,4 +228,9 @@ namespace GL
 		glActiveTexture(GL_TEXTURE0 + number);
 		glBindTexture(GL_TEXTURE_2D, id);
 	}
+
+	void Render::CleanTexture()
+	{
+		glActiveTexture(GL_TEXTURE0);
+	}
 }

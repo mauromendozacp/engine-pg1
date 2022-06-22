@@ -7,6 +7,13 @@ namespace GL
 		entities = std::list<Entity*>();
 		camera = nullptr;
 
+		pointBack = glm::vec3();
+		pointFront = glm::vec3();
+		pointTopLeft = glm::vec3();
+		pointTopRight = glm::vec3();
+		pointBottomLeft = glm::vec3();
+		pointBottomRight = glm::vec3();
+
 		up = Plane();
 		down = Plane();
 		left = Plane();

@@ -27,6 +27,7 @@ namespace GL
 		}
 		directory = path.substr(0, path.find_last_of('/'));
         textures_loaded.clear();
+        texturesUsed = 0;
 
         Entity3D* model = new Entity3D(render);
         model->Init();

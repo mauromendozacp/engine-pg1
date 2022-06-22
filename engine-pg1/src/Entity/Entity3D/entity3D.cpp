@@ -146,6 +146,7 @@ namespace GL
 			render->Draw(VAO, mesh.indexes.size());
 		}
 
+		render->CleanTexture();
 		for (std::list<Entity*>::iterator it = nodes.begin(); it != nodes.end(); ++it)
 		{
 			Entity3D* node3d = static_cast<Entity3D*>((*it));
