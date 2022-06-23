@@ -50,7 +50,7 @@ namespace GL
 		return distance;
 	}
 
-	void Plane::SetNormalAndPosition(glm::vec3 normal, glm::vec3 point)
+	void Plane::SetPositionAndNormal(glm::vec3 point, glm::vec3 normal)
 	{
 		this->normal = glm::normalize(normal);
 		distance = -glm::dot(this->normal, point);

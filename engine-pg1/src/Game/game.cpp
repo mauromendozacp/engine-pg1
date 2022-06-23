@@ -144,7 +144,7 @@ namespace GameXD
 		model = new Entity3D(render);
 		model = ModelImporter::LoadModel(render, "../res/Models/survival-guitar-backpack/backpack.obj");
 		//model = ModelImporter::LoadModel(render, "../res/Models/elshaman/Mauri.obj");
-		//model->SetPos(glm::vec3(0.f, 0.f, -15.f));
+		//model->SetPos(glm::vec3(0.f, 2.5f, -10.f));
 		//model->SetScale(0.25f);
 		model->material = defaultTextureMaterial;
 

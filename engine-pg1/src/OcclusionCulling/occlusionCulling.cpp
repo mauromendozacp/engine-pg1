@@ -49,9 +49,20 @@ namespace GL
 	void OcclusionCulling::Update()
 	{
 		float fov = camera->GetFOV();
-		float aspect = camera->GetAspect() / 2;
+		float aspect = camera->GetAspect();
 
-		pointBack = camera->GetPos() + camera->GetForward() * camera->GetNear();
+		float halfheight = camera->GetFar() * tan(fov * .5f);
+		float halfWidth = halfheight * aspect;
+		glm::vec3 frontFar = camera->GetFar() * camera->GetForward();
+
+		back.SetPositionAndNormal(camera->GetPos() + camera->GetNear() * camera->GetForward(), camera->GetForward());
+		front.SetPositionAndNormal(camera->GetPos() + frontFar, -camera->GetForward());
+		right.SetPositionAndNormal(camera->GetPos(), glm::cross(camera->GetUp(), frontFar + camera->GetRight() * halfWidth));
+		left.SetPositionAndNormal(camera->GetPos(), glm::cross(frontFar - camera->GetRight() * halfWidth, camera->GetUp()));
+		up.SetPositionAndNormal(camera->GetPos(), glm::cross(camera->GetRight(), frontFar - camera->GetUp() * halfheight));
+		down.SetPositionAndNormal(camera->GetPos(), glm::cross(frontFar + camera->GetUp() * halfheight, camera->GetRight()));
+
+		/*pointBack = camera->GetPos() + camera->GetForward() * camera->GetNear();
 		pointFront = camera->GetPos() + camera->GetForward() * camera->GetFar();
 
 		float angleY = fov / 2;
@@ -71,7 +82,7 @@ namespace GL
 		back.SetNormalAndPosition(glm::normalize(pointFront - pointBack), pointBack);
 
 		down.Flip();
-		left.Flip();
+		left.Flip();*/
 	}
 
 	void OcclusionCulling::SetCamera(Camera* cam)

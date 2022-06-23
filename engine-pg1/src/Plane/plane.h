@@ -21,7 +21,7 @@ namespace GL
 		glm::vec3 GetNormal();
 		float GetDistance();
 
-		void SetNormalAndPosition(glm::vec3 normal, glm::vec3 point);
+		void SetPositionAndNormal(glm::vec3 point, glm::vec3 normal);
 		void Set3Points(glm::vec3 a, glm::vec3 b, glm::vec3 c);
 
 		void Flip();

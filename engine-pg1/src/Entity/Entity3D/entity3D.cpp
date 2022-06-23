@@ -129,31 +129,29 @@ namespace GL
 
 	void Entity3D::NodeDraw()
 	{
-		
-
-		UpdateShader();
-
-		if (textures.size() > 0)
-		{
-			render->UpdateTexture(uniformBaseTexture, textures[0].id);
-		}
-
-		if (material != nullptr)
-		{
-			material->UpdateShader();
-		}
-
-		for (int i = 0; i < textures.size(); i++)
-		{
-			render->UseTexture(i, textures[i].id);
-		}
-
 		if (CheckVolume())
 		{
-			Entity::Draw();
-		}
+			UpdateShader();
 
-		render->CleanTexture();
+			if (textures.size() > 0)
+			{
+				render->UpdateTexture(uniformBaseTexture, textures[0].id);
+			}
+
+			if (material != nullptr)
+			{
+				material->UpdateShader();
+			}
+
+			for (int i = 0; i < textures.size(); i++)
+			{
+				render->UseTexture(i, textures[i].id);
+			}
+
+			Entity::Draw();
+
+			render->CleanTexture();
+		}
 
 		for (std::list<Entity*>::iterator it = nodes.begin(); it != nodes.end(); ++it)
 		{

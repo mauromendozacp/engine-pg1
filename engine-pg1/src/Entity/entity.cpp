@@ -45,6 +45,7 @@ namespace GL
 		uniformView = 0;
 		uniformProjection = 0;
 
+		UpdateTransform();
 		UpdateMatrix();
 	}
 
@@ -89,6 +90,7 @@ namespace GL
 		uniformView = 0;
 		uniformProjection = 0;
 
+		UpdateTransform();
 		UpdateMatrix();
 	}
 
@@ -133,6 +135,7 @@ namespace GL
 		uniformView = 0;
 		uniformProjection = 0;
 
+		UpdateTransform();
 		UpdateMatrix();
 	}
 
@@ -563,11 +566,16 @@ namespace GL
 
 	void Entity::UpdateMatrix()
 	{
-		matrix.model = matrix.translate * matrix.rotationX * matrix.rotationY * matrix.rotationZ * matrix.scale;
-
-		if (parent != nullptr)
+		if (parent == nullptr)
 		{
-			matrix.model *= parent->matrix.model;
+			glm::mat4 rot = matrix.rotationY * matrix.rotationX * matrix.rotationZ;
+			matrix.model = matrix.translate * rot * matrix.scale;
+		}
+		else
+		{
+			glm::mat4 rot = matrix.rotationY * matrix.rotationX * matrix.rotationZ;
+			glm::mat4 auxModel = matrix.translate * rot * matrix.scale;
+			matrix.model = parent->matrix.model * auxModel;
 		}
 	}
 
