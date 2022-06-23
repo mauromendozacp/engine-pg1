@@ -12,12 +12,8 @@ namespace GL
 		uniformAffectedLight = 0;
 		uniformUseTexture = 0;
 
-		VAO = 0;
-		VBO = 0;
-		EBO = 0;
 		tam = 0;
-		vertexs = 0;
-		vertices = 0;
+		indices = 0;
 
 		hasCollider = false;
 		moveable = false;
@@ -36,12 +32,8 @@ namespace GL
 		uniformAffectedLight = 0;
 		uniformUseTexture = 0;
 
-		VAO = 0;
-		VBO = 0;
-		EBO = 0;
 		tam = 0;
-		vertexs = 0;
-		vertices = 0;
+		indices = 0;
 
 		hasCollider = false;
 		moveable = false;
@@ -71,7 +63,7 @@ namespace GL
 	{
 		if (canDraw)
 		{
-			render->Draw(VAO, vertices);
+			render->Draw(VAO, indices);
 		}
 	}
 

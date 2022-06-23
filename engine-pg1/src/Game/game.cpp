@@ -185,8 +185,6 @@ namespace GameXD
 		tnt->material = defaultTextureMaterial;
 		tnt->LoadTexture("../res/Textures/tnt.png", true, GL::TEXTURE_TYPE::BASE);
 		tnt->SetPos(glm::vec3(2.5f, 0.f, 2.5f));
-
-		occlusionCulling->AddEntity(tnt);
 	}
 
 	void Game::InitLights()

@@ -2,7 +2,6 @@
 #define ENTITY3D_H
 
 #include "Entity/entity.h"
-#include "vertexs.h"
 
 #include "Material/material.h"
 #include "Color/color.h"
@@ -12,34 +11,23 @@
 
 namespace GL
 {
-	struct Mesh
-	{
-		std::vector<Vertex> vertexs;
-		std::vector<uint> indexes;
-		std::vector<Texture> textures;
-	};
-
 	class GRAPHICSENGINE_API Entity3D : public Entity
 	{
 	public:
 		Entity3D();
 		Entity3D(Render* render);
+		Entity3D(std::vector<Vertex> vertexs, std::vector<uint> indexes, std::vector<Texture> textures, Render* render);
 		~Entity3D();
 
 		void Init();
 		void Draw();
 		void DeInit();
 
-		void SetMesh(Mesh mesh);
-		std::vector<Vertex> GetVertexs() override;
-
 		Material* material;
 		Color color;
 
 	protected:
-		Mesh mesh;
-
-		uint VAO, VBO, EBO;
+		std::vector<Texture> textures;
 
 		uint uniformColor;
 		uint uniformAlpha;

@@ -8,7 +8,6 @@ namespace GL
 		render = nullptr;
 		mainCamera = nullptr;
 		lightManager = nullptr;
-		occlusionCulling = nullptr;
 		terminateEngine = false;
 	}
 
@@ -36,12 +35,6 @@ namespace GL
 		{
 			delete lightManager;
 			lightManager = nullptr;
-		}
-
-		if (occlusionCulling != nullptr)
-		{
-			delete occlusionCulling;
-			occlusionCulling = nullptr;
 		}
 	}
 
@@ -86,8 +79,7 @@ namespace GL
 
 		Input::Init(window, mainCamera);
 
-		occlusionCulling = new OcclusionCulling();
-		occlusionCulling->Init(mainCamera);		
+		OcclusionCulling::Init(mainCamera);		
 
 		srand(time(NULL));
 
@@ -102,7 +94,7 @@ namespace GL
 			Timer::Update(glfwGetTime());
 
 			Update();
-			occlusionCulling->Update();
+			OcclusionCulling::Update();
 			lightManager->UseLights();
 			Draw();
 

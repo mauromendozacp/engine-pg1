@@ -2,9 +2,16 @@
 #define	VOLUME_H
 
 #include "exports.h"
+#include "vertexs.h"
+
+#include "Plane/plane.h"
 #include "OcclusionCulling/occlusionCulling.h"
 
 #include "GLM/glm.hpp"
+#include <vector>
+#include <list>
+
+class Entity {};
 
 namespace GL
 {
@@ -14,7 +21,7 @@ namespace GL
 		Volume() { };
 		~Volume() { };
 
-		virtual bool IsOnFrustum(OcclusionCulling* frustum, Entity* entity) = 0;
+		virtual bool IsOnFrustum(std::list<Entity*> nodes, ) = 0;
 
 	protected:
 		virtual bool IsOnPlane(Plane plane) = 0;

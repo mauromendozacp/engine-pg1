@@ -2,7 +2,6 @@
 #define ENTITY2D_H
 
 #include "Entity/entity.h"
-#include "vertexs.h"
 
 #include "Color/color.h"
 #include "Material/material.h"
@@ -23,8 +22,6 @@ namespace GL
 		void SetMoveable(bool moveable);
 		void SetAffectedLight(bool affectedLight);
 
-		std::vector<Vertex> GetVertexs() override;
-
 		bool IsMoveable();
 		bool HasCollider();
 		bool IsAffectedLight();
@@ -38,8 +35,8 @@ namespace GL
 		uint uniformAffectedLight;
 		uint uniformUseTexture;
 
-		uint VAO, VBO, EBO, tam, vertices;
-		float* vertexs;
+		uint tam, indices;
+		float* vertices;
 		bool hasCollider;
 		bool moveable;
 

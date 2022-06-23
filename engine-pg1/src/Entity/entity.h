@@ -3,6 +3,7 @@
 
 #include "exports.h"
 #include "Renderer/renderer.h"
+#include "Volume/volume.h"
 #include "vertexs.h"
 
 #include "GLM/glm.hpp"
@@ -46,10 +47,13 @@ namespace GL
 	public:
 		Entity();
 		Entity(Render* render);
+		Entity(std::vector<Vertex> vertexs, std::vector<uint> indexes, Render* render);
 		~Entity();
 
 		void SetName(std::string name);
 		void SetCanDraw(bool canDraw);
+		std::vector<Vertex> GetVertexs();
+		std::vector<uint> GetIndexes();
 
 		void SetParent(Entity* parent);
 		void AddNode(Entity* node);
@@ -75,7 +79,6 @@ namespace GL
 		void SetScale(float size);
 
 		std::string GetName();
-		virtual std::vector<Vertex> GetVertexs() = 0;
 		bool IsCanDraw();
 
 		Entity* GetParent();
@@ -109,9 +112,14 @@ namespace GL
 
 		Matrix matrix;
 		Transform transform;
+		Volume* volume;
 
 	protected:
 		Render* render;
+
+		std::vector<Vertex> vertexs;
+		std::vector<uint> indexes;
+		uint VAO, VBO, EBO;
 
 		std::string name;
 		bool canDraw;

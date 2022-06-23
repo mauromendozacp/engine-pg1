@@ -42,10 +42,8 @@ namespace GL
         for (uint i = 0; i < node->mNumMeshes; i++)
         {
             aiMesh* aiMesh = scene->mMeshes[node->mMeshes[i]];
-            Mesh mesh = ProcessMesh(aiMesh, scene);
 
-            Entity3D* modelNode = new Entity3D(render);
-            modelNode->SetMesh(mesh);
+            Entity3D* modelNode = ProcessMesh(aiMesh, scene);
             modelNode->Init();
             modelNode->SetName(node->mName.C_Str());
             modelNode->SetParent(parent);
@@ -59,7 +57,7 @@ namespace GL
         }
 	}
 
-    Mesh ModelImporter::ProcessMesh(aiMesh* mesh, const aiScene* scene)
+    Entity3D* ModelImporter::ProcessMesh(aiMesh* mesh, const aiScene* scene)
     {
         std::vector<Vertex> vertices;
         std::vector<uint> indices;
@@ -106,29 +104,26 @@ namespace GL
 
         aiMaterial* material = scene->mMaterials[mesh->mMaterialIndex];
 
-        std::vector<Texture> baseColorMaps = LoadMaterialTextures(material, aiTextureType_BASE_COLOR, "texture_base_color");
+        std::vector<Texture> baseColorMaps = LoadMaterialTextures(material, aiTextureType_BASE_COLOR, "base_color");
         textures.insert(textures.end(), baseColorMaps.begin(), baseColorMaps.end());
-        std::vector<Texture> diffuseMaps = LoadMaterialTextures(material, aiTextureType_DIFFUSE, "texture_diffuse");
+        std::vector<Texture> diffuseMaps = LoadMaterialTextures(material, aiTextureType_DIFFUSE, "diffuse");
         textures.insert(textures.end(), diffuseMaps.begin(), diffuseMaps.end());
-        std::vector<Texture> specularMaps = LoadMaterialTextures(material, aiTextureType_SPECULAR, "texture_specular");
+        std::vector<Texture> specularMaps = LoadMaterialTextures(material, aiTextureType_SPECULAR, "specular");
         textures.insert(textures.end(), specularMaps.begin(), specularMaps.end());
-        std::vector<Texture> normalMaps = LoadMaterialTextures(material, aiTextureType_HEIGHT, "texture_normal");
+        std::vector<Texture> normalMaps = LoadMaterialTextures(material, aiTextureType_HEIGHT, "normal");
         textures.insert(textures.end(), normalMaps.begin(), normalMaps.end());
-        std::vector<Texture> heightMaps = LoadMaterialTextures(material, aiTextureType_AMBIENT, "texture_height");
+        std::vector<Texture> heightMaps = LoadMaterialTextures(material, aiTextureType_AMBIENT, "height");
         textures.insert(textures.end(), heightMaps.begin(), heightMaps.end());
-        std::vector<Texture> metalnessMaps = LoadMaterialTextures(material, aiTextureType_METALNESS, "texture_metalness");
+        std::vector<Texture> metalnessMaps = LoadMaterialTextures(material, aiTextureType_METALNESS, "metalness");
         textures.insert(textures.end(), metalnessMaps.begin(), metalnessMaps.end());
-        std::vector<Texture> diffuseRoughnessMaps = LoadMaterialTextures(material, aiTextureType_DIFFUSE_ROUGHNESS, "texture_diffuse_roughness");
+        std::vector<Texture> diffuseRoughnessMaps = LoadMaterialTextures(material, aiTextureType_DIFFUSE_ROUGHNESS, "diffuse_roughness");
         textures.insert(textures.end(), diffuseRoughnessMaps.begin(), diffuseRoughnessMaps.end());
-        std::vector<Texture> ambientOcclusionMaps = LoadMaterialTextures(material, aiTextureType_AMBIENT_OCCLUSION, "texture_ambient_occlusion");
+        std::vector<Texture> ambientOcclusionMaps = LoadMaterialTextures(material, aiTextureType_AMBIENT_OCCLUSION, "ambient_occlusion");
         textures.insert(textures.end(), ambientOcclusionMaps.begin(), ambientOcclusionMaps.end());
 
-        for (int i = 0; i < textures.size(); i++)
-        {
-            textures[i].type.erase(0, 7);
-        }
+        
 
-        return Mesh{ vertices, indices, textures };
+        return new Entity3D(vertices, indices, textures, render);
     }
 
 	std::vector<Texture> ModelImporter::LoadMaterialTextures(aiMaterial* mat, aiTextureType type, std::string typeName)

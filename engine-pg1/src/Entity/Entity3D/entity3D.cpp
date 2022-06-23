@@ -4,14 +4,10 @@ namespace GL
 {
 	Entity3D::Entity3D() : Entity()
 	{
+		textures = std::vector<Texture>();
+
 		material = nullptr;
 		color = Color();
-
-		mesh = Mesh();
-
-		VAO = 0;
-		VBO = 0;
-		EBO = 0;
 
 		uniformColor = 0;
 		uniformAlpha = 0;
@@ -24,14 +20,26 @@ namespace GL
 
 	Entity3D::Entity3D(Render* render) : Entity(render)
 	{
+		textures = std::vector<Texture>();
+
 		material = nullptr;
 		color = Color();
 
-		mesh = Mesh();
+		uniformColor = 0;
+		uniformAlpha = 0;
+		uniformAffectedLight = 0;
+		uniformUseTexture = 0;
+		uniformBaseTexture = 0;
 
-		VAO = 0;
-		VBO = 0;
-		EBO = 0;
+		affectedLight = true;
+	}
+
+	Entity3D::Entity3D(std::vector<Vertex> vertexs, std::vector<uint> indexes, std::vector<Texture> textures, Render* render) : Entity(vertexs, indexes, render)
+	{
+		this->textures = textures;
+
+		material = nullptr;
+		color = Color();
 
 		uniformColor = 0;
 		uniformAlpha = 0;
@@ -51,22 +59,22 @@ namespace GL
 		SetUniforms();
 
 		render->GenBuffers(VAO, VBO, EBO);
-		if (mesh.vertexs.size() == 0)
+		if (vertexs.size() == 0)
 		{
-			render->BindBuffer(VAO, VBO, mesh.vertexs.size() * sizeof(Vertex), 0);
+			render->BindBuffer(VAO, VBO, vertexs.size() * sizeof(Vertex), 0);
 		}
 		else
 		{
-			render->BindBuffer(VAO, VBO, mesh.vertexs.size() * sizeof(Vertex), &mesh.vertexs[0]);
+			render->BindBuffer(VAO, VBO, vertexs.size() * sizeof(Vertex), &vertexs[0]);
 		}
 
-		if (mesh.indexes.size() == 0)
+		if (indexes.size() == 0)
 		{
-			render->BindIndexs(EBO, mesh.indexes.size() * sizeof(unsigned int), 0);
+			render->BindIndexs(EBO, indexes.size() * sizeof(unsigned int), 0);
 		}
 		else
 		{
-			render->BindIndexs(EBO, mesh.indexes.size() * sizeof(unsigned int), &mesh.indexes[0]);
+			render->BindIndexs(EBO, indexes.size() * sizeof(unsigned int), &indexes[0]);
 		}
 
 		render->SetBaseAttribs(locationPosition, 3, sizeof(Vertex), (void*)0);
@@ -91,30 +99,20 @@ namespace GL
 	{
 		render->UnBind(VAO, VBO, EBO);
 
-		if (mesh.textures.size() > 0)
+		if (textures.size() > 0)
 		{
 			//render->TextureDelete(uniformBaseTexture, mesh.textures[0].id);
 		}
 
-		mesh.vertexs.clear();
-		mesh.indexes.clear();
-		mesh.textures.clear();
+		vertexs.clear();
+		indexes.clear();
+		textures.clear();
 
 		for (std::list<Entity*>::iterator it = nodes.begin(); it != nodes.end(); ++it)
 		{
 			Entity3D* node3d = static_cast<Entity3D*>((*it));
 			node3d->DeInit();
 		}
-	}
-
-	void Entity3D::SetMesh(Mesh mesh)
-	{
-		this->mesh = mesh;
-	}
-
-	std::vector<Vertex> Entity3D::GetVertexs()
-	{
-		return mesh.vertexs;
 	}
 	
 	void Entity3D::SetUniforms()
@@ -131,9 +129,9 @@ namespace GL
 	{
 		UpdateShader();
 		
-		if (mesh.textures.size() > 0)
+		if (textures.size() > 0)
 		{
-			render->UpdateTexture(uniformBaseTexture, mesh.textures[0].id);
+			render->UpdateTexture(uniformBaseTexture, textures[0].id);
 		}
 
 		if (material != nullptr)
@@ -141,14 +139,14 @@ namespace GL
 			material->UpdateShader();
 		}
 
-		for (int i = 0; i < mesh.textures.size(); i++)
+		for (int i = 0; i < textures.size(); i++)
 		{
-			render->UseTexture(i, mesh.textures[i].id);
+			render->UseTexture(i, textures[i].id);
 		}
 
 		if (canDraw)
 		{
-			render->Draw(VAO, mesh.indexes.size());
+			render->Draw(VAO, indexes.size());
 		}
 
 		render->CleanTexture();

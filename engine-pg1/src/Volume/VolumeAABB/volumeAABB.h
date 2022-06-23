@@ -13,7 +13,7 @@ namespace GL
 		VolumeAABB(glm::vec3 center, float extX, float extY, float extZ);
 		~VolumeAABB();
 
-		bool IsOnFrustum(OcclusionCulling* frustum, Entity* entity) override;
+		bool IsOnFrustum(Entity* entity) override;
 
 		static VolumeAABB GenerateVolumeAABB(Entity* entity);
 

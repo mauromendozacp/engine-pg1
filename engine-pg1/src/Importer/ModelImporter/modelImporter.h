@@ -29,7 +29,7 @@ namespace GL
 		static std::vector<Texture> textures_loaded;
 
 		static void ProcessNode(Entity3D* parent, aiNode* node, const aiScene* scene);
-		static Mesh ProcessMesh(aiMesh* mesh, const aiScene* scene);
+		static Entity3D* ProcessMesh(aiMesh* mesh, const aiScene* scene);
 		static std::vector<Texture> LoadMaterialTextures(aiMaterial* mat, aiTextureType type, std::string typeName);
 	};
 }

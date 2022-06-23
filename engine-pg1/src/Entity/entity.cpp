@@ -8,6 +8,19 @@ namespace GL
 	{
 		render = nullptr;
 
+		vertexs = std::vector<Vertex>();
+		indexes = std::vector<uint>();
+
+		VAO = 0;
+		VBO = 0;
+		EBO = 0;
+
+		name = "";
+		canDraw = true;
+
+		parent = nullptr;
+		nodes = std::list<Entity*>();
+
 		transform.position = glm::vec3(0.f);
 		transform.eulerAngles = glm::vec3(0.f);
 		transform.scale = glm::vec3(1.f);
@@ -28,12 +41,6 @@ namespace GL
 		matrix.rotationY = glm::mat4(1.f);
 		matrix.rotationZ = glm::mat4(1.f);
 		matrix.scale = glm::mat4(1.f);
-
-		name = "";
-		canDraw = true;
-
-		parent = nullptr;
-		nodes = std::list<Entity*>();
 
 		uniformModel = 0;
 		uniformView = 0;
@@ -46,6 +53,19 @@ namespace GL
 	{
 		this->render = render;
 
+		vertexs = std::vector<Vertex>();
+		indexes = std::vector<uint>();
+
+		VAO = 0;
+		VBO = 0;
+		EBO = 0;
+
+		name = "";
+		canDraw = true;
+
+		parent = nullptr;
+		nodes = std::list<Entity*>();
+
 		transform.position = glm::vec3(0.f);
 		transform.eulerAngles = glm::vec3(0.f);
 		transform.scale = glm::vec3(1.f);
@@ -67,11 +87,50 @@ namespace GL
 		matrix.rotationZ = glm::mat4(1.f);
 		matrix.scale = glm::mat4(1.f);
 
+		uniformModel = 0;
+		uniformView = 0;
+		uniformProjection = 0;
+
+		UpdateMatrix();
+	}
+
+	Entity::Entity(std::vector<Vertex> vertexs, std::vector<uint> indexes, Render* render)
+	{
+		this->render = render;
+
+		this->vertexs = vertexs;
+		this->indexes = indexes;
+
+		VAO = 0;
+		VBO = 0;
+		EBO = 0;
+
 		name = "";
 		canDraw = true;
 
 		parent = nullptr;
 		nodes = std::list<Entity*>();
+
+		transform.position = glm::vec3(0.f);
+		transform.eulerAngles = glm::vec3(0.f);
+		transform.scale = glm::vec3(1.f);
+		transform.rotation = glm::quat(0.f, 0.f, 0.f, 1.f);
+
+		transform.localPosition = glm::vec3(0.f);
+		transform.localEulerAngles = glm::vec3(0.f);
+		transform.localScale = glm::vec3(1.f);
+		transform.localRotation = glm::quat(0.f, 0.f, 0.f, 1.f);
+
+		transform.forward = glm::vec3(0.f, 0.f, 1.f);
+		transform.up = glm::vec3(0.f, 1.f, 0.f);
+		transform.right = glm::vec3(1.f, 0.f, 0.f);
+
+		matrix.model = glm::mat4(1.f);
+		matrix.translate = glm::mat4(1.f);
+		matrix.rotationX = glm::mat4(1.f);
+		matrix.rotationY = glm::mat4(1.f);
+		matrix.rotationZ = glm::mat4(1.f);
+		matrix.scale = glm::mat4(1.f);
 
 		uniformModel = 0;
 		uniformView = 0;
@@ -93,6 +152,16 @@ namespace GL
 	void Entity::SetCanDraw(bool canDraw)
 	{
 		this->canDraw = canDraw;
+	}
+
+	std::vector<Vertex> Entity::GetVertexs()
+	{
+		return vertexs;
+	}
+
+	std::vector<uint> Entity::GetIndexes()
+	{
+		return indexes;
 	}
 
 	void Entity::SetParent(Entity* parent)
@@ -452,6 +521,11 @@ namespace GL
 	void Entity::UpdateMatrix()
 	{
 		matrix.model = matrix.translate * matrix.rotationX * matrix.rotationY * matrix.rotationZ * matrix.scale;
+
+		if (parent != nullptr)
+		{
+			matrix.model *= parent->matrix.model;
+		}
 	}
 
 	void Entity::UpdateTransform()

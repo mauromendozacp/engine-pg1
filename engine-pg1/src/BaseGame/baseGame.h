@@ -30,7 +30,6 @@ namespace GL
 		Render* render;
 		Camera* mainCamera;
 		LightManager* lightManager;
-		OcclusionCulling* occlusionCulling;
 		std::string title;
 		bool terminateEngine;
 

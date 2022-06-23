@@ -25,7 +25,7 @@ namespace GL
 
 	}
 
-	bool VolumeAABB::IsOnFrustum(OcclusionCulling* frustum, Entity* entity)
+	bool VolumeAABB::IsOnFrustum(Entity* entity)
 	{
 		glm::vec3 globalCenter { entity->matrix.model * glm::vec4(center, 1.f) };
 
@@ -45,16 +45,14 @@ namespace GL
 			std::abs(glm::dot(glm::vec3{ 0.f, 0.f, 1.f }, up)) +
 			std::abs(glm::dot(glm::vec3{ 0.f, 0.f, 1.f }, forward));
 
-		return false;
-
 		VolumeAABB globalAABB(globalCenter, newIi, newIj, newIk);
 
-		return (globalAABB.IsOnPlane(frustum->left) &&
-			globalAABB.IsOnPlane(frustum->right) &&
-			globalAABB.IsOnPlane(frustum->up) &&
-			globalAABB.IsOnPlane(frustum->down) &&
-			globalAABB.IsOnPlane(frustum->back) &&
-			globalAABB.IsOnPlane(frustum->front));
+		return (globalAABB.IsOnPlane(OcclusionCulling::left) &&
+				globalAABB.IsOnPlane(OcclusionCulling::right) &&
+				globalAABB.IsOnPlane(OcclusionCulling::up) &&
+				globalAABB.IsOnPlane(OcclusionCulling::down) &&
+				globalAABB.IsOnPlane(OcclusionCulling::back) &&
+				globalAABB.IsOnPlane(OcclusionCulling::front));
 	}
 
 	VolumeAABB VolumeAABB::GenerateVolumeAABB(Entity* entity)

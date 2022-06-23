@@ -26,25 +26,25 @@ namespace GL
 		case SHAPE_TYPE::TRIANGLE:
 			
 			indexes = triangIndexes;
-			vertices = triangIndexTam;
-			vertexs = triangVertex;
-			tam = sizeof(vertexs) * triangVertTam;
+			indices = triangIndexTam;
+			vertices = triangVertex;
+			tam = sizeof(vertices) * triangVertTam;
 
 			break;
 		case SHAPE_TYPE::QUAD:
 
 			indexes = quadIndexes;
-			vertices = quadIndexTam;
-			vertexs = quadVertex;
-			tam = sizeof(vertexs) * quadVertTam;
+			indices = quadIndexTam;
+			vertices = quadVertex;
+			tam = sizeof(vertices) * quadVertTam;
 
 			break;
 		case SHAPE_TYPE::CUBE:
 
 			indexes = cubeIndexes;
-			vertices = cubeIndexTam;
-			vertexs = cubeVertex;
-			tam = sizeof(vertexs) * cubeVertTam;
+			indices = cubeIndexTam;
+			vertices = cubeVertex;
+			tam = sizeof(vertices) * cubeVertTam;
 
 			break;
 		default:
@@ -52,8 +52,8 @@ namespace GL
 		}
 
 		render->GenBuffers(VAO, VBO, EBO);
-		render->BindBuffer(VAO, VBO, tam, vertexs);
-		render->BindIndexs(EBO, sizeof(indexes) * vertices, indexes);
+		render->BindBuffer(VAO, VBO, tam, vertices);
+		render->BindIndexs(EBO, sizeof(indexes) * indices, indexes);
 
 		render->SetBaseAttribs(locationPosition, 3, 6 * sizeof(float), (void*)0);
 		render->SetBaseAttribs(locationNormal, 3, 6 * sizeof(float), (void*)(3 * sizeof(float)));

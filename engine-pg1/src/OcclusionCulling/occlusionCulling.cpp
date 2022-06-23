@@ -2,9 +2,24 @@
 
 namespace GL
 {
+	Camera* OcclusionCulling::camera = nullptr;
+
+	glm::vec3 OcclusionCulling::pointBack = glm::vec3();
+	glm::vec3 OcclusionCulling::pointFront = glm::vec3();
+	glm::vec3 OcclusionCulling::pointTopLeft = glm::vec3();
+	glm::vec3 OcclusionCulling::pointTopRight = glm::vec3();
+	glm::vec3 OcclusionCulling::pointBottomLeft = glm::vec3();
+	glm::vec3 OcclusionCulling::pointBottomRight = glm::vec3();
+
+	Plane OcclusionCulling::up = Plane();
+	Plane OcclusionCulling::down = Plane();
+	Plane OcclusionCulling::left = Plane();
+	Plane OcclusionCulling::right = Plane();
+	Plane OcclusionCulling::front = Plane();
+	Plane OcclusionCulling::back = Plane();
+
 	OcclusionCulling::OcclusionCulling()
 	{
-		entities = std::list<Entity*>();
 		camera = nullptr;
 
 		pointBack = glm::vec3();
@@ -26,32 +41,12 @@ namespace GL
 	{
 	}
 
-	void OcclusionCulling::Init(Camera* camera)
+	void OcclusionCulling::Init(Camera* cam)
 	{
-		this->camera = camera;
+		camera = cam;
 	}
 
 	void OcclusionCulling::Update()
-	{
-		UpdatePlanes();
-
-		for (std::list<Entity*>::iterator it = entities.begin(); it != entities.end(); ++it)
-		{
-			UpdateEntitiesDraw((*it));
-		}
-	}
-
-	void OcclusionCulling::SetCamera(Camera* camera)
-	{
-		this->camera = camera;
-	}
-
-	void OcclusionCulling::AddEntity(Entity* entity)
-	{
-		entities.push_back(entity);
-	}
-
-	void OcclusionCulling::UpdatePlanes()
 	{
 		pointBack = camera->GetPos() + camera->GetForward() * camera->GetNear();
 		pointFront = camera->GetPos() + camera->GetForward() * camera->GetFar();
@@ -76,26 +71,8 @@ namespace GL
 		left.Flip();
 	}
 
-	void OcclusionCulling::UpdateEntitiesDraw(Entity* entity)
+	void OcclusionCulling::SetCamera(Camera* cam)
 	{
-		glm::vec3 pos = entity->GetPos();
-
-		if (up.GetSide(pos) && down.GetSide(pos) && left.GetSide(pos) && right.GetSide(pos) && front.GetSide(pos) && back.GetSide(pos))
-		{
-			entity->SetCanDraw(true);
-		}
-		else
-		{
-			entity->SetCanDraw(false);
-		}
-
-		std::list<Entity*> nodes = entity->GetNodes();
-		if (nodes.size() > 0)
-		{
-			for (std::list<Entity*>::iterator it = nodes.begin(); it != nodes.end(); ++it)
-			{
-				UpdateEntitiesDraw((*it));
-			}
-		}
+		camera = cam;
 	}
 }

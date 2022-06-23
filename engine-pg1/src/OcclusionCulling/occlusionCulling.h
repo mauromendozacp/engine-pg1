@@ -2,12 +2,9 @@
 #define OCCLUSION_CULLING_H
 
 #include "exports.h"
-#include "Entity/entity.h"
-#include "Camera/camera.h"
 #include "Plane/plane.h"
 
-#include <list>
-#include <math.h>
+class Camera;
 
 namespace GL
 {
@@ -17,32 +14,27 @@ namespace GL
 		OcclusionCulling();
 		~OcclusionCulling();
 
-		void Init(Camera* camera);
-		void Update();
-
-		void SetCamera(Camera* camera);
-		void AddEntity(Entity* entity);
-
-		Plane up;
-		Plane down;
-		Plane left;
-		Plane right;
-		Plane front;
-		Plane back;
+		static void Init(Camera* camera);
+		static void Update();
+		 
+		static void SetCamera(Camera* camera);
+		
+		static Plane up;
+		static Plane down;
+		static Plane left;
+		static Plane right;
+		static Plane front;
+		static Plane back;
 
 	private:
-		void UpdatePlanes();
-		void UpdateEntitiesDraw(Entity* entity);
-
-		std::list<Entity*> entities;
-		Camera* camera;
-
-		glm::vec3 pointBack;
-		glm::vec3 pointFront;
-		glm::vec3 pointTopLeft;
-		glm::vec3 pointTopRight;
-		glm::vec3 pointBottomLeft;
-		glm::vec3 pointBottomRight;
+		static Camera* camera;
+		 
+		static glm::vec3 pointBack;
+		static glm::vec3 pointFront;
+		static glm::vec3 pointTopLeft;
+		static glm::vec3 pointTopRight;
+		static glm::vec3 pointBottomLeft;
+		static glm::vec3 pointBottomRight;
 	};
 }
 

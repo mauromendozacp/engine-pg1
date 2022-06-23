@@ -41,16 +41,16 @@ namespace GL
 		{
 		case GL::SPRITE_TYPE::QUAD:
 			indexes = quadIndexes;
-			vertices = quadIndexTam;
-			vertexs = quadVertex;
-			tam = sizeof(vertexs) * quadVertTam;
+			indices = quadIndexTam;
+			vertices = quadVertex;
+			tam = sizeof(vertices) * quadVertTam;
 
 			break;
 		case GL::SPRITE_TYPE::CUBE:
 			indexes = cubeIndexes;
-			vertices = cubeIndexTam;
-			vertexs = cubeVertex;
-			tam = sizeof(vertexs) * cubeVertTam;
+			indices = cubeIndexTam;
+			vertices = cubeVertex;
+			tam = sizeof(vertices) * cubeVertTam;
 
 			break;
 		default:
@@ -58,8 +58,8 @@ namespace GL
 		}
 
 		render->GenBuffers(VAO, VBO, EBO, UVB);
-		render->BindBuffer(VAO, VBO, tam, vertexs);
-		render->BindIndexs(EBO, sizeof(indexes) * vertices, indexes);
+		render->BindBuffer(VAO, VBO, tam, vertices);
+		render->BindIndexs(EBO, sizeof(indexes) * indices, indexes);
 		
 		render->SetBaseAttribs(locationPosition, 3, 6 * sizeof(float), (void*)0);
 		render->SetBaseAttribs(locationNormal, 3, 6 * sizeof(float), (void*)(3 * sizeof(float)));
