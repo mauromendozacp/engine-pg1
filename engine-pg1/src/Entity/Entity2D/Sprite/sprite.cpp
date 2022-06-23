@@ -84,9 +84,9 @@ namespace GL
 	{
 		render->BlendEnable();
 		render->UseShader();
-		render->UseTexture(0, baseTexture->id);
 
 		UpdateShader();
+		render->UseTexture(0, baseTexture->id);
 		Entity2D::Draw();
 
 		render->CleanTexture();

@@ -48,12 +48,15 @@ namespace GL
 
 	void OcclusionCulling::Update()
 	{
+		float fov = camera->GetFOV();
+		float aspect = camera->GetAspect() / 2;
+
 		pointBack = camera->GetPos() + camera->GetForward() * camera->GetNear();
 		pointFront = camera->GetPos() + camera->GetForward() * camera->GetFar();
 
-		float angleY = camera->GetFOV() / 2;
+		float angleY = fov / 2;
 		float halfHeight = (tan(angleY * glm::pi<float>() / 180)) * camera->GetFar();
-		float halfWidth = halfHeight * camera->GetAspect();
+		float halfWidth = halfHeight * aspect;
 
 		pointTopLeft = pointFront + (camera->GetUp() * halfHeight) - (camera->GetRight() * halfWidth);
 		pointTopRight = pointFront + (camera->GetUp() * halfHeight) + (camera->GetRight() * halfWidth);

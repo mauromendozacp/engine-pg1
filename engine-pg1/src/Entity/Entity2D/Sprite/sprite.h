@@ -25,7 +25,7 @@ namespace GL
 
 		void Init(SPRITE_TYPE type);
 		void Update();
-		void Draw();
+		void Draw() override;
 		void DeInit();
 
 		void LoadTexture(const char* path, bool invertImage, TEXTURE_TYPE type);

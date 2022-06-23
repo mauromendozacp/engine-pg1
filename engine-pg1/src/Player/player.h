@@ -19,14 +19,14 @@ namespace GameXD
 		Player(Render* render);
 		~Player();
 
-		void Init(Camera* camera, float moveSpeed, float rotSpeed);
+		void Init(GL::Camera* camera, float moveSpeed, float rotSpeed);
 		void Update();
 
-		Camera* GetCamera();
+		GL::Camera* GetCamera();
 		void SetCamera(CAMERA_TYPE cameraType);
 
 	private:
-		Camera* camera;
+		GL::Camera* camera;
 
 		float moveSpeed;
 		float rotSpeed;

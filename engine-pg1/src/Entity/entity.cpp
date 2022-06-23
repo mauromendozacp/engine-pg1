@@ -16,7 +16,6 @@ namespace GL
 		EBO = 0;
 
 		name = "";
-		canDraw = true;
 
 		parent = nullptr;
 		nodes = std::list<Entity*>();
@@ -61,7 +60,6 @@ namespace GL
 		EBO = 0;
 
 		name = "";
-		canDraw = true;
 
 		parent = nullptr;
 		nodes = std::list<Entity*>();
@@ -106,7 +104,6 @@ namespace GL
 		EBO = 0;
 
 		name = "";
-		canDraw = true;
 
 		parent = nullptr;
 		nodes = std::list<Entity*>();
@@ -147,21 +144,6 @@ namespace GL
 	void Entity::SetName(std::string name)
 	{
 		this->name = name;
-	}
-
-	void Entity::SetCanDraw(bool canDraw)
-	{
-		this->canDraw = canDraw;
-	}
-
-	std::vector<Vertex> Entity::GetVertexs()
-	{
-		return vertexs;
-	}
-
-	std::vector<uint> Entity::GetIndexes()
-	{
-		return indexes;
 	}
 
 	void Entity::SetParent(Entity* parent)
@@ -215,13 +197,12 @@ namespace GL
 		}
 
 		matrix.translate = glm::translate(glm::mat4(1.0f), transform.position);
+		UpdateMatrix();
 
 		for (std::list<Entity*>::iterator it = nodes.begin(); it != nodes.end(); ++it)
 		{
 			(*it)->UpdateNodesPos();
 		}
-
-		UpdateMatrix();
 	}
 
 	void Entity::SetRot(glm::vec3 rot)
@@ -241,13 +222,13 @@ namespace GL
 		matrix.rotationY = glm::rotate(glm::mat4(1.f), glm::radians(rot.y), glm::vec3(0.f, 1.f, 0.f));
 		matrix.rotationZ = glm::rotate(glm::mat4(1.f), glm::radians(rot.z), glm::vec3(0.f, 0.f, 1.f));
 
+		UpdateTransform();
+		UpdateMatrix();
+
 		for (std::list<Entity*>::iterator it = nodes.begin(); it != nodes.end(); ++it)
 		{
 			(*it)->UpdateNodesRot();
 		}
-
-		UpdateMatrix();
-		UpdateTransform();
 	}
 
 	void Entity::SetScale(glm::vec3 scale)
@@ -264,13 +245,12 @@ namespace GL
 		}
 
 		matrix.scale = glm::scale4(glm::mat4(1.f), transform.scale);
+		UpdateMatrix();
 
 		for (std::list<Entity*>::iterator it = nodes.begin(); it != nodes.end(); ++it)
 		{
 			(*it)->UpdateNodesScale();
 		}
-		
-		UpdateMatrix();
 	}
 
 	void Entity::SetPos(float x, float y, float z)
@@ -292,8 +272,6 @@ namespace GL
 	{
 		SetPos(glm::vec3(GetPosX(), GetPosY(), z));
 	}
-
-	
 
 	void Entity::SetRot(float x, float y, float z)
 	{
@@ -330,11 +308,6 @@ namespace GL
 		return name;
 	}
 
-	bool Entity::IsCanDraw()
-	{
-		return canDraw;
-	}
-
 	Entity* Entity::GetParent()
 	{
 		return parent;
@@ -369,6 +342,16 @@ namespace GL
 		}
 
 		return nullptr;
+	}
+
+	std::vector<Vertex> Entity::GetVertexs()
+	{
+		return vertexs;
+	}
+
+	std::vector<uint> Entity::GetIndexes()
+	{
+		return indexes;
 	}
 
 	glm::vec3 Entity::GetForward()
@@ -461,6 +444,66 @@ namespace GL
 		return transform.scale.z;
 	}
 
+	void Entity::Draw()
+	{
+		render->Draw(VAO, indexes.size());
+	}
+
+	bool Entity::CheckVolume()
+	{
+		if (volume == nullptr) return true;
+
+		return GetGlobalAABB()->IsOnFrustum(transform, matrix);
+	}
+
+	void Entity::GenerateVolumeAABB()
+	{
+		glm::vec3 minAABB = glm::vec3(std::numeric_limits<float>::max());
+		glm::vec3 maxAABB = glm::vec3(std::numeric_limits<float>::min());
+
+		for (int i = 0; i < vertexs.size(); i++)
+		{
+			Vertex vertex = vertexs[i];
+
+			minAABB.x = glm::min(minAABB.x, vertex.Position.x);
+			minAABB.y = glm::min(minAABB.y, vertex.Position.y);
+			minAABB.z = glm::min(minAABB.z, vertex.Position.z);
+
+			maxAABB.x = glm::max(maxAABB.x, vertex.Position.x);
+			maxAABB.y = glm::max(maxAABB.y, vertex.Position.y);
+			maxAABB.z = glm::max(maxAABB.z, vertex.Position.z);
+		}
+
+		volume = new VolumeAABB(minAABB, maxAABB);
+	}
+
+	VolumeAABB* Entity::GetGlobalAABB()
+	{
+		VolumeAABB* volumeAABB = static_cast<VolumeAABB*>(volume);
+
+		//Get global scale thanks to our transform
+		const glm::vec3 globalCenter{ matrix.model * glm::vec4(volumeAABB->center, 1.f) };
+
+		// Scaled orientation
+		const glm::vec3 right = transform.right * volumeAABB->extents.x;
+		const glm::vec3 up = transform.up * volumeAABB->extents.y;
+		const glm::vec3 forward = transform.forward * volumeAABB->extents.z;
+
+		const float newIi = std::abs(glm::dot(glm::vec3{ 1.f, 0.f, 0.f }, right)) +
+			std::abs(glm::dot(glm::vec3{ 1.f, 0.f, 0.f }, up)) +
+			std::abs(glm::dot(glm::vec3{ 1.f, 0.f, 0.f }, forward));
+
+		const float newIj = std::abs(glm::dot(glm::vec3{ 0.f, 1.f, 0.f }, right)) +
+			std::abs(glm::dot(glm::vec3{ 0.f, 1.f, 0.f }, up)) +
+			std::abs(glm::dot(glm::vec3{ 0.f, 1.f, 0.f }, forward));
+
+		const float newIk = std::abs(glm::dot(glm::vec3{ 0.f, 0.f, 1.f }, right)) +
+			std::abs(glm::dot(glm::vec3{ 0.f, 0.f, 1.f }, up)) +
+			std::abs(glm::dot(glm::vec3{ 0.f, 0.f, 1.f }, forward));
+
+		return new VolumeAABB(globalCenter, newIi, newIj, newIk);
+	}
+
 	void Entity::SetUniforms()
 	{
 		render->SetUniform(uniformModel, "model");
@@ -540,13 +583,12 @@ namespace GL
 	{
 		transform.position = parent->GetPos() + transform.localPosition;
 		matrix.translate = glm::translate(glm::mat4(1.0f), transform.position);
+		UpdateMatrix();
 
 		for (std::list<Entity*>::iterator it = nodes.begin(); it != nodes.end(); ++it)
 		{
 			(*it)->UpdateNodesPos();
 		}
-
-		UpdateMatrix();
 	}
 
 	void Entity::UpdateNodesRot()
@@ -557,25 +599,24 @@ namespace GL
 		matrix.rotationY = glm::rotate(glm::mat4(1.f), glm::radians(transform.eulerAngles.y), glm::vec3(0.f, 1.f, 0.f));
 		matrix.rotationZ = glm::rotate(glm::mat4(1.f), glm::radians(transform.eulerAngles.z), glm::vec3(0.f, 0.f, 1.f));
 
+		UpdateTransform();
+		UpdateMatrix();
+
 		for (std::list<Entity*>::iterator it = nodes.begin(); it != nodes.end(); ++it)
 		{
 			(*it)->UpdateNodesRot();
 		}
-
-		UpdateMatrix();
-		UpdateTransform();
 	}
 
 	void Entity::UpdateNodesScale()
 	{
 		transform.scale = parent->GetScale() * transform.localScale;
 		matrix.scale = glm::scale4(glm::mat4(1.f), transform.scale);
+		UpdateMatrix();
 
 		for (std::list<Entity*>::iterator it = nodes.begin(); it != nodes.end(); ++it)
 		{
 			(*it)->UpdateNodesScale();
 		}
-
-		UpdateMatrix();
 	}
 }

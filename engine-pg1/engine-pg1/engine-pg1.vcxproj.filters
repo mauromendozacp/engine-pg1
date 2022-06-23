@@ -347,6 +347,8 @@
     <ClInclude Include="..\src\Volume\VolumeAABB\volumeAABB.h">
       <Filter>Volume\VolumeAABB</Filter>
     </ClInclude>
+    <ClInclude Include="..\src\transform.h" />
+    <ClInclude Include="..\src\matrix.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\src\ShadersCode\fragment.shader">

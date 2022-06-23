@@ -2,9 +2,8 @@
 #define OCCLUSION_CULLING_H
 
 #include "exports.h"
+#include "Camera/camera.h"
 #include "Plane/plane.h"
-
-class Camera;
 
 namespace GL
 {

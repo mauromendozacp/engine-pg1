@@ -3,8 +3,13 @@
 
 #include "exports.h"
 #include "Renderer/renderer.h"
-#include "Volume/volume.h"
+
+#include "transform.h"
+#include "matrix.h"
 #include "vertexs.h"
+
+#include "Volume/volume.h"
+#include "Volume/VolumeAABB/volumeAABB.h"
 
 #include "GLM/glm.hpp"
 #include "GLM/ext/matrix_transform.hpp"
@@ -15,33 +20,6 @@
 
 namespace GL
 {
-	struct Transform
-	{
-		glm::vec3 position;
-		glm::vec3 eulerAngles;
-		glm::vec3 scale;
-		glm::quat rotation;
-
-		glm::vec3 localPosition;
-		glm::vec3 localEulerAngles;
-		glm::vec3 localScale;
-		glm::quat localRotation;
-
-		glm::vec3 forward;
-		glm::vec3 up;
-		glm::vec3 right;
-	};
-
-	struct Matrix
-	{
-		glm::mat4 model;
-		glm::mat4 translate;
-		glm::mat4 rotationX;
-		glm::mat4 rotationY;
-		glm::mat4 rotationZ;
-		glm::mat4 scale;
-	};
-
 	class GRAPHICSENGINE_API Entity
 	{
 	public:
@@ -51,10 +29,6 @@ namespace GL
 		~Entity();
 
 		void SetName(std::string name);
-		void SetCanDraw(bool canDraw);
-		std::vector<Vertex> GetVertexs();
-		std::vector<uint> GetIndexes();
-
 		void SetParent(Entity* parent);
 		void AddNode(Entity* node);
 		void RemoveNode(Entity* node);
@@ -79,12 +53,14 @@ namespace GL
 		void SetScale(float size);
 
 		std::string GetName();
-		bool IsCanDraw();
 
 		Entity* GetParent();
 		std::list<Entity*> GetNodes();
 		Entity* GetNode(std::string nodeName);
 		Entity* GetNode(int nodeIndex);
+
+		std::vector<Vertex> GetVertexs();
+		std::vector<uint> GetIndexes();
 
 		glm::vec3 GetForward();
 		glm::vec3 GetUp();
@@ -122,7 +98,6 @@ namespace GL
 		uint VAO, VBO, EBO;
 
 		std::string name;
-		bool canDraw;
 
 		Entity* parent;
 		std::list<Entity*> nodes;
@@ -136,6 +111,11 @@ namespace GL
 
 		virtual void SetUniforms();
 		virtual void UpdateShader();
+
+		virtual void Draw();
+		bool CheckVolume();
+		void GenerateVolumeAABB();
+		VolumeAABB* GetGlobalAABB();
 
 	private:
 		glm::quat EulerToQuat(glm::vec3 euler);

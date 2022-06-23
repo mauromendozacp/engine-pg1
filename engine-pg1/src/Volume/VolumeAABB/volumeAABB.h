@@ -13,15 +13,13 @@ namespace GL
 		VolumeAABB(glm::vec3 center, float extX, float extY, float extZ);
 		~VolumeAABB();
 
-		bool IsOnFrustum(Entity* entity) override;
-
-		static VolumeAABB GenerateVolumeAABB(Entity* entity);
-
-	private:
-		bool IsOnPlane(Plane plane) override;
+		bool IsOnFrustum(Transform transform, Matrix matrix) override;
 
 		glm::vec3 center;
 		glm::vec3 extents;
+
+	private:
+		bool IsOnPlane(Plane plane) override;
 	};
 }
 

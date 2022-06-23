@@ -46,6 +46,11 @@ namespace GL
 	{
 	}
 
+	void Entity2D::Draw()
+	{
+		render->Draw(VAO, indices);
+	}
+
 	void Entity2D::UpdateShader()
 	{
 		Entity::UpdateShader();
@@ -56,14 +61,6 @@ namespace GL
 		if (material != nullptr)
 		{
 			material->UpdateShader();
-		}
-	}
-
-	void Entity2D::Draw()
-	{
-		if (canDraw)
-		{
-			render->Draw(VAO, indices);
 		}
 	}
 

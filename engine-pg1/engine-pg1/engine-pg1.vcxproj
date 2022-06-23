@@ -223,6 +223,7 @@
     <ClInclude Include="..\src\Material\material.h" />
     <ClInclude Include="..\src\Material\SolidMaterial\solidMaterial.h" />
     <ClInclude Include="..\src\Material\TextureMaterial\textureMaterial.h" />
+    <ClInclude Include="..\src\matrix.h" />
     <ClInclude Include="..\src\OcclusionCulling\occlusionCulling.h" />
     <ClInclude Include="..\src\Plane\plane.h" />
     <ClInclude Include="..\src\Renderer\renderer.h" />
@@ -232,6 +233,7 @@
     <ClInclude Include="..\src\Tilemap\tilemap.h" />
     <ClInclude Include="..\src\Timer\timer.h" />
     <ClInclude Include="..\src\Tinyxml2\tinyxml2.h" />
+    <ClInclude Include="..\src\transform.h" />
     <ClInclude Include="..\src\vertexs.h" />
     <ClInclude Include="..\src\Volume\volume.h" />
     <ClInclude Include="..\src\Volume\VolumeAABB\volumeAABB.h" />

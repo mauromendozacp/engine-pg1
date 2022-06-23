@@ -80,6 +80,8 @@ namespace GL
 		render->SetBaseAttribs(locationPosition, 3, sizeof(Vertex), (void*)0);
 		render->SetBaseAttribs(locationNormal, 3, sizeof(Vertex), (void*)offsetof(Vertex, Normal));
 		render->SetBaseAttribs(locationTexCoord, 2, sizeof(Vertex), (void*)offsetof(Vertex, TexCoords));
+
+		GenerateVolumeAABB();
 	}
 
 	void Entity3D::Draw()
@@ -127,8 +129,10 @@ namespace GL
 
 	void Entity3D::NodeDraw()
 	{
-		UpdateShader();
 		
+
+		UpdateShader();
+
 		if (textures.size() > 0)
 		{
 			render->UpdateTexture(uniformBaseTexture, textures[0].id);
@@ -144,12 +148,13 @@ namespace GL
 			render->UseTexture(i, textures[i].id);
 		}
 
-		if (canDraw)
+		if (CheckVolume())
 		{
-			render->Draw(VAO, indexes.size());
+			Entity::Draw();
 		}
 
 		render->CleanTexture();
+
 		for (std::list<Entity*>::iterator it = nodes.begin(); it != nodes.end(); ++it)
 		{
 			Entity3D* node3d = static_cast<Entity3D*>((*it));

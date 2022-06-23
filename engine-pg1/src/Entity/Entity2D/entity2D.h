@@ -15,7 +15,7 @@ namespace GL
 		Entity2D(Render* render);
 		~Entity2D();
 		
-		void Draw();
+		void Draw() override;
 		void DeInit();
 
 		void SetCollider(bool hasCollider);

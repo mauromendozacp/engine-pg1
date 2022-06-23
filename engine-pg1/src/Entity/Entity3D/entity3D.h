@@ -20,7 +20,7 @@ namespace GL
 		~Entity3D();
 
 		void Init();
-		void Draw();
+		void Draw() override;
 		void DeInit();
 
 		Material* material;
