@@ -39,25 +39,34 @@ namespace GL
 
     void ModelImporter::ProcessNode(Entity3D* parent, aiNode* node, const aiScene* scene)
 	{
-        for (uint i = 0; i < node->mNumMeshes; i++)
+        Entity3D* entityNode = nullptr;
+        if (node->mNumMeshes > 0)
         {
-            aiMesh* aiMesh = scene->mMeshes[node->mMeshes[i]];
+            std::vector<Mesh*> meshes = std::vector<Mesh*>();
+            for (uint i = 0; i < node->mNumMeshes; i++)
+            {
+                aiMesh* aiMesh = scene->mMeshes[node->mMeshes[i]];
+                meshes.push_back(ProcessMesh(aiMesh, scene));
+            }
 
-            Entity3D* modelNode = ProcessMesh(aiMesh, scene);
-            modelNode->Init();
-            modelNode->SetName(node->mName.C_Str());
-            modelNode->SetParent(parent);
-
-            parent->AddNode(modelNode);
+            entityNode = new Entity3D(meshes, render);
+            entityNode->Init();
+            entityNode->SetName(node->mName.C_Str());
+            entityNode->SetParent(parent);
+            parent->AddNode(entityNode);
+        }
+        else
+        {
+            entityNode = parent;
         }
 
         for (uint i = 0; i < node->mNumChildren; i++)
         {
-            ProcessNode(parent, node->mChildren[i], scene);
+            ProcessNode(entityNode, node->mChildren[i], scene);
         }
 	}
 
-    Entity3D* ModelImporter::ProcessMesh(aiMesh* mesh, const aiScene* scene)
+    Mesh* ModelImporter::ProcessMesh(aiMesh* mesh, const aiScene* scene)
     {
         std::vector<Vertex> vertices;
         std::vector<uint> indices;
@@ -121,9 +130,24 @@ namespace GL
         std::vector<Texture> ambientOcclusionMaps = LoadMaterialTextures(material, aiTextureType_AMBIENT_OCCLUSION, "ambient_occlusion");
         textures.insert(textures.end(), ambientOcclusionMaps.begin(), ambientOcclusionMaps.end());
 
-        
+        aiColor4D color(0.f, 0.f, 0.f, 0.f);
+        aiGetMaterialColor(material, AI_MATKEY_COLOR_DIFFUSE, &color);
 
-        return new Entity3D(vertices, indices, textures, render);
+        Material* mat = nullptr;
+        if (textures.size() > 0)
+        {
+            mat = MaterialManager::GetTextureMaterial();
+        }
+        else
+        {
+            mat = MaterialManager::GetSolidMaterial();
+        }
+
+        Mesh* m = new Mesh(render, vertices, indices, textures);
+        m->color = Color(color.r, color.g, color.b);
+        m->material = mat;
+
+        return m;
     }
 
 	std::vector<Texture> ModelImporter::LoadMaterialTextures(aiMaterial* mat, aiTextureType type, std::string typeName)

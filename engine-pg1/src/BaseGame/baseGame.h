@@ -9,6 +9,7 @@
 #include "Timer/timer.h"
 
 #include "Light/LightManager/lightManager.h"
+#include "Material/MaterialManager/materialManager.h"
 #include "Collision/Collision2D/collision2D.h"
 #include "Camera/ThirdPersonCamera/thirdPersonCamera.h"
 #include "OcclusionCulling/occlusionCulling.h"

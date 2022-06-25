@@ -79,7 +79,9 @@ namespace GL
 
 		Input::Init(window, mainCamera);
 
-		OcclusionCulling::Init(mainCamera);		
+		OcclusionCulling::Init(mainCamera);
+
+		MaterialManager::Init(render);
 
 		srand(time(NULL));
 
@@ -104,6 +106,7 @@ namespace GL
 
 	void BaseGame::DeInitEngine()
 	{
+		MaterialManager::DeInit();
 		window->DestroyWindow();
 		glfwTerminate();
 	}

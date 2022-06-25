@@ -12,6 +12,14 @@ namespace GL
 		a = 1.f;
 	}
 
+	Color::Color(float r, float g, float b)
+	{
+		this->r = r;
+		this->g = g;
+		this->b = b;
+		a = 1.f;
+	}
+
 	Color::Color(int r, int g, int b)
 	{
 		SetColor(r, g, b);

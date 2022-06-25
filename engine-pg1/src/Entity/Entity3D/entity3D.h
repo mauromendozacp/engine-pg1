@@ -2,10 +2,7 @@
 #define ENTITY3D_H
 
 #include "Entity/entity.h"
-
-#include "Material/material.h"
-#include "Color/color.h"
-#include "Importer/TextureImporter/textureImporter.h"
+#include "Mesh/mesh.h"
 
 #include <vector>
 
@@ -16,24 +13,17 @@ namespace GL
 	public:
 		Entity3D();
 		Entity3D(Render* render);
-		Entity3D(std::vector<Vertex> vertexs, std::vector<uint> indexes, std::vector<Texture> textures, Render* render);
+		Entity3D(std::vector<Mesh*> meshes, Render* render);
 		~Entity3D();
 
 		void Init();
 		void Draw() override;
 		void DeInit();
 
-		Material* material;
-		Color color;
-
 	protected:
-		std::vector<Texture> textures;
+		std::vector<Mesh*> meshes;
 
-		uint uniformColor;
-		uint uniformAlpha;
 		uint uniformAffectedLight;
-		uint uniformUseTexture;
-		uint uniformBaseTexture;
 
 		bool affectedLight;
 

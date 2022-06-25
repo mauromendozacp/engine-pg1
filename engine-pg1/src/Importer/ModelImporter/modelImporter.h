@@ -1,11 +1,11 @@
 #ifndef MODEL_IMPORTER_H
 #define MODEL_IMPORTER_H
 
-#include "exports.h"
-
 #include "Entity/Entity3D/entity3D.h"
+#include "Mesh/mesh.h"
 
-#include "StbImage/stb_image.h"
+#include "Material/MaterialManager/materialManager.h"
+#include "Importer/TextureImporter/textureImporter.h"
 
 #include <assimp/Importer.hpp>
 #include <assimp/scene.h>
@@ -29,7 +29,7 @@ namespace GL
 		static std::vector<Texture> textures_loaded;
 
 		static void ProcessNode(Entity3D* parent, aiNode* node, const aiScene* scene);
-		static Entity3D* ProcessMesh(aiMesh* mesh, const aiScene* scene);
+		static Mesh* ProcessMesh(aiMesh* mesh, const aiScene* scene);
 		static std::vector<Texture> LoadMaterialTextures(aiMaterial* mat, aiTextureType type, std::string typeName);
 	};
 }

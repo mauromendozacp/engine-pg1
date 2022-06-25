@@ -106,6 +106,12 @@
     <ClCompile Include="..\src\Volume\VolumeAABB\volumeAABB.cpp">
       <Filter>Volume\VolumeAABB</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\Mesh\mesh.cpp">
+      <Filter>Mesh</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Material\MaterialManager\materialManager.cpp">
+      <Filter>Material\MaterialManager</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Window">
@@ -228,6 +234,12 @@
     <Filter Include="Volume\VolumeAABB">
       <UniqueIdentifier>{2f966341-c75c-40a4-bc24-37d3fe40c785}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Mesh">
+      <UniqueIdentifier>{945daaf0-7ec6-4db6-99f9-0a5e234bef88}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Material\MaterialManager">
+      <UniqueIdentifier>{e9a51ffd-a8cb-4cf4-93dd-ba468593257c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\Window\window.h">
@@ -349,6 +361,12 @@
     </ClInclude>
     <ClInclude Include="..\src\transform.h" />
     <ClInclude Include="..\src\matrix.h" />
+    <ClInclude Include="..\src\Mesh\mesh.h">
+      <Filter>Mesh</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Material\MaterialManager\materialManager.h">
+      <Filter>Material\MaterialManager</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\src\ShadersCode\fragment.shader">

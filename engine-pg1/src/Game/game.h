@@ -14,8 +14,6 @@
 #include "Light/SpotLight/spotLight.h"
 
 #include "Importer/ModelImporter/modelImporter.h"
-#include "Material/SolidMaterial/solidMaterial.h"
-#include "Material/TextureMaterial/textureMaterial.h"
 
 #include <iostream>
 
@@ -47,10 +45,6 @@ namespace GameXD
 		Entity3D* model;
 		Entity3D* character;
 
-		SolidMaterial* defaultSolidMaterial;
-		TextureMaterial* defaultTextureMaterial;
-
-		void InitMaterial();
 		void InitEntities();
 		void InitLights();
 		void UpdateInputs();

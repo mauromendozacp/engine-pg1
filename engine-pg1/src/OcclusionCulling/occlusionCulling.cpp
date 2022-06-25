@@ -61,28 +61,6 @@ namespace GL
 		left.SetPositionAndNormal(camera->GetPos(), glm::cross(frontFar - camera->GetRight() * halfWidth, camera->GetUp()));
 		up.SetPositionAndNormal(camera->GetPos(), glm::cross(camera->GetRight(), frontFar - camera->GetUp() * halfheight));
 		down.SetPositionAndNormal(camera->GetPos(), glm::cross(frontFar + camera->GetUp() * halfheight, camera->GetRight()));
-
-		/*pointBack = camera->GetPos() + camera->GetForward() * camera->GetNear();
-		pointFront = camera->GetPos() + camera->GetForward() * camera->GetFar();
-
-		float angleY = fov / 2;
-		float halfHeight = (tan(angleY * glm::pi<float>() / 180)) * camera->GetFar();
-		float halfWidth = halfHeight * aspect;
-
-		pointTopLeft = pointFront + (camera->GetUp() * halfHeight) - (camera->GetRight() * halfWidth);
-		pointTopRight = pointFront + (camera->GetUp() * halfHeight) + (camera->GetRight() * halfWidth);
-		pointBottomLeft = pointFront - (camera->GetUp() * halfHeight) - (camera->GetRight() * halfWidth);
-		pointBottomRight = pointFront - (camera->GetUp() * halfHeight) + (camera->GetRight() * halfWidth);
-
-		up.Set3Points(pointTopLeft, pointTopRight, camera->GetPos());
-		down.Set3Points(pointBottomLeft, pointBottomRight, camera->GetPos());
-		left.Set3Points(pointTopLeft, pointBottomLeft, camera->GetPos());
-		right.Set3Points(pointTopRight, pointBottomRight, camera->GetPos());
-		front.SetNormalAndPosition(glm::normalize(pointBack - pointFront), pointFront);
-		back.SetNormalAndPosition(glm::normalize(pointFront - pointBack), pointBack);
-
-		down.Flip();
-		left.Flip();*/
 	}
 
 	void OcclusionCulling::SetCamera(Camera* cam)

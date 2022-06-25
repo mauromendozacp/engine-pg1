@@ -181,8 +181,10 @@
     <ClCompile Include="..\src\Light\PointLight\pointLight.cpp" />
     <ClCompile Include="..\src\Light\SpotLight\spotLight.cpp" />
     <ClCompile Include="..\src\Material\material.cpp" />
+    <ClCompile Include="..\src\Material\MaterialManager\materialManager.cpp" />
     <ClCompile Include="..\src\Material\SolidMaterial\solidMaterial.cpp" />
     <ClCompile Include="..\src\Material\TextureMaterial\textureMaterial.cpp" />
+    <ClCompile Include="..\src\Mesh\mesh.cpp" />
     <ClCompile Include="..\src\OcclusionCulling\occlusionCulling.cpp" />
     <ClCompile Include="..\src\Plane\plane.cpp" />
     <ClCompile Include="..\src\Renderer\renderer.cpp" />
@@ -221,9 +223,11 @@
     <ClInclude Include="..\src\Light\PointLight\pointLight.h" />
     <ClInclude Include="..\src\Light\SpotLight\spotLight.h" />
     <ClInclude Include="..\src\Material\material.h" />
+    <ClInclude Include="..\src\Material\MaterialManager\materialManager.h" />
     <ClInclude Include="..\src\Material\SolidMaterial\solidMaterial.h" />
     <ClInclude Include="..\src\Material\TextureMaterial\textureMaterial.h" />
     <ClInclude Include="..\src\matrix.h" />
+    <ClInclude Include="..\src\Mesh\mesh.h" />
     <ClInclude Include="..\src\OcclusionCulling\occlusionCulling.h" />
     <ClInclude Include="..\src\Plane\plane.h" />
     <ClInclude Include="..\src\Renderer\renderer.h" />
