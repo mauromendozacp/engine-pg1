@@ -8,7 +8,6 @@
 #include "Texture/texture.h"
 #include "Material/material.h"
 #include "Color/color.h"
-#include "Material/SolidMaterial/solidMaterial.h"
 
 #include <vector>
 
