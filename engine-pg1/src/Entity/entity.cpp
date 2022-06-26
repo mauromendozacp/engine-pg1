@@ -456,51 +456,28 @@ namespace GL
 	{
 		if (volume == nullptr) return true;
 
-		return GetGlobalAABB()->IsOnFrustum(transform, matrix);
-	}
-
-	void Entity::GenerateVolumeAABB()
-	{
-		glm::vec3 minAABB = glm::vec3(std::numeric_limits<float>::max());
-		glm::vec3 maxAABB = glm::vec3(std::numeric_limits<float>::min());
-
-		for (int i = 0; i < vertexs.size(); i++)
-		{
-			Vertex vertex = vertexs[i];
-
-			minAABB.x = glm::min(minAABB.x, vertex.Position.x);
-			minAABB.y = glm::min(minAABB.y, vertex.Position.y);
-			minAABB.z = glm::min(minAABB.z, vertex.Position.z);
-
-			maxAABB.x = glm::max(maxAABB.x, vertex.Position.x);
-			maxAABB.y = glm::max(maxAABB.y, vertex.Position.y);
-			maxAABB.z = glm::max(maxAABB.z, vertex.Position.z);
-		}
-
-		volume = new VolumeAABB(minAABB, maxAABB);
+		return volume->IsOnFrustum(transform, matrix.model);
 	}
 
 	VolumeAABB* Entity::GetGlobalAABB()
 	{
 		VolumeAABB* volumeAABB = static_cast<VolumeAABB*>(volume);
 
-		//Get global scale thanks to our transform
-		const glm::vec3 globalCenter{ matrix.model * glm::vec4(volumeAABB->center, 1.f) };
+		glm::vec3 globalCenter{ matrix.model * glm::vec4(volumeAABB->center, 1.f) };
 
-		// Scaled orientation
-		const glm::vec3 right = transform.right * volumeAABB->extents.x;
-		const glm::vec3 up = transform.up * volumeAABB->extents.y;
-		const glm::vec3 forward = transform.forward * volumeAABB->extents.z;
+		glm::vec3 right = transform.right * volumeAABB->extents.x;
+		glm::vec3 up = transform.up * volumeAABB->extents.y;
+		glm::vec3 forward = transform.forward * volumeAABB->extents.z;
 
-		const float newIi = std::abs(glm::dot(glm::vec3{ 1.f, 0.f, 0.f }, right)) +
+		float newIi = std::abs(glm::dot(glm::vec3{ 1.f, 0.f, 0.f }, right)) +
 			std::abs(glm::dot(glm::vec3{ 1.f, 0.f, 0.f }, up)) +
 			std::abs(glm::dot(glm::vec3{ 1.f, 0.f, 0.f }, forward));
 
-		const float newIj = std::abs(glm::dot(glm::vec3{ 0.f, 1.f, 0.f }, right)) +
+		float newIj = std::abs(glm::dot(glm::vec3{ 0.f, 1.f, 0.f }, right)) +
 			std::abs(glm::dot(glm::vec3{ 0.f, 1.f, 0.f }, up)) +
 			std::abs(glm::dot(glm::vec3{ 0.f, 1.f, 0.f }, forward));
 
-		const float newIk = std::abs(glm::dot(glm::vec3{ 0.f, 0.f, 1.f }, right)) +
+		float newIk = std::abs(glm::dot(glm::vec3{ 0.f, 0.f, 1.f }, right)) +
 			std::abs(glm::dot(glm::vec3{ 0.f, 0.f, 1.f }, up)) +
 			std::abs(glm::dot(glm::vec3{ 0.f, 0.f, 1.f }, forward));
 
@@ -566,17 +543,7 @@ namespace GL
 
 	void Entity::UpdateMatrix()
 	{
-		if (parent == nullptr)
-		{
-			glm::mat4 rot = matrix.rotationY * matrix.rotationX * matrix.rotationZ;
-			matrix.model = matrix.translate * rot * matrix.scale;
-		}
-		else
-		{
-			glm::mat4 rot = matrix.rotationY * matrix.rotationX * matrix.rotationZ;
-			glm::mat4 auxModel = matrix.translate * rot * matrix.scale;
-			matrix.model = parent->matrix.model * auxModel;
-		}
+		matrix.model = matrix.translate * matrix.rotationY * matrix.rotationX * matrix.rotationZ * matrix.scale;
 	}
 
 	void Entity::UpdateTransform()

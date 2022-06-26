@@ -109,19 +109,18 @@ namespace GL
 		uint locationNormal;
 		uint locationTexCoord;
 
+		void UpdateMatrix();
 		virtual void SetUniforms();
 		virtual void UpdateShader();
 
 		virtual void Draw();
 		bool CheckVolume();
-		void GenerateVolumeAABB();
 		VolumeAABB* GetGlobalAABB();
 
 	private:
 		glm::quat EulerToQuat(glm::vec3 euler);
 		glm::vec3 QuatToVec(glm::quat quat, glm::vec3 euler);
 
-		void UpdateMatrix();
 		void UpdateTransform();
 
 		void UpdateNodesPos();

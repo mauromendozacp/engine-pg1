@@ -40,6 +40,7 @@ namespace GL
     void ModelImporter::ProcessNode(Entity3D* parent, aiNode* node, const aiScene* scene)
 	{
         Entity3D* entityNode = nullptr;
+
         if (node->mNumMeshes > 0)
         {
             std::vector<Mesh*> meshes = std::vector<Mesh*>();

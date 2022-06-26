@@ -11,7 +11,7 @@ namespace GL
 	Plane::Plane(glm::vec3 normal, glm::vec3 point)
 	{
 		this->normal = glm::normalize(normal);
-		distance = -glm::dot(normal, point);
+		distance = glm::dot(normal, point);
 	}
 
 	Plane::Plane(glm::vec3 normal, float distance)
@@ -23,7 +23,7 @@ namespace GL
 	Plane::Plane(glm::vec3 a, glm::vec3 b, glm::vec3 c)
 	{
 		normal = glm::normalize(glm::cross(b - a, c - a));
-		distance = -glm::dot(normal, a);
+		distance = glm::dot(normal, a);
 	}
 
 	Plane::~Plane()
@@ -53,13 +53,13 @@ namespace GL
 	void Plane::SetPositionAndNormal(glm::vec3 point, glm::vec3 normal)
 	{
 		this->normal = glm::normalize(normal);
-		distance = -glm::dot(this->normal, point);
+		distance = glm::dot(this->normal, point);
 	}
 
 	void Plane::Set3Points(glm::vec3 a, glm::vec3 b, glm::vec3 c)
 	{
 		normal = glm::normalize(glm::cross(b - a, c - a));
-		distance = -glm::dot(normal, a);
+		distance = glm::dot(normal, a);
 	}
 
 	void Plane::Flip()
@@ -81,12 +81,12 @@ namespace GL
 
 	float Plane::GetDistanceToPoint(glm::vec3 point)
 	{
-		return glm::dot(normal, point) + distance;
+		return glm::dot(normal, point) - distance;
 	}
 
 	bool Plane::GetSide(glm::vec3 point)
 	{
-		return glm::dot(normal, point) + distance > 0.f;
+		return glm::dot(normal, point) - distance > 0.f;
 	}
 
 	bool Plane::SameSide(glm::vec3 point1, glm::vec3 point2)

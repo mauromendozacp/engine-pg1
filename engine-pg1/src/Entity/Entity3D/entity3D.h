@@ -21,6 +21,8 @@ namespace GL
 		void DeInit();
 
 	protected:
+		void GenerateVolumeAABB();
+
 		std::vector<Mesh*> meshes;
 
 		uint uniformAffectedLight;

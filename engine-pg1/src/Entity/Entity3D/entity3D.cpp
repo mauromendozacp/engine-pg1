@@ -71,6 +71,34 @@ namespace GL
 			node3d->DeInit();
 		}
 	}
+
+	void Entity3D::GenerateVolumeAABB()
+	{
+		if (meshes.size() > 0)
+		{
+			glm::vec3 minAABB = glm::vec3(std::numeric_limits<float>::max());
+			glm::vec3 maxAABB = glm::vec3(std::numeric_limits<float>::min());
+
+			for (int i = 0; i < meshes.size(); i++)
+			{
+				Mesh* mesh = meshes[i];
+				for (int j = 0; j < mesh->GetVertexs().size(); j++)
+				{
+					Vertex vertex = mesh->GetVertexs()[j];
+
+					minAABB.x = glm::min(minAABB.x, vertex.Position.x);
+					minAABB.y = glm::min(minAABB.y, vertex.Position.y);
+					minAABB.z = glm::min(minAABB.z, vertex.Position.z);
+
+					maxAABB.x = glm::max(maxAABB.x, vertex.Position.x);
+					maxAABB.y = glm::max(maxAABB.y, vertex.Position.y);
+					maxAABB.z = glm::max(maxAABB.z, vertex.Position.z);
+				}
+			}
+
+			volume = new VolumeAABB(minAABB, maxAABB);
+		}
+	}
 	
 	void Entity3D::SetUniforms()
 	{
@@ -80,8 +108,7 @@ namespace GL
 
 	void Entity3D::NodeDraw()
 	{
-		if (true)
-		//if (CheckVolume())
+		if (CheckVolume())
 		{
 			UpdateShader();
 
@@ -89,6 +116,11 @@ namespace GL
 			{
 				meshes[i]->Draw();
 			}
+			std::cout << "on frustum: " << name << std::endl;
+		}
+		else
+		{
+			std::cout << "out frustum: " << name << std::endl;
 		}
 
 		for (std::list<Entity*>::iterator it = nodes.begin(); it != nodes.end(); ++it)

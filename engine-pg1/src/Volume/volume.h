@@ -2,17 +2,11 @@
 #define	VOLUME_H
 
 #include "exports.h"
-
 #include "transform.h"
-#include "matrix.h"
-#include "vertexs.h"
 
 #include "Plane/plane.h"
 
 #include "GLM/glm.hpp"
-
-#include <vector>
-#include <list>
 
 namespace GL
 {
@@ -22,7 +16,7 @@ namespace GL
 		Volume() { };
 		~Volume() { };
 
-		virtual bool IsOnFrustum(Transform transform, Matrix matrix) = 0;
+		virtual bool IsOnFrustum(Transform transform, glm::mat4 worldModel) = 0;
 
 	protected:
 		virtual bool IsOnPlane(Plane plane) = 0;

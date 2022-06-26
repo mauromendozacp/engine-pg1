@@ -111,17 +111,17 @@ namespace GameXD
 
 	void Game::InitEntities()
 	{
-		model = new Entity3D(render);
+		//model = new Entity3D(render);
 		model = ModelImporter::LoadModel(render, "../res/Models/gir/gir.fbx");
 		//model = ModelImporter::LoadModel(render, "../res/Models/survival-guitar-backpack/backpack.obj");
 		//model = ModelImporter::LoadModel(render, "../res/Models/elshaman/Mauri.obj");
-		model->SetPos(glm::vec3(0.f, -1.5f, -10.f));
+		//model->SetPos(glm::vec3(0.f, -1.5f, -10.f));
 
 		//player = static_cast<Player*>(ModelImporter::LoadModel(render, "../res/Models/survival-guitar-backpack/backpack.obj"));
 		player = new Player(render);
 		player->Init(mainCamera, 5.f, 75.f);
 		player->SetCamera(CAMERA_TYPE::TPS);
-		player->SetPos(glm::vec3(0.f, 1.5f, 0.f));
+		player->SetPos(glm::vec3(1.f, 1.5f, 0.f));
 		player->SetScale(1.0f);
 
 		floor = new Sprite(render);
@@ -240,13 +240,11 @@ namespace GameXD
 		}
 		if (Input::IsKeyPressed(KEY_9))
 		{
-			Entity* guitarNode1 = model->GetNode("Cylinder.030__0");
-			guitarNode1->SetPos(guitarNode1->GetLocalPosition() - glm::vec3(0.5f, 0.f, 0.f));
+			model->SetPos(model->GetLocalPosition() - glm::vec3(0.05f, 0.f, 0.f));
 		}
 		if (Input::IsKeyPressed(KEY_0))
 		{
-			Entity* guitarNode1 = model->GetNode("Cylinder.030__0");
-			guitarNode1->SetPos(guitarNode1->GetLocalPosition() + glm::vec3(0.5f, 0.f, 0.f));
+			model->SetPos(model->GetLocalPosition() + glm::vec3(0.05f, 0.f, 0.f));
 		}
 
 		if (Input::IsKeyDown(KEY_ESCAPE))

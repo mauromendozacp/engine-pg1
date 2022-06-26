@@ -5,6 +5,8 @@
 
 namespace GL
 {
+	#define MAX_BOUNDS 8
+
 	class GRAPHICSENGINE_API VolumeAABB : public Volume
 	{
 	public:
@@ -13,7 +15,7 @@ namespace GL
 		VolumeAABB(glm::vec3 center, float extX, float extY, float extZ);
 		~VolumeAABB();
 
-		bool IsOnFrustum(Transform transform, Matrix matrix) override;
+		bool IsOnFrustum(Transform transform, glm::mat4 worldModel) override;
 
 		glm::vec3 center;
 		glm::vec3 extents;

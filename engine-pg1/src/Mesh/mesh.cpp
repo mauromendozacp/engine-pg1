@@ -82,23 +82,10 @@ namespace GL
 		render->SetBaseAttribs(locationPosition, 3, sizeof(Vertex), (void*)0);
 		render->SetBaseAttribs(locationNormal, 3, sizeof(Vertex), (void*)offsetof(Vertex, Normal));
 		render->SetBaseAttribs(locationTexCoord, 2, sizeof(Vertex), (void*)offsetof(Vertex, TexCoords));
-
-		SolidMaterial* defaultSolidMaterial = new SolidMaterial(render);
-		defaultSolidMaterial->Init();
-		defaultSolidMaterial->SetAmbient(glm::vec3(0.5f, 0.5f, 0.5f));
-		defaultSolidMaterial->SetDiffuse(glm::vec3(0.4f, 0.4f, 0.4f));
-		defaultSolidMaterial->SetSpecular(glm::vec3(0.5f, 0.5f, 0.5f));
-		defaultSolidMaterial->SetShininess(64.f);
-
-		material = defaultSolidMaterial;
 	}
 
 	void Mesh::Draw()
 	{
-		render->UseShader();
-		render->BlendEnable();
-		render->TextureEnable();
-
 		for (int i = 0; i < textures.size(); i++)
 		{
 			render->UseTexture(i, textures[i].id);
@@ -109,9 +96,6 @@ namespace GL
 		render->Draw(VAO, indexes.size());
 
 		render->CleanTexture();
-		render->TextureDisable();
-		render->BlendDisable();
-		render->CleanShader();
 	}
 
 	void Mesh::DeInit()
