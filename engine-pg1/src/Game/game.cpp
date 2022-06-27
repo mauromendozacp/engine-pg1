@@ -110,7 +110,7 @@ namespace GameXD
 		model = ModelImporter::LoadModel(render, "../res/Models/gir/gir.fbx");
 		//model = ModelImporter::LoadModel(render, "../res/Models/survival-guitar-backpack/backpack.obj");
 		//model = ModelImporter::LoadModel(render, "../res/Models/elshaman/Mauri.obj");
-		//model->SetPos(glm::vec3(0.f, -1.5f, -10.f));
+		model->SetPos(glm::vec3(0.f, 2.5f, 0.f));
 
 		//player = static_cast<Player*>(ModelImporter::LoadModel(render, "../res/Models/survival-guitar-backpack/backpack.obj"));
 		player = new Player(render);
