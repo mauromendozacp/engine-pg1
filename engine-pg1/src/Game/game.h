@@ -43,7 +43,7 @@ namespace GameXD
 
 		Player* player;
 		Entity3D* model;
-		Entity3D* character;
+		Entity3D* node;
 
 		void InitEntities();
 		void InitLights();

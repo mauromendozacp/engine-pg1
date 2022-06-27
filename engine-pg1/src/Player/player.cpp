@@ -54,7 +54,7 @@ namespace GameXD
 
 	void Player::Inputs()
 	{
-		/*if (GL::Input::IsKeyPressed(KEY_A) || GL::Input::IsKeyPressed(KEY_LEFT))
+		if (GL::Input::IsKeyPressed(KEY_A) || GL::Input::IsKeyPressed(KEY_LEFT))
 		{
 			SetPos(GetPos() - glm::normalize(glm::cross(camera->GetForward(), camera->GetUp())) * GetSpeedDelta());
 		}
@@ -71,7 +71,7 @@ namespace GameXD
 			SetPos(GetPos() - GetSpeedDelta() * camera->GetForward());
 		}
 
-		if (GL::Input::IsKeyPressed(KEY_Q))
+		/*if (GL::Input::IsKeyPressed(KEY_Q))
 		{
 			SetRotY(GetRotY() + rotSpeed * GL::Timer::GetDeltaTime());
 		}
@@ -88,11 +88,6 @@ namespace GameXD
 		{
 			//camera->SetCameraType(GL::CAMERA_TYPE::TPS);
 		}*/
-
-		if (GL::Input::IsKeyPressed(KEY_R))
-		{
-			SetPos(glm::vec3(0.f));
-		}
 	}
 
 	float Player::GetSpeedDelta()

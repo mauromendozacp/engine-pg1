@@ -9,7 +9,7 @@ namespace GameXD
 		tnt = nullptr;
 
 		model = nullptr;
-		character = nullptr;
+		node = nullptr;
 		player = nullptr;
 
 		for (int i = 0; i < cubesLenght; i++)
@@ -29,11 +29,6 @@ namespace GameXD
 		{
 			delete model;
 			model = nullptr;
-		}
-		if (character != nullptr)
-		{
-			delete character;
-			character = nullptr;
 		}
 		if (floor != nullptr)
 		{
@@ -194,57 +189,103 @@ namespace GameXD
 
 	void Game::UpdateInputs()
 	{
-		if (Input::IsKeyDown(KEY_1))
+		//----------------------------LIGHTS---------------------------------
+		if (Input::IsKeyDown(KEY_Z))
 		{
 			SpotLight* spotLight = lightManager->GetLasSpotLightCreated();
 			spotLight->SetEnabled(!spotLight->IsEnabled());
 		}
-		if (Input::IsKeyDown(KEY_2))
+		if (Input::IsKeyDown(KEY_X))
 		{
 			PointLight* pointLight = lightManager->GetLasPointLightCreated();
 			pointLight->SetEnabled(!pointLight->IsEnabled());
 		}
-		if (Input::IsKeyDown(KEY_3))
+		if (Input::IsKeyDown(KEY_C))
 		{
 			DirectionalLight* directionalLight = lightManager->GetDirectionalLight();
 			directionalLight->SetEnabled(!directionalLight->IsEnabled());
 		}
-		if (Input::IsKeyDown(KEY_4))
+		if (Input::IsKeyDown(KEY_V))
 		{
 			PointLight* pointLight = lightManager->GetLasPointLightCreated();
 			pointLight->color = Color::GetRandomColor();
 		}
+
+		//----------------------------NODES---------------------------------
+		if (Input::IsKeyPressed(KEY_1))
+		{
+			node = static_cast<Entity3D*>(model);
+		}
+		if (Input::IsKeyPressed(KEY_2))
+		{
+			node = static_cast<Entity3D*>(model->GetNode("cabeza"));
+		}
+		if (Input::IsKeyPressed(KEY_3))
+		{
+			node = static_cast<Entity3D*>(model->GetNode("hombro_der"));
+		}
+		if (Input::IsKeyPressed(KEY_4))
+		{
+			node = static_cast<Entity3D*>(model->GetNode("brazo_der"));
+		}
 		if (Input::IsKeyPressed(KEY_5))
 		{
-			glm::vec3 guitarScale = model->GetScale();
-			guitarScale += glm::vec3(1) * Timer::GetDeltaTime();
-			model->SetScale(guitarScale);
+			node = static_cast<Entity3D*>(model->GetNode("mano_der"));
 		}
 		if (Input::IsKeyPressed(KEY_6))
 		{
-			glm::vec3 guitarScale = model->GetScale();
-			guitarScale -= glm::vec3(1) * Timer::GetDeltaTime();
-			model->SetScale(guitarScale);
+			node = static_cast<Entity3D*>(model->GetNode("dedos_der"));
 		}
 		if (Input::IsKeyPressed(KEY_7))
 		{
-			float guitarRotX = model->GetRotX();
-			guitarRotX -= 15.f * Timer::GetDeltaTime();
-			model->SetRotX(guitarRotX);
+			node = static_cast<Entity3D*>(model->GetNode("pata_der"));
 		}
 		if (Input::IsKeyPressed(KEY_8))
 		{
-			float guitarRotX = model->GetRotX();
-			guitarRotX += 15.f * Timer::GetDeltaTime();
-			model->SetRotX(guitarRotX);
+			node = static_cast<Entity3D*>(model->GetNode("pata_izq"));
 		}
 		if (Input::IsKeyPressed(KEY_9))
 		{
-			model->SetPos(model->GetLocalPosition() - glm::vec3(0.05f, 0.f, 0.f));
+			node = static_cast<Entity3D*>(model->GetNode("pecho"));
 		}
 		if (Input::IsKeyPressed(KEY_0))
 		{
-			model->SetPos(model->GetLocalPosition() + glm::vec3(0.05f, 0.f, 0.f));
+			node = static_cast<Entity3D*>(model->GetNode("ojos"));
+		}
+
+		//----------------------------TRANSFORMS---------------------------------
+		if (node != nullptr)
+		{
+			if (Input::IsKeyPressed(KEY_T))
+			{
+				node->SetPos(node->GetLocalPosition() - glm::vec3(0.05f, 0.f, 0.f));
+			}
+			if (Input::IsKeyPressed(KEY_Y))
+			{
+				node->SetPos(node->GetLocalPosition() + glm::vec3(0.05f, 0.f, 0.f));
+			}
+			if (Input::IsKeyPressed(KEY_G))
+			{
+				node->SetRotZ(node->GetLocalRotation().z - 1.f);
+			}
+			if (Input::IsKeyPressed(KEY_H))
+			{
+				node->SetRotZ(node->GetLocalRotation().z + 1.f);
+			}
+			if (Input::IsKeyPressed(KEY_B))
+			{
+				node->SetScale(node->GetLocalScale() - glm::vec3(0.005f));
+			}
+			if (Input::IsKeyPressed(KEY_N))
+			{
+				node->SetScale(node->GetLocalScale() + glm::vec3(0.005f));
+			}
+			if (Input::IsKeyPressed(KEY_R))
+			{
+				node->SetPos(glm::vec3(0.f));
+				node->SetRot(glm::vec3(0.f));
+				node->SetScale(glm::vec3(1.f));
+			}
 		}
 
 		if (Input::IsKeyDown(KEY_ESCAPE))

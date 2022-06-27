@@ -262,12 +262,22 @@ namespace GL
 
 	Entity* Entity::GetNode(std::string nodeName)
 	{
-		for (std::list<Entity*>::iterator it = nodes.begin(); it != nodes.end(); ++it)
+		if (name == nodeName)
 		{
-			if ((*it)->GetName() == nodeName)
+			return this;
+		}
+
+		if (nodes.size() > 0)
+		{
+			Entity* node = nullptr;
+			for (std::list<Entity*>::iterator it = nodes.begin(); it != nodes.end(); ++it)
 			{
-				return (*it);
+				node = (*it)->GetNode(nodeName);
+
+				if (node != nullptr) break;
 			}
+
+			return node;
 		}
 
 		return nullptr;
