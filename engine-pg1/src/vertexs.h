@@ -1,6 +1,8 @@
 #ifndef VERTEXS_H
 #define VERTEXS_H
 
+#include "GLM/glm.hpp"
+
 namespace GL
 {
 	struct Vertex
@@ -12,48 +14,196 @@ namespace GL
 
 #pragma region TRIANGULE_VERTEX
 
-	const int triangVertTam = 18;
+	const int triangVertexTam = 3;
 	const int triangIndexTam = 3;
+	static glm::vec3 triangPositions[triangVertexTam]
+	{
+		{  0.5f, -0.5f, 0.0f },
+		{ -0.5f, -0.5f, 0.0f },
+		{  0.0f,  0.5f, 0.0f }
+	};
+	static glm::vec3 triangNormals[triangVertexTam]
+	{
+		{ 1.0f, 1.0f, 1.0f },
+		{ 1.0f, 1.0f, 1.0f },
+		{ 1.0f, 1.0f, 1.0f }
+	};
 	static unsigned int triangIndexes[triangIndexTam]
 	{
 		0, 1, 2
-	};
-	static float triangVertex[triangVertTam]
-	{
-		// positions         // colors
-		//X		Y	  Z		 R	   G	 B
-		 0.5f, -0.5f, 0.0f,  1.0f, 1.0f, 1.0f,   // bottom right
-		-0.5f, -0.5f, 0.0f,  1.0f, 1.0f, 1.0f,   // bottom left
-		 0.0f,  0.5f, 0.0f,  1.0f, 1.0f, 1.0f    // top 
 	};
 
 #pragma endregion
 
 #pragma region QUAD_VERTEX
 
-	const int quadVertTam = 24;
+	const int quadVertexTam = 4;
 	const int quadIndexTam = 6;
+	static glm::vec3 quadPositions[quadVertexTam]
+	{
+		{ -0.5f, -0.5f, 0.0f },
+		{  0.5f, -0.5f, 0.0f },
+		{  0.5f,  0.5f, 0.0f },
+		{ -0.5f,  0.5f, 0.0f }
+	};
+	static glm::vec3 quadNormals[quadVertexTam]
+	{
+		{ 0.0f, 1.0f, -1.0f },
+		{ 0.0f, 1.0f, -1.0f },
+		{ 0.0f, 1.0f, -1.0f },
+		{ 0.0f, 1.0f, -1.0f }
+	};
+	static glm::vec2 quadTextureCoords[quadVertexTam]
+	{
+		{ 0.0f,  0.0f },
+		{ 1.0f,  0.0f },
+		{ 1.0f,  1.0f },
+		{ 0.0f,  1.0f },
+	};
 	static unsigned int quadIndexes[quadIndexTam]
 	{
-		0, 1, 3,
-		1, 2, 3
-	};
-	static float quadVertex[quadVertTam]
-	{
-		// positions          // normals
-		//X		Y	  Z		  X	    Y	  Z
-		 0.5f,  0.5f, 0.0f,   0.0f, 1.0f, -1.0f,	// top right
-		 0.5f, -0.5f, 0.0f,   0.0f, 1.0f, -1.0f,	// bottom right
-		-0.5f, -0.5f, 0.0f,   0.0f, 1.0f, -1.0f,	// bottom right
-		-0.5f,  0.5f, 0.0f,	  0.0f, 1.0f, -1.0f,	// top left
+		0, 1, 2,
+		0, 2, 3
 	};
 
 #pragma endregion
 
 #pragma region CUBE_VERTEX
 
-	const int cubeVertTam = 216;
+	const int cubeVertexTam = 36;
 	const int cubeIndexTam = 42;
+	static glm::vec3 cubePositions[cubeVertexTam]
+	{
+		{ -0.5f, -0.5f, -0.5f },
+		{  0.5f, -0.5f, -0.5f },
+		{  0.5f,  0.5f, -0.5f },
+		{  0.5f,  0.5f, -0.5f },
+		{ -0.5f,  0.5f, -0.5f },
+		{ -0.5f, -0.5f, -0.5f },
+
+		{ -0.5f, -0.5f,  0.5f },
+		{  0.5f, -0.5f,  0.5f },
+		{  0.5f,  0.5f,  0.5f },
+		{  0.5f,  0.5f,  0.5f },
+		{ -0.5f,  0.5f,  0.5f },
+		{ -0.5f, -0.5f,  0.5f },
+
+		{ -0.5f,  0.5f,  0.5f },
+		{ -0.5f,  0.5f, -0.5f },
+		{ -0.5f, -0.5f, -0.5f },
+		{ -0.5f, -0.5f, -0.5f },
+		{ -0.5f, -0.5f,  0.5f },
+		{ -0.5f,  0.5f,  0.5f },
+
+		{  0.5f,  0.5f,  0.5f },
+		{  0.5f,  0.5f, -0.5f },
+		{  0.5f, -0.5f, -0.5f },
+		{  0.5f, -0.5f, -0.5f },
+		{  0.5f, -0.5f,  0.5f },
+		{  0.5f,  0.5f,  0.5f },
+
+		{ -0.5f, -0.5f, -0.5f },
+		{  0.5f, -0.5f, -0.5f },
+		{  0.5f, -0.5f,  0.5f },
+		{  0.5f, -0.5f,  0.5f },
+		{ -0.5f, -0.5f,  0.5f },
+		{ -0.5f, -0.5f, -0.5f },
+
+		{ -0.5f,  0.5f, -0.5f },
+		{  0.5f,  0.5f, -0.5f },
+		{  0.5f,  0.5f,  0.5f },
+		{  0.5f,  0.5f,  0.5f },
+		{ -0.5f,  0.5f,  0.5f },
+		{ -0.5f,  0.5f, -0.5f }
+	};
+	static glm::vec3 cubeNormals[cubeVertexTam]
+	{
+		{  0.0f,  0.0f, -1.0f },
+		{  0.0f,  0.0f, -1.0f },
+		{  0.0f,  0.0f, -1.0f },
+		{  0.0f,  0.0f, -1.0f },
+		{  0.0f,  0.0f, -1.0f },
+		{  0.0f,  0.0f, -1.0f },
+
+		{  0.0f,  0.0f,  1.0f },
+		{  0.0f,  0.0f,  1.0f },
+		{  0.0f,  0.0f,  1.0f },
+		{  0.0f,  0.0f,  1.0f },
+		{  0.0f,  0.0f,  1.0f },
+		{  0.0f,  0.0f,  1.0f },
+
+		{ -1.0f,  0.0f,  0.0f },
+		{ -1.0f,  0.0f,  0.0f },
+		{ -1.0f,  0.0f,  0.0f },
+		{ -1.0f,  0.0f,  0.0f },
+		{ -1.0f,  0.0f,  0.0f },
+		{ -1.0f,  0.0f,  0.0f },
+
+		{  1.0f,  0.0f,  0.0f },
+		{  1.0f,  0.0f,  0.0f },
+		{  1.0f,  0.0f,  0.0f },
+		{  1.0f,  0.0f,  0.0f },
+		{  1.0f,  0.0f,  0.0f },
+		{  1.0f,  0.0f,  0.0f },
+
+		{  0.0f, -1.0f,  0.0f },
+		{  0.0f, -1.0f,  0.0f },
+		{  0.0f, -1.0f,  0.0f },
+		{  0.0f, -1.0f,  0.0f },
+		{  0.0f, -1.0f,  0.0f },
+		{  0.0f, -1.0f,  0.0f },
+
+		{  0.0f,  1.0f,  0.0f },
+		{  0.0f,  1.0f,  0.0f },
+		{  0.0f,  1.0f,  0.0f },
+		{  0.0f,  1.0f,  0.0f },
+		{  0.0f,  1.0f,  0.0f },
+		{  0.0f,  1.0f,  0.0f }
+	};
+	static glm::vec2 cubeTextureCoords[cubeVertexTam]
+	{
+		{ 0.0f,  0.0f },
+		{ 1.0f,  0.0f },
+		{ 1.0f,  1.0f },
+		{ 1.0f,  1.0f },
+		{ 0.0f,  1.0f },
+		{ 0.0f,  0.0f },
+					  
+		{ 0.0f,  0.0f },
+		{ 1.0f,  0.0f },
+		{ 1.0f,  1.0f },
+		{ 1.0f,  1.0f },
+		{ 0.0f,  1.0f },
+		{ 0.0f,  0.0f },
+
+		{ 0.0f,  0.0f },
+		{ 1.0f,  0.0f },
+		{ 1.0f,  1.0f },
+		{ 1.0f,  1.0f },
+		{ 0.0f,  1.0f },
+		{ 0.0f,  0.0f },
+
+		{ 0.0f,  0.0f },
+		{ 1.0f,  0.0f },
+		{ 1.0f,  1.0f },
+		{ 1.0f,  1.0f },
+		{ 0.0f,  1.0f },
+		{ 0.0f,  0.0f },
+
+		{ 0.0f,  0.0f },
+		{ 1.0f,  0.0f },
+		{ 1.0f,  1.0f },
+		{ 1.0f,  1.0f },
+		{ 0.0f,  1.0f },
+		{ 0.0f,  0.0f },
+
+		{ 0.0f,  0.0f },
+		{ 1.0f,  0.0f },
+		{ 1.0f,  1.0f },
+		{ 1.0f,  1.0f },
+		{ 0.0f,  1.0f },
+		{ 0.0f,  0.0f },
+	};
 	static unsigned int cubeIndexes[cubeIndexTam]
 	{
 		0,  1,  2,
@@ -68,52 +218,6 @@ namespace GL
 		27, 28,	29,
 		30, 31,	32,
 		33, 34, 35
-	};
-	static float cubeVertex[cubeVertTam]
-	{
-		// positions        
-		//X		Y	  Z		      NORMAL
-		-0.5f, -0.5f, -0.5f,  0.0f,  0.0f, -1.0f,
-		 0.5f, -0.5f, -0.5f,  0.0f,  0.0f, -1.0f,
-		 0.5f,  0.5f, -0.5f,  0.0f,  0.0f, -1.0f,
-		 0.5f,  0.5f, -0.5f,  0.0f,  0.0f, -1.0f,
-		-0.5f,  0.5f, -0.5f,  0.0f,  0.0f, -1.0f,
-		-0.5f, -0.5f, -0.5f,  0.0f,  0.0f, -1.0f,
-
-		-0.5f, -0.5f,  0.5f,  0.0f,  0.0f,  1.0f,
-		 0.5f, -0.5f,  0.5f,  0.0f,  0.0f,  1.0f,
-		 0.5f,  0.5f,  0.5f,  0.0f,  0.0f,  1.0f,
-		 0.5f,  0.5f,  0.5f,  0.0f,  0.0f,  1.0f,
-		-0.5f,  0.5f,  0.5f,  0.0f,  0.0f,  1.0f,
-		-0.5f, -0.5f,  0.5f,  0.0f,  0.0f,  1.0f,
-
-		-0.5f,  0.5f,  0.5f, -1.0f,  0.0f,  0.0f,
-		-0.5f,  0.5f, -0.5f, -1.0f,  0.0f,  0.0f,
-		-0.5f, -0.5f, -0.5f, -1.0f,  0.0f,  0.0f,
-		-0.5f, -0.5f, -0.5f, -1.0f,  0.0f,  0.0f,
-		-0.5f, -0.5f,  0.5f, -1.0f,  0.0f,  0.0f,
-		-0.5f,  0.5f,  0.5f, -1.0f,  0.0f,  0.0f,
-
-		 0.5f,  0.5f,  0.5f,  1.0f,  0.0f,  0.0f,
-		 0.5f,  0.5f, -0.5f,  1.0f,  0.0f,  0.0f,
-		 0.5f, -0.5f, -0.5f,  1.0f,  0.0f,  0.0f,
-		 0.5f, -0.5f, -0.5f,  1.0f,  0.0f,  0.0f,
-		 0.5f, -0.5f,  0.5f,  1.0f,  0.0f,  0.0f,
-		 0.5f,  0.5f,  0.5f,  1.0f,  0.0f,  0.0f,
-
-		-0.5f, -0.5f, -0.5f,  0.0f, -1.0f,  0.0f,
-		 0.5f, -0.5f, -0.5f,  0.0f, -1.0f,  0.0f,
-		 0.5f, -0.5f,  0.5f,  0.0f, -1.0f,  0.0f,
-		 0.5f, -0.5f,  0.5f,  0.0f, -1.0f,  0.0f,
-		-0.5f, -0.5f,  0.5f,  0.0f, -1.0f,  0.0f,
-		-0.5f, -0.5f, -0.5f,  0.0f, -1.0f,  0.0f,
-
-		-0.5f,  0.5f, -0.5f,  0.0f,  1.0f,  0.0f,
-		 0.5f,  0.5f, -0.5f,  0.0f,  1.0f,  0.0f,
-		 0.5f,  0.5f,  0.5f,  0.0f,  1.0f,  0.0f,
-		 0.5f,  0.5f,  0.5f,  0.0f,  1.0f,  0.0f,
-		-0.5f,  0.5f,  0.5f,  0.0f,  1.0f,  0.0f,
-		-0.5f,  0.5f, -0.5f,  0.0f,  1.0f,  0.0f
 	};
 
 #pragma endregion

@@ -54,7 +54,7 @@ namespace GameXD
 
 	void Player::Inputs()
 	{
-		if (GL::Input::IsKeyPressed(KEY_A) || GL::Input::IsKeyPressed(KEY_LEFT))
+		/*if (GL::Input::IsKeyPressed(KEY_A) || GL::Input::IsKeyPressed(KEY_LEFT))
 		{
 			SetPos(GetPos() - glm::normalize(glm::cross(camera->GetForward(), camera->GetUp())) * GetSpeedDelta());
 		}
@@ -87,7 +87,7 @@ namespace GameXD
 		else if (GL::Input::IsKeyPressed(KEY_C))
 		{
 			//camera->SetCameraType(GL::CAMERA_TYPE::TPS);
-		}
+		}*/
 
 		if (GL::Input::IsKeyPressed(KEY_R))
 		{

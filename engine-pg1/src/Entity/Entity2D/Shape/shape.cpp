@@ -19,32 +19,56 @@ namespace GL
 		useTexture = false;
 		SetUniforms();
 
-		uint* indexes;
-
 		switch (shapeType)
 		{
 		case SHAPE_TYPE::TRIANGLE:
-			
-			indexes = triangIndexes;
-			indices = triangIndexTam;
-			vertices = triangVertex;
-			tam = sizeof(vertices) * triangVertTam;
+			for (int i = 0; i < triangVertexTam; i++)
+			{
+				Vertex vertex;
+				vertex.Position = triangPositions[i];
+				vertex.Normal = triangNormals[i];
+
+				vertexs.push_back(vertex);
+			}
+
+			for (int i = 0; i < triangIndexTam; i++)
+			{
+				indexes.push_back(triangIndexes[i]);
+			}
 
 			break;
 		case SHAPE_TYPE::QUAD:
 
-			indexes = quadIndexes;
-			indices = quadIndexTam;
-			vertices = quadVertex;
-			tam = sizeof(vertices) * quadVertTam;
+			for (int i = 0; i < quadVertexTam; i++)
+			{
+				Vertex vertex;
+				vertex.Position = quadPositions[i];
+				vertex.Normal = quadNormals[i];
+
+				vertexs.push_back(vertex);
+			}
+
+			for (int i = 0; i < quadIndexTam; i++)
+			{
+				indexes.push_back(quadIndexes[i]);
+			}
 
 			break;
 		case SHAPE_TYPE::CUBE:
 
-			indexes = cubeIndexes;
-			indices = cubeIndexTam;
-			vertices = cubeVertex;
-			tam = sizeof(vertices) * cubeVertTam;
+			for (int i = 0; i < cubeVertexTam; i++)
+			{
+				Vertex vertex;
+				vertex.Position = cubePositions[i];
+				vertex.Normal = cubeNormals[i];
+
+				vertexs.push_back(vertex);
+			}
+
+			for (int i = 0; i < cubeIndexTam; i++)
+			{
+				indexes.push_back(cubeIndexes[i]);
+			}
 
 			break;
 		default:
@@ -52,11 +76,13 @@ namespace GL
 		}
 
 		render->GenBuffers(VAO, VBO, EBO);
-		render->BindBuffer(VAO, VBO, tam, vertices);
-		render->BindIndexs(EBO, sizeof(indexes) * indices, indexes);
+		render->BindBuffer(VAO, VBO, vertexs.size() * sizeof(Vertex), &vertexs[0]);
+		render->BindIndexs(EBO, indexes.size() * sizeof(unsigned int), &indexes[0]);
 
-		render->SetBaseAttribs(locationPosition, 3, 6 * sizeof(float), (void*)0);
-		render->SetBaseAttribs(locationNormal, 3, 6 * sizeof(float), (void*)(3 * sizeof(float)));
+		render->SetBaseAttribs(locationPosition, 3, sizeof(Vertex), (void*)0);
+		render->SetBaseAttribs(locationNormal, 3, sizeof(Vertex), (void*)offsetof(Vertex, Normal));
+
+		GenerateVolumeAABB();
 	}
 
 	void Shape::Draw()

@@ -15,7 +15,7 @@ namespace GL
 		Entity2D(Render* render);
 		~Entity2D();
 		
-		void Draw() override;
+		void Draw();
 		void DeInit();
 
 		void SetCollider(bool hasCollider);
@@ -35,8 +35,10 @@ namespace GL
 		uint uniformAffectedLight;
 		uint uniformUseTexture;
 
-		uint tam, indices;
-		float* vertices;
+		uint VAO, VBO, EBO;
+		std::vector<Vertex> vertexs;
+		std::vector<uint> indexes;
+
 		bool hasCollider;
 		bool moveable;
 
@@ -45,6 +47,7 @@ namespace GL
 
 		virtual void SetUniforms() override;
 		virtual void UpdateShader() override;
+		void GenerateVolumeAABB();
 	};
 }
 

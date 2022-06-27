@@ -25,13 +25,13 @@ namespace GL
 	{
 	}
 
-	bool VolumeAABB::IsOnFrustum(Transform transform, glm::mat4 worldModel)
+	bool VolumeAABB::IsOnFrustum(glm::mat4 worldModel)
 	{
 		glm::vec3 globalCenter { worldModel * glm::vec4(center, 1.f) };
 
-		glm::vec3 right = transform.right * extents.x;
-		glm::vec3 up = transform.up * extents.y;
-		glm::vec3 forward = transform.forward * extents.z;
+		glm::vec3 right = worldModel[0] * extents.x;
+		glm::vec3 up = worldModel[1] * extents.y;
+		glm::vec3 forward = worldModel[2] * extents.z;
 
 		float newIi = std::abs(glm::dot(glm::vec3{ 1.f, 0.f, 0.f }, right)) +
 			std::abs(glm::dot(glm::vec3{ 1.f, 0.f, 0.f }, up)) +
@@ -47,30 +47,12 @@ namespace GL
 
 		VolumeAABB globalAABB(globalCenter, newIi, newIj, newIk);
 
-		glm::vec3 aabbPositions[MAX_BOUNDS];
-		aabbPositions[0] = globalAABB.center + glm::vec3(-globalAABB.extents.x, -globalAABB.extents.y, globalAABB.extents.z);
-		aabbPositions[1] = globalAABB.center + glm::vec3(globalAABB.extents.x, -globalAABB.extents.y, globalAABB.extents.z);
-		aabbPositions[2] = globalAABB.center + glm::vec3(-globalAABB.extents.x, globalAABB.extents.y, globalAABB.extents.z);
-		aabbPositions[3] = globalAABB.center + glm::vec3(globalAABB.extents.x, globalAABB.extents.y, globalAABB.extents.z);
-		aabbPositions[4] = globalAABB.center + glm::vec3(-globalAABB.extents.x, -globalAABB.extents.y, -globalAABB.extents.z);
-		aabbPositions[5] = globalAABB.center + glm::vec3(globalAABB.extents.x, -globalAABB.extents.y, -globalAABB.extents.z);
-		aabbPositions[6] = globalAABB.center + glm::vec3(-globalAABB.extents.x, globalAABB.extents.y, -globalAABB.extents.z);
-		aabbPositions[7] = globalAABB.center + glm::vec3(globalAABB.extents.x, globalAABB.extents.y, -globalAABB.extents.z);
-
-		for (int i = 0; i < MAX_BOUNDS; i++)
-		{
-			if (OcclusionCulling::left.GetSide(aabbPositions[i]) &&
-				OcclusionCulling::right.GetSide(aabbPositions[i]) &&
-				OcclusionCulling::up.GetSide(aabbPositions[i]) &&
-				OcclusionCulling::down.GetSide(aabbPositions[i]) &&
-				OcclusionCulling::back.GetSide(aabbPositions[i]) &&
-				OcclusionCulling::front.GetSide(aabbPositions[i]))
-			{
-				return true;
-			}
-		}
-
-		return false;
+		return (globalAABB.IsOnPlane(OcclusionCulling::left) &&
+			globalAABB.IsOnPlane(OcclusionCulling::right) &&
+			globalAABB.IsOnPlane(OcclusionCulling::up) &&
+			globalAABB.IsOnPlane(OcclusionCulling::down) &&
+			globalAABB.IsOnPlane(OcclusionCulling::back) &&
+			globalAABB.IsOnPlane(OcclusionCulling::front));
 	}
 
 	bool VolumeAABB::IsOnPlane(Plane plane)

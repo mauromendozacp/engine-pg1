@@ -20,7 +20,7 @@ namespace GL
 		~Shape();
 
 		void Init(SHAPE_TYPE shapeType);
-		void Draw() override;
+		void Draw();
 		void DeInit();
 	};
 }

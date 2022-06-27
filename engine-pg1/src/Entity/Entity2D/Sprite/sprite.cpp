@@ -35,22 +35,41 @@ namespace GL
 
 		SetUniforms();
 
-		uint* indexes = 0;
-
 		switch (type)
 		{
 		case GL::SPRITE_TYPE::QUAD:
-			indexes = quadIndexes;
-			indices = quadIndexTam;
-			vertices = quadVertex;
-			tam = sizeof(vertices) * quadVertTam;
+			for (int i = 0; i < quadVertexTam; i++)
+			{
+				Vertex vertex;
+				vertex.Position = quadPositions[i];
+				vertex.Normal = quadNormals[i];
+				vertex.TexCoords = quadTextureCoords[i];
+
+				vertexs.push_back(vertex);
+			}
+
+			for (int i = 0; i < quadIndexTam; i++)
+			{
+				indexes.push_back(quadIndexes[i]);
+			}
 
 			break;
 		case GL::SPRITE_TYPE::CUBE:
-			indexes = cubeIndexes;
-			indices = cubeIndexTam;
-			vertices = cubeVertex;
-			tam = sizeof(vertices) * cubeVertTam;
+
+			for (int i = 0; i < cubeVertexTam; i++)
+			{
+				Vertex vertex;
+				vertex.Position = cubePositions[i];
+				vertex.Normal = cubeNormals[i];
+				vertex.TexCoords = cubeTextureCoords[i];
+
+				vertexs.push_back(vertex);
+			}
+
+			for (int i = 0; i < cubeIndexTam; i++)
+			{
+				indexes.push_back(cubeIndexes[i]);
+			}
 
 			break;
 		default:
@@ -58,14 +77,16 @@ namespace GL
 		}
 
 		render->GenBuffers(VAO, VBO, EBO, UVB);
-		render->BindBuffer(VAO, VBO, tam, vertices);
-		render->BindIndexs(EBO, sizeof(indexes) * indices, indexes);
-		
-		render->SetBaseAttribs(locationPosition, 3, 6 * sizeof(float), (void*)0);
-		render->SetBaseAttribs(locationNormal, 3, 6 * sizeof(float), (void*)(3 * sizeof(float)));
+		render->BindBuffer(VAO, VBO, vertexs.size() * sizeof(Vertex), &vertexs[0]);
+		render->BindIndexs(EBO, indexes.size() * sizeof(unsigned int), &indexes[0]);
 
-		SetTextureCoordinates(currFrame);
-		render->SetTextureAttribs(locationTexCoord, 2, 2, 0);
+		render->SetBaseAttribs(locationPosition, 3, sizeof(Vertex), (void*)0);
+		render->SetBaseAttribs(locationNormal, 3, sizeof(Vertex), (void*)offsetof(Vertex, Normal));
+
+		//SetTextureCoordinates(currFrame);
+		render->SetBaseAttribs(locationTexCoord, 2, sizeof(Vertex), (void*)offsetof(Vertex, TexCoords));
+
+		GenerateVolumeAABB();
 	}
 
 	void Sprite::Update()
@@ -82,8 +103,8 @@ namespace GL
 
 	void Sprite::Draw()
 	{
-		render->BlendEnable();
 		render->UseShader();
+		render->BlendEnable();
 
 		UpdateShader();
 		render->UseTexture(0, baseTexture->id);
@@ -91,8 +112,8 @@ namespace GL
 
 		render->CleanTexture();
 		render->TextureDisable();
-		render->CleanShader();
 		render->BlendDisable();
+		render->CleanShader();
 	}
 
 	void Sprite::DeInit()

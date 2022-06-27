@@ -25,7 +25,6 @@ namespace GL
 	public:
 		Entity();
 		Entity(Render* render);
-		Entity(std::vector<Vertex> vertexs, std::vector<uint> indexes, Render* render);
 		~Entity();
 
 		void SetName(std::string name);
@@ -59,9 +58,6 @@ namespace GL
 		Entity* GetNode(std::string nodeName);
 		Entity* GetNode(int nodeIndex);
 
-		std::vector<Vertex> GetVertexs();
-		std::vector<uint> GetIndexes();
-
 		glm::vec3 GetForward();
 		glm::vec3 GetUp();
 		glm::vec3 GetRight();
@@ -93,10 +89,6 @@ namespace GL
 	protected:
 		Render* render;
 
-		std::vector<Vertex> vertexs;
-		std::vector<uint> indexes;
-		uint VAO, VBO, EBO;
-
 		std::string name;
 
 		Entity* parent;
@@ -109,18 +101,15 @@ namespace GL
 		uint locationNormal;
 		uint locationTexCoord;
 
-		void UpdateMatrix();
+		bool CheckVolume();
 		virtual void SetUniforms();
 		virtual void UpdateShader();
-
-		virtual void Draw();
-		bool CheckVolume();
-		VolumeAABB* GetGlobalAABB();
 
 	private:
 		glm::quat EulerToQuat(glm::vec3 euler);
 		glm::vec3 QuatToVec(glm::quat quat, glm::vec3 euler);
 
+		void UpdateMatrix();
 		void UpdateTransform();
 
 		void UpdateNodesPos();

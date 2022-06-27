@@ -12,8 +12,12 @@ namespace GL
 		uniformAffectedLight = 0;
 		uniformUseTexture = 0;
 
-		tam = 0;
-		indices = 0;
+		this->vertexs = vertexs;
+		this->indexes = indexes;
+
+		VAO = 0;
+		VBO = 0;
+		EBO = 0;
 
 		hasCollider = false;
 		moveable = false;
@@ -32,8 +36,12 @@ namespace GL
 		uniformAffectedLight = 0;
 		uniformUseTexture = 0;
 
-		tam = 0;
-		indices = 0;
+		this->vertexs = vertexs;
+		this->indexes = indexes;
+
+		VAO = 0;
+		VBO = 0;
+		EBO = 0;
 
 		hasCollider = false;
 		moveable = false;
@@ -48,7 +56,10 @@ namespace GL
 
 	void Entity2D::Draw()
 	{
-		render->Draw(VAO, indices);
+		if (CheckVolume())
+		{
+			render->Draw(VAO, indexes.size());
+		}
 	}
 
 	void Entity2D::UpdateShader()
@@ -62,6 +73,27 @@ namespace GL
 		{
 			material->UpdateShader();
 		}
+	}
+
+	void Entity2D::GenerateVolumeAABB()
+	{
+		glm::vec3 minAABB = glm::vec3(std::numeric_limits<float>::max());
+		glm::vec3 maxAABB = glm::vec3(std::numeric_limits<float>::min());
+
+		for (int i = 0; i < vertexs.size(); i++)
+		{
+			Vertex vertex = vertexs[i];
+
+			minAABB.x = glm::min(minAABB.x, vertex.Position.x);
+			minAABB.y = glm::min(minAABB.y, vertex.Position.y);
+			minAABB.z = glm::min(minAABB.z, vertex.Position.z);
+
+			maxAABB.x = glm::max(maxAABB.x, vertex.Position.x);
+			maxAABB.y = glm::max(maxAABB.y, vertex.Position.y);
+			maxAABB.z = glm::max(maxAABB.z, vertex.Position.z);
+		}
+
+		volume = new VolumeAABB(minAABB, maxAABB);
 	}
 
 	void Entity2D::DeInit()

@@ -15,7 +15,7 @@ namespace GL
 		VolumeAABB(glm::vec3 center, float extX, float extY, float extZ);
 		~VolumeAABB();
 
-		bool IsOnFrustum(Transform transform, glm::mat4 worldModel) override;
+		bool IsOnFrustum(glm::mat4 worldModel) override;
 
 		glm::vec3 center;
 		glm::vec3 extents;

@@ -17,7 +17,7 @@ namespace GL
 		~Entity3D();
 
 		void Init();
-		void Draw() override;
+		void Draw();
 		void DeInit();
 
 	protected:

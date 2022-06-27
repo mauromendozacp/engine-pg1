@@ -8,15 +8,7 @@ namespace GL
 	{
 		render = nullptr;
 
-		vertexs = std::vector<Vertex>();
-		indexes = std::vector<uint>();
-
-		VAO = 0;
-		VBO = 0;
-		EBO = 0;
-
 		name = "";
-
 		parent = nullptr;
 		nodes = std::list<Entity*>();
 
@@ -53,60 +45,7 @@ namespace GL
 	{
 		this->render = render;
 
-		vertexs = std::vector<Vertex>();
-		indexes = std::vector<uint>();
-
-		VAO = 0;
-		VBO = 0;
-		EBO = 0;
-
 		name = "";
-
-		parent = nullptr;
-		nodes = std::list<Entity*>();
-
-		transform.position = glm::vec3(0.f);
-		transform.eulerAngles = glm::vec3(0.f);
-		transform.scale = glm::vec3(1.f);
-		transform.rotation = glm::quat(0.f, 0.f, 0.f, 1.f);
-
-		transform.localPosition = glm::vec3(0.f);
-		transform.localEulerAngles = glm::vec3(0.f);
-		transform.localScale = glm::vec3(1.f);
-		transform.localRotation = glm::quat(0.f, 0.f, 0.f, 1.f);
-
-		transform.forward = glm::vec3(0.f, 0.f, 1.f);
-		transform.up = glm::vec3(0.f, 1.f, 0.f);
-		transform.right = glm::vec3(1.f, 0.f, 0.f);
-
-		matrix.model = glm::mat4(1.f);
-		matrix.translate = glm::mat4(1.f);
-		matrix.rotationX = glm::mat4(1.f);
-		matrix.rotationY = glm::mat4(1.f);
-		matrix.rotationZ = glm::mat4(1.f);
-		matrix.scale = glm::mat4(1.f);
-
-		uniformModel = 0;
-		uniformView = 0;
-		uniformProjection = 0;
-
-		UpdateTransform();
-		UpdateMatrix();
-	}
-
-	Entity::Entity(std::vector<Vertex> vertexs, std::vector<uint> indexes, Render* render)
-	{
-		this->render = render;
-
-		this->vertexs = vertexs;
-		this->indexes = indexes;
-
-		VAO = 0;
-		VBO = 0;
-		EBO = 0;
-
-		name = "";
-
 		parent = nullptr;
 		nodes = std::list<Entity*>();
 
@@ -347,16 +286,6 @@ namespace GL
 		return nullptr;
 	}
 
-	std::vector<Vertex> Entity::GetVertexs()
-	{
-		return vertexs;
-	}
-
-	std::vector<uint> Entity::GetIndexes()
-	{
-		return indexes;
-	}
-
 	glm::vec3 Entity::GetForward()
 	{
 		return transform.forward;
@@ -447,41 +376,11 @@ namespace GL
 		return transform.scale.z;
 	}
 
-	void Entity::Draw()
-	{
-		render->Draw(VAO, indexes.size());
-	}
-
 	bool Entity::CheckVolume()
 	{
 		if (volume == nullptr) return true;
 
-		return volume->IsOnFrustum(transform, matrix.model);
-	}
-
-	VolumeAABB* Entity::GetGlobalAABB()
-	{
-		VolumeAABB* volumeAABB = static_cast<VolumeAABB*>(volume);
-
-		glm::vec3 globalCenter{ matrix.model * glm::vec4(volumeAABB->center, 1.f) };
-
-		glm::vec3 right = transform.right * volumeAABB->extents.x;
-		glm::vec3 up = transform.up * volumeAABB->extents.y;
-		glm::vec3 forward = transform.forward * volumeAABB->extents.z;
-
-		float newIi = std::abs(glm::dot(glm::vec3{ 1.f, 0.f, 0.f }, right)) +
-			std::abs(glm::dot(glm::vec3{ 1.f, 0.f, 0.f }, up)) +
-			std::abs(glm::dot(glm::vec3{ 1.f, 0.f, 0.f }, forward));
-
-		float newIj = std::abs(glm::dot(glm::vec3{ 0.f, 1.f, 0.f }, right)) +
-			std::abs(glm::dot(glm::vec3{ 0.f, 1.f, 0.f }, up)) +
-			std::abs(glm::dot(glm::vec3{ 0.f, 1.f, 0.f }, forward));
-
-		float newIk = std::abs(glm::dot(glm::vec3{ 0.f, 0.f, 1.f }, right)) +
-			std::abs(glm::dot(glm::vec3{ 0.f, 0.f, 1.f }, up)) +
-			std::abs(glm::dot(glm::vec3{ 0.f, 0.f, 1.f }, forward));
-
-		return new VolumeAABB(globalCenter, newIi, newIj, newIk);
+		return volume->IsOnFrustum(matrix.model);
 	}
 
 	void Entity::SetUniforms()

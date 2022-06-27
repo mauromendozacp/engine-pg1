@@ -116,11 +116,6 @@ namespace GL
 			{
 				meshes[i]->Draw();
 			}
-			std::cout << "on frustum: " << name << std::endl;
-		}
-		else
-		{
-			std::cout << "out frustum: " << name << std::endl;
 		}
 
 		for (std::list<Entity*>::iterator it = nodes.begin(); it != nodes.end(); ++it)
