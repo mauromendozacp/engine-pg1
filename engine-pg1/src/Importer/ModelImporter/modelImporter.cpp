@@ -55,8 +55,6 @@ namespace GL
             entityNode->SetName(node->mName.C_Str());
             entityNode->SetParent(parent);
             parent->AddNode(entityNode);
-
-            std::cout << entityNode->GetName() << std::endl;
         }
         else
         {

@@ -42,6 +42,7 @@ namespace GameXD
 		Sprite* tnt;
 
 		Player* player;
+		Entity3D* backpack;
 		Entity3D* model;
 		Entity3D* node;
 

@@ -25,13 +25,13 @@ namespace GL
 	{
 	}
 
-	bool VolumeAABB::IsOnFrustum(glm::mat4 worldModel)
+	bool VolumeAABB::IsOnFrustum(glm::mat4 model)
 	{
-		glm::vec3 globalCenter { worldModel * glm::vec4(center, 1.f) };
+		glm::vec3 globalCenter { model * glm::vec4(center, 1.f) };
 
-		glm::vec3 right = worldModel[0] * extents.x;
-		glm::vec3 up = worldModel[1] * extents.y;
-		glm::vec3 forward = worldModel[2] * extents.z;
+		glm::vec3 right = model[0] * extents.x;
+		glm::vec3 up = model[1] * extents.y;
+		glm::vec3 forward = model[2] * extents.z;
 
 		float newIi = std::abs(glm::dot(glm::vec3{ 1.f, 0.f, 0.f }, right)) +
 			std::abs(glm::dot(glm::vec3{ 1.f, 0.f, 0.f }, up)) +

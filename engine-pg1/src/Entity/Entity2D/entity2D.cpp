@@ -12,8 +12,8 @@ namespace GL
 		uniformAffectedLight = 0;
 		uniformUseTexture = 0;
 
-		this->vertexs = vertexs;
-		this->indexes = indexes;
+		vertexs = std::vector<Vertex>();
+		indexes = std::vector<uint>();
 
 		VAO = 0;
 		VBO = 0;
@@ -36,8 +36,8 @@ namespace GL
 		uniformAffectedLight = 0;
 		uniformUseTexture = 0;
 
-		this->vertexs = vertexs;
-		this->indexes = indexes;
+		vertexs = std::vector<Vertex>();
+		indexes = std::vector<uint>();
 
 		VAO = 0;
 		VBO = 0;

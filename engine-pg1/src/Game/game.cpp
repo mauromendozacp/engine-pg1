@@ -8,9 +8,10 @@ namespace GameXD
 		floor = nullptr;
 		tnt = nullptr;
 
+		player = nullptr;
+		backpack = nullptr;
 		model = nullptr;
 		node = nullptr;
-		player = nullptr;
 
 		for (int i = 0; i < cubesLenght; i++)
 		{
@@ -29,6 +30,11 @@ namespace GameXD
 		{
 			delete model;
 			model = nullptr;
+		}
+		if (backpack != nullptr)
+		{
+			delete backpack;
+			backpack = nullptr;
 		}
 		if (floor != nullptr)
 		{
@@ -85,6 +91,7 @@ namespace GameXD
 		spotCubeLight->Draw();
 		floor->Draw();
 		tnt->Draw();
+		backpack->Draw();
 		model->Draw();
 
 		player->Draw();
@@ -106,18 +113,18 @@ namespace GameXD
 
 	void Game::InitEntities()
 	{
-		//model = new Entity3D(render);
-		model = ModelImporter::LoadModel(render, "../res/Models/gir/gir.fbx");
-		//model = ModelImporter::LoadModel(render, "../res/Models/survival-guitar-backpack/backpack.obj");
-		//model = ModelImporter::LoadModel(render, "../res/Models/elshaman/Mauri.obj");
-		model->SetPos(glm::vec3(0.f, 2.5f, 0.f));
-
-		//player = static_cast<Player*>(ModelImporter::LoadModel(render, "../res/Models/survival-guitar-backpack/backpack.obj"));
 		player = new Player(render);
 		player->Init(mainCamera, 5.f, 75.f);
 		player->SetCamera(CAMERA_TYPE::TPS);
-		player->SetPos(glm::vec3(1.f, 1.5f, 0.f));
+		player->SetPos(glm::vec3(0.f, 1.5f, 5.f));
 		player->SetScale(1.0f);
+
+		backpack = ModelImporter::LoadModel(render, "../res/Models/survival-guitar-backpack/backpack.obj");
+		backpack->SetPos(glm::vec3(0.f, 1.5f, -15.f));
+
+		model = ModelImporter::LoadModel(render, "../res/Models/gir/gir.fbx");
+		model->SetPos(glm::vec3(0.f, 2.f, 0.f));
+		model->SetScale(0.75f);
 
 		floor = new Sprite(render);
 		floor->Init(SPRITE_TYPE::QUAD);
@@ -133,14 +140,14 @@ namespace GameXD
 			cubeLight[i] = new Shape(render);
 			cubeLight[i]->Init(SHAPE_TYPE::CUBE);
 			cubeLight[i]->material = MaterialManager::GetSolidMaterial();
-			cubeLight[i]->SetPos(glm::vec3(10.f - 2.5f * i, 2.5f, 10.f));
+			cubeLight[i]->SetPos(glm::vec3(10.f - 2.5f * i, 2.5f, 22.5f));
 			cubeLight[i]->color = Color::GetRandomColor();
 		}
 
 		spotCubeLight = new Shape(render);
 		spotCubeLight->Init(SHAPE_TYPE::CUBE);
 		spotCubeLight->material = MaterialManager::GetSolidMaterial();
-		spotCubeLight->SetPos(glm::vec3(0.f, 5.f, 0.f));
+		spotCubeLight->SetPos(glm::vec3(10.f, 5.f, 0.f));
 		spotCubeLight->color.SetColor(255, 0, 0);
 		spotCubeLight->SetScale(0.75f);
 
@@ -148,7 +155,7 @@ namespace GameXD
 		tnt->Init(SPRITE_TYPE::CUBE);
 		tnt->LoadTexture("../res/Textures/tnt.png", true, GL::TEXTURE_TYPE::BASE);
 		tnt->material = MaterialManager::GetTextureMaterial();
-		tnt->SetPos(glm::vec3(2.5f, 0.f, 2.5f));
+		tnt->SetPos(glm::vec3(5.f, 0.f, 2.5f));
 	}
 
 	void Game::InitLights()

@@ -15,7 +15,7 @@ namespace GL
 		Volume() { };
 		~Volume() { };
 
-		virtual bool IsOnFrustum(glm::mat4 worldModel) = 0;
+		virtual bool IsOnFrustum(glm::mat4 model) = 0;
 
 	protected:
 		virtual bool IsOnPlane(Plane plane) = 0;
