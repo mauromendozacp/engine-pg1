@@ -20,18 +20,24 @@ namespace GL
 		void Draw();
 		void DeInit();
 
-	protected:
-		void GenerateVolumeAABB();
+		void CanDrawVolume(bool status);
+		bool IsCanDrawVolume();
 
+		glm::vec3 minAABB;
+		glm::vec3 maxAABB;
+
+		void GenerateVolumeAABB() override;
+
+	protected:
 		std::vector<Mesh*> meshes;
 
 		uint uniformAffectedLight;
 
 		bool affectedLight;
+		bool drawVolume;
 
 		virtual void SetUniforms() override;
 		virtual void UpdateShader() override;
-		void NodeDraw();
 	};
 }
 

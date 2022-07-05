@@ -9,6 +9,10 @@ namespace GL
 		uniformAffectedLight = 0;
 
 		affectedLight = true;
+		drawVolume = false;
+
+		minAABB = glm::vec3(std::numeric_limits<float>::max());
+		maxAABB = glm::vec3(std::numeric_limits<float>::min());
 	}
 
 	Entity3D::Entity3D(Render* render) : Entity(render)
@@ -18,6 +22,10 @@ namespace GL
 		uniformAffectedLight = 0;
 
 		affectedLight = true;
+		drawVolume = false;
+
+		minAABB = glm::vec3(std::numeric_limits<float>::max());
+		maxAABB = glm::vec3(std::numeric_limits<float>::min());
 	}
 
 	Entity3D::Entity3D(std::vector<Mesh*> meshes, Render* render) : Entity(render)
@@ -27,6 +35,10 @@ namespace GL
 		uniformAffectedLight = 0;
 
 		affectedLight = true;
+		drawVolume = false;
+
+		minAABB = glm::vec3(std::numeric_limits<float>::max());
+		maxAABB = glm::vec3(std::numeric_limits<float>::min());
 	}
 
 	Entity3D::~Entity3D()
@@ -41,21 +53,37 @@ namespace GL
 		{
 			meshes[i]->Init();
 		}
-
-		GenerateVolumeAABB();
 	}
 
 	void Entity3D::Draw()
 	{
-		render->UseShader();
-		render->BlendEnable();
-		render->TextureEnable();
-		
-		NodeDraw();
+		if (CheckVolume())
+		{
+			if (volume != nullptr && drawVolume)
+			{
+				volume->Draw();
+			}
 
-		render->TextureDisable();
-		render->BlendDisable();
-		render->CleanShader();
+			render->UseShader();
+			render->BlendEnable();
+			render->TextureEnable();
+			UpdateShader();
+
+			for (int i = 0; i < meshes.size(); i++)
+			{
+				meshes[i]->Draw();
+			}
+
+			render->TextureDisable();
+			render->BlendDisable();
+			render->CleanShader();
+		}
+
+		for (std::list<Entity*>::iterator it = nodes.begin(); it != nodes.end(); ++it)
+		{
+			Entity3D* node3d = static_cast<Entity3D*>((*it));
+			node3d->Draw();
+		}
 	}
 
 	void Entity3D::DeInit()
@@ -72,13 +100,20 @@ namespace GL
 		}
 	}
 
+	void Entity3D::CanDrawVolume(bool status)
+	{
+		drawVolume = status;
+	}
+
+	bool Entity3D::IsCanDrawVolume()
+	{
+		return drawVolume;
+	}
+
 	void Entity3D::GenerateVolumeAABB()
 	{
 		if (meshes.size() > 0)
 		{
-			glm::vec3 minAABB = glm::vec3(std::numeric_limits<float>::max());
-			glm::vec3 maxAABB = glm::vec3(std::numeric_limits<float>::min());
-
 			for (int i = 0; i < meshes.size(); i++)
 			{
 				Mesh* mesh = meshes[i];
@@ -95,8 +130,23 @@ namespace GL
 					maxAABB.z = glm::max(maxAABB.z, vertex.Position.z);
 				}
 			}
-
 			volume = new VolumeAABB(minAABB, maxAABB);
+
+			std::vector<uint> indexes;
+			for (int i = 0; i < cube2IndexTam; i++)
+			{
+				indexes.push_back(cube2Indexes[i]);
+			}
+
+			volume->lines = Line(volume->GetVertexs(), indexes, render);
+			volume->lines.Init();
+		}
+
+		if (parent != nullptr)
+		{
+			Entity3D* parent3d = static_cast<Entity3D*>(parent);
+			parent3d->minAABB = glm::min(minAABB, parent3d->minAABB);
+			parent3d->maxAABB = glm::max(maxAABB, parent3d->maxAABB);
 		}
 	}
 	
@@ -104,25 +154,6 @@ namespace GL
 	{
 		Entity::SetUniforms();
 		render->SetUniform(uniformAffectedLight, "affectedLight");
-	}
-
-	void Entity3D::NodeDraw()
-	{
-		if (CheckVolume())
-		{
-			UpdateShader();
-
-			for (int i = 0; i < meshes.size(); i++)
-			{
-				meshes[i]->Draw();
-			}
-		}
-
-		for (std::list<Entity*>::iterator it = nodes.begin(); it != nodes.end(); ++it)
-		{
-			Entity3D* node3d = static_cast<Entity3D*>((*it));
-			node3d->NodeDraw();
-		}
 	}
 
 	void Entity3D::UpdateShader()

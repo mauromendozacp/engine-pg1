@@ -81,8 +81,6 @@ namespace GameXD
 
 	void Game::Draw()
 	{
-		mainCamera->UseCamera();
-
 		for (int i = 0; i < cubesLenght; i++)
 		{
 			cubeLight[i]->Draw();
@@ -115,11 +113,14 @@ namespace GameXD
 	{
 		player = new Player(render);
 		player->Init(mainCamera, 5.f, 75.f);
-		player->SetCamera(CAMERA_TYPE::TPS);
 		player->SetPos(glm::vec3(0.f, 1.5f, 5.f));
 		player->SetScale(1.0f);
 
-		backpack = ModelImporter::LoadModel(render, "../res/Models/survival-guitar-backpack/backpack.obj");
+		mainCamera->SetTarget(player);
+		mainCamera->SetOffset(10.f);
+
+		backpack = new Entity3D(render);
+		//backpack = ModelImporter::LoadModel(render, "../res/Models/survival-guitar-backpack/backpack.obj");
 		backpack->SetPos(glm::vec3(0.f, 1.5f, -15.f));
 
 		model = ModelImporter::LoadModel(render, "../res/Models/gir/gir.fbx");
@@ -162,7 +163,7 @@ namespace GameXD
 	{
 		lightManager->AddLight(LIGHT_TYPE::DIRECTIONAL);
 		DirectionalLight* directionalLight = lightManager->GetDirectionalLight();
-		directionalLight->color.SetColor(105, 105, 105);
+		directionalLight->color.SetColor(255, 255, 255);
 		directionalLight->SetDirection(glm::vec3(-0.2f, -1.0f, -0.3f));
 		directionalLight->SetAmbient(glm::vec3(0.5f, 0.5f, 0.5f));
 		directionalLight->SetDiffuse(glm::vec3(0.4f, 0.4f, 0.4f));
@@ -170,7 +171,7 @@ namespace GameXD
 
 		lightManager->AddLight(LIGHT_TYPE::POINTLIGHT);
 		PointLight* pointLight = lightManager->GetLasPointLightCreated();
-		pointLight->SetPos(player->GetPos() + glm::vec3(0.f, .5f, 0.f));
+		pointLight->SetPos(glm::vec3(0.f, 0.f, 2.5f));
 		pointLight->color = Color(255, 255, 255);
 		pointLight->SetAmbient(glm::vec3(0.05f, 0.05f, 0.05f));
 		pointLight->SetDiffuse(glm::vec3(0.8f, 0.8f, 0.8f));
@@ -219,45 +220,45 @@ namespace GameXD
 		}
 
 		//----------------------------NODES---------------------------------
-		if (Input::IsKeyPressed(KEY_1))
+		if (Input::IsKeyDown(KEY_1))
 		{
 			node = static_cast<Entity3D*>(model);
 		}
-		if (Input::IsKeyPressed(KEY_2))
+		if (Input::IsKeyDown(KEY_2))
 		{
 			node = static_cast<Entity3D*>(model->GetNode("cabeza"));
 		}
-		if (Input::IsKeyPressed(KEY_3))
+		if (Input::IsKeyDown(KEY_3))
 		{
 			node = static_cast<Entity3D*>(model->GetNode("hombro_der"));
 		}
-		if (Input::IsKeyPressed(KEY_4))
+		if (Input::IsKeyDown(KEY_4))
 		{
 			node = static_cast<Entity3D*>(model->GetNode("brazo_der"));
 		}
-		if (Input::IsKeyPressed(KEY_5))
+		if (Input::IsKeyDown(KEY_5))
 		{
 			node = static_cast<Entity3D*>(model->GetNode("mano_der"));
 		}
-		if (Input::IsKeyPressed(KEY_6))
+		if (Input::IsKeyDown(KEY_6))
 		{
-			node = static_cast<Entity3D*>(model->GetNode("dedos_der"));
+			node = static_cast<Entity3D*>(model->GetNode("dedo1"));
 		}
-		if (Input::IsKeyPressed(KEY_7))
+		if (Input::IsKeyDown(KEY_7))
 		{
-			node = static_cast<Entity3D*>(model->GetNode("pata_der"));
+			node = static_cast<Entity3D*>(model->GetNode("patas"));
 		}
-		if (Input::IsKeyPressed(KEY_8))
+		if (Input::IsKeyDown(KEY_8))
 		{
-			node = static_cast<Entity3D*>(model->GetNode("pata_izq"));
+			node = static_cast<Entity3D*>(model->GetNode("cuerpo"));
 		}
-		if (Input::IsKeyPressed(KEY_9))
+		if (Input::IsKeyDown(KEY_9))
 		{
 			node = static_cast<Entity3D*>(model->GetNode("pecho"));
 		}
-		if (Input::IsKeyPressed(KEY_0))
+		if (Input::IsKeyDown(KEY_0))
 		{
-			node = static_cast<Entity3D*>(model->GetNode("ojos"));
+			node = static_cast<Entity3D*>(model->GetNode("Gir"));
 		}
 
 		//----------------------------TRANSFORMS---------------------------------
@@ -270,6 +271,14 @@ namespace GameXD
 			if (Input::IsKeyPressed(KEY_Y))
 			{
 				node->SetPos(node->GetLocalPosition() + glm::vec3(0.05f, 0.f, 0.f));
+			}
+			if (Input::IsKeyPressed(KEY_U))
+			{
+				node->SetPos(node->GetLocalPosition() - glm::vec3(0.f, 0.05f, 0.f));
+			}
+			if (Input::IsKeyPressed(KEY_I))
+			{
+				node->SetPos(node->GetLocalPosition() + glm::vec3(0.f, 0.05f, 0.f));
 			}
 			if (Input::IsKeyPressed(KEY_G))
 			{
@@ -287,12 +296,14 @@ namespace GameXD
 			{
 				node->SetScale(node->GetLocalScale() + glm::vec3(0.005f));
 			}
-			if (Input::IsKeyPressed(KEY_R))
+			if (Input::IsKeyDown(KEY_P))
 			{
-				node->SetPos(glm::vec3(0.f));
-				node->SetRot(glm::vec3(0.f));
-				node->SetScale(glm::vec3(1.f));
+				node->CanDrawVolume(!node->IsCanDrawVolume());
 			}
+		}
+		if (Input::IsKeyPressed(KEY_R))
+		{
+			model->Reset();
 		}
 
 		if (Input::IsKeyDown(KEY_ESCAPE))

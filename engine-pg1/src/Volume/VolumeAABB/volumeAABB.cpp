@@ -55,6 +55,35 @@ namespace GL
 			globalAABB.IsOnPlane(OcclusionCulling::front));
 	}
 
+	void VolumeAABB::Draw()
+	{
+		lines.Draw();
+	}
+
+	std::vector<Vertex> VolumeAABB::GetVertexs()
+	{
+		glm::vec3 vertice[8];
+		vertice[0] = { center.x - extents.x, center.y - extents.y, center.z - extents.z };
+		vertice[1] = { center.x + extents.x, center.y - extents.y, center.z - extents.z };
+		vertice[2] = { center.x - extents.x, center.y + extents.y, center.z - extents.z };
+		vertice[3] = { center.x + extents.x, center.y + extents.y, center.z - extents.z };
+		vertice[4] = { center.x - extents.x, center.y - extents.y, center.z + extents.z };
+		vertice[5] = { center.x + extents.x, center.y - extents.y, center.z + extents.z };
+		vertice[6] = { center.x - extents.x, center.y + extents.y, center.z + extents.z };
+		vertice[7] = { center.x + extents.x, center.y + extents.y, center.z + extents.z };
+
+		std::vector<Vertex> vertexs = std::vector<Vertex>();
+		for (int i = 0; i < 8; i++)
+		{
+			Vertex vertex;
+			vertex.Position = vertice[i];
+			vertex.Normal = glm::vec3(1.f, 1.f, 1.f);
+			vertexs.push_back(vertex);
+		}
+
+		return vertexs;
+	}
+
 	bool VolumeAABB::IsOnPlane(Plane plane)
 	{
 		float r = extents.x * std::abs(plane.GetNormal().x) + extents.y * std::abs(plane.GetNormal().y) + extents.z * std::abs(plane.GetNormal().z);

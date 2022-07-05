@@ -39,6 +39,8 @@ namespace GL
 		uint uniformDiffuse;
 		uint uniformSpecular;
 		uint uniformEnabled;
+
+		void GenerateVolumeAABB() override;
 	};
 }
 

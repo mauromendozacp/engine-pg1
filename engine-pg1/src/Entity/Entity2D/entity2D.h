@@ -29,6 +29,9 @@ namespace GL
 		Color color;
 		Material* material;
 
+		glm::vec3 minAABB;
+		glm::vec3 maxAABB;
+
 	protected:
 		uint uniformColor;
 		uint uniformAlpha;
@@ -47,7 +50,7 @@ namespace GL
 
 		virtual void SetUniforms() override;
 		virtual void UpdateShader() override;
-		void GenerateVolumeAABB();
+		void GenerateVolumeAABB() override;
 	};
 }
 

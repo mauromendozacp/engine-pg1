@@ -162,8 +162,6 @@
     <ClCompile Include="..\src\Animation\Frame\frame.cpp" />
     <ClCompile Include="..\src\BaseGame\baseGame.cpp" />
     <ClCompile Include="..\src\Camera\camera.cpp" />
-    <ClCompile Include="..\src\Camera\FirstPersonCamera\firstPersonCamera.cpp" />
-    <ClCompile Include="..\src\Camera\ThirdPersonCamera\thirdPersonCamera.cpp" />
     <ClCompile Include="..\src\Collision\Collision2D\collision2D.cpp" />
     <ClCompile Include="..\src\Color\color.cpp" />
     <ClCompile Include="..\src\Entity\entity.cpp" />
@@ -180,6 +178,7 @@
     <ClCompile Include="..\src\Light\LightManager\lightManager.cpp" />
     <ClCompile Include="..\src\Light\PointLight\pointLight.cpp" />
     <ClCompile Include="..\src\Light\SpotLight\spotLight.cpp" />
+    <ClCompile Include="..\src\Line\line.cpp" />
     <ClCompile Include="..\src\Material\material.cpp" />
     <ClCompile Include="..\src\Material\MaterialManager\materialManager.cpp" />
     <ClCompile Include="..\src\Material\SolidMaterial\solidMaterial.cpp" />
@@ -202,8 +201,6 @@
     <ClInclude Include="..\src\Animation\Frame\frame.h" />
     <ClInclude Include="..\src\BaseGame\baseGame.h" />
     <ClInclude Include="..\src\Camera\camera.h" />
-    <ClInclude Include="..\src\Camera\FirstPersonCamera\firstPersonCamera.h" />
-    <ClInclude Include="..\src\Camera\ThirdPersonCamera\thirdPersonCamera.h" />
     <ClInclude Include="..\src\Collision\Collision2D\collision2D.h" />
     <ClInclude Include="..\src\Color\color.h" />
     <ClInclude Include="..\src\Entity\entity.h" />
@@ -222,6 +219,7 @@
     <ClInclude Include="..\src\Light\LightManager\lightManager.h" />
     <ClInclude Include="..\src\Light\PointLight\pointLight.h" />
     <ClInclude Include="..\src\Light\SpotLight\spotLight.h" />
+    <ClInclude Include="..\src\Line\line.h" />
     <ClInclude Include="..\src\Material\material.h" />
     <ClInclude Include="..\src\Material\MaterialManager\materialManager.h" />
     <ClInclude Include="..\src\Material\SolidMaterial\solidMaterial.h" />

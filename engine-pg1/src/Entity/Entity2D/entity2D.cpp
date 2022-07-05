@@ -24,6 +24,9 @@ namespace GL
 
 		affectedLight = true;
 		useTexture = false;
+
+		minAABB = glm::vec3(std::numeric_limits<float>::max());
+		maxAABB = glm::vec3(std::numeric_limits<float>::min());
 	}
 
 	Entity2D::Entity2D(Render* render) : Entity(render)
@@ -48,6 +51,9 @@ namespace GL
 
 		affectedLight = true;
 		useTexture = false;
+
+		minAABB = glm::vec3(std::numeric_limits<float>::max());
+		maxAABB = glm::vec3(std::numeric_limits<float>::min());
 	}
 
 	Entity2D::~Entity2D()
@@ -77,8 +83,8 @@ namespace GL
 
 	void Entity2D::GenerateVolumeAABB()
 	{
-		glm::vec3 minAABB = glm::vec3(std::numeric_limits<float>::max());
-		glm::vec3 maxAABB = glm::vec3(std::numeric_limits<float>::min());
+		minAABB = glm::vec3(std::numeric_limits<float>::max());
+		maxAABB = glm::vec3(std::numeric_limits<float>::min());
 
 		for (int i = 0; i < vertexs.size(); i++)
 		{
@@ -94,11 +100,21 @@ namespace GL
 		}
 
 		volume = new VolumeAABB(minAABB, maxAABB);
+
+		if (parent != nullptr)
+		{
+			Entity2D* parent2d = static_cast<Entity2D*>(parent);
+			parent2d->minAABB = glm::min(minAABB, parent2d->minAABB);
+			parent2d->maxAABB = glm::max(minAABB, parent2d->minAABB);
+		}
 	}
 
 	void Entity2D::DeInit()
 	{
 		render->UnBind(VAO, VBO, EBO);
+
+		vertexs.clear();
+		indexes.clear();
 	}
 
 	void Entity2D::SetCollider(bool hasCollider)

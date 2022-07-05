@@ -46,12 +46,6 @@
     <ClCompile Include="..\src\Material\material.cpp">
       <Filter>Material</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\Camera\FirstPersonCamera\firstPersonCamera.cpp">
-      <Filter>Camera\FirstPersonCamera</Filter>
-    </ClCompile>
-    <ClCompile Include="..\src\Camera\ThirdPersonCamera\thirdPersonCamera.cpp">
-      <Filter>Camera\ThirdPersonCamera</Filter>
-    </ClCompile>
     <ClCompile Include="..\src\Light\DirectionalLight\directionalLight.cpp">
       <Filter>Light\DirectionalLight</Filter>
     </ClCompile>
@@ -112,6 +106,9 @@
     <ClCompile Include="..\src\Material\MaterialManager\materialManager.cpp">
       <Filter>Material\MaterialManager</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\Line\line.cpp">
+      <Filter>Line</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Window">
@@ -164,12 +161,6 @@
     </Filter>
     <Filter Include="Material">
       <UniqueIdentifier>{5de5e3b5-1309-4b19-9251-12a6dec8017a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Camera\FirstPersonCamera">
-      <UniqueIdentifier>{c761efa7-734d-45ca-bfc4-8f6c772fd553}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Camera\ThirdPersonCamera">
-      <UniqueIdentifier>{8bce14f8-2831-45bc-9b75-0cb443fdb3cc}</UniqueIdentifier>
     </Filter>
     <Filter Include="Light\DirectionalLight">
       <UniqueIdentifier>{05bc88f8-1c3c-4db0-8c69-395968d64dcb}</UniqueIdentifier>
@@ -240,6 +231,9 @@
     <Filter Include="Material\MaterialManager">
       <UniqueIdentifier>{e9a51ffd-a8cb-4cf4-93dd-ba468593257c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Line">
+      <UniqueIdentifier>{acce2314-2b8d-4a30-b5d5-3ea728277983}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\Window\window.h">
@@ -293,12 +287,6 @@
       <Filter>Material</Filter>
     </ClInclude>
     <ClInclude Include="..\src\vertexs.h" />
-    <ClInclude Include="..\src\Camera\FirstPersonCamera\firstPersonCamera.h">
-      <Filter>Camera\FirstPersonCamera</Filter>
-    </ClInclude>
-    <ClInclude Include="..\src\Camera\ThirdPersonCamera\thirdPersonCamera.h">
-      <Filter>Camera\ThirdPersonCamera</Filter>
-    </ClInclude>
     <ClInclude Include="..\src\Light\DirectionalLight\directionalLight.h">
       <Filter>Light\DirectionalLight</Filter>
     </ClInclude>
@@ -366,6 +354,9 @@
     </ClInclude>
     <ClInclude Include="..\src\Material\MaterialManager\materialManager.h">
       <Filter>Material\MaterialManager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Line\line.h">
+      <Filter>Line</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

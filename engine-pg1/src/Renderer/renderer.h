@@ -29,8 +29,10 @@ namespace GL
 		void GenBuffers(uint& VAO, uint& VBO, uint& EBO);
 		void GenBuffers(uint& VAO, uint& VBO, uint& EBO, uint& UVB);
 		void BindBuffer(uint VAO, uint VBO, int tam, const void* vertices);
+		void BindBufferDynamic(uint VAO, uint VBO, int tam, const void* vertices);
 		void BindIndexs(uint EBO, int tam, uint* indexs);
 		void BindUV(uint UVB, int tam, float* vertices);
+		void ReBindBuffer(uint VBO, int tam, const void* vertices);
 		void UnBind(uint& VAO, uint& VBO, uint& EBO);
 		void UnBind(uint& VAO, uint& VBO, uint& EBO, uint& UVB);
 
@@ -52,6 +54,7 @@ namespace GL
 		void SetProjection(glm::mat4 projection);
 
 		void Draw(uint VAO, uint vertices);
+		void DrawLines(uint VAO, uint vertices);
 
 		void SetClearColor(float r, float g, float b, float a);
 		void ClearScreen();

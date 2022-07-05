@@ -5,6 +5,7 @@ namespace GameXD
 	Player::Player() : Entity3D()
 	{
 		camera = nullptr;
+		moveBaseSpeed = 0.f;
 		moveSpeed = 0.f;
 		rotSpeed = 0.f;
 	}
@@ -12,6 +13,7 @@ namespace GameXD
 	Player::Player(Render* render) : Entity3D(render)
 	{
 		camera = nullptr;
+		moveBaseSpeed = 0.f;
 		moveSpeed = 0.f;
 		rotSpeed = 0.f;
 	}
@@ -25,6 +27,8 @@ namespace GameXD
 		this->camera = camera;
 		this->moveSpeed = moveSpeed;
 		this->rotSpeed = rotSpeed;
+
+		moveBaseSpeed = moveSpeed;
 	}
 
 	void Player::Update()
@@ -32,66 +36,46 @@ namespace GameXD
 		Inputs();
 	}
 
-	Camera* Player::GetCamera()
-	{
-		return camera;
-	}
-
-	void Player::SetCamera(CAMERA_TYPE cameraType)
-	{
-		if (cameraType == CAMERA_TYPE::FPS)
-		{
-			FirstPersonCamera* camFPS = static_cast<FirstPersonCamera*>(camera);
-			camFPS->SetSpeed(5.f);
-		}
-		else if (cameraType == CAMERA_TYPE::TPS)
-		{
-			ThirdPersonCamera* camTPS = static_cast<ThirdPersonCamera*>(camera);
-			camTPS->SetTarget(this);
-			camTPS->SetOffset(10.f);
-		}
-	}
-
 	void Player::Inputs()
 	{
-		if (GL::Input::IsKeyPressed(KEY_A) || GL::Input::IsKeyPressed(KEY_LEFT))
+		if (Input::IsKeyPressed(KEY_A) || Input::IsKeyPressed(KEY_LEFT))
 		{
 			SetPos(GetPos() - glm::normalize(glm::cross(camera->GetForward(), camera->GetUp())) * GetSpeedDelta());
 		}
-		else if (GL::Input::IsKeyPressed(KEY_D) || GL::Input::IsKeyPressed(KEY_RIGHT))
+		else if (Input::IsKeyPressed(KEY_D) || Input::IsKeyPressed(KEY_RIGHT))
 		{
 			SetPos(GetPos() + glm::normalize(glm::cross(camera->GetForward(), camera->GetUp())) * GetSpeedDelta());
 		}
-		else if (GL::Input::IsKeyPressed(KEY_W) || GL::Input::IsKeyPressed(KEY_UP))
+		else if (Input::IsKeyPressed(KEY_W) || GL::Input::IsKeyPressed(KEY_UP))
 		{
 			SetPos(GetPos() + GetSpeedDelta() * camera->GetForward());
 		}
-		else if (GL::Input::IsKeyPressed(KEY_S) || GL::Input::IsKeyPressed(KEY_DOWN))
+		else if (Input::IsKeyPressed(KEY_S) || GL::Input::IsKeyPressed(KEY_DOWN))
 		{
 			SetPos(GetPos() - GetSpeedDelta() * camera->GetForward());
 		}
 
-		/*if (GL::Input::IsKeyPressed(KEY_Q))
+		if (GL::Input::IsKeyPressed(KEY_Q))
 		{
-			SetRotY(GetRotY() + rotSpeed * GL::Timer::GetDeltaTime());
+			camera->SetFollowStatus(true);
 		}
 		else if (GL::Input::IsKeyPressed(KEY_E))
 		{
-			SetRotY(GetRotY() - rotSpeed * GL::Timer::GetDeltaTime());
+			camera->SetFollowStatus(false);
 		}
 
-		if (GL::Input::IsKeyPressed(KEY_Z))
+		if (Input::IsKeyPressed(KEY_LEFT_SHIFT))
 		{
-			//camera->SetCameraType(GL::CAMERA_TYPE::FPS);
+			moveSpeed = moveBaseSpeed * 2.5f;
 		}
-		else if (GL::Input::IsKeyPressed(KEY_C))
+		else
 		{
-			//camera->SetCameraType(GL::CAMERA_TYPE::TPS);
-		}*/
+			moveSpeed = moveBaseSpeed;
+		}
 	}
 
 	float Player::GetSpeedDelta()
 	{
-		return moveSpeed * GL::Timer::GetDeltaTime();
+		return moveSpeed * Timer::GetDeltaTime();
 	}
 }

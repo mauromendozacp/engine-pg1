@@ -7,13 +7,6 @@
 
 namespace GL
 {
-	enum class CAMERA_TYPE
-	{
-		FPS,
-		TPS,
-		TOP_DOWN
-	};
-
 	class GRAPHICSENGINE_API Camera : public Entity
 	{
 	public:
@@ -21,36 +14,36 @@ namespace GL
 		~Camera();
 
 		void Init(float fov, float width, float height, float near, float far);
-		virtual void Update() = 0;
-
-		void UseCamera();
+		void Update();
 		void Rotate();
 		void Reset();
 
-		glm::mat4 GetView();
-		glm::mat4 GetProjection();
-
 		void SetFOV(float fov);
-		float GetFOV();
-
-		void SetSensitivity(float sensitivity);
-		float GetSensitivity();
-
 		void SetYaw(float yaw);
-		float GetYaw();
-
 		void SetPitch(float pitch);
+		void SetSensitivity(float sensitivity);
+		void SetTarget(Entity* target);
+		void SetOffset(float offset);
+		void SetFollowStatus(bool status);
+
+		float GetFOV();
+		float GetYaw();
 		float GetPitch();
+		float GetSensitivity();
 
 		float GetNear();
 		float GetFar();
 		float GetAspect();
 
 	protected:
-		virtual void SetUniforms() override;
-		virtual void UpdateDirection() = 0;
-		virtual void UpdateView() = 0;
+		void SetUniforms() override;
+		void UpdateShader() override;
+
+		void UpdateDirection();
+		void UpdateView();
 		void UpdateProjection();
+
+		void GenerateVolumeAABB() override;
 
 		glm::mat4 view;
 		glm::mat4 projection;
@@ -66,6 +59,10 @@ namespace GL
 		float far;
 
 		float sensitivity;
+	
+		Entity* target;
+		float offset;
+		bool followTarget;
 	};
 }
 

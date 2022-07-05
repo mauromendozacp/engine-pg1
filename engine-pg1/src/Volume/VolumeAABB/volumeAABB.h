@@ -14,12 +14,14 @@ namespace GL
 		~VolumeAABB();
 
 		bool IsOnFrustum(glm::mat4 model) override;
+		void Draw() override;
+		std::vector<Vertex> GetVertexs() override;
 
 		glm::vec3 center;
 		glm::vec3 extents;
 
 	private:
-		bool IsOnPlane(Plane plane) override;
+		bool IsOnPlane(Plane plane) override;		
 	};
 }
 

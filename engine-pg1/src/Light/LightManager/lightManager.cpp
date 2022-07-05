@@ -68,7 +68,7 @@ namespace GL
 		}
 	}
 
-	void LightManager::UseLights()
+	void LightManager::Update()
 	{
 		render->UseShader();
 

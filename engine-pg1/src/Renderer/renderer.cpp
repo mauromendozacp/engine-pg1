@@ -68,6 +68,14 @@ namespace GL
 		glBufferData(GL_ARRAY_BUFFER, tam, vertices, GL_STATIC_DRAW);
 	}
 
+	void Render::BindBufferDynamic(uint VAO, uint VBO, int tam, const void* vertices)
+	{
+		glBindVertexArray(VAO);
+
+		glBindBuffer(GL_ARRAY_BUFFER, VBO);
+		glBufferData(GL_ARRAY_BUFFER, tam, vertices, GL_DYNAMIC_DRAW);
+	}
+
 	void Render::BindIndexs(uint EBO, int tam, uint* indexs)
 	{
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
@@ -77,6 +85,12 @@ namespace GL
 	void Render::BindUV(uint UVB, int tam, float* vertices)
 	{
 		glBindBuffer(GL_ARRAY_BUFFER, UVB);
+		glBufferData(GL_ARRAY_BUFFER, tam, vertices, GL_DYNAMIC_DRAW);
+	}
+
+	void Render::ReBindBuffer(uint VBO, int tam, const void* vertices)
+	{
+		glBindBuffer(GL_ARRAY_BUFFER, VBO);
 		glBufferData(GL_ARRAY_BUFFER, tam, vertices, GL_DYNAMIC_DRAW);
 	}
 
@@ -176,6 +190,15 @@ namespace GL
 			glDrawArrays(GL_TRIANGLES, 0, vertices);
 		else
 			glDrawElements(GL_TRIANGLES, vertices, GL_UNSIGNED_INT, 0);
+
+		glBindVertexArray(0);
+	}
+
+	void Render::DrawLines(uint VAO, uint vertices)
+	{
+		glBindVertexArray(VAO);
+
+		glDrawArrays(GL_LINES, 0, vertices);
 
 		glBindVertexArray(0);
 	}

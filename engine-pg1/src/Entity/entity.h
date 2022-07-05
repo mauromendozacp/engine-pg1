@@ -82,6 +82,8 @@ namespace GL
 		float GetScaleY();
 		float GetScaleZ();
 
+		void Reset();
+
 		Matrix matrix;
 		Transform transform;
 		Volume* volume;
@@ -102,6 +104,7 @@ namespace GL
 		uint locationTexCoord;
 
 		bool CheckVolume();
+		virtual void GenerateVolumeAABB() = 0;
 		virtual void SetUniforms();
 		virtual void UpdateShader();
 

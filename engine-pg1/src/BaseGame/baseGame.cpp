@@ -73,7 +73,7 @@ namespace GL
 
 		lightManager = new LightManager(render);
 
-		mainCamera = new ThirdPersonCamera(render);
+		mainCamera = new Camera(render);
 		mainCamera->Init(45.f, window->GetWidth(), window->GetHeight(), 0.1f, 100.f);
 		mainCamera->SetSensitivity(0.25f);
 
@@ -96,8 +96,9 @@ namespace GL
 			Timer::Update(glfwGetTime());
 
 			Update();
+			mainCamera->Update();
 			OcclusionCulling::Update();
-			lightManager->UseLights();
+			lightManager->Update();
 			Draw();
 
 			render->PostRender(window);

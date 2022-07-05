@@ -2,10 +2,7 @@
 #define PLAYER_H
 
 #include "Entity/Entity3D/entity3D.h"
-
-#include "Camera/FirstPersonCamera/firstPersonCamera.h"
-#include "Camera/ThirdPersonCamera/thirdPersonCamera.h"
-
+#include "Timer/timer.h"
 #include "Input/input.h"
 
 using namespace GL;
@@ -22,12 +19,10 @@ namespace GameXD
 		void Init(GL::Camera* camera, float moveSpeed, float rotSpeed);
 		void Update();
 
-		GL::Camera* GetCamera();
-		void SetCamera(CAMERA_TYPE cameraType);
-
 	private:
 		GL::Camera* camera;
 
+		float moveBaseSpeed;
 		float moveSpeed;
 		float rotSpeed;
 
