@@ -51,7 +51,7 @@ namespace GL
 		float fov = camera->GetFOV();
 		float aspect = camera->GetAspect();
 
-		float halfheight = camera->GetFar() * tan(fov * .5f);
+		float halfheight = camera->GetFar() * glm::atan(fov * .5f);
 		float halfWidth = halfheight * aspect;
 		glm::vec3 frontFar = camera->GetFar() * camera->GetForward();
 
