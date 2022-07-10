@@ -17,7 +17,7 @@ namespace GL
 	public:
 		Line();
 		Line(Render* render);
-		Line(std::vector<Vertex> vertexs, std::vector<uint> indexes, Render* render);
+		Line(std::vector<Vertex> vertexs, Render* render);
 		~Line();
 
 		void Init();

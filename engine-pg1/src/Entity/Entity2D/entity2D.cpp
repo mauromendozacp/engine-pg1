@@ -98,8 +98,7 @@ namespace GL
 			maxAABB.y = glm::max(maxAABB.y, vertex.Position.y);
 			maxAABB.z = glm::max(maxAABB.z, vertex.Position.z);
 		}
-
-		volume = new VolumeAABB(minAABB, maxAABB);
+		volume->SetVolumeMinMax(minAABB, maxAABB);
 
 		if (parent != nullptr)
 		{

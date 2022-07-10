@@ -104,7 +104,7 @@ namespace GL
 		uint locationTexCoord;
 
 		bool CheckVolume();
-		virtual void GenerateVolumeAABB() = 0;
+		virtual void GenerateVolumeAABB();
 		virtual void SetUniforms();
 		virtual void UpdateShader();
 

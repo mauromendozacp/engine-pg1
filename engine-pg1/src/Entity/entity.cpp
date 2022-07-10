@@ -402,7 +402,12 @@ namespace GL
 	{
 		if (volume == nullptr) return true;
 
-		return volume->IsOnFrustum(matrix.model);
+		return volume->IsOnFrustum();
+	}
+
+	void Entity::GenerateVolumeAABB()
+	{
+		
 	}
 
 	void Entity::SetUniforms()

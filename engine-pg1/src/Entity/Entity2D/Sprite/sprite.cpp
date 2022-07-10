@@ -86,6 +86,8 @@ namespace GL
 		//SetTextureCoordinates(currFrame);
 		render->SetBaseAttribs(locationTexCoord, 2, sizeof(Vertex), (void*)offsetof(Vertex, TexCoords));
 
+		volume = new VolumeAABB();
+		volume->Init(render);
 		GenerateVolumeAABB();
 	}
 

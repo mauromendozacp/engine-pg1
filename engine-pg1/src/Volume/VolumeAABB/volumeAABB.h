@@ -9,13 +9,16 @@ namespace GL
 	{
 	public:
 		VolumeAABB();
-		VolumeAABB(glm::vec3 min, glm::vec3 max);
-		VolumeAABB(glm::vec3 center, float extX, float extY, float extZ);
 		~VolumeAABB();
 
-		bool IsOnFrustum(glm::mat4 model) override;
+		void Init(Render* render) override;
+		void Update(glm::mat4 model) override;
 		void Draw() override;
+
+		bool IsOnFrustum() override;
 		std::vector<Vertex> GetVertexs() override;
+		void SetVolumeMinMax(glm::vec3 min, glm::vec3 max) override;
+		void SetGlobalVolume(glm::vec3 center, float extX, float extY, float extZ);
 
 		glm::vec3 center;
 		glm::vec3 extents;

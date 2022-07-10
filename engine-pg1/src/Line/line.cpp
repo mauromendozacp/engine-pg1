@@ -38,11 +38,11 @@ namespace GL
 		uniformAlpha = 0;
 	}
 
-	Line::Line(std::vector<Vertex> vertexs, std::vector<uint> indexes, Render* render)
+	Line::Line(std::vector<Vertex> vertexs, Render* render)
 	{
 		this->render = render;
 		this->vertexs = vertexs;
-		this->indexes = indexes;
+		indexes = std::vector<uint>();
 
 		color = Color(124, 252, 0);
 
@@ -63,6 +63,12 @@ namespace GL
 	void Line::Init()
 	{
 		SetUniforms();
+
+		for (int i = 0; i < cube2IndexTam; i++)
+		{
+			indexes.push_back(cube2Indexes[i]);
+		}
+
 		render->GenBuffers(VAO, VBO, EBO);
 		render->BindBuffer(VAO, VBO, vertexs.size() * sizeof(Vertex), &vertexs[0]);
 		render->BindIndexs(EBO, indexes.size() * sizeof(unsigned int), &indexes[0]);

@@ -109,6 +109,9 @@
     <ClCompile Include="..\src\Line\line.cpp">
       <Filter>Line</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\Volume\volume.cpp">
+      <Filter>Volume</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Window">

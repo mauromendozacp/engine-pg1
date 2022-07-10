@@ -9,25 +9,19 @@ namespace GL
 		extents = glm::vec3();
 	}
 
-	VolumeAABB::VolumeAABB(glm::vec3 min, glm::vec3 max)
-	{
-		center = glm::vec3((max + min) * .5f);
-		extents = glm::vec3(max.x - center.x, max.y - center.y, max.z - center.z);
-	}
-
-	VolumeAABB::VolumeAABB(glm::vec3 center, float extX, float extY, float extZ)
-	{
-		this->center = center;
-		extents = glm::vec3(extX, extY, extZ);
-	}
-
 	VolumeAABB::~VolumeAABB()
 	{
 	}
 
-	bool VolumeAABB::IsOnFrustum(glm::mat4 model)
+	void VolumeAABB::Init(Render* render)
 	{
-		glm::vec3 globalCenter { model * glm::vec4(center, 1.f) };
+		lines = new Line(GetVertexs(), render);
+		lines->Init();
+	}
+
+	void VolumeAABB::Update(glm::mat4 model)
+	{
+		glm::vec3 globalCenter{ model * glm::vec4(center, 1.f) };
 
 		glm::vec3 right = model[0] * extents.x;
 		glm::vec3 up = model[1] * extents.y;
@@ -45,19 +39,22 @@ namespace GL
 			std::abs(glm::dot(glm::vec3{ 0.f, 0.f, 1.f }, up)) +
 			std::abs(glm::dot(glm::vec3{ 0.f, 0.f, 1.f }, forward));
 
-		VolumeAABB globalAABB(globalCenter, newIi, newIj, newIk);
-
-		return (globalAABB.IsOnPlane(OcclusionCulling::left) &&
-			globalAABB.IsOnPlane(OcclusionCulling::right) &&
-			globalAABB.IsOnPlane(OcclusionCulling::up) &&
-			globalAABB.IsOnPlane(OcclusionCulling::down) &&
-			globalAABB.IsOnPlane(OcclusionCulling::back) &&
-			globalAABB.IsOnPlane(OcclusionCulling::front));
+		SetGlobalVolume(globalCenter, newIi, newIj, newIk);
 	}
 
 	void VolumeAABB::Draw()
 	{
-		lines.Draw();
+		lines->Draw();
+	}
+
+	bool VolumeAABB::IsOnFrustum()
+	{
+		return (IsOnPlane(OcclusionCulling::left) &&
+			IsOnPlane(OcclusionCulling::right) &&
+			IsOnPlane(OcclusionCulling::up) &&
+			IsOnPlane(OcclusionCulling::down) &&
+			IsOnPlane(OcclusionCulling::back) &&
+			IsOnPlane(OcclusionCulling::front));
 	}
 
 	std::vector<Vertex> VolumeAABB::GetVertexs()
@@ -82,6 +79,18 @@ namespace GL
 		}
 
 		return vertexs;
+	}
+
+	void VolumeAABB::SetVolumeMinMax(glm::vec3 min, glm::vec3 max)
+	{
+		center = glm::vec3((max + min) * .5f);
+		extents = glm::vec3(max.x - center.x, max.y - center.y, max.z - center.z);
+	}
+
+	void VolumeAABB::SetGlobalVolume(glm::vec3 center, float extX, float extY, float extZ)
+	{
+		this->center = center;
+		extents = glm::vec3(extX, extY, extZ);
 	}
 
 	bool VolumeAABB::IsOnPlane(Plane plane)

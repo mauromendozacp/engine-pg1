@@ -53,6 +53,10 @@ namespace GL
 		{
 			meshes[i]->Init();
 		}
+
+		volume = new VolumeAABB();
+		GenerateVolumeAABB();
+		volume->Init(render);
 	}
 
 	void Entity3D::Draw()
@@ -130,16 +134,7 @@ namespace GL
 					maxAABB.z = glm::max(maxAABB.z, vertex.Position.z);
 				}
 			}
-			volume = new VolumeAABB(minAABB, maxAABB);
-
-			std::vector<uint> indexes;
-			for (int i = 0; i < cube2IndexTam; i++)
-			{
-				indexes.push_back(cube2Indexes[i]);
-			}
-
-			volume->lines = Line(volume->GetVertexs(), indexes, render);
-			volume->lines.Init();
+			volume->SetVolumeMinMax(minAABB, maxAABB);
 		}
 
 		if (parent != nullptr)

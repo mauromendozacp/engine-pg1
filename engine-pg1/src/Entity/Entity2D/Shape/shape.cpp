@@ -82,6 +82,8 @@ namespace GL
 		render->SetBaseAttribs(locationPosition, 3, sizeof(Vertex), (void*)0);
 		render->SetBaseAttribs(locationNormal, 3, sizeof(Vertex), (void*)offsetof(Vertex, Normal));
 
+		volume = new VolumeAABB();
+		volume->Init(render);
 		GenerateVolumeAABB();
 	}
 

@@ -57,17 +57,15 @@ namespace GL
             entityNode = new Entity3D(render);
         }
 
-        entityNode->Init();
-        entityNode->SetName(node->mName.C_Str());
-        entityNode->SetParent(parent);
-        parent->AddNode(entityNode);
-
         for (uint i = 0; i < node->mNumChildren; i++)
         {
             ProcessNode(entityNode, node->mChildren[i], scene);
         }
 
-        entityNode->GenerateVolumeAABB();
+        entityNode->Init();
+        entityNode->SetName(node->mName.C_Str());
+        entityNode->SetParent(parent);
+        parent->AddNode(entityNode);
 	}
 
     Mesh* ModelImporter::ProcessMesh(aiMesh* mesh, const aiScene* scene)
