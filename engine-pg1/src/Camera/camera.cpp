@@ -58,7 +58,7 @@ namespace GL
 
 	void Camera::Reset()
 	{
-		transform.position = glm::vec3(0.f);
+		SetPos(glm::vec3(0.f));
 		UpdateView();
 	}
 
@@ -148,11 +148,11 @@ namespace GL
 		{
 			if (followTarget)
 			{
-				transform.position = target->GetPos() - transform.forward * offset;
+				SetPos(target->GetPos() - transform.forward * offset);
 			}
 			else
 			{
-				transform.position = target->GetPos() - transform.forward;
+				SetPos(target->GetPos());
 			}
 		}
 
@@ -161,19 +161,13 @@ namespace GL
 
 	void Camera::UpdateView()
 	{
-		glm::vec3 position = transform.position;
-		if (target != nullptr)
-		{
-			position = target->GetPos();
-		}
-
 		if (followTarget)
 		{
-			view = glm::lookAt(transform.position, position, transform.up);
+			view = glm::lookAt(transform.position, target->GetPos(), transform.up);
 		}
 		else
 		{
-			view = glm::lookAt(transform.position, position + transform.forward, transform.up);
+			view = glm::lookAt(transform.position, transform.position + transform.forward, transform.up);
 		}
 
 		render->SetView(view);
@@ -197,9 +191,5 @@ namespace GL
 		Entity::UpdateShader();
 		render->UpdateVec3Value(uniformViewPosition, transform.position);
 		render->CleanShader();
-	}
-
-	void Camera::GenerateVolumeAABB()
-	{
 	}
 }

@@ -47,6 +47,12 @@ namespace GL
 		glDepthFunc(GL_LESS);
 	}
 
+	void Render::GenBuffers(uint& VAO, uint& VBO)
+	{
+		glGenVertexArrays(1, &VAO);
+		glGenBuffers(1, &VBO);
+	}
+
 	void Render::GenBuffers(uint& VAO, uint& VBO, uint& EBO)
 	{
 		glGenVertexArrays(1, &VAO);
@@ -68,14 +74,6 @@ namespace GL
 		glBufferData(GL_ARRAY_BUFFER, tam, vertices, GL_STATIC_DRAW);
 	}
 
-	void Render::BindBufferDynamic(uint VAO, uint VBO, int tam, const void* vertices)
-	{
-		glBindVertexArray(VAO);
-
-		glBindBuffer(GL_ARRAY_BUFFER, VBO);
-		glBufferData(GL_ARRAY_BUFFER, tam, vertices, GL_DYNAMIC_DRAW);
-	}
-
 	void Render::BindIndexs(uint EBO, int tam, uint* indexs)
 	{
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
@@ -88,10 +86,10 @@ namespace GL
 		glBufferData(GL_ARRAY_BUFFER, tam, vertices, GL_DYNAMIC_DRAW);
 	}
 
-	void Render::ReBindBuffer(uint VBO, int tam, const void* vertices)
+	void Render::UnBind(uint& VAO, uint& VBO)
 	{
-		glBindBuffer(GL_ARRAY_BUFFER, VBO);
-		glBufferData(GL_ARRAY_BUFFER, tam, vertices, GL_DYNAMIC_DRAW);
+		glDeleteVertexArrays(1, &VAO);
+		glDeleteBuffers(1, &VBO);
 	}
 
 	void Render::UnBind(uint& VAO, uint& VBO, uint& EBO)

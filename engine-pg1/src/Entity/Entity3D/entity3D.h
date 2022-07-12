@@ -26,8 +26,6 @@ namespace GL
 		glm::vec3 minAABB;
 		glm::vec3 maxAABB;
 
-		void GenerateVolumeAABB() override;
-
 	protected:
 		std::vector<Mesh*> meshes;
 
@@ -38,6 +36,7 @@ namespace GL
 
 		virtual void SetUniforms() override;
 		virtual void UpdateShader() override;
+		void GenerateVolumeAABB();
 	};
 }
 

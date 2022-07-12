@@ -246,19 +246,19 @@ namespace GameXD
 		}
 		if (Input::IsKeyDown(KEY_7))
 		{
-			node = static_cast<Entity3D*>(model->GetNode("patas"));
+			node = static_cast<Entity3D*>(model->GetNode("ojos"));
 		}
 		if (Input::IsKeyDown(KEY_8))
 		{
-			node = static_cast<Entity3D*>(model->GetNode("cuerpo"));
+			node = static_cast<Entity3D*>(model->GetNode("patas"));
 		}
 		if (Input::IsKeyDown(KEY_9))
 		{
-			node = static_cast<Entity3D*>(model->GetNode("pecho"));
+			node = static_cast<Entity3D*>(model->GetNode("pata_izq"));
 		}
 		if (Input::IsKeyDown(KEY_0))
 		{
-			node = static_cast<Entity3D*>(model->GetNode("Gir"));
+			node = static_cast<Entity3D*>(model->GetNode("cuerpo"));
 		}
 
 		//----------------------------TRANSFORMS---------------------------------

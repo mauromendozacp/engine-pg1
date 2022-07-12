@@ -398,16 +398,19 @@ namespace GL
 		}
 	}
 
-	bool Entity::CheckVolume()
+	bool Entity::IsCanDraw()
 	{
-		if (volume == nullptr) return true;
+		if (globalVolume == nullptr) return true;
 
-		return volume->IsOnFrustum();
+		return globalVolume->IsOnFrustum();
 	}
 
-	void Entity::GenerateVolumeAABB()
+	void Entity::UpdateGlobalVolume()
 	{
-		
+		if (globalVolume != nullptr)
+		{
+			globalVolume->SetGlobalVolume(volume, matrix.model);
+		}
 	}
 
 	void Entity::SetUniforms()
@@ -470,6 +473,8 @@ namespace GL
 	void Entity::UpdateMatrix()
 	{
 		matrix.model = matrix.translate * matrix.rotationY * matrix.rotationX * matrix.rotationZ * matrix.scale;
+
+		UpdateGlobalVolume();
 	}
 
 	void Entity::UpdateTransform()

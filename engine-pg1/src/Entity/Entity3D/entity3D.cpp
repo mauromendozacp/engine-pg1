@@ -54,18 +54,16 @@ namespace GL
 			meshes[i]->Init();
 		}
 
-		volume = new VolumeAABB();
 		GenerateVolumeAABB();
-		volume->Init(render);
 	}
 
 	void Entity3D::Draw()
 	{
-		if (CheckVolume())
+		if (IsCanDraw())
 		{
-			if (volume != nullptr && drawVolume)
+			if (globalVolume != nullptr && drawVolume)
 			{
-				volume->Draw();
+				globalVolume->Draw();
 			}
 
 			render->UseShader();
@@ -81,6 +79,10 @@ namespace GL
 			render->TextureDisable();
 			render->BlendDisable();
 			render->CleanShader();
+		}
+		else
+		{
+			//std::cout << name << std::endl;
 		}
 
 		for (std::list<Entity*>::iterator it = nodes.begin(); it != nodes.end(); ++it)
@@ -113,6 +115,18 @@ namespace GL
 	{
 		return drawVolume;
 	}
+	
+	void Entity3D::SetUniforms()
+	{
+		Entity::SetUniforms();
+		render->SetUniform(uniformAffectedLight, "affectedLight");
+	}
+
+	void Entity3D::UpdateShader()
+	{
+		Entity::UpdateShader();
+		render->UpdateStatus(uniformAffectedLight, affectedLight);
+	}
 
 	void Entity3D::GenerateVolumeAABB()
 	{
@@ -134,26 +148,24 @@ namespace GL
 					maxAABB.z = glm::max(maxAABB.z, vertex.Position.z);
 				}
 			}
-			volume->SetVolumeMinMax(minAABB, maxAABB);
 		}
+
+		volume = new VolumeAABB(minAABB, maxAABB);
+		globalVolume = new VolumeAABB();
+		globalVolume->SetGlobalVolume(volume, matrix.model);
+		globalVolume->Init(render);
 
 		if (parent != nullptr)
 		{
 			Entity3D* parent3d = static_cast<Entity3D*>(parent);
-			parent3d->minAABB = glm::min(minAABB, parent3d->minAABB);
-			parent3d->maxAABB = glm::max(maxAABB, parent3d->maxAABB);
-		}
-	}
-	
-	void Entity3D::SetUniforms()
-	{
-		Entity::SetUniforms();
-		render->SetUniform(uniformAffectedLight, "affectedLight");
-	}
 
-	void Entity3D::UpdateShader()
-	{
-		Entity::UpdateShader();
-		render->UpdateStatus(uniformAffectedLight, affectedLight);
+			parent3d->minAABB.x = glm::min(minAABB.x, parent3d->minAABB.x);
+			parent3d->minAABB.y = glm::min(minAABB.y, parent3d->minAABB.y);
+			parent3d->minAABB.z = glm::min(minAABB.z, parent3d->minAABB.z);
+
+			parent3d->maxAABB.x = glm::max(maxAABB.x, parent3d->maxAABB.x);
+			parent3d->maxAABB.y = glm::max(maxAABB.y, parent3d->maxAABB.y);
+			parent3d->maxAABB.z = glm::max(maxAABB.z, parent3d->maxAABB.z);
+		}
 	}
 }

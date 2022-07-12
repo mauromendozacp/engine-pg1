@@ -87,6 +87,7 @@ namespace GL
 		Matrix matrix;
 		Transform transform;
 		Volume* volume;
+		Volume* globalVolume;
 
 	protected:
 		Render* render;
@@ -103,8 +104,8 @@ namespace GL
 		uint locationNormal;
 		uint locationTexCoord;
 
-		bool CheckVolume();
-		virtual void GenerateVolumeAABB();
+		bool IsCanDraw();
+		void UpdateGlobalVolume();
 		virtual void SetUniforms();
 		virtual void UpdateShader();
 

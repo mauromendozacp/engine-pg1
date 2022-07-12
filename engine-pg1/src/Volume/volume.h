@@ -17,13 +17,13 @@ namespace GL
 		~Volume();
 		
 		virtual void Init(Render* render) = 0;
-		virtual void Update(glm::mat4 model) = 0;
 		virtual void Draw() = 0;
 		void DeInit();
 
-		virtual void SetVolumeMinMax(glm::vec3 min, glm::vec3 max) = 0;
 		virtual bool IsOnFrustum() = 0;
 		virtual std::vector<Vertex> GetVertexs() = 0;
+
+		virtual void SetGlobalVolume(Volume* volume, glm::mat4 model) = 0;
 
 		Line* lines;
 

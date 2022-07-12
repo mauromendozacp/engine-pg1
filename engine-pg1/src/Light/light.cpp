@@ -71,7 +71,4 @@ namespace GL
 	{
 		return enabled;
 	}
-	void Light::GenerateVolumeAABB()
-	{
-	}
 }

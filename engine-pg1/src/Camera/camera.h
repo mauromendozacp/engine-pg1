@@ -43,8 +43,6 @@ namespace GL
 		void UpdateView();
 		void UpdateProjection();
 
-		void GenerateVolumeAABB() override;
-
 		glm::mat4 view;
 		glm::mat4 projection;
 

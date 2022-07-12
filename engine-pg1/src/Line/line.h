@@ -24,7 +24,6 @@ namespace GL
 		void Draw();
 		void DeInit();
 		
-		void SetVertexs(std::vector<Vertex> vertexs);
 		std::vector<Vertex> GetVertexs();
 
 		Color color;
@@ -32,16 +31,13 @@ namespace GL
 	private:
 		Render* render;
 
-		uint VAO, VBO, EBO;
+		uint VAO, VBO;
 		std::vector<Vertex> vertexs;
-		std::vector<uint> indexes;
 
 		uint locationPosition;
-		uint locationNormal;
 		uint uniformColor;
 		uint uniformAlpha;
 
-		void UpdateVertexs();
 		void SetUniforms();
 		void UpdateShader();
 	};

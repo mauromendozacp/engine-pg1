@@ -26,13 +26,13 @@ namespace GL
 		uint GetShaderId();
 		void CleanShader();
 
+		void GenBuffers(uint& VAO, uint& VBO);
 		void GenBuffers(uint& VAO, uint& VBO, uint& EBO);
 		void GenBuffers(uint& VAO, uint& VBO, uint& EBO, uint& UVB);
 		void BindBuffer(uint VAO, uint VBO, int tam, const void* vertices);
-		void BindBufferDynamic(uint VAO, uint VBO, int tam, const void* vertices);
 		void BindIndexs(uint EBO, int tam, uint* indexs);
 		void BindUV(uint UVB, int tam, float* vertices);
-		void ReBindBuffer(uint VBO, int tam, const void* vertices);
+		void UnBind(uint& VAO, uint& VBO);
 		void UnBind(uint& VAO, uint& VBO, uint& EBO);
 		void UnBind(uint& VAO, uint& VBO, uint& EBO, uint& UVB);
 

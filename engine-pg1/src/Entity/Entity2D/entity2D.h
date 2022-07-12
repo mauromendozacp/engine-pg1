@@ -50,7 +50,7 @@ namespace GL
 
 		virtual void SetUniforms() override;
 		virtual void UpdateShader() override;
-		void GenerateVolumeAABB() override;
+		void GenerateVolumeAABB();
 	};
 }
 
