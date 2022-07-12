@@ -12,7 +12,7 @@ namespace GL
 		drawVolume = false;
 
 		minAABB = glm::vec3(std::numeric_limits<float>::max());
-		maxAABB = glm::vec3(std::numeric_limits<float>::min());
+		maxAABB = -glm::vec3(std::numeric_limits<float>::max());
 	}
 
 	Entity3D::Entity3D(Render* render) : Entity(render)
@@ -25,7 +25,7 @@ namespace GL
 		drawVolume = false;
 
 		minAABB = glm::vec3(std::numeric_limits<float>::max());
-		maxAABB = glm::vec3(std::numeric_limits<float>::min());
+		maxAABB = -glm::vec3(std::numeric_limits<float>::max());
 	}
 
 	Entity3D::Entity3D(std::vector<Mesh*> meshes, Render* render) : Entity(render)
@@ -38,7 +38,7 @@ namespace GL
 		drawVolume = false;
 
 		minAABB = glm::vec3(std::numeric_limits<float>::max());
-		maxAABB = glm::vec3(std::numeric_limits<float>::min());
+		maxAABB = -glm::vec3(std::numeric_limits<float>::max());
 	}
 
 	Entity3D::~Entity3D()
@@ -79,10 +79,6 @@ namespace GL
 			render->TextureDisable();
 			render->BlendDisable();
 			render->CleanShader();
-		}
-		else
-		{
-			//std::cout << name << std::endl;
 		}
 
 		for (std::list<Entity*>::iterator it = nodes.begin(); it != nodes.end(); ++it)

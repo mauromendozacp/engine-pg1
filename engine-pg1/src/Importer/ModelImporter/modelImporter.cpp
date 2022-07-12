@@ -40,21 +40,30 @@ namespace GL
     void ModelImporter::ProcessNode(Entity3D* parent, aiNode* node, const aiScene* scene)
 	{
         Entity3D* entityNode = nullptr;
+        std::string assimpfbx = "$AssimpFbx$";
+        std::string name = node->mName.C_Str();
 
-        if (node->mNumMeshes > 0)
+        if (name.find(assimpfbx) != std::string::npos)
         {
-            std::vector<Mesh*> meshes = std::vector<Mesh*>();
-            for (uint i = 0; i < node->mNumMeshes; i++)
-            {
-                aiMesh* aiMesh = scene->mMeshes[node->mMeshes[i]];
-                meshes.push_back(ProcessMesh(aiMesh, scene));
-            }
-
-            entityNode = new Entity3D(meshes, render);
+            entityNode = parent;
         }
         else
         {
-            entityNode = new Entity3D(render);
+            if (node->mNumMeshes > 0)
+            {
+                std::vector<Mesh*> meshes = std::vector<Mesh*>();
+                for (uint i = 0; i < node->mNumMeshes; i++)
+                {
+                    aiMesh* aiMesh = scene->mMeshes[node->mMeshes[i]];
+                    meshes.push_back(ProcessMesh(aiMesh, scene));
+                }
+
+                entityNode = new Entity3D(meshes, render);
+            }
+            else
+            {
+                entityNode = new Entity3D(render);
+            }
         }
 
         for (uint i = 0; i < node->mNumChildren; i++)
@@ -62,10 +71,13 @@ namespace GL
             ProcessNode(entityNode, node->mChildren[i], scene);
         }
 
-        entityNode->Init();
-        entityNode->SetName(node->mName.C_Str());
-        entityNode->SetParent(parent);
-        parent->AddNode(entityNode);
+        if (name.find(assimpfbx) == std::string::npos)
+        {
+            entityNode->SetName(node->mName.C_Str());
+            entityNode->SetParent(parent);
+            entityNode->Init();
+            parent->AddNode(entityNode);
+        }
 	}
 
     Mesh* ModelImporter::ProcessMesh(aiMesh* mesh, const aiScene* scene)
