@@ -5,22 +5,7 @@ namespace GL
 	Line::Line()
 	{
 		render = nullptr;
-		color = Color(124, 252, 0);
-
-		VAO = 0;
-		VBO = 0;
-
-		vertexs = std::vector<Vertex>();
-
-		locationPosition = 0;
-		uniformColor = 0;
-		uniformAlpha = 0;
-	}
-
-	Line::Line(Render* render)
-	{
-		this->render = render;
-		color = Color(124, 252, 0);
+		color = Color(125, 255, 0);
 
 		VAO = 0;
 		VBO = 0;
@@ -35,6 +20,30 @@ namespace GL
 
 		uniformColor = 0;
 		uniformAlpha = 0;
+		uniformAffectedLight = 0;
+		uniformUseTexture = 0;
+	}
+
+	Line::Line(Render* render)
+	{
+		this->render = render;
+		color = Color(125, 255, 0);
+
+		VAO = 0;
+		VBO = 0;
+
+		vertexs = std::vector<Vertex>();
+
+		locationPosition = 0;
+
+		uniformModel = 0;
+		uniformView = 0;
+		uniformProjection = 0;
+
+		uniformColor = 0;
+		uniformAlpha = 0;
+		uniformAffectedLight = 0;
+		uniformUseTexture = 0;
 	}
 
 	Line::Line(std::vector<Vertex> vertexs, Render* render)
@@ -55,6 +64,8 @@ namespace GL
 
 		uniformColor = 0;
 		uniformAlpha = 0;
+		uniformAffectedLight = 0;
+		uniformUseTexture = 0;
 	}
 
 	Line::~Line()
@@ -101,11 +112,15 @@ namespace GL
 
 		render->SetUniform(uniformColor, "color");
 		render->SetUniform(uniformAlpha, "a");
+		render->SetUniform(uniformAffectedLight, "affectedLight");
+		render->SetUniform(uniformUseTexture, "useTexture");
 	}
 
 	void Line::UpdateShader(glm::mat4 model)
 	{
 		render->UpdateMVP(uniformModel, uniformView, uniformProjection, model);
 		render->UpdateColor(uniformColor, uniformAlpha, color.GetColor());
+		render->UpdateStatus(uniformAffectedLight, false);
+		render->UpdateStatus(uniformUseTexture, false);
 	}
 }

@@ -222,7 +222,7 @@ namespace GameXD
 		//----------------------------NODES---------------------------------
 		if (Input::IsKeyDown(KEY_1))
 		{
-			node = static_cast<Entity3D*>(model);
+			node = static_cast<Entity3D*>(model->GetNode("RootNode")->GetNode(0));
 		}
 		if (Input::IsKeyDown(KEY_2))
 		{

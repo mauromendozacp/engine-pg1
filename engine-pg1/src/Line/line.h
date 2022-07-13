@@ -42,6 +42,8 @@ namespace GL
 
 		uint uniformColor;
 		uint uniformAlpha;
+		uint uniformAffectedLight;
+		uint uniformUseTexture;
 
 		void SetUniforms();
 		void UpdateShader(glm::mat4 model);

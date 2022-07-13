@@ -86,9 +86,7 @@ namespace GL
 
 		Matrix matrix;
 		Transform transform;
-		Volume* localVolume;
-		Volume* globalVolume;
-
+		
 	protected:
 		Render* render;
 
@@ -96,6 +94,9 @@ namespace GL
 
 		Entity* parent;
 		std::list<Entity*> nodes;
+
+		Volume* localVolume;
+		Volume* globalVolume;
 
 		uint uniformModel;
 		uint uniformView;

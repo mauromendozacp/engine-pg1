@@ -116,6 +116,10 @@ void main()
 			}
 		}
 	}
+	else
+	{
+		resultColor = color;
+	}
 
 	if (useTexture)
 	{

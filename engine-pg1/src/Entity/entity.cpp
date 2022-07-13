@@ -293,7 +293,7 @@ namespace GL
 
 	Entity* Entity::GetNode(int nodeIndex)
 	{
-		if (nodeIndex > 0 && nodeIndex < nodes.size())
+		if (nodeIndex >= 0 && nodeIndex < nodes.size())
 		{
 			std::list<Entity*>::iterator it = nodes.begin();
 			std::advance(it, nodeIndex);
