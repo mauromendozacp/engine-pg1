@@ -28,6 +28,11 @@ namespace GL
 		vertexs = std::vector<Vertex>();
 
 		locationPosition = 0;
+
+		uniformModel = 0;
+		uniformView = 0;
+		uniformProjection = 0;
+
 		uniformColor = 0;
 		uniformAlpha = 0;
 	}
@@ -43,6 +48,11 @@ namespace GL
 		VBO = 0;
 
 		locationPosition = 0;
+
+		uniformModel = 0;
+		uniformView = 0;
+		uniformProjection = 0;
+
 		uniformColor = 0;
 		uniformAlpha = 0;
 	}
@@ -61,10 +71,10 @@ namespace GL
 		render->SetBaseAttribs(locationPosition, 3, sizeof(Vertex), (void*)0);
 	}
 
-	void Line::Draw()
+	void Line::Draw(glm::mat4 model)
 	{
 		render->UseShader();
-		UpdateShader();
+		UpdateShader(model);
 		render->DrawLines(VAO, vertexs.size());
 		render->CleanShader();
 	}
@@ -85,12 +95,17 @@ namespace GL
 	{
 		render->SetLocation(locationPosition, "aPos");
 
+		render->SetUniform(uniformModel, "model");
+		render->SetUniform(uniformView, "view");
+		render->SetUniform(uniformProjection, "projection");
+
 		render->SetUniform(uniformColor, "color");
 		render->SetUniform(uniformAlpha, "a");
 	}
 
-	void Line::UpdateShader()
+	void Line::UpdateShader(glm::mat4 model)
 	{
+		render->UpdateMVP(uniformModel, uniformView, uniformProjection, model);
 		render->UpdateColor(uniformColor, uniformAlpha, color.GetColor());
 	}
 }

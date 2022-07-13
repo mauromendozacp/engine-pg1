@@ -5,6 +5,7 @@ namespace GL
     Render* ModelImporter::render = nullptr;
     std::vector<Texture> ModelImporter::textures_loaded = std::vector<Texture>();
     std::string ModelImporter::directory = std::string();
+    std::string assimpfbx = "$AssimpFbx$";
 
 	ModelImporter::ModelImporter()
 	{
@@ -40,7 +41,6 @@ namespace GL
     void ModelImporter::ProcessNode(Entity3D* parent, aiNode* node, const aiScene* scene)
 	{
         Entity3D* entityNode = nullptr;
-        std::string assimpfbx = "$AssimpFbx$";
         std::string name = node->mName.C_Str();
 
         if (name.find(assimpfbx) != std::string::npos)

@@ -26,7 +26,7 @@ namespace GL
 		useTexture = false;
 
 		minAABB = glm::vec3(std::numeric_limits<float>::max());
-		maxAABB = glm::vec3(std::numeric_limits<float>::min());
+		maxAABB = -glm::vec3(std::numeric_limits<float>::max());
 	}
 
 	Entity2D::Entity2D(Render* render) : Entity(render)
@@ -53,7 +53,7 @@ namespace GL
 		useTexture = false;
 
 		minAABB = glm::vec3(std::numeric_limits<float>::max());
-		maxAABB = glm::vec3(std::numeric_limits<float>::min());
+		maxAABB = -glm::vec3(std::numeric_limits<float>::max());
 	}
 
 	Entity2D::~Entity2D()
@@ -74,6 +74,9 @@ namespace GL
 
 		vertexs.clear();
 		indexes.clear();
+
+		localVolume->DeInit();
+		globalVolume->DeInit();
 	}
 
 	void Entity2D::SetCollider(bool hasCollider)
@@ -143,9 +146,9 @@ namespace GL
 			maxAABB.z = glm::max(maxAABB.z, vertex.Position.z);
 		}
 
-		volume = new VolumeAABB(minAABB, maxAABB);
+		localVolume = new VolumeAABB(minAABB, maxAABB);
 		globalVolume = new VolumeAABB();
-		globalVolume->SetGlobalVolume(volume, matrix.model);
+		globalVolume->SetGlobalVolume(localVolume, matrix.model);
 		globalVolume->Init(render);
 
 		if (parent != nullptr)

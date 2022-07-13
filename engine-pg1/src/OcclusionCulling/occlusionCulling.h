@@ -27,13 +27,6 @@ namespace GL
 
 	private:
 		static Camera* camera;
-		 
-		static glm::vec3 pointBack;
-		static glm::vec3 pointFront;
-		static glm::vec3 pointTopLeft;
-		static glm::vec3 pointTopRight;
-		static glm::vec3 pointBottomLeft;
-		static glm::vec3 pointBottomRight;
 	};
 }
 

@@ -86,7 +86,7 @@ namespace GL
 
 		Matrix matrix;
 		Transform transform;
-		Volume* volume;
+		Volume* localVolume;
 		Volume* globalVolume;
 
 	protected:

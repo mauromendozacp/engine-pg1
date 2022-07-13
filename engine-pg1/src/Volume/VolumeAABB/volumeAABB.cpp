@@ -33,9 +33,9 @@ namespace GL
 		lines->Init();
 	}
 
-	void VolumeAABB::Draw()
+	void VolumeAABB::Draw(glm::mat4 model)
 	{
-		lines->Draw();
+		lines->Draw(model);
 	}
 
 	bool VolumeAABB::IsOnFrustum()
@@ -118,8 +118,6 @@ namespace GL
 	{
 		this->center = center;
 		extents = glm::vec3(extX, extY, extZ);
-
-		//lines->SetVertexs(GetVertexs());
 	}
 
 	bool VolumeAABB::IsOnPlane(Plane plane)

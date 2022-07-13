@@ -18,6 +18,9 @@ namespace GL
 
 	void Volume::DeInit()
 	{
-		lines->DeInit();
+		if (lines != nullptr)
+		{
+			lines->DeInit();
+		}
 	}
 }

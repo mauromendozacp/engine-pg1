@@ -21,7 +21,7 @@ namespace GL
 		~Line();
 
 		void Init();
-		void Draw();
+		void Draw(glm::mat4 model);
 		void DeInit();
 		
 		std::vector<Vertex> GetVertexs();
@@ -35,11 +35,16 @@ namespace GL
 		std::vector<Vertex> vertexs;
 
 		uint locationPosition;
+
+		uint uniformModel;
+		uint uniformView;
+		uint uniformProjection;
+
 		uint uniformColor;
 		uint uniformAlpha;
 
 		void SetUniforms();
-		void UpdateShader();
+		void UpdateShader(glm::mat4 model);
 	};
 }
 

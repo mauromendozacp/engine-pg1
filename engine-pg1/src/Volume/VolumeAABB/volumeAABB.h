@@ -14,7 +14,7 @@ namespace GL
 		~VolumeAABB();
 
 		void Init(Render* render) override;
-		void Draw() override;
+		void Draw(glm::mat4 model) override;
 
 		bool IsOnFrustum() override;
 		std::vector<Vertex> GetVertexs() override;

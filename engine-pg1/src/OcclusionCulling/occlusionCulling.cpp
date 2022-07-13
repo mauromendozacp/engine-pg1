@@ -4,13 +4,6 @@ namespace GL
 {
 	Camera* OcclusionCulling::camera = nullptr;
 
-	glm::vec3 OcclusionCulling::pointBack = glm::vec3();
-	glm::vec3 OcclusionCulling::pointFront = glm::vec3();
-	glm::vec3 OcclusionCulling::pointTopLeft = glm::vec3();
-	glm::vec3 OcclusionCulling::pointTopRight = glm::vec3();
-	glm::vec3 OcclusionCulling::pointBottomLeft = glm::vec3();
-	glm::vec3 OcclusionCulling::pointBottomRight = glm::vec3();
-
 	Plane OcclusionCulling::up = Plane();
 	Plane OcclusionCulling::down = Plane();
 	Plane OcclusionCulling::left = Plane();
@@ -21,13 +14,6 @@ namespace GL
 	OcclusionCulling::OcclusionCulling()
 	{
 		camera = nullptr;
-
-		pointBack = glm::vec3();
-		pointFront = glm::vec3();
-		pointTopLeft = glm::vec3();
-		pointTopRight = glm::vec3();
-		pointBottomLeft = glm::vec3();
-		pointBottomRight = glm::vec3();
 
 		up = Plane();
 		down = Plane();
@@ -49,7 +35,7 @@ namespace GL
 	void OcclusionCulling::Update()
 	{
 		float fov = camera->GetFOV();
-		float aspect = camera->GetAspect() / 2.f;
+		float aspect = camera->GetAspect();
 
 		float halfheight = camera->GetFar() * (glm::tan((fov * .5f) * glm::pi<float>() / 180.f));
 		float halfWidth = halfheight * aspect;

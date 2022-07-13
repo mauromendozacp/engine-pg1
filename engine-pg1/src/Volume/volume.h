@@ -17,7 +17,7 @@ namespace GL
 		~Volume();
 		
 		virtual void Init(Render* render) = 0;
-		virtual void Draw() = 0;
+		virtual void Draw(glm::mat4 model) = 0;
 		void DeInit();
 
 		virtual bool IsOnFrustum() = 0;

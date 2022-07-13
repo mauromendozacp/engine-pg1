@@ -63,7 +63,7 @@ namespace GL
 		{
 			if (globalVolume != nullptr && drawVolume)
 			{
-				globalVolume->Draw();
+				globalVolume->Draw(matrix.model);
 			}
 
 			render->UseShader();
@@ -94,6 +94,9 @@ namespace GL
 		{
 			meshes[i]->DeInit();
 		}
+
+		localVolume->DeInit();
+		globalVolume->DeInit();
 
 		for (std::list<Entity*>::iterator it = nodes.begin(); it != nodes.end(); ++it)
 		{
@@ -146,9 +149,9 @@ namespace GL
 			}
 		}
 
-		volume = new VolumeAABB(minAABB, maxAABB);
+		localVolume = new VolumeAABB(minAABB, maxAABB);
 		globalVolume = new VolumeAABB();
-		globalVolume->SetGlobalVolume(volume, matrix.model);
+		globalVolume->SetGlobalVolume(localVolume, matrix.model);
 		globalVolume->Init(render);
 
 		if (parent != nullptr)

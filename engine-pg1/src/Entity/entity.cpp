@@ -37,6 +37,10 @@ namespace GL
 		uniformView = 0;
 		uniformProjection = 0;
 
+		locationPosition = 0;
+		locationNormal = 0;
+		locationTexCoord = 0;
+
 		UpdateTransform();
 		UpdateMatrix();
 	}
@@ -73,6 +77,10 @@ namespace GL
 		uniformModel = 0;
 		uniformView = 0;
 		uniformProjection = 0;
+
+		locationPosition = 0;
+		locationNormal = 0;
+		locationTexCoord = 0;
 
 		UpdateTransform();
 		UpdateMatrix();
@@ -409,7 +417,7 @@ namespace GL
 	{
 		if (globalVolume != nullptr)
 		{
-			globalVolume->SetGlobalVolume(volume, matrix.model);
+			globalVolume->SetGlobalVolume(localVolume, matrix.model);
 		}
 	}
 
