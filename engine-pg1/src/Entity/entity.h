@@ -51,6 +51,8 @@ namespace GL
 		void SetScale(float x, float y, float z);
 		void SetScale(float size);
 
+		void SetDirection(glm::vec3 dir);
+
 		std::string GetName();
 
 		Entity* GetParent();

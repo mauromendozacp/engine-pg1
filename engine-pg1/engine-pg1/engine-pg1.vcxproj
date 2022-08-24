@@ -185,6 +185,7 @@
     <ClCompile Include="..\src\Material\TextureMaterial\textureMaterial.cpp" />
     <ClCompile Include="..\src\Mesh\mesh.cpp" />
     <ClCompile Include="..\src\OcclusionCulling\occlusionCulling.cpp" />
+    <ClCompile Include="..\src\PlaneBSP\planeBSP.cpp" />
     <ClCompile Include="..\src\Plane\plane.cpp" />
     <ClCompile Include="..\src\Renderer\renderer.cpp" />
     <ClCompile Include="..\src\Shader\shader.cpp" />
@@ -228,6 +229,7 @@
     <ClInclude Include="..\src\matrix.h" />
     <ClInclude Include="..\src\Mesh\mesh.h" />
     <ClInclude Include="..\src\OcclusionCulling\occlusionCulling.h" />
+    <ClInclude Include="..\src\PlaneBSP\planeBSP.h" />
     <ClInclude Include="..\src\Plane\plane.h" />
     <ClInclude Include="..\src\Renderer\renderer.h" />
     <ClInclude Include="..\src\Shader\shader.h" />

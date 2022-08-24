@@ -112,6 +112,9 @@
     <ClCompile Include="..\src\Volume\volume.cpp">
       <Filter>Volume</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\PlaneBSP\planeBSP.cpp">
+      <Filter>PlaneBSP</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Window">
@@ -237,6 +240,9 @@
     <Filter Include="Line">
       <UniqueIdentifier>{acce2314-2b8d-4a30-b5d5-3ea728277983}</UniqueIdentifier>
     </Filter>
+    <Filter Include="PlaneBSP">
+      <UniqueIdentifier>{66dbdfd4-c12f-4f83-833c-7057ed8a897a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\Window\window.h">
@@ -360,6 +366,9 @@
     </ClInclude>
     <ClInclude Include="..\src\Line\line.h">
       <Filter>Line</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\PlaneBSP\planeBSP.h">
+      <Filter>PlaneBSP</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

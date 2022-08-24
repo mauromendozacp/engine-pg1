@@ -140,9 +140,7 @@ namespace GL
 		direction.y = sin(glm::radians(pitch));
 		direction.z = sin(glm::radians(yaw)) * cos(glm::radians(pitch));
 
-		transform.forward = glm::normalize(direction);
-		transform.right = glm::normalize(glm::cross(transform.forward, glm::vec3(0.f, 1.f, 0.f)));
-		transform.up = glm::normalize(glm::cross(transform.right, transform.forward));
+		SetDirection(direction);
 
 		if (target != nullptr)
 		{

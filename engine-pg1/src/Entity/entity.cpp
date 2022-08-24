@@ -253,6 +253,13 @@ namespace GL
 		SetScale(glm::vec3(size, size, size));
 	}
 
+	void Entity::SetDirection(glm::vec3 dir)
+	{
+		transform.forward = glm::normalize(dir);
+		transform.right = glm::normalize(glm::cross(transform.forward, glm::vec3(0.f, 1.f, 0.f)));
+		transform.up = glm::normalize(glm::cross(transform.right, transform.forward));
+	}
+
 	std::string Entity::GetName()
 	{
 		return name;
