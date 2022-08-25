@@ -32,7 +32,6 @@ namespace GL
 		quad->Init(SHAPE_TYPE::QUAD);
 		quad->material = MaterialManager::GetSolidMaterial();
 		quad->SetPos(position);
-		quad->SetDirection(normal);
 	}
 
 	void PlaneBSP::Draw()
@@ -43,8 +42,16 @@ namespace GL
 		}
 	}
 
-	void PlaneBSP::SetCanDraw(bool status)
+	void PlaneBSP::DeInit()
 	{
-		canDraw = status;
+		if (quad != nullptr)
+		{
+			quad->DeInit();
+		}
+	}
+
+	void PlaneBSP::SwitchCanDrawStatus()
+	{
+		canDraw = !canDraw;
 	}
 }

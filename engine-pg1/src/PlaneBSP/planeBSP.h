@@ -16,8 +16,9 @@ namespace GL
 
 		void Init(Render* render, glm::vec3 position, glm::vec3 normal);
 		void Draw();
+		void DeInit();
 
-		void SetCanDraw(bool status);
+		void SwitchCanDrawStatus();
 
 	private:
 		Plane* plane;

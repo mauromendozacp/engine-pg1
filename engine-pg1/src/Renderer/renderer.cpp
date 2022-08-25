@@ -5,6 +5,7 @@ namespace GL
 	Render::Render()
 	{
 		this->shader = nullptr;
+		clearColor = Color(0.1f, 0.1f, 0.1f);
 
 		view = glm::mat4(0.f);
 		projection = glm::mat4(0.f);
@@ -203,12 +204,12 @@ namespace GL
 
 	void Render::SetClearColor(float r, float g, float b, float a)
 	{
-		glClearColor(r, g, b, a);
+		clearColor.SetColor(r, g, b, a);
 	}
 
 	void Render::ClearScreen()
 	{
-		glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
+		glClearColor(clearColor.GetColor().r, clearColor.GetColor().g, clearColor.GetColor().b, clearColor.GetColor().a );
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	}
 

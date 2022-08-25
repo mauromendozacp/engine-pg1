@@ -4,19 +4,18 @@ namespace GameXD
 {
 	Game::Game()
 	{
-		spotCubeLight = nullptr;
-		floor = nullptr;
-		tnt = nullptr;
-
 		player = nullptr;
-		backpack = nullptr;
-		model = nullptr;
-		node = nullptr;
 
-		for (int i = 0; i < cubesLenght; i++)
-		{
-			cubeLight[i] = nullptr;
-		}
+		planeLeft = nullptr;
+		planeFront = nullptr;
+		planeRight = nullptr;
+
+		objStaticMid = nullptr;
+		objStaticLeft = nullptr;
+		objStaticFront = nullptr;
+		objStaticRight = nullptr;
+		objMovable = nullptr;
+		node = nullptr;
 	}
 
 	Game::~Game()
@@ -26,39 +25,50 @@ namespace GameXD
 			delete player;
 			player = nullptr;
 		}
-		if (model != nullptr)
+		if (planeLeft != nullptr)
 		{
-			delete model;
-			model = nullptr;
+			delete planeLeft;
+			planeLeft = nullptr;
 		}
-		if (backpack != nullptr)
+		if (planeFront != nullptr)
 		{
-			delete backpack;
-			backpack = nullptr;
+			delete planeFront;
+			planeFront = nullptr;
 		}
-		if (floor != nullptr)
+		if (planeRight != nullptr)
 		{
-			delete floor;
-			floor = nullptr;
+			delete planeRight;
+			planeRight = nullptr;
 		}
-		if (spotCubeLight != nullptr)
+		if (objStaticMid != nullptr)
 		{
-			delete spotCubeLight;
-			spotCubeLight = nullptr;
+			delete objStaticMid;
+			objStaticMid = nullptr;
 		}
-		if (tnt != nullptr)
+		if (objStaticLeft != nullptr)
 		{
-			delete tnt;
-			tnt = nullptr;
+			delete objStaticLeft;
+			objStaticLeft = nullptr;
 		}
-
-		for (int i = 0; i < cubesLenght; i++)
+		if (objStaticFront != nullptr)
 		{
-			if (cubeLight[i] != nullptr)
-			{
-				delete cubeLight[i];
-				cubeLight[i] = nullptr;
-			}
+			delete objStaticFront;
+			objStaticFront = nullptr;
+		}
+		if (objStaticRight != nullptr)
+		{
+			delete objStaticRight;
+			objStaticRight = nullptr;
+		}
+		if (objMovable != nullptr)
+		{
+			delete objMovable;
+			objMovable = nullptr;
+		}
+		if (node != nullptr)
+		{
+			delete node;
+			node = nullptr;
 		}
 	}
 
@@ -81,16 +91,15 @@ namespace GameXD
 
 	void Game::Draw()
 	{
-		for (int i = 0; i < cubesLenght; i++)
-		{
-			cubeLight[i]->Draw();
-		}
+		planeLeft->Draw();
+		planeFront->Draw();
+		planeRight->Draw();
 
-		spotCubeLight->Draw();
-		floor->Draw();
-		tnt->Draw();
-		backpack->Draw();
-		model->Draw();
+		objStaticMid->Draw();
+		objStaticLeft->Draw();
+		objStaticFront->Draw();
+		objStaticRight->Draw();
+		objMovable->Draw();
 
 		player->Draw();
 	}
@@ -98,65 +107,64 @@ namespace GameXD
 	void Game::DeInit()
 	{
 		player->DeInit();
-		floor->DeInit();
-		spotCubeLight->DeInit();
-		tnt->DeInit();
-		model->DeInit();
 
-		for (int i = 0; i < cubesLenght; i++)
-		{
-			cubeLight[i]->DeInit();
-		}
+		planeLeft->DeInit();
+		planeFront->DeInit();
+		planeRight->DeInit();
+
+		objStaticMid->DeInit();
+		objStaticLeft->DeInit();
+		objStaticFront->DeInit();
+		objStaticRight->DeInit();
+		objMovable->DeInit();
+		node->DeInit();
 	}
 
 	void Game::InitEntities()
 	{
+		//----------------------------PLAYER---------------------------------
 		player = new Player(render);
 		player->Init(mainCamera, 5.f, 75.f);
-		player->SetPos(glm::vec3(0.f, 1.5f, 5.f));
-		player->SetScale(1.0f);
+		player->SetPos(glm::vec3(0.f, 3.5f, 15.f));
 
 		mainCamera->SetTarget(player);
 		mainCamera->SetOffset(10.f);
 
-		backpack = new Entity3D(render);
-		//backpack = ModelImporter::LoadModel(render, "../res/Models/survival-guitar-backpack/backpack.obj");
-		backpack->SetPos(glm::vec3(0.f, 1.5f, -15.f));
+		//----------------------------PLANES---------------------------------
+		planeLeft = new PlaneBSP();
+		planeLeft->Init(render, glm::vec3(-8.f, 0.f, 0.f), glm::vec3(-1.f, 0.f, 0.f));
 
-		model = ModelImporter::LoadModel(render, "../res/Models/gir/gir.fbx");
-		model->SetPos(glm::vec3(0.f, 2.f, 0.f));
-		model->SetScale(0.75f);
+		planeFront = new PlaneBSP();
+		planeFront->Init(render, glm::vec3(0.f, 0.f, 8.f), glm::vec3(0.f, 0.f, 0.f));
 
-		floor = new Sprite(render);
-		floor->Init(SPRITE_TYPE::QUAD);
-		floor->LoadTexture("../res/Textures/floor.jpg", false, TEXTURE_TYPE::BASE);
-		floor->material = MaterialManager::GetTextureMaterial();
-		floor->color = Color(255, 255, 255);
-		floor->SetPos(glm::vec3(0.f, -.5f, 0.f));
-		floor->SetRotX(90.f);
-		floor->SetScale(50.f, 50.f, 1.f);
+		planeRight = new PlaneBSP();
+		planeRight->Init(render, glm::vec3(8.f, 0.f, 0.f), glm::vec3(1.f, 0.f, 0.f));
 
-		for (int i = 0; i < cubesLenght; i++)
-		{
-			cubeLight[i] = new Shape(render);
-			cubeLight[i]->Init(SHAPE_TYPE::CUBE);
-			cubeLight[i]->material = MaterialManager::GetSolidMaterial();
-			cubeLight[i]->SetPos(glm::vec3(10.f - 2.5f * i, 2.5f, 22.5f));
-			cubeLight[i]->color = Color::GetRandomColor();
-		}
+		//----------------------------OBJECTS---------------------------------
+		objStaticMid = new Entity3D(render);
+		objStaticMid = ModelImporter::LoadModel(render, "../res/Models/gir/gir.fbx");
+		objStaticMid->SetPos(glm::vec3(0.f, 0.f, 0.f));
+		objStaticMid->SetScale(0.5f);
 
-		spotCubeLight = new Shape(render);
-		spotCubeLight->Init(SHAPE_TYPE::CUBE);
-		spotCubeLight->material = MaterialManager::GetSolidMaterial();
-		spotCubeLight->SetPos(glm::vec3(10.f, 5.f, 0.f));
-		spotCubeLight->color.SetColor(255, 0, 0);
-		spotCubeLight->SetScale(0.75f);
+		objStaticLeft = new Entity3D(render);
+		objStaticLeft = ModelImporter::LoadModel(render, "../res/Models/gir/gir.fbx");
+		objStaticLeft->SetPos(glm::vec3(-10.f, 0.f, 0.f));
+		objStaticLeft->SetScale(0.5f);
 
-		tnt = new Sprite(render);
-		tnt->Init(SPRITE_TYPE::CUBE);
-		tnt->LoadTexture("../res/Textures/tnt.png", true, GL::TEXTURE_TYPE::BASE);
-		tnt->material = MaterialManager::GetTextureMaterial();
-		tnt->SetPos(glm::vec3(5.f, 0.f, 2.5f));
+		objStaticFront = new Entity3D(render);
+		objStaticFront = ModelImporter::LoadModel(render, "../res/Models/gir/gir.fbx");
+		objStaticFront->SetPos(glm::vec3(0.f, 0.f, -10.f));
+		objStaticFront->SetScale(0.5f);
+
+		objStaticRight = new Entity3D(render);
+		objStaticRight = ModelImporter::LoadModel(render, "../res/Models/gir/gir.fbx");
+		objStaticRight->SetPos(glm::vec3(10.f, 0.f, 0.f));
+		objStaticRight->SetScale(0.5f);
+
+		objMovable = new Entity3D(render);
+		objMovable = ModelImporter::LoadModel(render, "../res/Models/gir/gir.fbx");
+		objMovable->SetPos(glm::vec3(5.f, 0.f, 0.f));
+		objMovable->SetScale(0.75f);
 	}
 
 	void Game::InitLights()
@@ -179,20 +187,6 @@ namespace GameXD
 		pointLight->SetConstant(1.f);
 		pointLight->SetLinear(0.09f);
 		pointLight->SetQuadratic(0.032f);
-
-		lightManager->AddLight(LIGHT_TYPE::SPOTLIGHT);
-		SpotLight* spotLight = lightManager->GetLasSpotLightCreated();
-		spotLight->SetPos(spotCubeLight->GetPos());
-		spotLight->SetDirection(glm::vec3(0.0f, -1.0f, 0.0f));
-		spotLight->color = spotCubeLight->color;
-		spotLight->SetAmbient(glm::vec3(1.f, 1.f, 1.f));
-		spotLight->SetDiffuse(glm::vec3(1.f, 1.f, 1.f));
-		spotLight->SetSpecular(glm::vec3(1.f, 1.f, 1.f));
-		spotLight->SetConstant(1.f);
-		spotLight->SetLinear(0.07f);
-		spotLight->SetQuadratic(0.0075f);
-		spotLight->SetCutOff(12.5f);
-		spotLight->SetOuterCutOff(17.5f);
 	}
 
 	void Game::UpdateInputs()
@@ -200,8 +194,8 @@ namespace GameXD
 		//----------------------------LIGHTS---------------------------------
 		if (Input::IsKeyDown(KEY_Z))
 		{
-			SpotLight* spotLight = lightManager->GetLasSpotLightCreated();
-			spotLight->SetEnabled(!spotLight->IsEnabled());
+			PointLight* pointLight = lightManager->GetLasPointLightCreated();
+			pointLight->color = Color::GetRandomColor();
 		}
 		if (Input::IsKeyDown(KEY_X))
 		{
@@ -213,78 +207,73 @@ namespace GameXD
 			DirectionalLight* directionalLight = lightManager->GetDirectionalLight();
 			directionalLight->SetEnabled(!directionalLight->IsEnabled());
 		}
-		if (Input::IsKeyDown(KEY_V))
-		{
-			PointLight* pointLight = lightManager->GetLasPointLightCreated();
-			pointLight->color = Color::GetRandomColor();
-		}
 
 		//----------------------------NODES---------------------------------
 		if (Input::IsKeyDown(KEY_1))
 		{
-			node = static_cast<Entity3D*>(model->GetNode("RootNode")->GetNode(0));
+			node = static_cast<Entity3D*>(objMovable->GetNode("RootNode")->GetNode(0));
 		}
 		if (Input::IsKeyDown(KEY_2))
 		{
-			node = static_cast<Entity3D*>(model->GetNode("cabeza"));
+			node = static_cast<Entity3D*>(objMovable->GetNode("cabeza"));
 		}
 		if (Input::IsKeyDown(KEY_3))
 		{
-			node = static_cast<Entity3D*>(model->GetNode("hombro_der"));
+			node = static_cast<Entity3D*>(objMovable->GetNode("hombro_der"));
 		}
 		if (Input::IsKeyDown(KEY_4))
 		{
-			node = static_cast<Entity3D*>(model->GetNode("brazo_der"));
+			node = static_cast<Entity3D*>(objMovable->GetNode("brazo_der"));
 		}
 		if (Input::IsKeyDown(KEY_5))
 		{
-			node = static_cast<Entity3D*>(model->GetNode("mano_der"));
+			node = static_cast<Entity3D*>(objMovable->GetNode("mano_der"));
 		}
 		if (Input::IsKeyDown(KEY_6))
 		{
-			node = static_cast<Entity3D*>(model->GetNode("dedo1"));
+			node = static_cast<Entity3D*>(objMovable->GetNode("dedo1"));
 		}
 		if (Input::IsKeyDown(KEY_7))
 		{
-			node = static_cast<Entity3D*>(model->GetNode("ojos"));
+			node = static_cast<Entity3D*>(objMovable->GetNode("ojos"));
 		}
 		if (Input::IsKeyDown(KEY_8))
 		{
-			node = static_cast<Entity3D*>(model->GetNode("patas"));
+			node = static_cast<Entity3D*>(objMovable->GetNode("patas"));
 		}
 		if (Input::IsKeyDown(KEY_9))
 		{
-			node = static_cast<Entity3D*>(model->GetNode("pata_izq"));
+			node = static_cast<Entity3D*>(objMovable->GetNode("pata_izq"));
 		}
 		if (Input::IsKeyDown(KEY_0))
 		{
-			node = static_cast<Entity3D*>(model->GetNode("cuerpo"));
+			node = static_cast<Entity3D*>(objMovable->GetNode("cuerpo"));
 		}
 
 		//----------------------------TRANSFORMS---------------------------------
 		if (node != nullptr)
 		{
-			if (Input::IsKeyPressed(KEY_T))
+			if (Input::IsKeyPressed(KEY_G))
 			{
 				node->SetPos(node->GetLocalPosition() - glm::vec3(0.05f, 0.f, 0.f));
 			}
-			if (Input::IsKeyPressed(KEY_Y))
+			if (Input::IsKeyPressed(KEY_J))
 			{
 				node->SetPos(node->GetLocalPosition() + glm::vec3(0.05f, 0.f, 0.f));
 			}
-			if (Input::IsKeyPressed(KEY_U))
+			if (Input::IsKeyPressed(KEY_H))
 			{
 				node->SetPos(node->GetLocalPosition() - glm::vec3(0.f, 0.05f, 0.f));
 			}
-			if (Input::IsKeyPressed(KEY_I))
+			if (Input::IsKeyPressed(KEY_Y))
 			{
 				node->SetPos(node->GetLocalPosition() + glm::vec3(0.f, 0.05f, 0.f));
 			}
-			if (Input::IsKeyPressed(KEY_G))
+			if (Input::IsKeyPressed(KEY_T))
 			{
 				node->SetRotZ(node->GetLocalRotation().z - 1.f);
 			}
-			if (Input::IsKeyPressed(KEY_H))
+			if (Input::IsKeyPressed(KEY_U))
 			{
 				node->SetRotZ(node->GetLocalRotation().z + 1.f);
 			}
@@ -292,18 +281,25 @@ namespace GameXD
 			{
 				node->SetScale(node->GetLocalScale() - glm::vec3(0.005f));
 			}
-			if (Input::IsKeyPressed(KEY_N))
+			if (Input::IsKeyPressed(KEY_M))
 			{
 				node->SetScale(node->GetLocalScale() + glm::vec3(0.005f));
 			}
-			if (Input::IsKeyDown(KEY_P))
+			if (Input::IsKeyDown(KEY_N))
 			{
 				node->CanDrawVolume(!node->IsCanDrawVolume());
 			}
 		}
-		if (Input::IsKeyPressed(KEY_R))
+		if (Input::IsKeyDown(KEY_R))
 		{
-			model->Reset();
+			objMovable->Reset();
+		}
+
+		if (Input::IsKeyDown(KEY_F))
+		{
+			planeLeft->SwitchCanDrawStatus();
+			planeFront->SwitchCanDrawStatus();
+			planeRight->SwitchCanDrawStatus();
 		}
 
 		if (Input::IsKeyDown(KEY_ESCAPE))

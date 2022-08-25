@@ -5,6 +5,7 @@
 
 #include "Window/window.h"
 #include "Shader/shader.h"
+#include "Color/color.h"
 
 #include "GLM/glm.hpp"
 #include "GLM/ext/matrix_transform.hpp"
@@ -70,9 +71,10 @@ namespace GL
 
 	private:
 		Shader* shader;
+		Color clearColor;
 
 		glm::mat4 view;
-		glm::mat4 projection;
+		glm::mat4 projection;		
 	};
 }
 

@@ -253,6 +253,13 @@ namespace GL
 		SetScale(glm::vec3(size, size, size));
 	}
 
+	void Entity::LookTarget(glm::vec3 target)
+	{
+		glm::mat4 quat = glm::lookAt(target, transform.position, transform.up);
+		glm::vec3 rot = QuatToVec(quat, transform.up);
+		SetRot(rot);
+	}
+
 	void Entity::SetDirection(glm::vec3 dir)
 	{
 		transform.forward = glm::normalize(dir);

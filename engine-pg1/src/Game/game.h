@@ -8,6 +8,7 @@
 #include "Entity/Entity2D/Shape/shape.h"
 #include "Entity/Entity2D/Sprite/sprite.h"
 #include "Entity/Entity3D/entity3D.h"
+#include "PlaneBSP/planeBSP.h"
 
 #include "Light/DirectionalLight/directionalLight.h"
 #include "Light/PointLight/pointLight.h"
@@ -21,8 +22,6 @@ using namespace GL;
 
 namespace GameXD
 {
-	int const cubesLenght = 10;
-
 	class GRAPHICSENGINE_API Game : public BaseGame
 	{
 	public:
@@ -36,14 +35,17 @@ namespace GameXD
 		void DeInit() override;
 
 	private:
-		Sprite* floor;
-		Shape* cubeLight[cubesLenght];
-		Shape* spotCubeLight;
-		Sprite* tnt;
-
 		Player* player;
-		Entity3D* backpack;
-		Entity3D* model;
+
+		PlaneBSP* planeLeft;
+		PlaneBSP* planeFront;
+		PlaneBSP* planeRight;
+
+		Entity3D* objStaticMid;
+		Entity3D* objStaticLeft;
+		Entity3D* objStaticFront;
+		Entity3D* objStaticRight;
+		Entity3D* objMovable;
 		Entity3D* node;
 
 		void InitEntities();
