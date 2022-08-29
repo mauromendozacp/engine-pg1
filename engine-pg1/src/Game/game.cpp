@@ -75,6 +75,7 @@ namespace GameXD
 	void Game::Init()
 	{
 		render->SetDepth();
+		render->clearColor.SetColor(5, 5, 5);
 
 		InitEntities();
 		InitLights();
@@ -132,13 +133,13 @@ namespace GameXD
 
 		//----------------------------PLANES---------------------------------
 		planeLeft = new PlaneBSP();
-		planeLeft->Init(render, glm::vec3(-8.f, 0.f, 0.f), glm::vec3(-1.f, 0.f, 0.f));
+		planeLeft->Init(render, glm::vec3(-7.f, 0.f, 0.f), glm::vec3(-1.f, 0.f, 0.f));
 
 		planeFront = new PlaneBSP();
-		planeFront->Init(render, glm::vec3(0.f, 0.f, 8.f), glm::vec3(0.f, 0.f, 0.f));
+		planeFront->Init(render, glm::vec3(0.f, 0.f, -2.5f), glm::vec3(0.f, 0.f, 1.f));
 
 		planeRight = new PlaneBSP();
-		planeRight->Init(render, glm::vec3(8.f, 0.f, 0.f), glm::vec3(1.f, 0.f, 0.f));
+		planeRight->Init(render, glm::vec3(7.f, 0.f, 0.f), glm::vec3(1.f, 0.f, 0.f));
 
 		//----------------------------OBJECTS---------------------------------
 		objStaticMid = new Entity3D(render);

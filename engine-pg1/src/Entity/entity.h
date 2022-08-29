@@ -43,6 +43,7 @@ namespace GL
 		void SetPosY(float y);
 		void SetPosZ(float z);
 
+		void SetRot(glm::mat4 m);
 		void SetRot(float x, float y, float z);
 		void SetRotX(float x);
 		void SetRotY(float y);
@@ -84,6 +85,9 @@ namespace GL
 		float GetScaleX();
 		float GetScaleY();
 		float GetScaleZ();
+
+		glm::quat GetRotationByMatrix(glm::mat4 m);
+		glm::vec3 GetScaleByMatrix(glm::mat4 m);
 
 		void Reset();
 

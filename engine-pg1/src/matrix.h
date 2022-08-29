@@ -9,9 +9,7 @@ namespace GL
 	{
 		glm::mat4 model;
 		glm::mat4 translate;
-		glm::mat4 rotationX;
-		glm::mat4 rotationY;
-		glm::mat4 rotationZ;
+		glm::mat4 rotation;
 		glm::mat4 scale;
 	};
 }

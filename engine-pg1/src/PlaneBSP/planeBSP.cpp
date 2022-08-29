@@ -32,6 +32,7 @@ namespace GL
 		quad->Init(SHAPE_TYPE::QUAD);
 		quad->material = MaterialManager::GetSolidMaterial();
 		quad->SetPos(position);
+		quad->LookTarget(position + normal);
 	}
 
 	void PlaneBSP::Draw()

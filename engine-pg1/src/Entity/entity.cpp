@@ -28,9 +28,7 @@ namespace GL
 
 		matrix.model = glm::mat4(1.f);
 		matrix.translate = glm::mat4(1.f);
-		matrix.rotationX = glm::mat4(1.f);
-		matrix.rotationY = glm::mat4(1.f);
-		matrix.rotationZ = glm::mat4(1.f);
+		matrix.rotation = glm::mat4(1.f);
 		matrix.scale = glm::mat4(1.f);
 
 		uniformModel = 0;
@@ -69,9 +67,7 @@ namespace GL
 
 		matrix.model = glm::mat4(1.f);
 		matrix.translate = glm::mat4(1.f);
-		matrix.rotationX = glm::mat4(1.f);
-		matrix.rotationY = glm::mat4(1.f);
-		matrix.rotationZ = glm::mat4(1.f);
+		matrix.rotation = glm::mat4(1.f);
 		matrix.scale = glm::mat4(1.f);
 
 		uniformModel = 0;
@@ -173,9 +169,10 @@ namespace GL
 			(*it)->UpdateNodesRot();
 		}
 
-		matrix.rotationX = glm::rotate(glm::mat4(1.f), glm::radians(rot.x), glm::vec3(1.f, 0.f, 0.f));
-		matrix.rotationY = glm::rotate(glm::mat4(1.f), glm::radians(rot.y), glm::vec3(0.f, 1.f, 0.f));
-		matrix.rotationZ = glm::rotate(glm::mat4(1.f), glm::radians(rot.z), glm::vec3(0.f, 0.f, 1.f));
+		glm::mat4 rotationX = glm::rotate(glm::mat4(1.f), glm::radians(rot.x), glm::vec3(1.f, 0.f, 0.f));
+		glm::mat4 rotationY = glm::rotate(glm::mat4(1.f), glm::radians(rot.y), glm::vec3(0.f, 1.f, 0.f));
+		glm::mat4 rotationZ = glm::rotate(glm::mat4(1.f), glm::radians(rot.z), glm::vec3(0.f, 0.f, 1.f));
+		matrix.rotation = rotationX * rotationY * rotationZ;
 
 		UpdateTransform();
 		UpdateMatrix();
@@ -223,6 +220,17 @@ namespace GL
 		SetPos(glm::vec3(GetPosX(), GetPosY(), z));
 	}
 
+	void Entity::SetRot(glm::mat4 m)
+	{
+		glm::quat quat = GetRotationByMatrix(m);
+		transform.rotation = quat;
+		transform.localRotation = quat;
+
+		matrix.rotation = m;
+
+		UpdateMatrix();
+	}
+
 	void Entity::SetRot(float x, float y, float z)
 	{
 		SetRot(glm::vec3(x, y, z ));
@@ -255,9 +263,8 @@ namespace GL
 
 	void Entity::LookTarget(glm::vec3 target)
 	{
-		glm::mat4 quat = glm::lookAt(target, transform.position, transform.up);
-		glm::vec3 rot = QuatToVec(quat, transform.up);
-		SetRot(rot);
+		glm::mat4 rotMatrix = glm::lookAt(transform.position, target, transform.up);
+		SetRot(rotMatrix);
 	}
 
 	void Entity::SetDirection(glm::vec3 dir)
@@ -408,6 +415,47 @@ namespace GL
 		return transform.scale.z;
 	}
 
+	glm::quat Entity::GetRotationByMatrix(glm::mat4 m)
+	{
+		glm::vec3 s = GetScaleByMatrix(matrix.scale);
+
+		float m00 = m[0].x / s.x;
+		float m01 = m[0].y / s.y;
+		float m02 = m[0].z / s.z;
+		float m10 = m[1].x / s.x;
+		float m11 = m[1].y / s.y;
+		float m12 = m[1].z / s.z;
+		float m20 = m[2].x / s.x;
+		float m21 = m[2].y / s.y;
+		float m22 = m[2].z / s.z;
+
+		glm::quat q = glm::quat();
+		q.w = glm::sqrt(glm::max(0.0f, 1.0f + m00 + m11 + m22)) / 2;
+		q.x = glm::sqrt(glm::max(0.0f, 1.0f + m00 - m11 - m22)) / 2;
+		q.y = glm::sqrt(glm::max(0.0f, 1.0f - m00 + m11 - m22)) / 2;
+		q.z = glm::sqrt(glm::max(0.0f, 1.0f - m00 - m11 + m22)) / 2;
+		q.x *= glm::sign(q.x * (m21 - m12));
+		q.y *= glm::sign(q.y * (m02 - m20));
+		q.z *= glm::sign(q.z * (m10 - m01));
+
+		float qMagnitude = glm::sqrt(q.w * q.w + q.x * q.x + q.y * q.y + q.z * q.z);
+		q.w /= qMagnitude;
+		q.x /= qMagnitude;
+		q.y /= qMagnitude;
+		q.z /= qMagnitude;
+
+		return q;
+	}
+
+	glm::vec3 Entity::GetScaleByMatrix(glm::mat4 scaleMatrix)
+	{
+		glm::vec4 m0 = glm::vec4(scaleMatrix[0].x, scaleMatrix[1].x, scaleMatrix[2].x, scaleMatrix[3].x);
+		glm::vec4 m1 = glm::vec4(scaleMatrix[0].y, scaleMatrix[1].y, scaleMatrix[2].y, scaleMatrix[3].y);
+		glm::vec4 m2 = glm::vec4(scaleMatrix[0].z, scaleMatrix[1].z, scaleMatrix[2].z, scaleMatrix[3].z);
+
+		return glm::vec3(glm::length(m0), glm::length(m1), glm::length(m2));
+	}
+
 	void Entity::Reset()
 	{
 		SetPos(glm::vec3(0.f));
@@ -494,7 +542,7 @@ namespace GL
 
 	void Entity::UpdateMatrix()
 	{
-		matrix.model = matrix.translate * matrix.rotationY * matrix.rotationX * matrix.rotationZ * matrix.scale;
+		matrix.model = matrix.translate * matrix.rotation * matrix.scale;
 
 		UpdateGlobalVolume();
 	}
@@ -529,9 +577,10 @@ namespace GL
 			(*it)->UpdateNodesRot();
 		}
 
-		matrix.rotationX = glm::rotate(glm::mat4(1.f), glm::radians(transform.eulerAngles.x), glm::vec3(1.f, 0.f, 0.f));
-		matrix.rotationY = glm::rotate(glm::mat4(1.f), glm::radians(transform.eulerAngles.y), glm::vec3(0.f, 1.f, 0.f));
-		matrix.rotationZ = glm::rotate(glm::mat4(1.f), glm::radians(transform.eulerAngles.z), glm::vec3(0.f, 0.f, 1.f));
+		glm::mat4 rotationX = glm::rotate(glm::mat4(1.f), glm::radians(transform.eulerAngles.x), glm::vec3(1.f, 0.f, 0.f));
+		glm::mat4 rotationY = glm::rotate(glm::mat4(1.f), glm::radians(transform.eulerAngles.y), glm::vec3(0.f, 1.f, 0.f));
+		glm::mat4 rotationZ = glm::rotate(glm::mat4(1.f), glm::radians(transform.eulerAngles.z), glm::vec3(0.f, 0.f, 1.f));
+		matrix.rotation = rotationX * rotationY * rotationZ;
 
 		UpdateTransform();
 		UpdateMatrix();

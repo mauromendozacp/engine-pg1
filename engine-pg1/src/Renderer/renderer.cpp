@@ -202,11 +202,6 @@ namespace GL
 		glBindVertexArray(0);
 	}
 
-	void Render::SetClearColor(float r, float g, float b, float a)
-	{
-		clearColor.SetColor(r, g, b, a);
-	}
-
 	void Render::ClearScreen()
 	{
 		glClearColor(clearColor.GetColor().r, clearColor.GetColor().g, clearColor.GetColor().b, clearColor.GetColor().a );

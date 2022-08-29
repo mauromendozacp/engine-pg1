@@ -57,7 +57,6 @@ namespace GL
 		void Draw(uint VAO, uint vertices);
 		void DrawLines(uint VAO, uint vertices);
 
-		void SetClearColor(float r, float g, float b, float a);
 		void ClearScreen();
 		void PostRender(Window* window);
 
@@ -69,9 +68,10 @@ namespace GL
 		void BlendEnable();
 		void BlendDisable();
 
-	private:
-		Shader* shader;
 		Color clearColor;
+
+	private:
+		Shader* shader;		
 
 		glm::mat4 view;
 		glm::mat4 projection;		
