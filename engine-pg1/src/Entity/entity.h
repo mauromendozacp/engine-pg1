@@ -86,9 +86,6 @@ namespace GL
 		float GetScaleY();
 		float GetScaleZ();
 
-		glm::quat GetRotationByMatrix(glm::mat4 m);
-		glm::vec3 GetScaleByMatrix(glm::mat4 m);
-
 		void Reset();
 
 		Matrix matrix;
@@ -104,6 +101,7 @@ namespace GL
 
 		Volume* localVolume;
 		Volume* globalVolume;
+		bool volumeDirty;
 
 		uint uniformModel;
 		uint uniformView;
@@ -120,6 +118,8 @@ namespace GL
 	private:
 		glm::quat EulerToQuat(glm::vec3 euler);
 		glm::vec3 QuatToVec(glm::quat quat, glm::vec3 euler);
+		glm::quat GetRotationByMatrix(glm::mat4 m);
+		glm::vec3 GetScaleByMatrix(glm::mat4 m);
 
 		void UpdateMatrix();
 		void UpdateTransform();

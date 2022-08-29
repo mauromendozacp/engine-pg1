@@ -12,6 +12,10 @@ namespace GL
 		parent = nullptr;
 		nodes = std::list<Entity*>();
 
+		localVolume = nullptr;
+		globalVolume = nullptr;
+		volumeDirty = false;
+
 		transform.position = glm::vec3(0.f);
 		transform.eulerAngles = glm::vec3(0.f);
 		transform.scale = glm::vec3(1.f);
@@ -50,6 +54,10 @@ namespace GL
 		name = "";
 		parent = nullptr;
 		nodes = std::list<Entity*>();
+
+		localVolume = nullptr;
+		globalVolume = nullptr;
+		volumeDirty = false;
 
 		transform.position = glm::vec3(0.f);
 		transform.eulerAngles = glm::vec3(0.f);
@@ -415,62 +423,15 @@ namespace GL
 		return transform.scale.z;
 	}
 
-	glm::quat Entity::GetRotationByMatrix(glm::mat4 m)
-	{
-		glm::vec3 s = GetScaleByMatrix(matrix.scale);
-
-		float m00 = m[0].x / s.x;
-		float m01 = m[0].y / s.y;
-		float m02 = m[0].z / s.z;
-		float m10 = m[1].x / s.x;
-		float m11 = m[1].y / s.y;
-		float m12 = m[1].z / s.z;
-		float m20 = m[2].x / s.x;
-		float m21 = m[2].y / s.y;
-		float m22 = m[2].z / s.z;
-
-		glm::quat q = glm::quat();
-		q.w = glm::sqrt(glm::max(0.0f, 1.0f + m00 + m11 + m22)) / 2;
-		q.x = glm::sqrt(glm::max(0.0f, 1.0f + m00 - m11 - m22)) / 2;
-		q.y = glm::sqrt(glm::max(0.0f, 1.0f - m00 + m11 - m22)) / 2;
-		q.z = glm::sqrt(glm::max(0.0f, 1.0f - m00 - m11 + m22)) / 2;
-		q.x *= glm::sign(q.x * (m21 - m12));
-		q.y *= glm::sign(q.y * (m02 - m20));
-		q.z *= glm::sign(q.z * (m10 - m01));
-
-		float qMagnitude = glm::sqrt(q.w * q.w + q.x * q.x + q.y * q.y + q.z * q.z);
-		q.w /= qMagnitude;
-		q.x /= qMagnitude;
-		q.y /= qMagnitude;
-		q.z /= qMagnitude;
-
-		return q;
-	}
-
-	glm::vec3 Entity::GetScaleByMatrix(glm::mat4 scaleMatrix)
-	{
-		glm::vec4 m0 = glm::vec4(scaleMatrix[0].x, scaleMatrix[1].x, scaleMatrix[2].x, scaleMatrix[3].x);
-		glm::vec4 m1 = glm::vec4(scaleMatrix[0].y, scaleMatrix[1].y, scaleMatrix[2].y, scaleMatrix[3].y);
-		glm::vec4 m2 = glm::vec4(scaleMatrix[0].z, scaleMatrix[1].z, scaleMatrix[2].z, scaleMatrix[3].z);
-
-		return glm::vec3(glm::length(m0), glm::length(m1), glm::length(m2));
-	}
-
-	void Entity::Reset()
-	{
-		SetPos(glm::vec3(0.f));
-		SetRot(glm::vec3(0.f));
-		SetScale(glm::vec3(1.f));
-
-		for (std::list<Entity*>::iterator it = nodes.begin(); it != nodes.end(); ++it)
-		{
-			(*it)->Reset();
-		}
-	}
-
 	bool Entity::IsCanDraw()
 	{
 		if (globalVolume == nullptr) return true;
+
+		if (volumeDirty)
+		{
+			UpdateGlobalVolume();
+			volumeDirty = false;
+		}
 
 		return globalVolume->IsOnFrustum();
 	}
@@ -540,11 +501,64 @@ namespace GL
 		return res;
 	}
 
+	glm::quat Entity::GetRotationByMatrix(glm::mat4 m)
+	{
+		glm::vec3 s = GetScaleByMatrix(matrix.scale);
+
+		float m00 = m[0].x / s.x;
+		float m01 = m[0].y / s.y;
+		float m02 = m[0].z / s.z;
+		float m10 = m[1].x / s.x;
+		float m11 = m[1].y / s.y;
+		float m12 = m[1].z / s.z;
+		float m20 = m[2].x / s.x;
+		float m21 = m[2].y / s.y;
+		float m22 = m[2].z / s.z;
+
+		glm::quat q = glm::quat();
+		q.w = glm::sqrt(glm::max(0.0f, 1.0f + m00 + m11 + m22)) / 2;
+		q.x = glm::sqrt(glm::max(0.0f, 1.0f + m00 - m11 - m22)) / 2;
+		q.y = glm::sqrt(glm::max(0.0f, 1.0f - m00 + m11 - m22)) / 2;
+		q.z = glm::sqrt(glm::max(0.0f, 1.0f - m00 - m11 + m22)) / 2;
+		q.x *= glm::sign(q.x * (m21 - m12));
+		q.y *= glm::sign(q.y * (m02 - m20));
+		q.z *= glm::sign(q.z * (m10 - m01));
+
+		float qMagnitude = glm::sqrt(q.w * q.w + q.x * q.x + q.y * q.y + q.z * q.z);
+		q.w /= qMagnitude;
+		q.x /= qMagnitude;
+		q.y /= qMagnitude;
+		q.z /= qMagnitude;
+
+		return q;
+	}
+
+	glm::vec3 Entity::GetScaleByMatrix(glm::mat4 scaleMatrix)
+	{
+		glm::vec4 m0 = glm::vec4(scaleMatrix[0].x, scaleMatrix[1].x, scaleMatrix[2].x, scaleMatrix[3].x);
+		glm::vec4 m1 = glm::vec4(scaleMatrix[0].y, scaleMatrix[1].y, scaleMatrix[2].y, scaleMatrix[3].y);
+		glm::vec4 m2 = glm::vec4(scaleMatrix[0].z, scaleMatrix[1].z, scaleMatrix[2].z, scaleMatrix[3].z);
+
+		return glm::vec3(glm::length(m0), glm::length(m1), glm::length(m2));
+	}
+
+	void Entity::Reset()
+	{
+		SetPos(glm::vec3(0.f));
+		SetRot(glm::vec3(0.f));
+		SetScale(glm::vec3(1.f));
+
+		for (std::list<Entity*>::iterator it = nodes.begin(); it != nodes.end(); ++it)
+		{
+			(*it)->Reset();
+		}
+	}
+
 	void Entity::UpdateMatrix()
 	{
 		matrix.model = matrix.translate * matrix.rotation * matrix.scale;
 
-		UpdateGlobalVolume();
+		volumeDirty = true;
 	}
 
 	void Entity::UpdateTransform()

@@ -118,7 +118,6 @@ namespace GameXD
 		objStaticFront->DeInit();
 		objStaticRight->DeInit();
 		objMovable->DeInit();
-		node->DeInit();
 	}
 
 	void Game::InitEntities()
