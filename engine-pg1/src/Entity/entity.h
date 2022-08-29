@@ -27,7 +27,6 @@ namespace GL
 		Entity(Render* render);
 		~Entity();
 
-		void SetName(std::string name);
 		void SetParent(Entity* parent);
 		void AddNode(Entity* node);
 		void RemoveNode(Entity* node);
@@ -54,8 +53,6 @@ namespace GL
 
 		void LookTarget(glm::vec3 target);
 		void SetDirection(glm::vec3 dir);
-
-		std::string GetName();
 
 		Entity* GetParent();
 		std::list<Entity*> GetNodes();
@@ -90,11 +87,12 @@ namespace GL
 
 		Matrix matrix;
 		Transform transform;
+
+		std::string name;
+		bool visible;
 		
 	protected:
 		Render* render;
-
-		std::string name;
 
 		Entity* parent;
 		std::list<Entity*> nodes;

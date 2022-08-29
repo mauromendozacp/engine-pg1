@@ -9,6 +9,8 @@ namespace GL
 		render = nullptr;
 
 		name = "";
+		visible = true;
+
 		parent = nullptr;
 		nodes = std::list<Entity*>();
 
@@ -52,6 +54,8 @@ namespace GL
 		this->render = render;
 
 		name = "";
+		visible = true;
+
 		parent = nullptr;
 		nodes = std::list<Entity*>();
 
@@ -95,11 +99,6 @@ namespace GL
 		nodes.clear();
 	}
 
-	void Entity::SetName(std::string name)
-	{
-		this->name = name;
-	}
-
 	void Entity::SetParent(Entity* parent)
 	{
 		this->parent = parent;
@@ -119,7 +118,7 @@ namespace GL
 	{
 		for (std::list<Entity*>::iterator it = nodes.begin(); it != nodes.end(); ++it)
 		{
-			if ((*it)->GetName() == nodeName)
+			if ((*it)->name == nodeName)
 			{
 				nodes.remove((*it));
 				return;
@@ -282,11 +281,6 @@ namespace GL
 		transform.up = glm::normalize(glm::cross(transform.right, transform.forward));
 	}
 
-	std::string Entity::GetName()
-	{
-		return name;
-	}
-
 	Entity* Entity::GetParent()
 	{
 		return parent;
@@ -433,7 +427,7 @@ namespace GL
 			volumeDirty = false;
 		}
 
-		return globalVolume->IsOnFrustum();
+		return globalVolume->IsOnFrustum() && visible;
 	}
 
 	void Entity::UpdateGlobalVolume()
