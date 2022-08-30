@@ -31,7 +31,7 @@ namespace GL
 
         Entity3D* model = new Entity3D(render);
         model->Init();
-        model->SetName(scene->mRootNode->mName.C_Str());
+        model->name = scene->mRootNode->mName.C_Str();
 
         ProcessNode(model, scene->mRootNode, scene);
 
@@ -65,7 +65,7 @@ namespace GL
         }
 
         parent->AddNode(entityNode);
-        entityNode->SetName(name);
+        entityNode->name = name;
         entityNode->SetParent(parent);
 
         entityNode->Init();

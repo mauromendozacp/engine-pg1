@@ -12,6 +12,7 @@
 #include "Material/MaterialManager/materialManager.h"
 #include "Collision/Collision2D/collision2D.h"
 #include "OcclusionCulling/occlusionCulling.h"
+#include <BSP/bsp.h>
 
 #include <stdlib.h>
 #include <time.h>
@@ -26,12 +27,14 @@ namespace GL
 		void Play();
 
 	protected:
+		std::string title;
+		bool terminateEngine;
+
 		Window* window;
 		Render* render;
 		Camera* mainCamera;
 		LightManager* lightManager;
-		std::string title;
-		bool terminateEngine;
+		BSP* bsp;
 
 		void InitEngine();
 		void UpdateEngine();

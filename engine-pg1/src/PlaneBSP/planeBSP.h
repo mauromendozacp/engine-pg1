@@ -19,6 +19,7 @@ namespace GL
 		void DeInit();
 
 		void SwitchCanDrawStatus();
+		bool SamePositionsSide(glm::vec3 point1, glm::vec3 point2);
 
 	private:
 		Plane* plane;

@@ -9,6 +9,7 @@ namespace GL
 		mainCamera = nullptr;
 		lightManager = nullptr;
 		terminateEngine = false;
+		bsp = nullptr;
 	}
 
 	BaseGame::~BaseGame()
@@ -35,6 +36,12 @@ namespace GL
 		{
 			delete lightManager;
 			lightManager = nullptr;
+		}
+
+		if (bsp != nullptr)
+		{
+			delete bsp;
+			bsp = nullptr;
 		}
 	}
 
@@ -83,6 +90,8 @@ namespace GL
 
 		MaterialManager::Init(render);
 
+		bsp = new BSP(render, mainCamera);
+
 		srand(time(NULL));
 
 		Init();
@@ -93,12 +102,15 @@ namespace GL
 		while (!glfwWindowShouldClose(window->GetWindow()) && !terminateEngine)
 		{
 			render->ClearScreen();
-			Timer::Update(glfwGetTime());
 
-			Update();
+			Timer::Update(glfwGetTime());
 			mainCamera->Update();
 			OcclusionCulling::Update();
 			lightManager->Update();
+			bsp->Update();
+			Update();
+			
+			bsp->Draw();
 			Draw();
 
 			render->PostRender(window);

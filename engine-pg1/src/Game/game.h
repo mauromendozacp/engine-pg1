@@ -37,10 +37,6 @@ namespace GameXD
 	private:
 		Player* player;
 
-		PlaneBSP* planeLeft;
-		PlaneBSP* planeFront;
-		PlaneBSP* planeRight;
-
 		Entity3D* objStaticMid;
 		Entity3D* objStaticLeft;
 		Entity3D* objStaticFront;

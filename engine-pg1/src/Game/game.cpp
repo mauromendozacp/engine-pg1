@@ -6,10 +6,6 @@ namespace GameXD
 	{
 		player = nullptr;
 
-		planeLeft = nullptr;
-		planeFront = nullptr;
-		planeRight = nullptr;
-
 		objStaticMid = nullptr;
 		objStaticLeft = nullptr;
 		objStaticFront = nullptr;
@@ -24,21 +20,6 @@ namespace GameXD
 		{
 			delete player;
 			player = nullptr;
-		}
-		if (planeLeft != nullptr)
-		{
-			delete planeLeft;
-			planeLeft = nullptr;
-		}
-		if (planeFront != nullptr)
-		{
-			delete planeFront;
-			planeFront = nullptr;
-		}
-		if (planeRight != nullptr)
-		{
-			delete planeRight;
-			planeRight = nullptr;
 		}
 		if (objStaticMid != nullptr)
 		{
@@ -92,10 +73,6 @@ namespace GameXD
 
 	void Game::Draw()
 	{
-		planeLeft->Draw();
-		planeFront->Draw();
-		planeRight->Draw();
-
 		objStaticMid->Draw();
 		objStaticLeft->Draw();
 		objStaticFront->Draw();
@@ -108,10 +85,6 @@ namespace GameXD
 	void Game::DeInit()
 	{
 		player->DeInit();
-
-		planeLeft->DeInit();
-		planeFront->DeInit();
-		planeRight->DeInit();
 
 		objStaticMid->DeInit();
 		objStaticLeft->DeInit();
@@ -129,16 +102,6 @@ namespace GameXD
 
 		mainCamera->SetTarget(player);
 		mainCamera->SetOffset(10.f);
-
-		//----------------------------PLANES---------------------------------
-		planeLeft = new PlaneBSP();
-		planeLeft->Init(render, glm::vec3(-7.f, 0.f, 0.f), glm::vec3(-1.f, 0.f, 0.f));
-
-		planeFront = new PlaneBSP();
-		planeFront->Init(render, glm::vec3(0.f, 0.f, -2.5f), glm::vec3(0.f, 0.f, 1.f));
-
-		planeRight = new PlaneBSP();
-		planeRight->Init(render, glm::vec3(7.f, 0.f, 0.f), glm::vec3(1.f, 0.f, 0.f));
 
 		//----------------------------OBJECTS---------------------------------
 		objStaticMid = new Entity3D(render);
@@ -165,6 +128,17 @@ namespace GameXD
 		objMovable = ModelImporter::LoadModel(render, "../res/Models/gir/gir.fbx");
 		objMovable->SetPos(glm::vec3(5.f, 0.f, 0.f));
 		objMovable->SetScale(0.75f);
+
+		//------------------------------BSP---------------------------------
+		bsp->AddPlane(glm::vec3(-7.f, 0.f, 0.f), glm::vec3(1.f, 0.f, 0.f));
+		bsp->AddPlane(glm::vec3(0.f, 0.f, -2.5f), glm::vec3(0.f, 0.f, 1.f));
+		bsp->AddPlane(glm::vec3(7.f, 0.f, 0.f), glm::vec3(-1.f, 0.f, 0.f));
+
+		bsp->AddEntity(objStaticMid);
+		bsp->AddEntity(objStaticLeft);
+		bsp->AddEntity(objStaticFront);
+		bsp->AddEntity(objStaticRight);
+		bsp->AddEntity(objMovable);
 	}
 
 	void Game::InitLights()
@@ -297,9 +271,7 @@ namespace GameXD
 
 		if (Input::IsKeyDown(KEY_F))
 		{
-			planeLeft->SwitchCanDrawStatus();
-			planeFront->SwitchCanDrawStatus();
-			planeRight->SwitchCanDrawStatus();
+			bsp->TogglePlaneStatus();
 		}
 
 		if (Input::IsKeyDown(KEY_ESCAPE))

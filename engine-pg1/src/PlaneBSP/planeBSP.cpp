@@ -55,4 +55,9 @@ namespace GL
 	{
 		canDraw = !canDraw;
 	}
+
+	bool PlaneBSP::SamePositionsSide(glm::vec3 point1, glm::vec3 point2)
+	{
+		return plane->SameSide(point1, point2);
+	}
 }

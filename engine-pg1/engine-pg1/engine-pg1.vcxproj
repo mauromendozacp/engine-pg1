@@ -161,6 +161,7 @@
     <ClCompile Include="..\src\Animation\animation.cpp" />
     <ClCompile Include="..\src\Animation\Frame\frame.cpp" />
     <ClCompile Include="..\src\BaseGame\baseGame.cpp" />
+    <ClCompile Include="..\src\BSP\bsp.cpp" />
     <ClCompile Include="..\src\Camera\camera.cpp" />
     <ClCompile Include="..\src\Collision\Collision2D\collision2D.cpp" />
     <ClCompile Include="..\src\Color\color.cpp" />
@@ -202,6 +203,7 @@
     <ClInclude Include="..\src\Animation\atlasConfig.h" />
     <ClInclude Include="..\src\Animation\Frame\frame.h" />
     <ClInclude Include="..\src\BaseGame\baseGame.h" />
+    <ClInclude Include="..\src\BSP\bsp.h" />
     <ClInclude Include="..\src\Camera\camera.h" />
     <ClInclude Include="..\src\Collision\Collision2D\collision2D.h" />
     <ClInclude Include="..\src\Color\color.h" />
