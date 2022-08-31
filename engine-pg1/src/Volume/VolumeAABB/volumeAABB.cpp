@@ -48,6 +48,13 @@ namespace GL
 			IsOnPlane(OcclusionCulling::front));
 	}
 
+	bool VolumeAABB::IsOnPlane(Plane plane)
+	{
+		float r = extents.x * std::abs(plane.GetNormal().x) + extents.y * std::abs(plane.GetNormal().y) + extents.z * std::abs(plane.GetNormal().z);
+
+		return -r <= plane.GetDistanceToPoint(center);
+	}
+
 	std::vector<Vertex> VolumeAABB::GetVertexs()
 	{
 		glm::vec3 vertice[lineVertTam];
@@ -118,12 +125,5 @@ namespace GL
 	{
 		this->center = center;
 		extents = glm::vec3(extX, extY, extZ);
-	}
-
-	bool VolumeAABB::IsOnPlane(Plane plane)
-	{
-		float r = extents.x * std::abs(plane.GetNormal().x) + extents.y * std::abs(plane.GetNormal().y) + extents.z * std::abs(plane.GetNormal().z);
-		
-		return -r <= plane.GetDistanceToPoint(center);
 	}
 }

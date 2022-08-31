@@ -58,6 +58,7 @@ namespace GL
 		std::list<Entity*> GetNodes();
 		Entity* GetNode(std::string nodeName);
 		Entity* GetNode(int nodeIndex);
+		Volume* GetGlobalVolume();
 
 		glm::vec3 GetForward();
 		glm::vec3 GetUp();

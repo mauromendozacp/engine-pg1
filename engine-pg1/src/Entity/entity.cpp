@@ -327,6 +327,11 @@ namespace GL
 		return nullptr;
 	}
 
+	Volume* Entity::GetGlobalVolume()
+	{
+		return globalVolume;
+	}
+
 	glm::vec3 Entity::GetForward()
 	{
 		return transform.forward;

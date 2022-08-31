@@ -21,14 +21,12 @@ namespace GL
 		void DeInit();
 
 		virtual bool IsOnFrustum() = 0;
+		virtual bool IsOnPlane(Plane plane) = 0;
 		virtual std::vector<Vertex> GetVertexs() = 0;
 
 		virtual void SetGlobalVolume(Volume* volume, glm::mat4 model) = 0;
 
 		Line* lines;
-
-	protected:
-		virtual bool IsOnPlane(Plane plane) = 0;
 	};
 }
 

@@ -32,17 +32,7 @@ namespace GL
 	{
 		for (std::list<Entity*>::iterator itE = entities.begin(); itE != entities.end(); ++itE)
 		{
-			bool drawEntity = true;
-			for (std::list<PlaneBSP*>::iterator itP = planes.begin(); itP != planes.end(); ++itP)
-			{
-				if ((*itP)->SamePositionsSide((*itE)->GetPos(), camera->GetPos()))
-				{
-					drawEntity = false;
-					break;
-				}
-			}
-
-			(*itE)->visible = drawEntity;
+			UpdateNodeVolume((*itE));
 		}
 	}
 
@@ -83,6 +73,30 @@ namespace GL
 		for (std::list<PlaneBSP*>::iterator it = planes.begin(); it != planes.end(); ++it)
 		{
 			(*it)->SwitchCanDrawStatus();
+		}
+	}
+
+	void BSP::UpdateNodeVolume(Entity* node)
+	{
+		bool drawEntity = true;
+
+		for (std::list<PlaneBSP*>::iterator itP = planes.begin(); itP != planes.end(); ++itP)
+		{
+			if (node->GetGlobalVolume()->IsOnPlane(*(*itP)->GetPlane()) != (*itP)->GetPlane()->GetSide(camera->GetPos()))
+			{
+				drawEntity = false;
+				break;
+			}
+		}
+		node->visible = drawEntity;
+
+		std::list<Entity*> nodes = node->GetNodes();
+		if (!nodes.empty())
+		{
+			for (std::list<Entity*>::iterator itN = nodes.begin(); itN != nodes.end(); ++itN)
+			{
+				UpdateNodeVolume((*itN));
+			}
 		}
 	}
 }

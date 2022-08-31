@@ -21,6 +21,8 @@ namespace GL
 		void SwitchCanDrawStatus();
 		bool SamePositionsSide(glm::vec3 point1, glm::vec3 point2);
 
+		Plane* GetPlane();
+
 	private:
 		Plane* plane;
 		Shape* quad;

@@ -17,6 +17,7 @@ namespace GL
 		void Draw(glm::mat4 model) override;
 
 		bool IsOnFrustum() override;
+		bool IsOnPlane(Plane plane) override;
 		std::vector<Vertex> GetVertexs() override;
 
 		void SetGlobalVolume(Volume* volume, glm::mat4 model) override;
@@ -24,9 +25,6 @@ namespace GL
 
 		glm::vec3 center;
 		glm::vec3 extents;
-
-	private:
-		bool IsOnPlane(Plane plane) override;		
 	};
 }
 

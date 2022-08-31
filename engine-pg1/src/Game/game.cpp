@@ -130,9 +130,9 @@ namespace GameXD
 		objMovable->SetScale(0.75f);
 
 		//------------------------------BSP---------------------------------
-		bsp->AddPlane(glm::vec3(-7.f, 0.f, 0.f), glm::vec3(1.f, 0.f, 0.f));
+		bsp->AddPlane(glm::vec3(-7.f, 0.f, 5.f), glm::vec3(1.f, 0.f, 0.f));
 		bsp->AddPlane(glm::vec3(0.f, 0.f, -2.5f), glm::vec3(0.f, 0.f, 1.f));
-		bsp->AddPlane(glm::vec3(7.f, 0.f, 0.f), glm::vec3(-1.f, 0.f, 0.f));
+		bsp->AddPlane(glm::vec3(7.f, 0.f, 5.f), glm::vec3(-1.f, 0.f, 0.f));
 
 		bsp->AddEntity(objStaticMid);
 		bsp->AddEntity(objStaticLeft);

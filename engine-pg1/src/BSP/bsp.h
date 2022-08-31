@@ -33,6 +33,8 @@ namespace GL
 
 		std::list<Entity*> entities;
 		std::list<PlaneBSP*> planes;
+
+		void UpdateNodeVolume(Entity* node);
 	};
 }
 

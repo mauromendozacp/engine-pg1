@@ -60,4 +60,9 @@ namespace GL
 	{
 		return plane->SameSide(point1, point2);
 	}
+
+	Plane* PlaneBSP::GetPlane()
+	{
+		return plane;
+	}
 }
