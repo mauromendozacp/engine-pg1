@@ -82,7 +82,7 @@ namespace GL
 
 		for (std::list<PlaneBSP*>::iterator itP = planes.begin(); itP != planes.end(); ++itP)
 		{
-			if (node->GetGlobalVolume()->IsOnPlane(*(*itP)->GetPlane()) != (*itP)->GetPlane()->GetSide(camera->GetPos()))
+			if (node->GetGlobalVolume()->IsOnPlane(*(*itP)->plane) != (*itP)->plane->GetSide(camera->GetPos()))
 			{
 				drawEntity = false;
 				break;

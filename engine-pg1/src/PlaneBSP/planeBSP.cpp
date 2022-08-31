@@ -32,7 +32,12 @@ namespace GL
 		quad->Init(SHAPE_TYPE::QUAD);
 		quad->material = MaterialManager::GetSolidMaterial();
 		quad->SetPos(position);
-		quad->LookTarget(position + normal);
+
+		if (glm::abs(normal.x) > 0.f)
+		{
+			quad->SetRotY(90.f);
+		}
+		//quad->LookTarget(position + normal);
 	}
 
 	void PlaneBSP::Draw()
@@ -59,10 +64,5 @@ namespace GL
 	bool PlaneBSP::SamePositionsSide(glm::vec3 point1, glm::vec3 point2)
 	{
 		return plane->SameSide(point1, point2);
-	}
-
-	Plane* PlaneBSP::GetPlane()
-	{
-		return plane;
 	}
 }
