@@ -33,6 +33,15 @@ namespace GL
 	{
 		if (!enabled) return;
 
+		for (std::list<PlaneBSP*>::iterator itP = planes.begin(); itP != planes.end(); ++itP)
+		{
+			Plane* plane = (*itP)->plane;
+			if (!plane->GetSide(camera->GetPos()))
+			{
+				plane->Flip();
+			}
+		}
+
 		for (std::list<Entity*>::iterator itE = entities.begin(); itE != entities.end(); ++itE)
 		{
 			UpdateNodeVolume((*itE));
@@ -79,7 +88,8 @@ namespace GL
 
 			for (std::list<PlaneBSP*>::iterator itP = planes.begin(); itP != planes.end(); ++itP)
 			{
-				if (node->GetGlobalVolume()->IsOnPlane(*(*itP)->plane) != (*itP)->plane->GetSide(camera->GetPos()))
+				Plane* plane = (*itP)->plane;
+				if (node->GetGlobalVolume()->IsOnPlane(*plane) != plane->GetSide(camera->GetPos()))
 				{
 					drawEntity = false;
 					break;

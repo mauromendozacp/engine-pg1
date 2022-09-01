@@ -104,7 +104,7 @@ namespace GameXD
 		//----------------------------PLAYER---------------------------------
 		player = new Player(render);
 		player->Init(mainCamera, 5.f, 75.f);
-		player->SetPos(glm::vec3(0.f, 3.5f, 15.f));
+		player->SetPos(glm::vec3(0.f, 5.f, 25.f));
 
 		mainCamera->SetTarget(player);
 		mainCamera->SetOffset(10.f);
@@ -112,7 +112,7 @@ namespace GameXD
 		//----------------------------OBJECTS---------------------------------
 		objStaticMid = new Entity3D(render);
 		objStaticMid = ModelImporter::LoadModel(render, "../res/Models/gir/gir.fbx");
-		objStaticMid->SetPos(glm::vec3(0.f, 0.f, 0.f));
+		objStaticMid->SetPos(glm::vec3(0.f, 0.f, 2.5f));
 		objStaticMid->SetScale(0.5f);
 
 		objStaticLeft = new Entity3D(render);
@@ -132,7 +132,7 @@ namespace GameXD
 
 		objMovable = new Entity3D(render);
 		objMovable = ModelImporter::LoadModel(render, "../res/Models/gir/gir.fbx");
-		objMovable->SetPos(glm::vec3(5.f, 0.f, 0.f));
+		objMovable->SetPos(glm::vec3(5.f, 0.f, 5.f));
 		objMovable->SetScale(0.75f);
 
 		//------------------------------BSP---------------------------------
