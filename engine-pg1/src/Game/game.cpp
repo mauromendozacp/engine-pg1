@@ -280,6 +280,11 @@ namespace GameXD
 			BSP::TogglePlaneStatus();
 		}
 
+		if (Input::IsKeyDown(KEY_V))
+		{
+			BSP::ToggleStatus();
+		}
+
 		if (Input::IsKeyDown(KEY_ESCAPE))
 		{
 			CloseEngine();

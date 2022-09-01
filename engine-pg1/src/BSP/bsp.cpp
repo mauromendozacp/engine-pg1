@@ -2,6 +2,7 @@
 
 namespace GL
 {
+	bool BSP::enabled = true;
 	Render* BSP::render = nullptr;
 	Camera* BSP::camera = nullptr;
 
@@ -10,6 +11,7 @@ namespace GL
 
 	BSP::BSP()
 	{
+		enabled = true;
 		render = nullptr;
 		camera = nullptr;
 
@@ -59,16 +61,10 @@ namespace GL
 		planes.push_back(plane);
 	}
 
-	void BSP::TogglePlaneStatus()
+	bool BSP::IsOnPlanesBSP(Entity* node)
 	{
-		for (std::list<PlaneBSP*>::iterator it = planes.begin(); it != planes.end(); ++it)
-		{
-			(*it)->SwitchCanDrawStatus();
-		}
-	}
+		if (!enabled) return true;
 
-	bool BSP::IsOnBSP(Entity* node)
-	{
 		bool drawEntity = true;
 
 		for (std::list<PlaneBSP*>::iterator itP = planes.begin(); itP != planes.end(); ++itP)
@@ -81,5 +77,18 @@ namespace GL
 		}
 
 		return drawEntity;
+	}
+
+	void BSP::TogglePlaneStatus()
+	{
+		for (std::list<PlaneBSP*>::iterator it = planes.begin(); it != planes.end(); ++it)
+		{
+			(*it)->SwitchCanDrawStatus();
+		}
+	}
+
+	void BSP::ToggleStatus()
+	{
+		enabled = !enabled;
 	}
 }

@@ -23,10 +23,13 @@ namespace GL
 
 		static void AddEntity(Entity* entity);
 		static void AddPlane(glm::vec3 position, glm::vec3 normal);
+		static bool IsOnPlanesBSP(Entity* node);
+
 		static void TogglePlaneStatus();
-		static bool IsOnBSP(Entity* node);
+		static void ToggleStatus();
 
 	private:
+		static bool enabled;
 		static Render* render;
 		static Camera* camera;
 
