@@ -92,9 +92,15 @@ namespace GL
 		if (IsCanDraw())
 		{
 			render->UseShader();
+			render->BlendEnable();
+
 			UpdateShader();
 			Entity2D::Draw();
+
+			render->BlendDisable();
 			render->CleanShader();
+
+			Entity::DrawVolume();
 		}
 
 		Entity::Draw();
@@ -103,5 +109,6 @@ namespace GL
 	void Shape::DeInit()
 	{
 		render->UnBind(VAO, VBO, EBO);
+		Entity2D::DeInit();
 	}
 }

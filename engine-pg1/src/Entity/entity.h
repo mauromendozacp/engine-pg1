@@ -65,6 +65,7 @@ namespace GL
 
 		Volume* GetGlobalVolume();
 		void ToggleDrawVolume();
+		void DrawVolume();
 
 		glm::vec3 GetForward();
 		glm::vec3 GetUp();
@@ -98,6 +99,7 @@ namespace GL
 		std::string name;
 		bool enabled;
 		bool visible;
+		bool isOnFrustum;
 		
 	protected:
 		Render* render;

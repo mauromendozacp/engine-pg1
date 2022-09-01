@@ -32,6 +32,8 @@ namespace GL
 		quad->Init(SHAPE_TYPE::QUAD);
 		quad->material = MaterialManager::GetSolidMaterial();
 		quad->SetPos(position);
+		quad->SetScale(14.f, 14.f, 1.f);
+		quad->color.SetColor(1.f, 1.f, 1.f, 0.1f);
 
 		if (glm::abs(normal.x) > 0.f)
 		{

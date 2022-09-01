@@ -11,6 +11,7 @@ namespace GL
 		name = "";
 		enabled = true;
 		visible = true;
+		isOnFrustum = true;
 
 		parent = nullptr;
 		nodes = std::list<Entity*>();
@@ -57,6 +58,7 @@ namespace GL
 		name = "";
 		enabled = true;
 		visible = true;
+		isOnFrustum = true;
 
 		parent = nullptr;
 		nodes = std::list<Entity*>();
@@ -111,7 +113,7 @@ namespace GL
 			volumeDirty = false;
 		}
 
-		visible = globalVolume->IsOnFrustum();
+		isOnFrustum = globalVolume != nullptr ? globalVolume->IsOnFrustum() : true;
 
 		for (std::list<Entity*>::iterator it = nodes.begin(); it != nodes.end(); ++it)
 		{
@@ -121,11 +123,6 @@ namespace GL
 
 	void Entity::Draw()
 	{
-		if (globalVolume != nullptr && drawVolume)
-		{
-			globalVolume->Draw(matrix.model);
-		}
-
 		for (std::list<Entity*>::iterator it = nodes.begin(); it != nodes.end(); ++it)
 		{
 			(*it)->Draw();
@@ -468,7 +465,7 @@ namespace GL
 
 	bool Entity::IsCanDraw()
 	{
-		return enabled && visible;
+		return enabled && isOnFrustum && visible;
 	}
 
 	void Entity::UpdateGlobalVolume()
@@ -482,6 +479,14 @@ namespace GL
 	void Entity::ToggleDrawVolume()
 	{
 		drawVolume = !drawVolume;
+	}
+
+	void Entity::DrawVolume()
+	{
+		if (globalVolume != nullptr && drawVolume)
+		{
+			globalVolume->Draw(matrix.model);
+		}
 	}
 
 	void Entity::SetUniforms()

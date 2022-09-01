@@ -99,9 +99,10 @@ namespace GL
 			Timer::Update(glfwGetTime());
 			lightManager->Update();
 			mainCamera->Update();
-			OcclusionCulling::Update();
+			OcclusionCulling::Update();			
 
 			Update();
+			BSP::Update();
 			
 			BSP::Draw();
 			Draw();

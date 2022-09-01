@@ -29,6 +29,16 @@ namespace GL
 		camera = cam;
 	}
 
+	void BSP::Update()
+	{
+		if (!enabled) return;
+
+		for (std::list<Entity*>::iterator itE = entities.begin(); itE != entities.end(); ++itE)
+		{
+			UpdateNodeVolume((*itE));
+		}
+	}
+
 	void BSP::Draw()
 	{
 		for (std::list<PlaneBSP*>::iterator it = planes.begin(); it != planes.end(); ++it)
@@ -61,19 +71,31 @@ namespace GL
 		planes.push_back(plane);
 	}
 
-	bool BSP::IsOnPlanesBSP(Entity* node)
+	void BSP::UpdateNodeVolume(Entity* node)
 	{
-		if (!enabled) return true;
-
-		for (std::list<PlaneBSP*>::iterator itP = planes.begin(); itP != planes.end(); ++itP)
+		if (node->isOnFrustum)
 		{
-			if (node->GetGlobalVolume()->IsOnPlane(*(*itP)->plane) != (*itP)->plane->GetSide(camera->GetPos()))
+			bool drawEntity = true;
+
+			for (std::list<PlaneBSP*>::iterator itP = planes.begin(); itP != planes.end(); ++itP)
 			{
-				return false;
+				if (node->GetGlobalVolume()->IsOnPlane(*(*itP)->plane) != (*itP)->plane->GetSide(camera->GetPos()))
+				{
+					drawEntity = false;
+					break;
+				}
+			}
+			node->visible = drawEntity;
+
+			std::list<Entity*> nodes = node->GetNodes();
+			if (!nodes.empty())
+			{
+				for (std::list<Entity*>::iterator itN = nodes.begin(); itN != nodes.end(); ++itN)
+				{
+					UpdateNodeVolume((*itN));
+				}
 			}
 		}
-
-		return true;
 	}
 
 	void BSP::TogglePlaneStatus()

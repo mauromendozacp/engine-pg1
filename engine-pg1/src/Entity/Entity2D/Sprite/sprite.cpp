@@ -116,6 +116,8 @@ namespace GL
 			render->TextureDisable();
 			render->BlendDisable();
 			render->CleanShader();
+
+			Entity::DrawVolume();
 		}
 
 		Entity::Draw();

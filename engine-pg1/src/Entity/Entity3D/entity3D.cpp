@@ -75,8 +75,10 @@ namespace GL
 			render->BlendDisable();
 			render->CleanShader();
 
-			Entity::Draw();
+			Entity::DrawVolume();
 		}
+
+		Entity::Draw();
 	}
 
 	void Entity3D::DeInit()
