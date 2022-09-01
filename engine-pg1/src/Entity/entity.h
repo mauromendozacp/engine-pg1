@@ -27,6 +27,10 @@ namespace GL
 		Entity(Render* render);
 		~Entity();
 
+		virtual void Update();
+		virtual void Draw();
+		virtual void DeInit();
+
 		void SetParent(Entity* parent);
 		void AddNode(Entity* node);
 		void RemoveNode(Entity* node);
@@ -58,7 +62,9 @@ namespace GL
 		std::list<Entity*> GetNodes();
 		Entity* GetNode(std::string nodeName);
 		Entity* GetNode(int nodeIndex);
+
 		Volume* GetGlobalVolume();
+		void ToggleDrawVolume();
 
 		glm::vec3 GetForward();
 		glm::vec3 GetUp();
@@ -90,6 +96,7 @@ namespace GL
 		Transform transform;
 
 		std::string name;
+		bool enabled;
 		bool visible;
 		
 	protected:
@@ -101,6 +108,7 @@ namespace GL
 		Volume* localVolume;
 		Volume* globalVolume;
 		bool volumeDirty;
+		bool drawVolume;
 
 		uint uniformModel;
 		uint uniformView;
@@ -111,6 +119,7 @@ namespace GL
 
 		bool IsCanDraw();
 		void UpdateGlobalVolume();
+
 		virtual void SetUniforms();
 		virtual void UpdateShader();
 

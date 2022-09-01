@@ -62,21 +62,15 @@ namespace GL
 
 	void Entity2D::Draw()
 	{
-		if (IsCanDraw())
-		{
-			render->Draw(VAO, indexes.size());
-		}
+		render->Draw(VAO, indexes.size());
 	}
 
 	void Entity2D::DeInit()
 	{
-		render->UnBind(VAO, VBO, EBO);
-
 		vertexs.clear();
 		indexes.clear();
 
-		localVolume->DeInit();
-		globalVolume->DeInit();
+		Entity::DeInit();
 	}
 
 	void Entity2D::SetCollider(bool hasCollider)

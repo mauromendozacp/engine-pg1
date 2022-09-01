@@ -2,6 +2,12 @@
 
 namespace GL
 {
+	Render* BSP::render = nullptr;
+	Camera* BSP::camera = nullptr;
+
+	std::list<Entity*> BSP::entities = std::list<Entity*>();
+	std::list<PlaneBSP*> BSP::planes = std::list<PlaneBSP*>();
+
 	BSP::BSP()
 	{
 		render = nullptr;
@@ -11,29 +17,14 @@ namespace GL
 		planes = std::list<PlaneBSP*>();
 	}
 
-	BSP::BSP(Render* render, Camera* camera)
-	{
-		this->render = render;
-		this->camera = camera;
-
-		entities = std::list<Entity*>();
-		planes = std::list<PlaneBSP*>();
-	}
-
 	BSP::~BSP()
 	{
 	}
 
-	void BSP::Init()
+	void BSP::Init(Render* rend, Camera* cam)
 	{
-	}
-
-	void BSP::Update()
-	{
-		for (std::list<Entity*>::iterator itE = entities.begin(); itE != entities.end(); ++itE)
-		{
-			UpdateNodeVolume((*itE));
-		}
+		render = rend;
+		camera = cam;
 	}
 
 	void BSP::Draw()
@@ -76,7 +67,7 @@ namespace GL
 		}
 	}
 
-	void BSP::UpdateNodeVolume(Entity* node)
+	bool BSP::IsOnBSP(Entity* node)
 	{
 		bool drawEntity = true;
 
@@ -88,15 +79,7 @@ namespace GL
 				break;
 			}
 		}
-		node->visible = drawEntity;
 
-		std::list<Entity*> nodes = node->GetNodes();
-		if (!nodes.empty())
-		{
-			for (std::list<Entity*>::iterator itN = nodes.begin(); itN != nodes.end(); ++itN)
-			{
-				UpdateNodeVolume((*itN));
-			}
-		}
+		return drawEntity;
 	}
 }

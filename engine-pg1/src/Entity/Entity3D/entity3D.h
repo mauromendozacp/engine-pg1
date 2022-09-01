@@ -20,9 +20,6 @@ namespace GL
 		void Draw();
 		void DeInit();
 
-		void CanDrawVolume(bool status);
-		bool IsCanDrawVolume();
-
 		glm::vec3 minAABB;
 		glm::vec3 maxAABB;
 
@@ -32,7 +29,6 @@ namespace GL
 		uint uniformAffectedLight;
 
 		bool affectedLight;
-		bool drawVolume;
 
 		virtual void SetUniforms() override;
 		virtual void UpdateShader() override;

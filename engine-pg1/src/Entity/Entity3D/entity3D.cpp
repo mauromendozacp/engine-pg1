@@ -61,11 +61,6 @@ namespace GL
 	{
 		if (IsCanDraw())
 		{
-			if (globalVolume != nullptr && drawVolume)
-			{
-				globalVolume->Draw(matrix.model);
-			}
-
 			render->UseShader();
 			render->BlendEnable();
 			render->TextureEnable();
@@ -79,12 +74,8 @@ namespace GL
 			render->TextureDisable();
 			render->BlendDisable();
 			render->CleanShader();
-		}
 
-		for (std::list<Entity*>::iterator it = nodes.begin(); it != nodes.end(); ++it)
-		{
-			Entity3D* node3d = static_cast<Entity3D*>((*it));
-			node3d->Draw();
+			Entity::Draw();
 		}
 	}
 
@@ -95,26 +86,9 @@ namespace GL
 			meshes[i]->DeInit();
 		}
 
-		localVolume->DeInit();
-		globalVolume->DeInit();
-
-		for (std::list<Entity*>::iterator it = nodes.begin(); it != nodes.end(); ++it)
-		{
-			Entity3D* node3d = static_cast<Entity3D*>((*it));
-			node3d->DeInit();
-		}
+		Entity::DeInit();
 	}
 
-	void Entity3D::CanDrawVolume(bool status)
-	{
-		drawVolume = status;
-	}
-
-	bool Entity3D::IsCanDrawVolume()
-	{
-		return drawVolume;
-	}
-	
 	void Entity3D::SetUniforms()
 	{
 		Entity::SetUniforms();

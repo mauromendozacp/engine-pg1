@@ -15,26 +15,23 @@ namespace GL
 	{
 	public:
 		BSP();
-		BSP(Render* render, Camera* camera);
 		~BSP();
 
-		void Init();
-		void Update();
-		void Draw();
-		void DeInit();
+		static void Init(Render* rend, Camera* cam);
+		static void Draw();
+		static void DeInit();
 
-		void AddEntity(Entity* entity);
-		void AddPlane(glm::vec3 position, glm::vec3 normal);
-		void TogglePlaneStatus();
+		static void AddEntity(Entity* entity);
+		static void AddPlane(glm::vec3 position, glm::vec3 normal);
+		static void TogglePlaneStatus();
+		static bool IsOnBSP(Entity* node);
 
 	private:
-		Render* render;
-		Camera* camera;
+		static Render* render;
+		static Camera* camera;
 
-		std::list<Entity*> entities;
-		std::list<PlaneBSP*> planes;
-
-		void UpdateNodeVolume(Entity* node);
+		static std::list<Entity*> entities;
+		static std::list<PlaneBSP*> planes;
 	};
 }
 

@@ -103,17 +103,22 @@ namespace GL
 
 	void Sprite::Draw()
 	{
-		render->UseShader();
-		render->BlendEnable();
+		if (IsCanDraw())
+		{
+			render->UseShader();
+			render->BlendEnable();
 
-		UpdateShader();
-		render->UseTexture(0, baseTexture->id);
-		Entity2D::Draw();
+			UpdateShader();
+			render->UseTexture(0, baseTexture->id);
+			Entity2D::Draw();
 
-		render->CleanTexture();
-		render->TextureDisable();
-		render->BlendDisable();
-		render->CleanShader();
+			render->CleanTexture();
+			render->TextureDisable();
+			render->BlendDisable();
+			render->CleanShader();
+		}
+
+		Entity::Draw();
 	}
 
 	void Sprite::DeInit()
@@ -131,6 +136,8 @@ namespace GL
 		{
 			delete anim[i];
 		}
+
+		Entity2D::DeInit();
 	}
 
 	void Sprite::SetTexture(Texture* texture, TEXTURE_TYPE type)

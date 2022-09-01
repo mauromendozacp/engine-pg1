@@ -9,6 +9,7 @@ namespace GL
 		render = nullptr;
 
 		name = "";
+		enabled = true;
 		visible = true;
 
 		parent = nullptr;
@@ -54,6 +55,7 @@ namespace GL
 		this->render = render;
 
 		name = "";
+		enabled = true;
 		visible = true;
 
 		parent = nullptr;
@@ -97,6 +99,48 @@ namespace GL
 	Entity::~Entity()
 	{
 		nodes.clear();
+	}
+
+	void Entity::Update()
+	{
+		if (!enabled) return;
+
+		if (volumeDirty)
+		{
+			UpdateGlobalVolume();
+			volumeDirty = false;
+		}
+
+		visible = globalVolume->IsOnFrustum();
+
+		for (std::list<Entity*>::iterator it = nodes.begin(); it != nodes.end(); ++it)
+		{
+			(*it)->Update();
+		}
+	}
+
+	void Entity::Draw()
+	{
+		if (globalVolume != nullptr && drawVolume)
+		{
+			globalVolume->Draw(matrix.model);
+		}
+
+		for (std::list<Entity*>::iterator it = nodes.begin(); it != nodes.end(); ++it)
+		{
+			(*it)->Draw();
+		}
+	}
+
+	void Entity::DeInit()
+	{
+		localVolume->DeInit();
+		globalVolume->DeInit();
+
+		for (std::list<Entity*>::iterator it = nodes.begin(); it != nodes.end(); ++it)
+		{
+			(*it)->DeInit();
+		}
 	}
 
 	void Entity::SetParent(Entity* parent)
@@ -424,15 +468,7 @@ namespace GL
 
 	bool Entity::IsCanDraw()
 	{
-		if (globalVolume == nullptr) return true;
-
-		if (volumeDirty)
-		{
-			UpdateGlobalVolume();
-			volumeDirty = false;
-		}
-
-		return globalVolume->IsOnFrustum() && visible;
+		return enabled && visible;
 	}
 
 	void Entity::UpdateGlobalVolume()
@@ -441,6 +477,11 @@ namespace GL
 		{
 			globalVolume->SetGlobalVolume(localVolume, matrix.model);
 		}
+	}
+
+	void Entity::ToggleDrawVolume()
+	{
+		drawVolume = !drawVolume;
 	}
 
 	void Entity::SetUniforms()

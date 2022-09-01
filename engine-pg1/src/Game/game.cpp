@@ -67,6 +67,12 @@ namespace GameXD
 		player->Update();
 		mainCamera->Update();
 		lightManager->GetLasPointLightCreated()->SetPos(player->GetPos() + glm::vec3(0.f, .5f, 0.f));
+
+		objStaticMid->Update();
+		objStaticLeft->Update();
+		objStaticFront->Update();
+		objStaticRight->Update();
+		objMovable->Update();
 		
 		UpdateInputs();
 	}
@@ -130,15 +136,15 @@ namespace GameXD
 		objMovable->SetScale(0.75f);
 
 		//------------------------------BSP---------------------------------
-		bsp->AddPlane(glm::vec3(-7.f, 0.f, 5.f), glm::vec3(1.f, 0.f, 0.f));
-		bsp->AddPlane(glm::vec3(0.f, 0.f, -2.5f), glm::vec3(0.f, 0.f, 1.f));
-		bsp->AddPlane(glm::vec3(7.f, 0.f, 5.f), glm::vec3(-1.f, 0.f, 0.f));
-
-		bsp->AddEntity(objStaticMid);
-		bsp->AddEntity(objStaticLeft);
-		bsp->AddEntity(objStaticFront);
-		bsp->AddEntity(objStaticRight);
-		bsp->AddEntity(objMovable);
+		BSP::AddPlane(glm::vec3(-7.f, 0.f, 5.f), glm::vec3(1.f, 0.f, 0.f));
+		BSP::AddPlane(glm::vec3(0.f, 0.f, -2.5f), glm::vec3(0.f, 0.f, 1.f));
+		BSP::AddPlane(glm::vec3(7.f, 0.f, 5.f), glm::vec3(-1.f, 0.f, 0.f));
+		
+		BSP::AddEntity(objStaticMid);
+		BSP::AddEntity(objStaticLeft);
+		BSP::AddEntity(objStaticFront);
+		BSP::AddEntity(objStaticRight);
+		BSP::AddEntity(objMovable);
 	}
 
 	void Game::InitLights()
@@ -261,7 +267,7 @@ namespace GameXD
 			}
 			if (Input::IsKeyDown(KEY_N))
 			{
-				node->CanDrawVolume(!node->IsCanDrawVolume());
+				node->ToggleDrawVolume();
 			}
 		}
 		if (Input::IsKeyDown(KEY_R))
@@ -271,7 +277,7 @@ namespace GameXD
 
 		if (Input::IsKeyDown(KEY_F))
 		{
-			bsp->TogglePlaneStatus();
+			BSP::TogglePlaneStatus();
 		}
 
 		if (Input::IsKeyDown(KEY_ESCAPE))

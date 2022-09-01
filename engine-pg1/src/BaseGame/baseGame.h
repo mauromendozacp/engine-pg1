@@ -34,7 +34,6 @@ namespace GL
 		Render* render;
 		Camera* mainCamera;
 		LightManager* lightManager;
-		BSP* bsp;
 
 		void InitEngine();
 		void UpdateEngine();

@@ -89,10 +89,15 @@ namespace GL
 
 	void Shape::Draw()
 	{
-		render->UseShader();
-		UpdateShader();
-		Entity2D::Draw();
-		render->CleanShader();
+		if (IsCanDraw())
+		{
+			render->UseShader();
+			UpdateShader();
+			Entity2D::Draw();
+			render->CleanShader();
+		}
+
+		Entity::Draw();
 	}
 
 	void Shape::DeInit()
