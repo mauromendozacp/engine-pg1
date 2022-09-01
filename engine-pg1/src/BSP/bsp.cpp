@@ -65,18 +65,15 @@ namespace GL
 	{
 		if (!enabled) return true;
 
-		bool drawEntity = true;
-
 		for (std::list<PlaneBSP*>::iterator itP = planes.begin(); itP != planes.end(); ++itP)
 		{
 			if (node->GetGlobalVolume()->IsOnPlane(*(*itP)->plane) != (*itP)->plane->GetSide(camera->GetPos()))
 			{
-				drawEntity = false;
-				break;
+				return false;
 			}
 		}
 
-		return drawEntity;
+		return true;
 	}
 
 	void BSP::TogglePlaneStatus()
