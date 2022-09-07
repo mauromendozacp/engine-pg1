@@ -104,7 +104,7 @@ namespace GameXD
 		//----------------------------PLAYER---------------------------------
 		player = new Player(render);
 		player->Init(mainCamera, 5.f, 75.f);
-		player->SetPos(glm::vec3(0.f, 5.f, 25.f));
+		player->SetPos(glm::vec3(-2.5f, 5.f, 25.f));
 
 		mainCamera->SetTarget(player);
 		mainCamera->SetOffset(10.f);
@@ -153,9 +153,9 @@ namespace GameXD
 		DirectionalLight* directionalLight = lightManager->GetDirectionalLight();
 		directionalLight->color.SetColor(255, 255, 255);
 		directionalLight->SetDirection(glm::vec3(-0.2f, -1.0f, -0.3f));
-		directionalLight->SetAmbient(glm::vec3(0.5f, 0.5f, 0.5f));
-		directionalLight->SetDiffuse(glm::vec3(0.4f, 0.4f, 0.4f));
-		directionalLight->SetSpecular(glm::vec3(0.5f, 0.5f, 0.5f));
+		directionalLight->SetAmbient(glm::vec3(1.f, 1.f, 1.f));
+		directionalLight->SetDiffuse(glm::vec3(0.6f, 0.6f, 0.6f));
+		directionalLight->SetSpecular(glm::vec3(0.25f, 0.25f, 0.25f));
 
 		lightManager->AddLight(LIGHT_TYPE::POINTLIGHT);
 		PointLight* pointLight = lightManager->GetLasPointLightCreated();
@@ -195,39 +195,39 @@ namespace GameXD
 		}
 		if (Input::IsKeyDown(KEY_2))
 		{
-			node = static_cast<Entity3D*>(objMovable->GetNode("cabeza"));
+			node = static_cast<Entity3D*>(objMovable->GetNode("cuerpo"));
 		}
 		if (Input::IsKeyDown(KEY_3))
 		{
-			node = static_cast<Entity3D*>(objMovable->GetNode("hombro_der"));
+			node = static_cast<Entity3D*>(objMovable->GetNode("cabeza"));
 		}
 		if (Input::IsKeyDown(KEY_4))
 		{
-			node = static_cast<Entity3D*>(objMovable->GetNode("brazo_der"));
+			node = static_cast<Entity3D*>(objMovable->GetNode("hombro_der"));
 		}
 		if (Input::IsKeyDown(KEY_5))
 		{
-			node = static_cast<Entity3D*>(objMovable->GetNode("mano_der"));
+			node = static_cast<Entity3D*>(objMovable->GetNode("brazo_der"));
 		}
 		if (Input::IsKeyDown(KEY_6))
 		{
-			node = static_cast<Entity3D*>(objMovable->GetNode("dedo1"));
+			node = static_cast<Entity3D*>(objMovable->GetNode("mano_der"));
 		}
 		if (Input::IsKeyDown(KEY_7))
 		{
-			node = static_cast<Entity3D*>(objMovable->GetNode("ojos"));
+			node = static_cast<Entity3D*>(objMovable->GetNode("dedos_der"));
 		}
 		if (Input::IsKeyDown(KEY_8))
 		{
-			node = static_cast<Entity3D*>(objMovable->GetNode("patas"));
+			node = static_cast<Entity3D*>(objMovable->GetNode("dedo_1"));
 		}
 		if (Input::IsKeyDown(KEY_9))
 		{
-			node = static_cast<Entity3D*>(objMovable->GetNode("pata_izq"));
+			node = static_cast<Entity3D*>(objMovable->GetNode("ojos"));
 		}
 		if (Input::IsKeyDown(KEY_0))
 		{
-			node = static_cast<Entity3D*>(objMovable->GetNode("cuerpo"));
+			node = static_cast<Entity3D*>(objMovable->GetNode("ojo_izq"));
 		}
 
 		//----------------------------TRANSFORMS---------------------------------
@@ -243,11 +243,11 @@ namespace GameXD
 			}
 			if (Input::IsKeyPressed(KEY_H))
 			{
-				node->SetPos(node->GetLocalPosition() - glm::vec3(0.f, 0.05f, 0.f));
+				node->SetPos(node->GetLocalPosition() + glm::vec3(0.f, 0.f, 0.05f));
 			}
 			if (Input::IsKeyPressed(KEY_Y))
 			{
-				node->SetPos(node->GetLocalPosition() + glm::vec3(0.f, 0.05f, 0.f));
+				node->SetPos(node->GetLocalPosition() - glm::vec3(0.f, 0.f, 0.05f));
 			}
 			if (Input::IsKeyPressed(KEY_T))
 			{
