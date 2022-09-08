@@ -23,9 +23,13 @@ namespace GL
 		static void DeInit();
 
 		static void AddEntity(Entity* entity);
-		static void AddPlane(glm::vec3 position, glm::vec3 normal);
+
+		static void FindPlanes(Entity* scene);
+		static void AddPlane(Entity* node);
+
 		static void UpdateNodeVolume(Entity* node);
 		static void UpdatePlanes();
+
 		static void TogglePlaneStatus();
 		static void ToggleStatus();
 

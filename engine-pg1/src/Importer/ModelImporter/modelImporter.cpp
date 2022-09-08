@@ -69,6 +69,14 @@ namespace GL
         entityNode->SetParent(parent);
 
         entityNode->Init();
+
+        glm::vec4 m1 = glm::vec4(node->mTransformation.a1, node->mTransformation.a2, node->mTransformation.a3, node->mTransformation.a4);
+        glm::vec4 m2 = glm::vec4(node->mTransformation.b1, node->mTransformation.b2, node->mTransformation.b3, node->mTransformation.b4);
+        glm::vec4 m3 = glm::vec4(node->mTransformation.c1, node->mTransformation.c2, node->mTransformation.c3, node->mTransformation.c4);
+        glm::vec4 m4 = glm::vec4(node->mTransformation.d1, node->mTransformation.d2, node->mTransformation.d3, node->mTransformation.d4);
+        glm::mat4 mat = glm::mat4(m1, m2, m3, m4);
+
+        entityNode->SetMatrix(mat);
 	}
 
     Mesh* ModelImporter::ProcessMesh(aiMesh* mesh, const aiScene* scene)

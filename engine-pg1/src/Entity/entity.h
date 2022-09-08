@@ -14,9 +14,11 @@
 #include "GLM/glm.hpp"
 #include "GLM/ext/matrix_transform.hpp"
 #include "GLM/gtc/type_ptr.hpp"
+#include "GLM/gtx/norm.hpp"
 
 #include <list>
 #include <vector>
+#include <math.h>
 
 namespace GL
 {
@@ -46,7 +48,6 @@ namespace GL
 		void SetPosY(float y);
 		void SetPosZ(float z);
 
-		void SetRot(glm::mat4 m);
 		void SetRot(float x, float y, float z);
 		void SetRotX(float x);
 		void SetRotY(float y);
@@ -54,6 +55,8 @@ namespace GL
 
 		void SetScale(float x, float y, float z);
 		void SetScale(float size);
+
+		void SetMatrix(glm::mat4 mat);
 
 		void LookTarget(glm::vec3 target);
 		void SetDirection(glm::vec3 dir);
@@ -74,6 +77,10 @@ namespace GL
 		glm::vec3 GetPos();
 		glm::vec3 GetRot();
 		glm::vec3 GetScale();
+
+		glm::vec3 GetPos(glm::mat4 mat);
+		glm::vec3 GetRot(glm::mat4 mat);
+		glm::vec3 GetScale(glm::mat4 mat);
 
 		glm::vec3 GetLocalPosition();
 		glm::vec3 GetLocalRotation();
@@ -128,8 +135,11 @@ namespace GL
 	private:
 		glm::quat EulerToQuat(glm::vec3 euler);
 		glm::vec3 QuatToVec(glm::quat quat, glm::vec3 euler);
-		glm::quat GetRotationByMatrix(glm::mat4 m);
-		glm::vec3 GetScaleByMatrix(glm::mat4 m);
+
+		glm::quat GetRotationByMatrix(glm::mat4 mat);
+		glm::vec3 ToEulerRad(glm::quat rot);
+		glm::vec3 NormalizeAngles(glm::vec3 angles);
+		float NormalizeAngle(float angle);
 
 		void UpdateMatrix();
 		void UpdateTransform();

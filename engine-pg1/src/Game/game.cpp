@@ -6,6 +6,7 @@ namespace GameXD
 	{
 		player = nullptr;
 
+		girScene = nullptr;
 		objStaticMid = nullptr;
 		objStaticLeft = nullptr;
 		objStaticFront = nullptr;
@@ -20,6 +21,11 @@ namespace GameXD
 		{
 			delete player;
 			player = nullptr;
+		}
+		if (girScene != nullptr)
+		{
+			delete girScene;
+			girScene = nullptr;
 		}
 		if (objStaticMid != nullptr)
 		{
@@ -45,11 +51,6 @@ namespace GameXD
 		{
 			delete objMovable;
 			objMovable = nullptr;
-		}
-		if (node != nullptr)
-		{
-			delete node;
-			node = nullptr;
 		}
 	}
 
@@ -110,41 +111,24 @@ namespace GameXD
 		mainCamera->SetOffset(10.f);
 
 		//----------------------------OBJECTS---------------------------------
-		objStaticMid = new Entity3D(render);
-		objStaticMid = ModelImporter::LoadModel(render, "../res/Models/gir/gir.fbx");
-		objStaticMid->SetPos(glm::vec3(0.f, 0.f, 2.5f));
-		objStaticMid->SetScale(0.5f);
+		girScene = ModelImporter::LoadModel(render, "../res/Models/gir/gir_scene.fbx");
 
-		objStaticLeft = new Entity3D(render);
-		objStaticLeft = ModelImporter::LoadModel(render, "../res/Models/gir/gir.fbx");
-		objStaticLeft->SetPos(glm::vec3(-10.f, 0.f, 0.f));
-		objStaticLeft->SetScale(0.5f);
-
-		objStaticFront = new Entity3D(render);
-		objStaticFront = ModelImporter::LoadModel(render, "../res/Models/gir/gir.fbx");
-		objStaticFront->SetPos(glm::vec3(0.f, 0.f, -10.f));
-		objStaticFront->SetScale(0.5f);
-
-		objStaticRight = new Entity3D(render);
-		objStaticRight = ModelImporter::LoadModel(render, "../res/Models/gir/gir.fbx");
-		objStaticRight->SetPos(glm::vec3(10.f, 0.f, 0.f));
-		objStaticRight->SetScale(0.5f);
-
-		objMovable = new Entity3D(render);
-		objMovable = ModelImporter::LoadModel(render, "../res/Models/gir/gir.fbx");
-		objMovable->SetPos(glm::vec3(5.f, 0.f, 5.f));
-		objMovable->SetScale(0.75f);
+		objStaticMid = static_cast<Entity3D*>(girScene->GetNode("gir_1"));
+		objStaticLeft = static_cast<Entity3D*>(girScene->GetNode("gir_2"));
+		objStaticFront = static_cast<Entity3D*>(girScene->GetNode("gir_3"));
+		objStaticRight = static_cast<Entity3D*>(girScene->GetNode("gir_4"));
+		objMovable = static_cast<Entity3D*>(girScene->GetNode("gir_movable"));
 
 		//------------------------------BSP---------------------------------
-		BSP::AddPlane(glm::vec3(-7.f, 0.f, 5.f), glm::vec3(1.f, 0.f, 0.f));
-		BSP::AddPlane(glm::vec3(0.f, 0.f, -2.5f), glm::vec3(0.f, 0.f, 1.f));
-		BSP::AddPlane(glm::vec3(7.f, 0.f, 5.f), glm::vec3(-1.f, 0.f, 0.f));
-		
+		BSP::AddPlane(girScene);
+
 		BSP::AddEntity(objStaticMid);
 		BSP::AddEntity(objStaticLeft);
 		BSP::AddEntity(objStaticFront);
 		BSP::AddEntity(objStaticRight);
 		BSP::AddEntity(objMovable);
+
+		BSP::ToggleStatus();
 	}
 
 	void Game::InitLights()
@@ -191,7 +175,7 @@ namespace GameXD
 		//----------------------------NODES---------------------------------
 		if (Input::IsKeyDown(KEY_1))
 		{
-			node = static_cast<Entity3D*>(objMovable->GetNode("RootNode")->GetNode(0));
+			node = objMovable;
 		}
 		if (Input::IsKeyDown(KEY_2))
 		{

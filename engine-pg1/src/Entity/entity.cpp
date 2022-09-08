@@ -268,17 +268,6 @@ namespace GL
 		SetPos(glm::vec3(GetPosX(), GetPosY(), z));
 	}
 
-	void Entity::SetRot(glm::mat4 m)
-	{
-		glm::quat quat = GetRotationByMatrix(m);
-		transform.rotation = quat;
-		transform.localRotation = quat;
-
-		matrix.rotation = m;
-
-		UpdateMatrix();
-	}
-
 	void Entity::SetRot(float x, float y, float z)
 	{
 		SetRot(glm::vec3(x, y, z ));
@@ -309,10 +298,20 @@ namespace GL
 		SetScale(glm::vec3(size, size, size));
 	}
 
+	void Entity::SetMatrix(glm::mat4 mat)
+	{
+		SetPos(GetPos(mat));
+
+		//SetRot(ToEulerRad(GetRotationByMatrix(mat)));
+		//SetRot(GetRot(mat));
+
+		SetScale(GetScale(mat));
+	}
+
 	void Entity::LookTarget(glm::vec3 target)
 	{
-		glm::mat4 rotMatrix = glm::lookAt(transform.position, target, transform.up);
-		SetRot(rotMatrix);
+		//SetRot(ToEulerRad(GetRotationByMatrix(glm::lookAt(transform.position, target, transform.up))));
+		//SetRot(GetRot(glm::lookAt(transform.position, target, transform.up)));
 	}
 
 	void Entity::SetDirection(glm::vec3 dir)
@@ -401,6 +400,42 @@ namespace GL
 	glm::vec3 Entity::GetScale()
 	{
 		return transform.scale;
+	}
+
+	glm::vec3 Entity::GetPos(glm::mat4 mat)
+	{
+		return glm::vec3(mat[0].w, mat[1].w, mat[2].w);
+	}
+
+	glm::vec3 Entity::GetRot(glm::mat4 mat)
+	{
+		float sy = glm::sqrt(mat[0].x * mat[0].x + mat[1].x * mat[1].x);
+		bool singular = sy < 1e-6f;
+
+		float x, y, z;
+		if (!singular)
+		{
+			x = atan2(mat[2].y, mat[2].z);
+			y = atan2(-mat[2].x, sy);
+			z = atan2(mat[1].x, mat[0].x);
+		}
+		else
+		{
+			x = atan2(-mat[1].z, mat[1].y);
+			y = atan2(-mat[2].x, sy);
+			z = 0.f;
+		}
+		
+		return glm::vec3(x, y, z);
+	}
+
+	glm::vec3 Entity::GetScale(glm::mat4 mat)
+	{
+		glm::vec4 m0 = glm::vec4(mat[0].x, mat[1].x, mat[2].x, mat[3].x);
+		glm::vec4 m1 = glm::vec4(mat[0].y, mat[1].y, mat[2].y, mat[3].y);
+		glm::vec4 m2 = glm::vec4(mat[0].z, mat[1].z, mat[2].z, mat[3].z);
+
+		return glm::vec3(glm::length(m0), glm::length(m1), glm::length(m2));
 	}
 
 	glm::vec3 Entity::GetLocalPosition()
@@ -546,25 +581,25 @@ namespace GL
 		return res;
 	}
 
-	glm::quat Entity::GetRotationByMatrix(glm::mat4 m)
+	glm::quat Entity::GetRotationByMatrix(glm::mat4 mat)
 	{
-		glm::vec3 s = GetScaleByMatrix(matrix.scale);
+		glm::vec3 s = GetScale(mat);
 
-		float m00 = m[0].x / s.x;
-		float m01 = m[0].y / s.y;
-		float m02 = m[0].z / s.z;
-		float m10 = m[1].x / s.x;
-		float m11 = m[1].y / s.y;
-		float m12 = m[1].z / s.z;
-		float m20 = m[2].x / s.x;
-		float m21 = m[2].y / s.y;
-		float m22 = m[2].z / s.z;
+		float m00 = mat[0].x / s.x;
+		float m01 = mat[0].y / s.y;
+		float m02 = mat[0].z / s.z;
+		float m10 = mat[1].x / s.x;
+		float m11 = mat[1].y / s.y;
+		float m12 = mat[1].z / s.z;
+		float m20 = mat[2].x / s.x;
+		float m21 = mat[2].y / s.y;
+		float m22 = mat[2].z / s.z;
 
-		glm::quat q = glm::quat();
-		q.w = glm::sqrt(glm::max(0.0f, 1.0f + m00 + m11 + m22)) / 2;
-		q.x = glm::sqrt(glm::max(0.0f, 1.0f + m00 - m11 - m22)) / 2;
-		q.y = glm::sqrt(glm::max(0.0f, 1.0f - m00 + m11 - m22)) / 2;
-		q.z = glm::sqrt(glm::max(0.0f, 1.0f - m00 - m11 + m22)) / 2;
+		glm::quat q = glm::identity<glm::quat>();
+		q.w = glm::sqrt(glm::max(0.f, 1.f + m00 + m11 + m22)) / 2.f;
+		q.x = glm::sqrt(glm::max(0.f, 1.f + m00 - m11 - m22)) / 2.f;
+		q.y = glm::sqrt(glm::max(0.f, 1.f - m00 + m11 - m22)) / 2.f;
+		q.z = glm::sqrt(glm::max(0.f, 1.f - m00 - m11 + m22)) / 2.f;
 		q.x *= glm::sign(q.x * (m21 - m12));
 		q.y *= glm::sign(q.y * (m02 - m20));
 		q.z *= glm::sign(q.z * (m10 - m01));
@@ -578,13 +613,59 @@ namespace GL
 		return q;
 	}
 
-	glm::vec3 Entity::GetScaleByMatrix(glm::mat4 scaleMatrix)
+	glm::vec3 Entity::ToEulerRad(glm::quat rot)
 	{
-		glm::vec4 m0 = glm::vec4(scaleMatrix[0].x, scaleMatrix[1].x, scaleMatrix[2].x, scaleMatrix[3].x);
-		glm::vec4 m1 = glm::vec4(scaleMatrix[0].y, scaleMatrix[1].y, scaleMatrix[2].y, scaleMatrix[3].y);
-		glm::vec4 m2 = glm::vec4(scaleMatrix[0].z, scaleMatrix[1].z, scaleMatrix[2].z, scaleMatrix[3].z);
+		float sqw = rot.w * rot.w;
+		float sqx = rot.x * rot.x;
+		float sqy = rot.y * rot.y;
+		float sqz = rot.z * rot.z;
+		float unit = sqx + sqy + sqz + sqw;
+		float test = rot.x * rot.w - rot.y * rot.z;
 
-		return glm::vec3(glm::length(m0), glm::length(m1), glm::length(m2));
+		glm::vec3 v = glm::vec3();
+
+		if (test > 0.4995f * unit)
+		{
+			v.y = 2.f * atan2(rot.y, rot.x);
+			v.x = glm::pi<float>() / 2.f;
+			v.z = 0.f;
+
+			return NormalizeAngles(v * 57.29578f);
+		}
+		if (test < -0.4995f * unit)
+		{
+			v.y = -2.f * atan2(rot.y, rot.x);
+			v.x = -glm::pi<float>() / 2.f;
+			v.z = 0.f;
+
+			return NormalizeAngles(v * 57.29578f);
+		}
+
+		glm::quat q = glm::quat(rot.w, rot.z, rot.x, rot.y);
+		v.y = atan2(2.f * q.x * q.w + 2.f * q.y * q.z, 1.f - 2.f * (q.z * q.z + q.w * q.w));
+		v.x = asin(2.f * (q.x * q.z - q.w * q.y));
+		v.z = atan2(2.f * q.x * q.y + 2.f * q.z * q.w, 1.f - 2.f * (q.y * q.y + q.z * q.z));
+
+		return NormalizeAngles(v * 57.29578f);
+	}
+
+	glm::vec3 Entity::NormalizeAngles(glm::vec3 angles)
+	{
+		angles.x = NormalizeAngle(angles.x);
+		angles.y = NormalizeAngle(angles.y);
+		angles.z = NormalizeAngle(angles.z);
+
+		return angles;
+	}
+
+	float Entity::NormalizeAngle(float angle)
+	{
+		while (angle > 360.f)
+			angle -= 360.f;
+		while (angle < 0.f)
+			angle += 360.f;
+
+		return angle;
 	}
 
 	void Entity::Reset()

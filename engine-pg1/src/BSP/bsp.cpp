@@ -65,12 +65,29 @@ namespace GL
 		entities.push_back(entity);
 	}
 
-	void BSP::AddPlane(glm::vec3 position, glm::vec3 normal)
+	void BSP::FindPlanes(Entity* scene)
 	{
-		PlaneBSP* plane = new PlaneBSP();
-		plane->Init(render, position, normal);
+		std::list<Entity*> nodes = scene->GetNodes();
+		if (!nodes.empty())
+		{
+			for (std::list<Entity*>::iterator it = nodes.begin(); it != nodes.end(); ++it)
+			{
+				AddPlane((*it));
+			}
+		}
+	}
 
-		planes.push_back(plane);
+	void BSP::AddPlane(Entity* node)
+	{
+		if (node->name.find("bsp") != std::string::npos)
+		{
+			PlaneBSP* plane = new PlaneBSP();
+			plane->Init(render, node->GetPos(), node->transform.forward);
+
+			planes.push_back(plane);
+		}
+		
+		FindPlanes(node);
 	}
 
 	void BSP::UpdateNodeVolume(Entity* node)

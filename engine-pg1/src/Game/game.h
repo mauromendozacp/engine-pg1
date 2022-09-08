@@ -37,6 +37,7 @@ namespace GameXD
 	private:
 		Player* player;
 
+		Entity3D* girScene;
 		Entity3D* objStaticMid;
 		Entity3D* objStaticLeft;
 		Entity3D* objStaticFront;

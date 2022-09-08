@@ -34,12 +34,7 @@ namespace GL
 		quad->SetPos(position);
 		quad->SetScale(14.f, 14.f, 1.f);
 		quad->color.SetColor(1.f, 1.f, 1.f, 0.1f);
-
-		if (glm::abs(normal.x) > 0.f)
-		{
-			quad->SetRotY(90.f);
-		}
-		//quad->LookTarget(position + normal);
+		quad->LookTarget(position + normal);
 	}
 
 	void PlaneBSP::Draw()
