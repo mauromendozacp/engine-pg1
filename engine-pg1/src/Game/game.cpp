@@ -27,31 +27,6 @@ namespace GameXD
 			delete girScene;
 			girScene = nullptr;
 		}
-		if (objStaticMid != nullptr)
-		{
-			delete objStaticMid;
-			objStaticMid = nullptr;
-		}
-		if (objStaticLeft != nullptr)
-		{
-			delete objStaticLeft;
-			objStaticLeft = nullptr;
-		}
-		if (objStaticFront != nullptr)
-		{
-			delete objStaticFront;
-			objStaticFront = nullptr;
-		}
-		if (objStaticRight != nullptr)
-		{
-			delete objStaticRight;
-			objStaticRight = nullptr;
-		}
-		if (objMovable != nullptr)
-		{
-			delete objMovable;
-			objMovable = nullptr;
-		}
 	}
 
 	void Game::Init()
@@ -69,35 +44,21 @@ namespace GameXD
 		mainCamera->Update();
 		lightManager->GetLasPointLightCreated()->SetPos(player->GetPos() + glm::vec3(0.f, .5f, 0.f));
 
-		objStaticMid->Update();
-		objStaticLeft->Update();
-		objStaticFront->Update();
-		objStaticRight->Update();
-		objMovable->Update();
+		girScene->Update();
 		
 		UpdateInputs();
 	}
 
 	void Game::Draw()
 	{
-		objStaticMid->Draw();
-		objStaticLeft->Draw();
-		objStaticFront->Draw();
-		objStaticRight->Draw();
-		objMovable->Draw();
-
 		player->Draw();
+		girScene->Draw();
 	}
 
 	void Game::DeInit()
 	{
 		player->DeInit();
-
-		objStaticMid->DeInit();
-		objStaticLeft->DeInit();
-		objStaticFront->DeInit();
-		objStaticRight->DeInit();
-		objMovable->DeInit();
+		girScene->DeInit();
 	}
 
 	void Game::InitEntities()
@@ -120,15 +81,13 @@ namespace GameXD
 		objMovable = static_cast<Entity3D*>(girScene->GetNode("gir_movable"));
 
 		//------------------------------BSP---------------------------------
-		BSP::AddPlane(girScene);
+		BSP::FindPlanes(girScene);
 
 		BSP::AddEntity(objStaticMid);
 		BSP::AddEntity(objStaticLeft);
 		BSP::AddEntity(objStaticFront);
 		BSP::AddEntity(objStaticRight);
 		BSP::AddEntity(objMovable);
-
-		BSP::ToggleStatus();
 	}
 
 	void Game::InitLights()

@@ -301,17 +301,13 @@ namespace GL
 	void Entity::SetMatrix(glm::mat4 mat)
 	{
 		SetPos(GetPos(mat));
-
-		//SetRot(ToEulerRad(GetRotationByMatrix(mat)));
-		//SetRot(GetRot(mat));
-
+		SetRot(GetRot(mat));
 		SetScale(GetScale(mat));
 	}
 
 	void Entity::LookTarget(glm::vec3 target)
 	{
-		//SetRot(ToEulerRad(GetRotationByMatrix(glm::lookAt(transform.position, target, transform.up))));
-		//SetRot(GetRot(glm::lookAt(transform.position, target, transform.up)));
+		SetRot(ToEulerRad(GetRotationByMatrix(glm::lookAt(transform.position, target, glm::vec3(0.f, 1.f, 0.f)))));
 	}
 
 	void Entity::SetDirection(glm::vec3 dir)
@@ -404,29 +400,12 @@ namespace GL
 
 	glm::vec3 Entity::GetPos(glm::mat4 mat)
 	{
-		return glm::vec3(mat[0].w, mat[1].w, mat[2].w);
+		return glm::vec3(mat[3][0], mat[3][1], mat[3][2]);
 	}
 
 	glm::vec3 Entity::GetRot(glm::mat4 mat)
 	{
-		float sy = glm::sqrt(mat[0].x * mat[0].x + mat[1].x * mat[1].x);
-		bool singular = sy < 1e-6f;
-
-		float x, y, z;
-		if (!singular)
-		{
-			x = atan2(mat[2].y, mat[2].z);
-			y = atan2(-mat[2].x, sy);
-			z = atan2(mat[1].x, mat[0].x);
-		}
-		else
-		{
-			x = atan2(-mat[1].z, mat[1].y);
-			y = atan2(-mat[2].x, sy);
-			z = 0.f;
-		}
-		
-		return glm::vec3(x, y, z);
+		return ToEulerRad(GetRotationByMatrix(mat));
 	}
 
 	glm::vec3 Entity::GetScale(glm::mat4 mat)
@@ -595,7 +574,7 @@ namespace GL
 		float m21 = mat[2].y / s.y;
 		float m22 = mat[2].z / s.z;
 
-		glm::quat q = glm::identity<glm::quat>();
+		glm::quat q = glm::quat();
 		q.w = glm::sqrt(glm::max(0.f, 1.f + m00 + m11 + m22)) / 2.f;
 		q.x = glm::sqrt(glm::max(0.f, 1.f + m00 - m11 - m22)) / 2.f;
 		q.y = glm::sqrt(glm::max(0.f, 1.f - m00 + m11 - m22)) / 2.f;
@@ -641,7 +620,7 @@ namespace GL
 			return NormalizeAngles(v * 57.29578f);
 		}
 
-		glm::quat q = glm::quat(rot.w, rot.z, rot.x, rot.y);
+		glm::vec4 q = glm::vec4(rot.w, rot.z, rot.x, rot.y);
 		v.y = atan2(2.f * q.x * q.w + 2.f * q.y * q.z, 1.f - 2.f * (q.z * q.z + q.w * q.w));
 		v.x = asin(2.f * (q.x * q.z - q.w * q.y));
 		v.z = atan2(2.f * q.x * q.y + 2.f * q.z * q.w, 1.f - 2.f * (q.y * q.y + q.z * q.z));

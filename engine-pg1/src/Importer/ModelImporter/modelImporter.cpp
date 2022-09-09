@@ -33,50 +33,79 @@ namespace GL
         model->Init();
         model->name = scene->mRootNode->mName.C_Str();
 
-        ProcessNode(model, scene->mRootNode, scene);
+        ProcessNode(model, glm::mat4(), scene->mRootNode, scene);
 
         return model;
 	}
 
-    void ModelImporter::ProcessNode(Entity3D* parent, aiNode* node, const aiScene* scene)
+    void ModelImporter::ProcessNode(Entity3D* parent, glm::mat4 mat, aiNode* node, const aiScene* scene)
 	{
         Entity3D* entityNode = nullptr;
         std::string name = node->mName.C_Str();
 
-        if (node->mNumMeshes > 0)
+        if (name.find("$AssimpFbx$") != std::string::npos)
         {
-            std::vector<Mesh*> meshes = std::vector<Mesh*>();
-            for (uint i = 0; i < node->mNumMeshes; i++)
-            {
-                aiMesh* aiMesh = scene->mMeshes[node->mMeshes[i]];
-                meshes.push_back(ProcessMesh(aiMesh, scene));
-            }
+            entityNode = parent;
 
-            entityNode = new Entity3D(meshes, render);
+            if (name.find("RotationPivot") != std::string::npos && name.find("Inverse") == std::string::npos)
+            {
+                aiMatrix4x4 matrix = node->mTransformation;
+
+                mat[0][0] = (float)matrix.a1; mat[0][1] = (float)matrix.b1;  mat[0][2] = (float)matrix.c1; mat[0][3] = (float)matrix.d1;
+                mat[1][0] = (float)matrix.a2; mat[1][1] = (float)matrix.b2;  mat[1][2] = (float)matrix.c2; mat[1][3] = (float)matrix.d2;
+                mat[2][0] = (float)matrix.a3; mat[2][1] = (float)matrix.b3;  mat[2][2] = (float)matrix.c3; mat[2][3] = (float)matrix.d3;
+                mat[3][0] = (float)matrix.a4; mat[3][1] = (float)matrix.b4;  mat[3][2] = (float)matrix.c4; mat[3][3] = (float)matrix.d4;
+            }
+            if (name.find("Pivot") == std::string::npos)
+            {
+                glm::mat4 m;
+                aiMatrix4x4 matrix = node->mTransformation;
+
+                m[0][0] = (float)matrix.a1; m[0][1] = (float)matrix.b1;  m[0][2] = (float)matrix.c1; m[0][3] = (float)matrix.d1;
+                m[1][0] = (float)matrix.a2; m[1][1] = (float)matrix.b2;  m[1][2] = (float)matrix.c2; m[1][3] = (float)matrix.d2;
+                m[2][0] = (float)matrix.a3; m[2][1] = (float)matrix.b3;  m[2][2] = (float)matrix.c3; m[2][3] = (float)matrix.d3;
+                m[3][0] = (float)matrix.a4; m[3][1] = (float)matrix.b4;  m[3][2] = (float)matrix.c4; m[3][3] = (float)matrix.d4;
+
+                mat *= m;
+            }
         }
         else
         {
-            entityNode = new Entity3D(render);
+            if (node->mNumMeshes > 0)
+            {
+                std::vector<Mesh*> meshes = std::vector<Mesh*>();
+                for (uint i = 0; i < node->mNumMeshes; i++)
+                {
+                    aiMesh* aiMesh = scene->mMeshes[node->mMeshes[i]];
+                    meshes.push_back(ProcessMesh(aiMesh, scene));
+                }
+
+                entityNode = new Entity3D(meshes, render);
+            }
+            else
+            {
+                entityNode = new Entity3D(render);
+
+                if (name.find("bsp") != std::string::npos)
+                {
+                    entityNode->SetMatrix(mat);
+                }
+            }
         }
 
         for (uint i = 0; i < node->mNumChildren; i++)
         {
-            ProcessNode(entityNode, node->mChildren[i], scene);
+            ProcessNode(entityNode, mat, node->mChildren[i], scene);
         }
+        
+        if (name.find("$AssimpFbx$") == std::string::npos)
+        {
+            parent->AddNode(entityNode);
+            entityNode->name = name;
+            entityNode->SetParent(parent);
 
-        parent->AddNode(entityNode);
-        entityNode->name = name;
-        entityNode->SetParent(parent);
-
-        entityNode->Init();
-
-        glm::vec4 m1 = glm::vec4(node->mTransformation.a1, node->mTransformation.a2, node->mTransformation.a3, node->mTransformation.a4);
-        glm::vec4 m2 = glm::vec4(node->mTransformation.b1, node->mTransformation.b2, node->mTransformation.b3, node->mTransformation.b4);
-        glm::vec4 m3 = glm::vec4(node->mTransformation.c1, node->mTransformation.c2, node->mTransformation.c3, node->mTransformation.c4);
-        glm::vec4 m4 = glm::vec4(node->mTransformation.d1, node->mTransformation.d2, node->mTransformation.d3, node->mTransformation.d4);
-        glm::mat4 mat = glm::mat4(m1, m2, m3, m4);
-
-        entityNode->SetMatrix(mat);
+            entityNode->Init();
+        }
 	}
 
     Mesh* ModelImporter::ProcessMesh(aiMesh* mesh, const aiScene* scene)
