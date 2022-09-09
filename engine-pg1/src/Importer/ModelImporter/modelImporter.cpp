@@ -33,7 +33,7 @@ namespace GL
         model->Init();
         model->name = scene->mRootNode->mName.C_Str();
 
-        ProcessNode(model, glm::mat4(), scene->mRootNode, scene);
+        ProcessNode(model, glm::mat4(1.f), scene->mRootNode, scene);
 
         return model;
 	}
