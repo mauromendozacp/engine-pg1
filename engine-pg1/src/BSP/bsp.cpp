@@ -72,22 +72,23 @@ namespace GL
 		{
 			for (std::list<Entity*>::iterator it = nodes.begin(); it != nodes.end(); ++it)
 			{
-				AddPlane((*it));
+				Entity* node = (*it);
+				if (node->name.find("bsp") != std::string::npos)
+				{
+					AddPlane(node);
+				}
+
+				FindPlanes(node);
 			}
 		}
 	}
 
 	void BSP::AddPlane(Entity* node)
 	{
-		if (node->name.find("bsp") != std::string::npos)
-		{
-			PlaneBSP* plane = new PlaneBSP();
-			plane->Init(render, node->GetPos(), node->transform.forward);
+		PlaneBSP* plane = new PlaneBSP();
+		plane->Init(render, node->GetPos(), node->transform.forward);
 
-			planes.push_back(plane);
-		}
-		
-		FindPlanes(node);
+		planes.push_back(plane);
 	}
 
 	void BSP::UpdateNodeVolume(Entity* node)

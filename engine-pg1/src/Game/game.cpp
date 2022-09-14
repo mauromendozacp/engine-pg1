@@ -178,19 +178,19 @@ namespace GameXD
 		{
 			if (Input::IsKeyPressed(KEY_G))
 			{
-				node->SetPos(node->GetLocalPosition() - glm::vec3(0.05f, 0.f, 0.f));
+				node->SetPos(node->GetLocalPosition() - glm::vec3(0.015f, 0.f, 0.f));
 			}
 			if (Input::IsKeyPressed(KEY_J))
 			{
-				node->SetPos(node->GetLocalPosition() + glm::vec3(0.05f, 0.f, 0.f));
+				node->SetPos(node->GetLocalPosition() + glm::vec3(0.015f, 0.f, 0.f));
 			}
 			if (Input::IsKeyPressed(KEY_H))
 			{
-				node->SetPos(node->GetLocalPosition() + glm::vec3(0.f, 0.f, 0.05f));
+				node->SetPos(node->GetLocalPosition() + glm::vec3(0.f, 0.f, 0.015f));
 			}
 			if (Input::IsKeyPressed(KEY_Y))
 			{
-				node->SetPos(node->GetLocalPosition() - glm::vec3(0.f, 0.f, 0.05f));
+				node->SetPos(node->GetLocalPosition() - glm::vec3(0.f, 0.f, 0.015f));
 			}
 			if (Input::IsKeyPressed(KEY_T))
 			{
